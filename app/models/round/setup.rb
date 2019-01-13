@@ -2,10 +2,11 @@
 
 class Round
   class Setup
-    attr_reader :players, :deck, :hands, :replacements, :main_piles
+    attr_reader :players, :rules, :deck, :hands, :replacements, :central_pile
 
-    def initialize(players:)
+    def initialize(players, rules)
       @players = players
+      @rules = rules
       create_deck_and_hands
       deal_cards
     end
@@ -15,7 +16,7 @@ class Round
       @deck         = Deck.new(size: num_decks)
       @hands        = players.map { |player| [player.id, Hand.new(player: player)] }.to_h
       @replacements = Array.new(2) { [] }
-      @main_piles   = Array.new(2) { [] }
+      @central_pile = CentralPile.new(rules)
     end
 
     def deal_cards
@@ -24,7 +25,7 @@ class Round
         hand.draw_pile = deck.draw_cards(amount: 15)
       end
       @replacements.each { |pile| pile.concat deck.draw_cards(amount: 5) }
-      @main_piles.each { |pile| pile.concat deck.draw_cards(amount: 1) }
+      @central_pile.put_initial_cards(deck.draw_cards(amount: 2))
     end
 
     def to_h
@@ -32,7 +33,7 @@ class Round
         players: players_to_h,
         deck: deck.to_h,
         replacements: replacements.map { |pile| pile.map(&:to_h) },
-        main_piles: main_piles.map { |pile| pile.map(&:to_h) }
+        central_pile: central_pile.to_h
       }
     end
 

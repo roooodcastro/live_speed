@@ -22,4 +22,8 @@ class Game < ApplicationRecord
     round = rounds.create(number: round_number)
     round.setup_round!
   end
+
+  def rules
+    []
+  end
 end

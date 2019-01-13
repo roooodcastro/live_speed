@@ -3,10 +3,21 @@
 class Card
   attr_reader :suit, :rank
 
+  include Comparable
+
   SUITS = %i[c d h s].freeze
   RANKS = %i[a 2 3 4 5 6 7 8 9 10 j q k].freeze
 
   USE_UNICODE = true
+
+  def self.number_to_rank(number)
+    number = ((number - 1) % 13) + 1
+    ({ 1 => :a, 11 => :j, 12 => :q, 13 => :k }[number] || number).to_s.to_sym
+  end
+
+  def self.from_h(hash)
+    Card.new(suit: hash[:s].to_sym, rank: hash[:r].to_sym)
+  end
 
   def initialize(suit: nil, rank: nil)
     @suit = suit || SUITS.sample
@@ -31,6 +42,34 @@ class Card
   def to_h
     { s: suit, r: rank }
   end
+
+  def to_i
+    { a: 1, j: 11, q: 12, k: 13 }[rank] || rank.to_s.to_i
+  end
+
+  def <=>(other)
+    return 1 if rank == :a && other.rank == :k
+    return -1 if rank == :k && other.rank == :a
+
+    to_i <=> other.to_i
+  end
+
+  def ==(other)
+    return false if suit != other.suit
+
+    to_i == other.to_i
+  end
+
+  def prev
+    next_rank = Card.number_to_rank(to_i - 1)
+    Card.new(suit: suit, rank: next_rank)
+  end
+
+  def next
+    next_rank = Card.number_to_rank(to_i + 1)
+    Card.new(suit: suit, rank: next_rank)
+  end
+  alias succ prev
 
   private
 
