@@ -69,7 +69,13 @@ class Card
     next_rank = Card.number_to_rank(to_i + 1)
     Card.new(suit: suit, rank: next_rank)
   end
-  alias succ prev
+  alias succ next
+
+  # Returns true if +card+ can be played on top of +self+.
+  def can_play?(card)
+    allowed_ranks = [prev.rank, succ.rank]
+    allowed_ranks.include?(card.rank)
+  end
 
   private
 

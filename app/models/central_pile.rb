@@ -17,8 +17,8 @@ class CentralPile
   def put_initial_cards(cards)
     raise "Exactly 2 cards, not #{cards.size}, are required to setup the central piles." unless cards.size == 2
 
-    @piles[0] = [cards.first]
-    @piles[1] = [cards.last]
+    @piles[0] << cards.first
+    @piles[1] << cards.last
   end
 
   def play_card(card, pile_index)
@@ -29,8 +29,11 @@ class CentralPile
 
   def can_play?(card, pile_index)
     top_card = piles[pile_index].last
-    allowed_ranks = [top_card.prev.rank, top_card.next.rank]
-    allowed_ranks.include?(card.rank)
+    top_card.can_play?(card)
+  end
+
+  def top_cards
+    piles.map(&:last)
   end
 
   def to_h

@@ -30,8 +30,7 @@ class Round
 
     def to_h
       {
-        players: players_to_h,
-        deck: deck.to_h,
+        hands: hands.map(&:to_h),
         replacements: replacements.map { |pile| pile.map(&:to_h) },
         central_pile: central_pile.to_h
       }
