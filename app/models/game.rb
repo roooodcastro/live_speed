@@ -19,7 +19,7 @@ class Game < ApplicationRecord
     round_number = rounds.count + 1
     return nil if round_number >= num_rounds
 
-    round = rounds.create(number: round_number)
+    round = rounds.create(number: round_number, data: { game_name: 'speed' })
     round.setup_round!
   end
 

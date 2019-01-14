@@ -8,7 +8,7 @@ class Card
   SUITS = %i[c d h s].freeze
   RANKS = %i[a 2 3 4 5 6 7 8 9 10 j q k].freeze
 
-  USE_UNICODE = true
+  USE_UNICODE = false
 
   def self.number_to_rank(number)
     number = ((number - 1) % 13) + 1
@@ -16,7 +16,7 @@ class Card
   end
 
   def self.from_h(hash)
-    Card.new(suit: hash[:s].to_sym, rank: hash[:r].to_sym)
+    new(suit: hash[:s].to_sym, rank: hash[:r].to_sym)
   end
 
   def initialize(suit: nil, rank: nil)
@@ -70,12 +70,6 @@ class Card
     Card.new(suit: suit, rank: next_rank)
   end
   alias succ next
-
-  # Returns true if +card+ can be played on top of +self+.
-  def can_play?(card)
-    allowed_ranks = [prev.rank, succ.rank]
-    allowed_ranks.include?(card.rank)
-  end
 
   private
 

@@ -7,7 +7,7 @@ class Player < ApplicationRecord
 
   validates :name, presence: true, unless: :user
   validates :name, absence: true, if: :user
-  validates :user, uniqueness: true
+  validates :user, uniqueness: true, allow_nil: true
 
   def player_name
     return user.name if user
