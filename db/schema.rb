@@ -13,25 +13,26 @@
 ActiveRecord::Schema.define(version: 2019_01_13_191954) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "game_players", id: false, force: :cascade do |t|
-    t.bigint "player_id", null: false
-    t.bigint "game_id", null: false
+  create_table "game_players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "player_id"
+    t.uuid "game_id"
     t.index ["game_id", "player_id"], name: "index_game_players_on_game_id_and_player_id"
     t.index ["player_id", "game_id"], name: "index_game_players_on_player_id_and_game_id"
   end
 
-  create_table "games", force: :cascade do |t|
+  create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "status"
     t.integer "num_rounds"
-    t.integer "winner_id"
+    t.uuid "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["winner_id"], name: "index_games_on_winner_id"
   end
 
-  create_table "players", force: :cascade do |t|
+  create_table "players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -39,10 +40,10 @@ ActiveRecord::Schema.define(version: 2019_01_13_191954) do
     t.index ["user_id"], name: "index_players_on_user_id"
   end
 
-  create_table "rounds", force: :cascade do |t|
+  create_table "rounds", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "number"
-    t.bigint "game_id"
-    t.integer "winner_id"
+    t.uuid "game_id"
+    t.uuid "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "data"
@@ -50,7 +51,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_191954) do
     t.index ["winner_id"], name: "index_rounds_on_winner_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "email"
     t.string "password_digest"
@@ -58,6 +59,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_191954) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "game_players", "games"
+  add_foreign_key "game_players", "players"
   add_foreign_key "games", "players", column: "winner_id"
   add_foreign_key "rounds", "games"
   add_foreign_key "rounds", "players", column: "winner_id"

@@ -10,7 +10,7 @@ class Player < ApplicationRecord
   validates :user, uniqueness: true, allow_nil: true
 
   def own_name
-    columns[:name]
+    attributes[:name]
   end
 
   def name
