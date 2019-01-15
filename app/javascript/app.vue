@@ -1,22 +1,19 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
+    <PlayingCard></PlayingCard>
 </template>
 
 <script>
-export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
+  import PlayingCard from 'components/playing_card';
+
+  export default {
+    data() {
+      return {}
+    },
+    components: {
+      PlayingCard
     }
   }
-}
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
 </style>
