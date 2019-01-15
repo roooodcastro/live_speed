@@ -8,7 +8,7 @@ class Card
   SUITS = %i[c d h s].freeze
   RANKS = %i[a 2 3 4 5 6 7 8 9 10 j q k].freeze
 
-  USE_UNICODE = false
+  USE_UNICODE = true
 
   def self.number_to_rank(number)
     number = ((number - 1) % 13) + 1
@@ -61,13 +61,13 @@ class Card
   end
 
   def prev
-    next_rank = Card.number_to_rank(to_i - 1)
-    Card.new(suit: suit, rank: next_rank)
+    next_rank = self.class.number_to_rank(to_i - 1)
+    self.class.new(suit: suit, rank: next_rank)
   end
 
   def next
-    next_rank = Card.number_to_rank(to_i + 1)
-    Card.new(suit: suit, rank: next_rank)
+    next_rank = self.class.number_to_rank(to_i + 1)
+    self.class.new(suit: suit, rank: next_rank)
   end
   alias succ next
 

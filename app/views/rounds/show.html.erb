@@ -1,0 +1,112 @@
+<h1>Round <%= @round.number %> for Game <%= @round.game.id %><%= ' - FINISHED' if @round.winner %></h1>
+
+<%= link_to 'Back to Game', game_path(@round.game) %>
+
+<h3>Players:</h3>
+<ol>
+  <% @round.players.each do |player| %>
+    <li><%= player.name %><%= ' - WINNER!' if @round.winner == player %></li>
+  <% end %>
+</ol>
+
+<% if @round.round_controller.can_use_replacement_piles? %>
+  <%= form_with model: @round do |f| %>
+    <%= f.hidden_field :action, value: :use_replacement_pile! %>
+    <%= f.button 'Draw from replacement piles!' %>
+  <% end %>
+<% end %>
+
+<% @round.possible_plays(0).each do |card_index, pile_indexes| %>
+  <% pile_indexes.each do |pile_index| %>
+    <%= form_with model: @round do |f| %>
+      <%= f.hidden_field :action, value: :play_card! %>
+      <%= f.hidden_field :card_index, value: card_index %>
+      <%= f.hidden_field :pile_index, value: pile_index %>
+      <%= f.hidden_field :player_id, value: @round.hands[0].player_id %>
+      <%= f.button "Play #{@round.player_card(0, card_index)} on pile #{pile_index + 1}".html_safe %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<table class="quick-round-table">
+  <tbody>
+  <tr>
+    <td colspan="7">
+      Player 1 hand
+      <%= "(+#{@round.hands[0].draw_pile.size})" if @round.has_draw_cards?(0) %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><%= FaceDownCard.new if @round.has_draw_cards?(0) %></td>
+    <td></td>
+    <% 5.times.each do |i| %>
+      <td><%= @round.player_card(0, i) %></td>
+    <% end %>
+  </tr>
+
+  <tr>
+    <td colspan="7">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <td><%= FaceDownCard.new if @round.has_replacement_cards? %></td>
+    <td></td>
+    <td><%= @round.central_pile_top_card(0) %></td>
+    <td></td>
+    <td><%= @round.central_pile_top_card(1) %></td>
+    <td></td>
+    <td><%= FaceDownCard.new if @round.has_replacement_cards? %></td>
+  </tr>
+
+  <tr>
+    <td colspan="7">&nbsp;</td>
+  </tr>
+
+  <tr>
+    <% 5.times.each do |i| %>
+      <td><%= @round.player_card(1, i) %></td>
+    <% end %>
+    <td></td>
+    <td><%= FaceDownCard.new if @round.has_draw_cards?(1) %></td>
+  </tr>
+
+  <tr>
+    <td colspan="7">
+      Player 2 hand
+      <%= "(+#{@round.hands[1].draw_pile.size})" if @round.has_draw_cards?(1) %>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<% @round.possible_plays(1).each do |card_index, pile_indexes| %>
+  <% pile_indexes.each do |pile_index| %>
+    <%= form_with model: @round do |f| %>
+      <%= f.hidden_field :action, value: :play_card! %>
+      <%= f.hidden_field :card_index, value: card_index %>
+      <%= f.hidden_field :pile_index, value: pile_index %>
+      <%= f.hidden_field :player_id, value: @round.hands[1].player_id %>
+      <%= f.button "Play #{@round.player_card(1, card_index)} on pile #{pile_index + 1}".html_safe %>
+    <% end %>
+  <% end %>
+<% end %>
+
+<style>
+  .quick-round-table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+
+  .quick-round-table tr {
+    line-height: 3rem;
+  }
+
+  .quick-round-table td {
+    width: 3rem;
+    padding: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 2rem;
+  }
+</style>

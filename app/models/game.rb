@@ -10,16 +10,18 @@ class Game < ApplicationRecord
   validates :players, length: { in: 2..4 }
 
   def current_round
-    return rounds.last if rounds.present?
+    return rounds.last if rounds.last&.unfinished?
 
     create_next_round!
   end
 
   def create_next_round!
-    round_number = rounds.count + 1
-    return nil if round_number >= num_rounds
+    return rounds.last if rounds.last&.unfinished?
 
-    round = rounds.create(number: round_number, data: { game_name: 'speed' })
+    round_number = rounds.count + 1
+    return nil if round_number > num_rounds
+
+    round = rounds.new(number: round_number, data: { game_name: 'speed' })
     round.setup_round!
   end
 
