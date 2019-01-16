@@ -1,6 +1,6 @@
-<h1>Round <%= @round.number %> for Game <%= @round.game.id %><%= ' - FINISHED' if @round.winner %></h1>
+<h1>Round <%= @round.number %> for Game <%= @round.match.id %><%= ' - FINISHED' if @round.winner %></h1>
 
-<%= link_to 'Back to Game', game_path(@round.game) %>
+<%= link_to 'Back to Match', match_path(@round.match) %>
 
 <h3>Players:</h3>
 <ol>

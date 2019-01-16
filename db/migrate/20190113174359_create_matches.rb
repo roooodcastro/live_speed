@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-class CreateGames < ActiveRecord::Migration[5.2]
+class CreateMatches < ActiveRecord::Migration[5.2]
   def change
-    create_table :games, id: :uuid do |t|
+    create_table :matches, id: :uuid do |t|
       t.integer :status
       t.integer :num_rounds
       t.uuid :winner_id

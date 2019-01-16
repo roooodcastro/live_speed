@@ -128,6 +128,7 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.0)
       ffi (~> 1.0)
+    redis (4.1.0)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -201,6 +202,7 @@ DEPENDENCIES
   pry
   puma (~> 3.11)
   rails (~> 5.2.2)
+  redis (~> 4.0)
   responders
   rubocop
   sass-rails (~> 5.0)

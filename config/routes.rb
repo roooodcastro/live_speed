@@ -3,6 +3,8 @@
 Rails.application.routes.draw do
   root to: 'home#index'
 
-  resources :games
+  mount ActionCable.server => '/cable'
+
+  resources :matches
   resources :rounds, except: :index
 end

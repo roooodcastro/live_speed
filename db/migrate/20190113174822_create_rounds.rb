@@ -7,7 +7,7 @@ class CreateRounds < ActiveRecord::Migration[5.2]
       t.json :data
 
       t.references :winner, type: :uuid, foreign_key: { to_table: :players }
-      t.references :game, type: :uuid, foreign_key: true
+      t.references :match,  type: :uuid, foreign_key: true
 
       t.timestamps
     end

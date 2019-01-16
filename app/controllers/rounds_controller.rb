@@ -40,6 +40,6 @@ class RoundsController < ApplicationController
   end
 
   def round_params
-    params[:round].permit(:number, :game_id, :player_id, :card_index, :pile_index, :action)
+    params[:round].permit(:number, :match_id, :player_id, :card_index, :pile_index, :action)
   end
 end

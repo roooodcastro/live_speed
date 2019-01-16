@@ -11,12 +11,12 @@ gem 'rails', '~> 5.2.2'
 
 gem 'bcrypt', '~> 3.1'
 gem 'jbuilder', '~> 2.5'
+gem 'redis', '~> 4.0'
 gem 'responders'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'webpacker'
-# gem 'redis', '~> 4.0'
 
 gem 'bootsnap', '>= 1.1', require: false
 

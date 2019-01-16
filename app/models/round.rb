@@ -2,15 +2,23 @@
 
 class Round < ApplicationRecord
   belongs_to :winner, class_name: 'Player', optional: true
-  belongs_to :game
+  belongs_to :match
 
   GAMES = {
     speed: { setup: 'Games::Speed::Setup', controller: 'Games::Speed::RoundController' }
   }
 
-  validates :number, presence: true, numericality: true
+  STATUS_CREATED  = 0
+  STATUS_PLAYING  = 1
+  STATUS_PAUSED   = 2
+  STATUS_FINISHED = 3
 
-  delegate :players, :rules, to: :game
+  ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED]
+
+  validates :number, presence: true, numericality: true
+  validates :status, inclusion: { in: ALL_STATUS }
+
+  delegate :players, :rules, to: :match
   delegate :print_game, :finished?, :unfinished?, to: :round_controller
 
   def setup_round!
@@ -35,10 +43,18 @@ class Round < ApplicationRecord
     end
   end
 
+  def status
+    data['status']
+  end
+
+  def status=(new_status)
+    data['status'] = new_status
+  end
+
   private
 
   def update_round!
-    self.data = round_controller.to_h
+    self.data = round_controller.to_h.merge(status: status)
     check_for_winner
     save!
 
@@ -51,13 +67,13 @@ class Round < ApplicationRecord
 
   def controller_class
     klass = GAMES[data['game_name'].to_sym][:controller]
-    raise StandardError, "Round Controller class for game '#{data['game_name']}' doesn't exist!" if klass.blank?
+    raise StandardError, "Round Controller class for match '#{data['game_name']}' doesn't exist!" if klass.blank?
     klass.constantize
   end
 
   def setup_class
     klass = GAMES[data['game_name'].to_sym][:setup]
-    raise StandardError, "Round Setup class for game '#{data['game_name']}' doesn't exist!" if klass.blank?
+    raise StandardError, "Round Setup class for match '#{data['game_name']}' doesn't exist!" if klass.blank?
     klass.constantize
   end
 end

@@ -11,5 +11,5 @@ end
 player1 = Player.find_or_create_by user: user1
 player2 = Player.find_or_create_by user: user2
 
-game = Game.find_or_create_by num_rounds: 5, players: [player1, player2]
-game.current_round
+match = Match.find_or_create_by num_rounds: 5, players: [player1, player2]
+match.current_round
