@@ -38,7 +38,7 @@
   </tr>
 
   <tr>
-    <td><%= FaceDownCard.new if @round.has_draw_cards?(0) %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.has_draw_cards?(0) %></td>
     <td></td>
     <% 5.times.each do |i| %>
       <td><%= @round.player_card(0, i) %></td>
@@ -50,13 +50,13 @@
   </tr>
 
   <tr>
-    <td><%= FaceDownCard.new if @round.has_replacement_cards? %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.has_replacement_cards? %></td>
     <td></td>
     <td><%= @round.central_pile_top_card(0) %></td>
     <td></td>
     <td><%= @round.central_pile_top_card(1) %></td>
     <td></td>
-    <td><%= FaceDownCard.new if @round.has_replacement_cards? %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.has_replacement_cards? %></td>
   </tr>
 
   <tr>
@@ -68,7 +68,7 @@
       <td><%= @round.player_card(1, i) %></td>
     <% end %>
     <td></td>
-    <td><%= FaceDownCard.new if @round.has_draw_cards?(1) %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.has_draw_cards?(1) %></td>
   </tr>
 
   <tr>
@@ -104,9 +104,7 @@
 
   .quick-round-table td {
     width: 3rem;
-    padding: 0;
     text-align: center;
     vertical-align: middle;
-    font-size: 2rem;
   }
 </style>

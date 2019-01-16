@@ -29,6 +29,6 @@ class RoundDecorator < ApplicationDecorator
 
   def format_card(card)
     color = card.suit.in?([:d, :h]) ? :red : :black
-    view.content_tag(:span, card.to_unicode, style: "color: #{color}")
+    view.content_tag(:span, card.to_unicode, style: "color: #{color}", class: 'playing-card')
   end
 end

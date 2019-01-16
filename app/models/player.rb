@@ -9,13 +9,9 @@ class Player < ApplicationRecord
   validates :own_name, absence: true, if: :user
   validates :user, uniqueness: true, allow_nil: true
 
-  def own_name
-    attributes[:name]
-  end
-
   def name
     return user.name if user
 
-    super
+    own_name
   end
 end

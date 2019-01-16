@@ -45,10 +45,10 @@ module Games
 
       # Temporary method to print relevant round info so I can play on the terminal
       def print_game # rubocop:disable Metrics/AbcSize
-        hand1 = player_hand(1)
-        hand2 = player_hand(2)
-        Rails.logger.info "\nHand 1: #{hand1.cards.join(' ')}, #{hand1.draw_pile.size} extra"
-        Rails.logger.info "Hand 2: #{hand2.cards.join(' ')}, #{hand2.draw_pile.size} extra"
+        hands.each_with_index do |hand, index|
+          Rails.logger.info "Hand #{index}: #{hand.cards.join(' ')}, #{hand.draw_pile.size} extra"
+        end
+
         Rails.logger.info "\nPiles: #{central_pile.piles.map(&:last)}"
       end
 
@@ -81,7 +81,7 @@ module Games
       private
 
       def player_hand(player_id)
-        hands.find { |hand| hand.player_id == player_id.to_i }
+        hands.find { |hand| hand.player_id == player_id }
       end
     end
   end

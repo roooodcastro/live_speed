@@ -1,0 +1,475 @@
+.playing-card {
+    width: 240px;
+    height: 336px;
+    transform: scale(0.625);
+    transform-origin: top left;
+}
+
+.svg-c_10 {
+	background: url("playing_cards.svg") 12.5% 0 no-repeat;
+}
+
+.svg-c_10-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_2 {
+	background: url("playing_cards.svg") 75% 40% no-repeat;
+}
+
+.svg-c_2-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_3 {
+	background: url("playing_cards.svg") 25% 0 no-repeat;
+}
+
+.svg-c_3-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_4 {
+	background: url("playing_cards.svg") 0 20% no-repeat;
+}
+
+.svg-c_4-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_5 {
+	background: url("playing_cards.svg") 12.5% 20% no-repeat;
+}
+
+.svg-c_5-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_6 {
+	background: url("playing_cards.svg") 25% 20% no-repeat;
+}
+
+.svg-c_6-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_7 {
+	background: url("playing_cards.svg") 37.5% 0 no-repeat;
+}
+
+.svg-c_7-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_8 {
+	background: url("playing_cards.svg") 37.5% 20% no-repeat;
+}
+
+.svg-c_8-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_9 {
+	background: url("playing_cards.svg") 50% 0 no-repeat;
+}
+
+.svg-c_9-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_a {
+	background: url("playing_cards.svg") 50% 20% no-repeat;
+}
+
+.svg-c_a-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_j {
+	background: url("playing_cards.svg") 0 40% no-repeat;
+}
+
+.svg-c_j-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_k {
+	background: url("playing_cards.svg") 12.5% 40% no-repeat;
+}
+
+.svg-c_k-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-c_q {
+	background: url("playing_cards.svg") 25% 40% no-repeat;
+}
+
+.svg-c_q-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_10 {
+	background: url("playing_cards.svg") 37.5% 40% no-repeat;
+}
+
+.svg-d_10-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_2 {
+	background: url("playing_cards.svg") 50% 40% no-repeat;
+}
+
+.svg-d_2-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_3 {
+	background: url("playing_cards.svg") 62.5% 0 no-repeat;
+}
+
+.svg-d_3-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_4 {
+	background: url("playing_cards.svg") 62.5% 20% no-repeat;
+}
+
+.svg-d_4-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_5 {
+	background: url("playing_cards.svg") 62.5% 40% no-repeat;
+}
+
+.svg-d_5-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_6 {
+	background: url("playing_cards.svg") 0 60% no-repeat;
+}
+
+.svg-d_6-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_7 {
+	background: url("playing_cards.svg") 12.5% 60% no-repeat;
+}
+
+.svg-d_7-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_8 {
+	background: url("playing_cards.svg") 25% 60% no-repeat;
+}
+
+.svg-d_8-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_9 {
+	background: url("playing_cards.svg") 37.5% 60% no-repeat;
+}
+
+.svg-d_9-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_a {
+	background: url("playing_cards.svg") 50% 60% no-repeat;
+}
+
+.svg-d_a-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_j {
+	background: url("playing_cards.svg") 62.5% 60% no-repeat;
+}
+
+.svg-d_j-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_k {
+	background: url("playing_cards.svg") 75% 0 no-repeat;
+}
+
+.svg-d_k-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-d_q {
+	background: url("playing_cards.svg") 75% 20% no-repeat;
+}
+
+.svg-d_q-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_10 {
+	background: url("playing_cards.svg") 0 0 no-repeat;
+}
+
+.svg-h_10-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_2 {
+	background: url("playing_cards.svg") 75% 60% no-repeat;
+}
+
+.svg-h_2-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_3 {
+	background: url("playing_cards.svg") 0 80% no-repeat;
+}
+
+.svg-h_3-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_4 {
+	background: url("playing_cards.svg") 12.5% 80% no-repeat;
+}
+
+.svg-h_4-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_5 {
+	background: url("playing_cards.svg") 25% 80% no-repeat;
+}
+
+.svg-h_5-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_6 {
+	background: url("playing_cards.svg") 37.5% 80% no-repeat;
+}
+
+.svg-h_6-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_7 {
+	background: url("playing_cards.svg") 50% 80% no-repeat;
+}
+
+.svg-h_7-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_8 {
+	background: url("playing_cards.svg") 62.5% 80% no-repeat;
+}
+
+.svg-h_8-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_9 {
+	background: url("playing_cards.svg") 75% 80% no-repeat;
+}
+
+.svg-h_9-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_a {
+	background: url("playing_cards.svg") 87.5% 0 no-repeat;
+}
+
+.svg-h_a-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_j {
+	background: url("playing_cards.svg") 87.5% 20% no-repeat;
+}
+
+.svg-h_j-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_k {
+	background: url("playing_cards.svg") 87.5% 40% no-repeat;
+}
+
+.svg-h_k-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-h_q {
+	background: url("playing_cards.svg") 87.5% 60% no-repeat;
+}
+
+.svg-h_q-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_10 {
+	background: url("playing_cards.svg") 87.5% 80% no-repeat;
+}
+
+.svg-s_10-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_2 {
+	background: url("playing_cards.svg") 100% 0 no-repeat;
+}
+
+.svg-s_2-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_3 {
+	background: url("playing_cards.svg") 100% 20% no-repeat;
+}
+
+.svg-s_3-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_4 {
+	background: url("playing_cards.svg") 100% 40% no-repeat;
+}
+
+.svg-s_4-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_5 {
+	background: url("playing_cards.svg") 100% 60% no-repeat;
+}
+
+.svg-s_5-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_6 {
+	background: url("playing_cards.svg") 100% 80% no-repeat;
+}
+
+.svg-s_6-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_7 {
+	background: url("playing_cards.svg") 0 100% no-repeat;
+}
+
+.svg-s_7-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_8 {
+	background: url("playing_cards.svg") 12.5% 100% no-repeat;
+}
+
+.svg-s_8-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_9 {
+	background: url("playing_cards.svg") 25% 100% no-repeat;
+}
+
+.svg-s_9-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_a {
+	background: url("playing_cards.svg") 37.5% 100% no-repeat;
+}
+
+.svg-s_a-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_j {
+	background: url("playing_cards.svg") 50% 100% no-repeat;
+}
+
+.svg-s_j-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_k {
+	background: url("playing_cards.svg") 62.5% 100% no-repeat;
+}
+
+.svg-s_k-dims {
+	width: 240px;
+	height: 336px;
+}
+
+.svg-s_q {
+	background: url("playing_cards.svg") 75% 100% no-repeat;
+}
+
+.svg-s_q-dims {
+	width: 240px;
+	height: 336px;
+}
+

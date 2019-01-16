@@ -18,7 +18,7 @@ class Round < ApplicationRecord
   end
 
   def play_card!(args)
-    round_controller.play_card!(args[:player_id].to_i, args[:card_index].to_i, args[:pile_index].to_i)
+    round_controller.play_card!(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
     update_round!
   end
 
