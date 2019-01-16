@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# TODO: Rename to Match, use Redis to store round data while playing, add state to round.
 class Game < ApplicationRecord
   belongs_to :winner, class_name: 'Player', optional: true
   has_many :rounds, dependent: :destroy
