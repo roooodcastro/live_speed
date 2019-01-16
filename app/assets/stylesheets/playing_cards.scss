@@ -1,0 +1,60 @@
+.playing-card {
+  background-image:  url("playing_cards.svg");
+  background-repeat: no-repeat;
+  width:             240px;
+  height:            336px;
+  transform:         scale(0.625);
+  transform-origin:  top left;
+}
+.card-c_a { background-position: 50% 20%; }
+.card-c_2 { background-position: 75% 40%; }
+.card-c_3 { background-position: 25% 0; }
+.card-c_4 { background-position: 0 20%; }
+.card-c_5 { background-position: 12.5% 20%; }
+.card-c_6 { background-position: 25% 20%; }
+.card-c_7 { background-position: 37.5% 0; }
+.card-c_8 { background-position: 37.5% 20%; }
+.card-c_9 { background-position: 50% 0; }
+.card-c_10 { background-position: 12.5% 0; }
+.card-c_j { background-position: 0 40%; }
+.card-c_q { background-position: 25% 40%; }
+.card-c_k { background-position: 12.5% 40%; }
+.card-d_a { background-position: 50% 60%; }
+.card-d_2 { background-position: 50% 40%; }
+.card-d_3 { background-position: 62.5% 0; }
+.card-d_4 { background-position: 62.5% 20%; }
+.card-d_5 { background-position: 62.5% 40%; }
+.card-d_6 { background-position: 0 60%; }
+.card-d_7 { background-position: 12.5% 60%; }
+.card-d_8 { background-position: 25% 60%; }
+.card-d_9 { background-position: 37.5% 60%; }
+.card-d_10 { background-position: 37.5% 40%; }
+.card-d_j { background-position: 62.5% 60%; }
+.card-d_q { background-position: 75% 20%; }
+.card-d_k { background-position: 75% 0; }
+.card-h_a { background-position: 87.5% 0; }
+.card-h_2 { background-position: 75% 60%; }
+.card-h_3 { background-position: 0 80%; }
+.card-h_4 { background-position: 12.5% 80%; }
+.card-h_5 { background-position: 25% 80%; }
+.card-h_6 { background-position: 37.5% 80%; }
+.card-h_7 { background-position: 50% 80%; }
+.card-h_8 { background-position: 62.5% 80%; }
+.card-h_9 { background-position: 75% 80%; }
+.card-h_10 { background-position: 0 0; }
+.card-h_j { background-position: 87.5% 20%; }
+.card-h_q { background-position: 87.5% 60%; }
+.card-h_k { background-position: 87.5% 40%; }
+.card-s_a { background-position: 37.5% 100%; }
+.card-s_2 { background-position: 100% 0; }
+.card-s_3 { background-position: 100% 20%; }
+.card-s_4 { background-position: 100% 40%; }
+.card-s_5 { background-position: 100% 60%; }
+.card-s_6 { background-position: 100% 80%; }
+.card-s_7 { background-position: 0 100%; }
+.card-s_8 { background-position: 12.5% 100%; }
+.card-s_9 { background-position: 25% 100%; }
+.card-s_10 { background-position: 87.5% 80%; }
+.card-s_j { background-position: 50% 100%; }
+.card-s_q { background-position: 75% 100%; }
+.card-s_k { background-position: 62.5% 100%; }
