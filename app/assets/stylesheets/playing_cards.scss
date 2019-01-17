@@ -6,6 +6,8 @@
   position:          absolute;
   transform:         scale(0.625);
   transform-origin:  top left;
+  transition:        all 0.25s;
+  transition-timing-function: ease-in-out;
 }
 .card-c_a { background-position: 50% 20%; }
 .card-c_2 { background-position: 75% 40%; }
