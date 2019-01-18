@@ -1,27 +1,29 @@
-<h1>Game <%= @match.id %></h1>
+<livespeed-gametable round-id="<%= @round.id %>"></livespeed-gametable>
 
-<h3>Players:</h3>
-<ol>
-  <% @match.players.each do |player| %>
-    <li><%= player.name %></li>
-  <% end %>
-</ol>
+<!--<h1>Game <%#= @match.id %></h1>-->
 
-<h3>Rounds: (best of <%= @match.num_rounds %>)</h3>
+<!--<h3>Players:</h3>-->
+<!--<ol>-->
+  <%# @match.players.each do |player| %>
+<!--    <li><%#= player.name %></li>-->
+  <%# end %>
+<!--</ol>-->
 
-<%= form_with model: @match do |f| %>
-  <%= f.hidden_field :action, value: :create_next_round! %>
-  <%= f.submit 'Create Next Round' %>
-<% end %>
+<!--<h3>Rounds: (best of <%#= @match.num_rounds %>)</h3>-->
 
-<ol>
-  <% @match.rounds.each do |round| %>
-    <li><%= link_to "Round #{round.number}", round %></li>
-  <% end %>
-</ol>
+<%#= form_with model: @match do |f| %>
+  <%#= f.hidden_field :action, value: :create_next_round! %>
+  <%#= f.submit 'Create Next Round' %>
+<%# end %>
 
-<% if @match.winner.present? %>
-  <h3>Winner:</h3>
+<!--<ol>-->
+  <%# @match.rounds.each do |round| %>
+<!--    <li><%#= link_to "Round #{round.number}", round %></li>-->
+  <%# end %>
+<!--</ol>-->
 
-  <h4><%= @match.winner.name %></h4>
-<% end %>
+<%# if @match.winner.present? %>
+<!--  <h3>Winner:</h3>-->
+
+<!--  <h4><%#= @match.winner.name %></h4>-->
+<%# end %>

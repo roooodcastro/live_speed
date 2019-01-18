@@ -4,6 +4,7 @@ class ApplicationDecorator
   attr_reader :object, :view
 
   delegate_missing_to :object
+  delegate :as_json, to: :object
 
   def self.decorate(object, view_context)
     new(object, view_context)

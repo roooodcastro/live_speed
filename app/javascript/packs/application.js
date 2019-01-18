@@ -13,11 +13,11 @@ import Vue from 'vue/dist/vue.esm'
 
 Vue.use(TurbolinksAdapter)
 
-import PlayingCard from '../components/playing_card'
-import GameTable from '../components/game_table'
+import PlayingCard from '../components/PlayingCard'
+import TheGameTable from '../components/TheGameTable'
 
 Vue.component('livespeed-playing-card', PlayingCard);
-Vue.component('livespeed-gametable', GameTable);
+Vue.component('livespeed-gametable', TheGameTable);
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
@@ -25,7 +25,7 @@ document.addEventListener('turbolinks:load', () => {
     data: {},
     components: {
       PlayingCard,
-      GameTable
+      TheGameTable
     }
   });
 

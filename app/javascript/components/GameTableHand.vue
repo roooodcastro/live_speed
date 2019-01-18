@@ -43,6 +43,9 @@
           let dealer = (promise, index) => promise.then(() => this.dealCard(index, delay));
           Array.from(Array(5).keys()).reduce(dealer, Promise.resolve()).then(() => resolve());
         });
+      },
+      setHandData(data) {
+
       }
     }
   }
