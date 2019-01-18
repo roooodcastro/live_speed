@@ -16,7 +16,7 @@ Vue.use(TurbolinksAdapter)
 import PlayingCard from '../components/playing_card'
 import GameTable from '../components/game_table'
 
-Vue.component('livespeed-playingcard', PlayingCard);
+Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', GameTable);
 
 document.addEventListener('turbolinks:load', () => {
