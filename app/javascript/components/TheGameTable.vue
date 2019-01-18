@@ -47,10 +47,14 @@
       fetchRoundData() {
         return new Promise((resolve) => {
           axios.get('/rounds/' + this.roundId + '.json').then((response) => {
-            this.roundData = response.data;
+            this.parseRoundData(response.data);
             resolve();
           });
         });
+      },
+      parseRoundData(round) {
+        this.roundData = round;
+        this.hands.forEach((hand, index) => hand.setHandData(round.data.hands[index]));
       }
     },
     props: {

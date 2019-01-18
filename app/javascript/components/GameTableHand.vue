@@ -44,8 +44,8 @@
           Array.from(Array(5).keys()).reduce(dealer, Promise.resolve()).then(() => resolve());
         });
       },
-      setHandData(data) {
-
+      setHandData(handData) {
+        this.cards.forEach((card, index) => card.setRankSuit(handData.cards[index]));
       }
     }
   }

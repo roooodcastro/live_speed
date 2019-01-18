@@ -50,18 +50,24 @@
     data() {
       return {
         position: this.initialPosition,
-        rotation: this.initialRotation
+        rotation: this.initialRotation,
+        rank: this.initialRank,
+        suit: this.initialSuit
       }
     },
 
     props: {
-      rank: { type: String, default: 'a' },
-      suit: { type: String, default: 's' },
+      initialRank: { type: String, default: 'a' },
+      initialSuit: { type: String, default: 's' },
       initialPosition: { type: Array, default: () => [0, 0] },
       initialRotation: { type: Number, default: 0 }
     },
 
     methods: {
+      setRankSuit(data) {
+        this.rank = data.r;
+        this.suit = data.s;
+      },
       move(position) {
         this.position = position;
       },
