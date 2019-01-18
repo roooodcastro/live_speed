@@ -4,7 +4,7 @@
 
 <script>
   export default {
-    name: 'PlayingCard',
+    name:     'PlayingCard',
     computed: {
       color() {
         if (this.suit === 'd' || this.suit === 'h') {
@@ -15,7 +15,11 @@
       },
 
       cssClass() {
-        return 'playing-card card-' + this.suit + '_' + this.rank;
+        if (this.flipped) {
+          return 'playing-card card-flipped';
+        } else {
+          return 'playing-card card-' + this.suit + '_' + this.rank;
+        }
       },
 
       transform() {
@@ -24,49 +28,61 @@
       },
 
       posX() {
-        let cardWidth = this.width * this.scale;
-        let posVw = this.pxToVw(this.vwToPx(50) - cardWidth);
+        let cardWidth     = this.width * this.scale;
+        let posVw         = this.pxToVw(this.vwToPx(50) - cardWidth);
         let correctedMove = this.position[0] * (100 - this.pxToVw(cardWidth)) / 200;
         return (posVw + correctedMove) / this.scale;
       },
 
       posY() {
-        let cardHeight = this.height * this.scale;
-        let posVh = this.pxToVh(this.vhToPx(50) - cardHeight);
+        let cardHeight    = this.height * this.scale;
+        let posVh         = this.pxToVh(this.vhToPx(50) - cardHeight);
         let correctedMove = this.position[1] * (100 - this.pxToVh(cardHeight)) / 200;
         return (posVh + correctedMove) / this.scale;
       },
 
       scale() {
-        let heightVh = this.pxToVh(this.height * 1.2);
+        let heightVh     = this.pxToVh(this.height * 1.2);
         let targetHeight = 100 / 5;
         return targetHeight / heightVh;
       },
 
-      width() { return 240; },
-      height() { return 336; },
+      width() {
+        return 240;
+      },
+      height() {
+        return 336;
+      }
     },
 
     data() {
       return {
         position: this.initialPosition,
         rotation: this.initialRotation,
-        rank: this.initialRank,
-        suit: this.initialSuit
-      }
+        rank:     this.initialRank,
+        suit:     this.initialSuit,
+        flipped:  this.initialFlipped
+      };
     },
 
     props: {
-      initialRank: { type: String, default: 'a' },
-      initialSuit: { type: String, default: 's' },
-      initialPosition: { type: Array, default: () => [0, 0] },
-      initialRotation: { type: Number, default: 0 }
+      initialRank:     {type: String, default: 'a'},
+      initialSuit:     {type: String, default: 's'},
+      initialPosition: {type: Array, default: () => [0, 0]},
+      initialRotation: {type: Number, default: 0},
+      initialFlipped:  {type: Boolean, default: true}
     },
 
     methods: {
       setRankSuit(data) {
         this.rank = data.r;
         this.suit = data.s;
+      },
+      flipUp() {
+        this.flipped = false;
+      },
+      flipDown() {
+        this.flipped = true;
       },
       move(position) {
         this.position = position;
@@ -88,7 +104,7 @@
 
       vhToPx(vh) {
         return vh * (document.documentElement.clientHeight / 100);
-      },
+      }
     }
-  }
+  };
 </script>

@@ -17,12 +17,12 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import axios         from 'axios';
   import GameTableHand from './GameTableHand';
 
   export default {
     components: {GameTableHand},
-    computed: {
+    computed:   {
       hands() {
         return [this.$refs['hand1'], this.$refs['hand0']];
       }
@@ -34,7 +34,7 @@
     data() {
       return {roundData: {}};
     },
-    methods: {
+    methods:    {
       moveCard(card, position) {
         card.move(position);
       },
@@ -57,8 +57,8 @@
         this.hands.forEach((hand, index) => hand.setHandData(round.data.hands[index]));
       }
     },
-    props: {
+    props:      {
       roundId: {type: String, required: true}
     }
-  }
+  };
 </script>

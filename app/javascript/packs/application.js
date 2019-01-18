@@ -7,22 +7,22 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import '../stylesheets/application'
-import TurbolinksAdapter from 'vue-turbolinks'
-import Vue from 'vue/dist/vue.esm'
+import '../stylesheets/application';
+import TurbolinksAdapter from 'vue-turbolinks';
+import Vue               from 'vue/dist/vue.esm';
 
-Vue.use(TurbolinksAdapter)
+Vue.use(TurbolinksAdapter);
 
-import PlayingCard from '../components/PlayingCard'
-import TheGameTable from '../components/TheGameTable'
+import PlayingCard  from '../components/PlayingCard';
+import TheGameTable from '../components/TheGameTable';
 
 Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);
 
 document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
-    el: '[data-behaviour="vue"]',
-    data: {},
+    el:         '[data-behaviour="vue"]',
+    data:       {},
     components: {
       PlayingCard,
       TheGameTable

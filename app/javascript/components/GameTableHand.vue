@@ -20,17 +20,18 @@
     },
     mounted() {
     },
-    props: {
+    props:    {
       playerIndex: {type: Number, required: true}
     },
-    methods: {
+    methods:  {
       dealCard(cardIndex, delay) {
         return new Promise((resolve) => {
-          let mult = (this.playerIndex === 0) ? 1 : -1;
-          let posY = 80 * mult;
+          let mult     = (this.playerIndex === 0) ? 1 : -1;
+          let posY     = 80 * mult;
           let posIndex = cardIndex - 2;
-          let posX = ((15 * posIndex) - 10) * mult;
-          let card = this.cards[cardIndex];
+          let posX     = ((15 * posIndex) - 10) * mult;
+          let card     = this.cards[cardIndex];
+          card.flipUp();
           card.move([posX, posY]);
           card.rotate(this.playerIndex * 180);
 
@@ -39,7 +40,7 @@
       },
       dealCards() {
         return new Promise((resolve) => {
-          let delay = 100;
+          let delay  = 100;
           let dealer = (promise, index) => promise.then(() => this.dealCard(index, delay));
           Array.from(Array(5).keys()).reduce(dealer, Promise.resolve()).then(() => resolve());
         });
@@ -48,5 +49,5 @@
         this.cards.forEach((card, index) => card.setRankSuit(handData.cards[index]));
       }
     }
-  }
+  };
 </script>
