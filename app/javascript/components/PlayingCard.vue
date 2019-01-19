@@ -1,30 +1,22 @@
 <template>
-    <div :class="cssClass" :style="{ transform: transform }"></div>
+    <div :class="cssClass" :style="{ transform: transform, zIndex: order, filter: dropShadow }"></div>
 </template>
 
 <script>
   export default {
     name:     'PlayingCard',
     computed: {
-      color() {
-        if (this.suit === 'd' || this.suit === 'h') {
-          return '#A00';
-        } else {
-          return '#111';
-        }
-      },
-
       cssClass() {
-        if (this.flipped) {
-          return 'playing-card card-flipped';
-        } else {
-          return 'playing-card card-' + this.suit + '_' + this.rank;
-        }
+        return 'playing-card card-' + this.suit + '_' + this.rank + (this.flipped ? ' card-f_1' : '');
       },
 
       transform() {
         let translate = this.posX + 'vw, ' + this.posY + 'vh';
         return 'scale(' + this.scale + ') translate(' + translate + ') rotate(' + this.rotation + 'deg)';
+      },
+
+      dropShadow() {
+        return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
       },
 
       posX() {
@@ -48,7 +40,7 @@
       },
 
       width() {
-        return 240;
+        return 216;
       },
       height() {
         return 336;
@@ -57,11 +49,13 @@
 
     data() {
       return {
+        altitude: 0,
+        flipped:  this.initialFlipped,
+        order:    1,
         position: this.initialPosition,
         rotation: this.initialRotation,
         rank:     this.initialRank,
-        suit:     this.initialSuit,
-        flipped:  this.initialFlipped
+        suit:     this.initialSuit
       };
     },
 
@@ -89,6 +83,9 @@
       },
       rotate(angle) {
         this.rotation = angle;
+      },
+      setOrder(newOrder) {
+        this.order = newOrder;
       },
       pxToVw(px) {
         return px * (100 / document.documentElement.clientWidth);
