@@ -23,10 +23,7 @@ document.addEventListener('turbolinks:load', () => {
   const app = new Vue({
     el:         '[data-behaviour="vue"]',
     data:       {},
-    components: {
-      PlayingCard,
-      TheGameTable
-    }
+    components: {TheGameTable}
   });
 
   window.vue = app;

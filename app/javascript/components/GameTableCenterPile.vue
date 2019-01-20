@@ -1,9 +1,21 @@
 <template>
     <div class="game-table-hand">
-        <livespeed-playing-card v-for="index in leftCenterCount" :ref="'center_left_' + index"/>
-        <livespeed-playing-card v-for="index in rightCenterCount" :ref="'center_right_' + index"/>
-        <livespeed-playing-card v-for="index in leftRepPileCount" :ref="'replacement_left_' + index"/>
-        <livespeed-playing-card v-for="index in rightRepPileCount" :ref="'replacement_right_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
+                                :suit="card.s"
+                                :rank="card.r"
+                                :ref="'center_left_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
+                                :suit="card.s"
+                                :rank="card.r"
+                                :ref="'center_right_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in replacementPiles[0]"
+                                :rank="card.r"
+                                :suit="card.s"
+                                :ref="'replacement_left_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in replacementPiles[1]"
+                                :rank="card.r"
+                                :suit="card.s"
+                                :ref="'replacement_right_' + index"/>
     </div>
 </template>
 
@@ -14,7 +26,7 @@
   export default {
     computed: {
       allCards() {
-        return this.leftCenterCards.concat(this.rightCenterCards, this.leftRepPile, this.rightRepPile);
+        return this.leftRepPile.concat(this.rightRepPile, this.leftCenterCards, this.rightCenterCards);
       },
 
       leftCenterCards() {
@@ -32,26 +44,10 @@
       rightRepPile() {
         return this.filterCards('replacement_right');
       },
-
-      leftCenterCount() {
-        return this.roundData.centerPiles.length > 0 ? this.roundData.centerPiles[0].length : 0;
-      },
-
-      rightCenterCount() {
-        return this.roundData.centerPiles.length > 0 ? this.roundData.centerPiles[1].length : 0;
-      },
-
-      leftRepPileCount() {
-        return this.roundData.replacementPiles.length > 0 ? this.roundData.replacementPiles[0].length : 0;
-      },
-
-      rightRepPileCount() {
-        return this.roundData.replacementPiles.length > 0 ? this.roundData.replacementPiles[1].length : 0;
-      }
     },
 
     data() {
-      return {roundData: {centerPiles: [], replacementPiles: []}};
+      return {centerPiles: [], replacementPiles: []};
     },
 
     mounted() {
@@ -65,6 +61,7 @@
           setTimeout(() => resolve(), delay);
         });
       },
+
       dealCenterPileCard(pileIndex, cardIndex, delay) {
         let mult = (pileIndex === 0) ? 1 : -1;
         let posY = cardIndex * -0.2;
@@ -75,6 +72,7 @@
 
         return this.moveCard(card, [posX, posY], delay);
       },
+
       dealRepPileCard(pileIndex, cardIndex, delay) {
         let mult = (pileIndex === 0) ? 1 : -1;
         let posY = cardIndex * -0.2;
@@ -85,6 +83,7 @@
 
         return this.moveCard(card, [posX, posY], delay);
       },
+
       dealCards() {
         return new Promise((resolve) => {
           let delay         = 150;
@@ -108,8 +107,8 @@
       },
 
       setCardData(data) {
-        this.roundData.centerPiles      = data.central_pile.piles;
-        this.roundData.replacementPiles = data.replacement_piles;
+        this.centerPiles      = data.central_pile.piles;
+        this.replacementPiles = data.replacement_piles;
 
         Vue.nextTick(() => {
           this.leftCenterCards.forEach((card, index) => card.setRankSuit(data.central_pile.piles[0][index]));
@@ -118,9 +117,7 @@
           this.rightRepPile.forEach((card, index) => card.setRankSuit(data.replacement_piles[1][index]));
         });
       },
-      expandArray(length) {
-        return Array.from(Array(length).keys());
-      },
+
       filterCards(ref) {
         return Object.keys(this.$refs)
           .filter(key => key.includes(ref))
@@ -128,6 +125,18 @@
             let ref = this.$refs[key];
             return Array.isArray(ref) ? ref[0] : ref;
           });
+      },
+
+      cardOverLeftPile(card) {
+        let insideX = Math.abs(card.dragPosition[0] + 10) < card.widthVw * 1.5 && card.dragPosition[0] < 0;
+        let insideY = Math.abs(card.dragPosition[1]) < card.heightVh * 2;
+        return insideX && insideY;
+      },
+
+      cardOverRightPile(card) {
+        let insideX = Math.abs(card.dragPosition[0] - 10) < card.widthVw * 1.5 && card.dragPosition[0] > 0;
+        let insideY = Math.abs(card.dragPosition[1]) < card.heightVh * 2;
+        return insideX && insideY;
       }
     }
   };

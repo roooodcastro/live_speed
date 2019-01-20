@@ -1,7 +1,15 @@
 <template>
     <div class="game-table-hand">
-        <livespeed-playing-card v-for="index in 15" :ref="'draw_' + playerIndex + '_' + index"/>
-        <livespeed-playing-card v-for="index in 5" :ref="'card_' + playerIndex + '_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in draw"
+                                :rank="card.r"
+                                :suit="card.s"
+                                :ref="'draw_' + playerIndex + '_' + index"
+                                :key="'draw_' + playerIndex + '_' + index"/>
+        <livespeed-playing-card v-for="(card, index) in hand"
+                                :rank="card.r"
+                                :suit="card.s"
+                                :ref="'card_' + playerIndex + '_' + index"
+                                :key="'card_' + playerIndex + '_' + index"/>
     </div>
 </template>
 
@@ -10,6 +18,9 @@
 
   export default {
     computed: {
+      allCards() {
+        return this.handCards.concat(this.drawCards);
+      },
       handCards() {
         return Object.keys(this.$refs)
           .filter(key => key.includes('card'))
@@ -28,17 +39,14 @@
     },
 
     data() {
-      return {};
+      return {hand: [], draw: []};
     },
 
-    mounted() {
-    },
-
-    props:    {
+    props: {
       playerIndex: {type: Number, required: true}
     },
 
-    methods:  {
+    methods: {
       moveCard(card, position, rotation, delay) {
         return new Promise((resolve) => {
           card.move(position);
@@ -82,19 +90,16 @@
       },
 
       setHandData(handData) {
-        this.handCards.forEach((card, index) => card.setRankSuit(handData.cards[index]));
-        this.drawCards.forEach((card, index) => card.setRankSuit(handData.draw_pile[index]));
+        this.hand = handData.cards;
+        this.draw = handData.draw_pile;
       },
+
       revealCards() {
         return new Promise((resolve) => {
           this.handCards.forEach((card) => card.flipUp());
           setTimeout(() => resolve(), 500);
         });
       },
-
-      expandArray(length) {
-        return Array.from(Array(length).keys());
-      }
     }
   };
 </script>

@@ -2,7 +2,7 @@ export default {
   play(audioName, volume = 1.0) {
     let audio = new Audio(audioName);
     audio.volume = volume;
-    return audio.play();
+    // return audio.play();
   },
 
   playDealCard() {
