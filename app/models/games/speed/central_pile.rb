@@ -41,9 +41,9 @@ module Games
       def to_h
         {
           piles: [
-                   piles[0].map(&:to_h),
-                   piles[1].map(&:to_h)
-                 ]
+            piles[0].map(&:to_h),
+            piles[1].map(&:to_h)
+          ]
         }
       end
     end

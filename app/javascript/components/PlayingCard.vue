@@ -48,7 +48,7 @@
       scale() {
         let heightVh     = this.pxToVh(this.height * 1.2);
         let targetHeight = 100 / 5;
-        return targetHeight / heightVh;
+        return (targetHeight / heightVh) * (1 + this.altitude / 500);
       },
 
       width() {
@@ -129,11 +129,13 @@
         this.isDragging   = true;
         this.dragPosition = this.position;
         this.altitude     = 50;
+        this.order += 1000;
       },
 
       endDrag() {
         this.isDragging = false;
         this.altitude   = 0;
+        this.order -= 1000;
       },
 
       dragMove(ev) {

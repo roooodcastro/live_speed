@@ -8,6 +8,8 @@ class CreateJoinTablePlayerMatch < ActiveRecord::Migration[5.2]
 
       t.index %i[player_id match_id]
       t.index %i[match_id player_id]
+
+      t.timestamps
     end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MatchChannel < ApplicationCable::Channel
   def subscribed
     stream_from "player_#{player_id}"

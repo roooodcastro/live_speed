@@ -33,12 +33,12 @@
   <tr>
     <td colspan="7">
       Player 1 hand
-      <%= "(+#{@round.hands[0].draw_pile.size})" if @round.has_draw_cards?(0) %>
+      <%= "(+#{@round.hands[0].draw_pile.size})" if @round.draw_cards?(0) %>
     </td>
   </tr>
 
   <tr>
-    <td><%= @round.format_card(FaceDownCard.new) if @round.has_draw_cards?(0) %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.draw_cards?(0) %></td>
     <td></td>
     <% 5.times.each do |i| %>
       <td><%= @round.player_card(0, i) %></td>
@@ -50,13 +50,13 @@
   </tr>
 
   <tr>
-    <td><%= @round.format_card(FaceDownCard.new) if @round.has_replacement_cards? %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.replacement_cards? %></td>
     <td></td>
     <td><%= @round.central_pile_top_card(0) %></td>
     <td></td>
     <td><%= @round.central_pile_top_card(1) %></td>
     <td></td>
-    <td><%= @round.format_card(FaceDownCard.new) if @round.has_replacement_cards? %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.replacement_cards? %></td>
   </tr>
 
   <tr>
@@ -68,13 +68,13 @@
       <td><%= @round.player_card(1, i) %></td>
     <% end %>
     <td></td>
-    <td><%= @round.format_card(FaceDownCard.new) if @round.has_draw_cards?(1) %></td>
+    <td><%= @round.format_card(FaceDownCard.new) if @round.draw_cards?(1) %></td>
   </tr>
 
   <tr>
     <td colspan="7">
       Player 2 hand
-      <%= "(+#{@round.hands[1].draw_pile.size})" if @round.has_draw_cards?(1) %>
+      <%= "(+#{@round.hands[1].draw_pile.size})" if @round.draw_cards?(1) %>
     </td>
   </tr>
   </tbody>

@@ -11,11 +11,11 @@ class RoundDecorator < ApplicationDecorator
     '&nbsp;'.html_safe
   end
 
-  def has_replacement_cards?
+  def replacement_cards?
     replacement_piles.first.present?
   end
 
-  def has_draw_cards?(player_index)
+  def draw_cards?(player_index)
     hands[player_index].draw_pile.present?
   end
 
@@ -28,7 +28,7 @@ class RoundDecorator < ApplicationDecorator
   end
 
   def format_card(card)
-    color = card.suit.in?([:d, :h]) ? :red : :black
+    color = card.suit.in?(%i[d h]) ? :red : :black
     view.content_tag(:span, card.to_unicode, style: "color: #{color}", class: 'playing-card')
   end
 end

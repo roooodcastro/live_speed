@@ -4,6 +4,7 @@ AllCops:
     - 'spec/fixtures/**/*'
     - 'tmp/**/*'
     - 'bin/**/*'
+    - 'node_modules/**/*'
     - 'db/schema.rb'
   TargetRubyVersion: 2.6
   TargetRailsVersion: 5.2

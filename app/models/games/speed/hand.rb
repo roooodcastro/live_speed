@@ -3,15 +3,16 @@
 module Games
   module Speed
     class Hand
-      attr_accessor :player, :cards, :draw_pile
+      attr_accessor :cards, :draw_pile
+      attr_reader :player
 
       delegate :id, to: :player, prefix: true
 
       def self.from_h(hash)
-        cards     = hash[:cards].map { |card| Card.from_h(card) }
-        draw_pile = hash[:draw_pile].map { |card| Card.from_h(card) }
-        player    = hash[:players].to_a.find { |player| player.id == hash[:player_id] }
-        Hand.new(player: player, cards: cards, draw_pile: draw_pile)
+        cards       = hash[:cards].map { |card| Card.from_h(card) }
+        draw_pile   = hash[:draw_pile].map { |card| Card.from_h(card) }
+        player_data = hash[:players].to_a.find { |player| player.id == hash[:player_id] }
+        Hand.new(player: player_data, cards: cards, draw_pile: draw_pile)
       end
 
       def initialize(player:, cards: nil, draw_pile: nil)

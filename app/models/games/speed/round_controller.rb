@@ -10,7 +10,7 @@ module Games
           central_pile      = Speed::CentralPile.from_h(hash[:central_pile], [])
           hands             = array_from_h(hash[:hands], Speed::Hand)
           replacement_piles = array_from_h(hash[:replacement_piles], Speed::Card)
-          self.new(hands: hands, central_pile: central_pile, replacement_piles: replacement_piles)
+          new(hands: hands, central_pile: central_pile, replacement_piles: replacement_piles)
         end
       end
 
@@ -28,6 +28,7 @@ module Games
 
       def use_replacement_pile!
         raise InvalidPlayError, 'Cannot use replacement pile!' unless can_use_replacement_piles?
+
         central_pile.put_initial_cards([replacement_piles[0].pop, replacement_piles[1].pop])
       end
 
@@ -44,7 +45,7 @@ module Games
       end
 
       # Temporary method to print relevant round info so I can play on the terminal
-      def print_game # rubocop:disable Metrics/AbcSize
+      def print_game
         hands.each_with_index do |hand, index|
           Rails.logger.info "Hand #{index}: #{hand.cards.join(' ')}, #{hand.draw_pile.size} extra"
         end
@@ -71,10 +72,10 @@ module Games
 
       def to_h
         {
-          game_name:         'speed',
-          hands:             array_to_h(hands),
+          game_name: 'speed',
+          hands: array_to_h(hands),
           replacement_piles: array_to_h(replacement_piles),
-          central_pile:      central_pile.to_h
+          central_pile: central_pile.to_h
         }
       end
 

@@ -6,14 +6,14 @@ class Round < ApplicationRecord
 
   GAMES = {
     speed: { setup: 'Games::Speed::Setup', controller: 'Games::Speed::RoundController' }
-  }
+  }.freeze
 
   STATUS_CREATED  = 0
   STATUS_PLAYING  = 1
   STATUS_PAUSED   = 2
   STATUS_FINISHED = 3
 
-  ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED]
+  ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED].freeze
 
   validates :number, presence: true, numericality: true
   validates :status, inclusion: { in: ALL_STATUS }
@@ -30,7 +30,7 @@ class Round < ApplicationRecord
     update_round!
   end
 
-  def use_replacement_pile!(_)
+  def use_replacement_pile!(*)
     round_controller.use_replacement_pile!
     update_round!
   end
@@ -68,12 +68,14 @@ class Round < ApplicationRecord
   def controller_class
     klass = GAMES[data['game_name'].to_sym][:controller]
     raise StandardError, "Round Controller class for match '#{data['game_name']}' doesn't exist!" if klass.blank?
+
     klass.constantize
   end
 
   def setup_class
     klass = GAMES[data['game_name'].to_sym][:setup]
     raise StandardError, "Round Setup class for match '#{data['game_name']}' doesn't exist!" if klass.blank?
+
     klass.constantize
   end
 end
