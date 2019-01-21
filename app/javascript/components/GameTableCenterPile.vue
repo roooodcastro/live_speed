@@ -3,11 +3,15 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :ref="'center_left_' + index"/>
+                                :initial-position="[-10, 0]"
+                                :ref="'center_left_' + index"
+                                :key="'center_left_' + index"/>
         <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :ref="'center_right_' + index"/>
+                                :initial-position="[10, 0]"
+                                :ref="'center_right_' + index"
+                                :key="'center_right_' + index"/>
         <livespeed-playing-card v-for="(card, index) in replacementPiles[0]"
                                 :rank="card.r"
                                 :suit="card.s"
@@ -23,26 +27,24 @@
   import Vue          from 'vue';
   import AudioManager from '../audio_manager';
 
+  const DEFAULT_DELAY = 10;
+
   export default {
     computed: {
       allCards() {
-        return this.leftRepPile.concat(this.rightRepPile, this.leftCenterCards, this.rightCenterCards);
+        return this.$children;
       },
-
-      leftCenterCards() {
-        return this.filterCards('center_left');
+      leftCenterPileCount() {
+        return this.centerPiles[0].length;
       },
-
-      rightCenterCards() {
-        return this.filterCards('center_right');
+      rightCenterPileCount() {
+        return this.centerPiles[1].length;
       },
-
-      leftRepPile() {
-        return this.filterCards('replacement_left');
+      leftRepPileCount() {
+        return this.replacementPiles[0].length;
       },
-
-      rightRepPile() {
-        return this.filterCards('replacement_right');
+      rightRepPileCount() {
+        return this.replacementPiles[1].length;
       },
     },
 
@@ -51,6 +53,10 @@
     },
 
     mounted() {
+    },
+
+    updated() {
+      // this.dealCards(0);
     },
 
     methods: {
@@ -63,10 +69,12 @@
       },
 
       dealCenterPileCard(pileIndex, cardIndex, delay) {
-        let mult = (pileIndex === 0) ? 1 : -1;
-        let posY = cardIndex * -0.2;
-        let posX = 10 * mult;
-        let card = (pileIndex === 0) ? this.leftCenterCards[cardIndex] : this.rightCenterCards[cardIndex];
+        let mult       = (pileIndex === 0) ? -1 : 1;
+        let posY       = cardIndex * -0.2;
+        let posX       = 10 * mult;
+        let leftCards  = this.filterCards('center_left');
+        let rightCards = this.filterCards('center_right');
+        let card       = (pileIndex === 0) ? leftCards[cardIndex] : rightCards[cardIndex];
         card.setOrder(cardIndex + 100);
         AudioManager.playDealCard();
 
@@ -74,34 +82,35 @@
       },
 
       dealRepPileCard(pileIndex, cardIndex, delay) {
-        let mult = (pileIndex === 0) ? 1 : -1;
-        let posY = cardIndex * -0.2;
-        let posX = 40 * mult;
-        let card = (pileIndex === 0) ? this.leftRepPile[cardIndex] : this.rightRepPile[cardIndex];
+        let mult       = (pileIndex === 0) ? 1 : -1;
+        let posY       = cardIndex * -0.2;
+        let posX       = 40 * mult;
+        let leftCards  = this.filterCards('replacement_left');
+        let rightCards = this.filterCards('replacement_right');
+        let card       = (pileIndex === 0) ? leftCards[cardIndex] : rightCards[cardIndex];
         card.setOrder(cardIndex + 100);
         AudioManager.playDealCard();
 
         return this.moveCard(card, [posX, posY], delay);
       },
 
-      dealCards() {
+      dealCards(delay = DEFAULT_DELAY) {
         return new Promise((resolve) => {
-          let delay         = 150;
           let center1Dealer = (promise, index) => promise.then(() => this.dealCenterPileCard(0, index, delay));
           let center2Dealer = (promise, index) => promise.then(() => this.dealCenterPileCard(1, index, delay));
           let rep1Dealer    = (promise, index) => promise.then(() => this.dealRepPileCard(0, index, delay));
           let rep2Dealer    = (promise, index) => promise.then(() => this.dealRepPileCard(1, index, delay));
-          let promise       = Array.from(Array(5).keys()).reduce(rep1Dealer, Promise.resolve());
-          promise           = Array.from(Array(5).keys()).reduce(rep2Dealer, promise);
-          promise           = Array.from(Array(1).keys()).reduce(center1Dealer, promise);
-          return Array.from(Array(1).keys()).reduce(center2Dealer, promise).then(() => resolve());
+          let promise       = this.expandArray(this.leftRepPileCount).reduce(rep1Dealer, Promise.resolve());
+          promise           = this.expandArray(this.rightRepPileCount).reduce(rep2Dealer, promise);
+          promise           = this.expandArray(this.leftCenterPileCount).reduce(center1Dealer, promise);
+          return this.expandArray(this.rightCenterPileCount).reduce(center2Dealer, promise).then(() => resolve());
         });
       },
 
       revealCards() {
         return new Promise((resolve) => {
-          this.leftCenterCards.forEach((card) => card.flipUp());
-          this.rightCenterCards.forEach((card) => card.flipUp());
+          this.filterCards('center_left').forEach((card) => card.flipUp());
+          this.filterCards('center_right').forEach((card) => card.flipUp());
           setTimeout(() => resolve(), 500);
         });
       },
@@ -109,13 +118,6 @@
       setCardData(data) {
         this.centerPiles      = data.central_pile.piles;
         this.replacementPiles = data.replacement_piles;
-
-        Vue.nextTick(() => {
-          this.leftCenterCards.forEach((card, index) => card.setRankSuit(data.central_pile.piles[0][index]));
-          this.rightCenterCards.forEach((card, index) => card.setRankSuit(data.central_pile.piles[1][index]));
-          this.leftRepPile.forEach((card, index) => card.setRankSuit(data.replacement_piles[0][index]));
-          this.rightRepPile.forEach((card, index) => card.setRankSuit(data.replacement_piles[1][index]));
-        });
       },
 
       filterCards(ref) {
@@ -137,6 +139,19 @@
         let insideX = Math.abs(card.dragPosition[0] - 10) < card.widthVw * 1.5 && card.dragPosition[0] > 0;
         let insideY = Math.abs(card.dragPosition[1]) < card.heightVh * 2;
         return insideX && insideY;
+      },
+
+      place(cardData, pileIndex) {
+        let newPile = this.centerPiles[pileIndex].concat([cardData]);
+        this.centerPiles.splice(pileIndex, 1, newPile);
+
+        Vue.nextTick(() => {
+          this.dealCards(0).then(this.revealCards);
+        });
+      },
+
+      expandArray(number) {
+        return Array.from(Array(number).keys());
       }
     }
   };

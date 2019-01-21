@@ -6,10 +6,6 @@
         <GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>
 
         <GameTableCenterPile ref="centerPile"/>
-        <!--<livespeed-playing-card :initial-position="[-40, 0]"/>-->
-        <!--<livespeed-playing-card :initial-position="[-10, 0]"/>-->
-        <!--<livespeed-playing-card :initial-position="[10, 0]"/>-->
-        <!--<livespeed-playing-card :initial-position="[40, 0]"/>-->
     </div>
 </template>
 
@@ -27,6 +23,10 @@
           .map((key) => {
             return this.$refs[key];
           });
+      },
+
+      playerHand() {
+        return this.hands[0];
       },
 
       centerPile() {
@@ -98,7 +98,7 @@
       },
 
       isPlayerCard(card) {
-        return this.hands[0].handCards.includes(card);
+        return this.playerHand.handCards.includes(card);
       },
 
       dragStart(ev) {
@@ -127,7 +127,9 @@
       },
 
       playCard(card, pileIndex) {
-        alert('card played at ' + pileIndex);
+        let playedCardData = this.playerHand.removeCard(card);
+        this.centerPile.place(playedCardData, pileIndex);
+        // alert('card played at ' + pileIndex);
       }
     },
     props:      {

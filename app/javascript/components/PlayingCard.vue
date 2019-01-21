@@ -13,7 +13,11 @@
     name:     'PlayingCard',
     computed: {
       cssClass() {
-        return 'playing-card card-' + this.suit + '_' + this.rank + (this.flipped ? ' card-f_1' : '');
+        if (this.rank !== 'e' && this.suit !== 'e') {
+          return 'playing-card card-' + this.suit + '_' + this.rank + (this.flipped ? ' card-f_1' : '');
+        } else {
+          return '';
+        }
       },
 
       transform() {
