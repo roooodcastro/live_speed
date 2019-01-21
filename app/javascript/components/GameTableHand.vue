@@ -119,10 +119,9 @@
             console.log('replaced ' + this.hand[cardIndex].r + ' with ' + newFromDraw.r);
             this.hand.splice(cardIndex, 1, newFromDraw);
             console.log('hand cards: ' + this.printCards(this.hand));
-            card.$el.parentNode.removeChild(card.$el);
+            // card.$el.parentNode.removeChild(card.$el);
             Vue.nextTick(() => {
               let card = this.filterCards('card')[cardIndex];
-              debugger;
               console.log(card);
               card.flipUp();
             });
