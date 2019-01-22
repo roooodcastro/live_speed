@@ -76,7 +76,7 @@
       return {
         altitude:     0,
         flipped:      this.initialFlipped,
-        order:        1,
+        order:        this.initialOrder,
         position:     this.initialPosition,
         rotation:     this.initialRotation,
         dragPosition: [0, 0],
@@ -89,7 +89,8 @@
       suit:            {type: String, default: 's'},
       initialPosition: {type: Array, default: () => [0, 0]},
       initialRotation: {type: Number, default: 0},
-      initialFlipped:  {type: Boolean, default: true}
+      initialFlipped:  {type: Boolean, default: true},
+      initialOrder:    {type: Number, default: 1}
     },
 
     methods: {

@@ -3,24 +3,32 @@
         <livespeed-playing-card v-for="(card, index) in draw"
                                 :rank="card.r"
                                 :suit="card.s"
+                                :initial-position="drawCardPos(index)"
+                                :initial-rotation="cardRotation"
                                 :ref="'draw_' + playerIndex + '_' + index"
                                 :key="'draw_' + playerIndex + '_' + index"/>
         <livespeed-playing-card v-for="(card, index) in hand"
                                 :rank="card.r"
                                 :suit="card.s"
+                                :initial-position="handCardPos(index)"
+                                :initial-rotation="cardRotation"
+                                :initial-flipped="false"
                                 :ref="'card_' + playerIndex + '_' + index"
                                 :key="'card_' + playerIndex + '_' + index"/>
     </div>
 </template>
 
 <script>
-  import Vue          from 'vue';
-  import AudioManager from '../audio_manager';
-
-  const DEFAULT_DELAY = 10;
+  import Vue                        from 'vue';
+  import AudioManager               from '../audio_manager';
+  import {CARD_VERTICAL_SEPARATION} from "../constants";
 
   export default {
     computed: {
+      cardRotation() {
+        return this.playerIndex * 180;
+      },
+
       allCards() {
         return this.handCards.concat(this.drawCards);
       },
@@ -50,57 +58,9 @@
     },
 
     methods: {
-      moveCard(card, position, rotation) {
-        return new Promise((resolve) => {
-          card.move(position);
-          card.rotate(rotation);
-
-          setTimeout(() => resolve(), DEFAULT_DELAY);
-        });
-      },
-
-      dealHandCard(cardIndex) {
-        let mult     = (this.playerIndex === 0) ? 1 : -1;
-        let posY     = 80 * mult;
-        let posIndex = cardIndex - 2;
-        let posX     = ((15 * posIndex) - 10) * mult;
-        let card     = this.handCards[cardIndex];
-        card.setOrder(cardIndex + 100);
-        AudioManager.playDealCard();
-
-        return this.moveCard(card, [posX, posY], this.playerIndex * 180, DEFAULT_DELAY);
-      },
-
-      dealDrawCard(cardIndex) {
-        let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posY = (80 * mult) - (cardIndex * 0.2);
-        let posX = 40 * mult;
-        let card = this.drawCards[cardIndex];
-        card.setOrder(cardIndex + 100);
-        AudioManager.playDealCard();
-
-        return this.moveCard(card, [posX, posY], this.playerIndex * 180, DEFAULT_DELAY);
-      },
-
-      dealCards() {
-        return new Promise((resolve) => {
-          let handDealer = (promise, index) => promise.then(() => this.dealHandCard(index));
-          let drawDealer = (promise, index) => promise.then(() => this.dealDrawCard(index));
-          let promise    = Array.from(Array(this.handCards.length).keys()).reduce(handDealer, Promise.resolve());
-          Array.from(Array(this.drawCards.length).keys()).reduce(drawDealer, promise).then(() => resolve());
-        });
-      },
-
       setHandData(handData) {
         this.hand = handData.cards;
         this.draw = handData.draw_pile;
-      },
-
-      revealCards() {
-        return new Promise((resolve) => {
-          this.handCards.forEach((card) => card.flipUp());
-          setTimeout(() => resolve(), 500);
-        });
       },
 
       removeCard(card) {
@@ -148,6 +108,20 @@
         return cards.reduce((string, card) => {
           return string + ', ' + this.printCard(card);
         }, '');
+      },
+
+      handCardPos(cardIndex) {
+        let mult = (this.playerIndex === 0) ? 1 : -1;
+        let posX = ((cardIndex * 15) - 40) * mult;
+        let posY = 80 * mult;
+        return [posX, posY];
+      },
+
+      drawCardPos(cardIndex) {
+        let mult = (this.playerIndex === 0) ? 1 : -1;
+        let posX = 40 * mult;
+        let posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
+        return [posX, posY];
       }
     }
   };

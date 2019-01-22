@@ -1,11 +1,17 @@
 <template>
-    <div id="game_table" class="game-table-container" @mousedown="dragStart" @mouseup="dragEnd" @mousemove="dragMove">
-        <GameTableHand ref="hand0" :player-index="0"/>
-        <GameTableHand ref="hand1" :player-index="1"/>
-        <GameTableHand ref="hand2" :player-index="2" v-if="playerCount >= 3"/>
-        <GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>
+    <div id="game_table" class="game-table-container">
+        <div v-show="status === 'game'"
+             @mousedown="dragStart"
+             @mouseup="dragEnd"
+             @mousemove="dragMove">
+            <GameTableHand ref="hand0" :player-index="0"/>
+            <GameTableHand ref="hand1" :player-index="1"/>
+            <GameTableHand ref="hand2" :player-index="2" v-if="playerCount >= 3"/>
+            <GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>
 
-        <GameTableCenterPile ref="centerPile"/>
+            <GameTableCenterPile ref="centerPile"/>
+        </div>
+        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
     </div>
 </template>
 
@@ -13,9 +19,10 @@
   import axios               from 'axios';
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
+  import PlayingCardDeck     from './PlayingCardDeck';
 
   export default {
-    components: {GameTableHand, GameTableCenterPile},
+    components: {GameTableHand, GameTableCenterPile, PlayingCardDeck},
     computed:   {
       hands() {
         return Object.keys(this.$refs)
@@ -48,18 +55,20 @@
 
     mounted() {
       this.fetchRoundData()
-        .then(this.stackDeck)
-        .then(this.dealHands)
-        .then(this.centerPile.dealCards)
-        .then(this.revealCards)
+        .then(() => this.$refs['cardDeck'].dealCards())
         .then(() => this.status = 'game');
+      //   .then(this.stackDeck)
+      //   .then(this.dealHands)
+      //   .then(this.centerPile.dealCards)
+      //   .then(this.revealCards)
+      //   .then(() => this.status = 'game');
     },
 
     data() {
       return {roundData: {}, isDragging: undefined, status: 'setup'};
     },
 
-    methods:    {
+    methods: {
       stackDeck() {
         return new Promise((resolve) => {
           this.allCards.forEach((card, index) => card.move([0, index * -0.2]));
@@ -132,7 +141,7 @@
         // alert('card played at ' + pileIndex);
       }
     },
-    props:      {
+    props:   {
       roundId: {type: String, required: true}
     }
   };
