@@ -10,6 +10,8 @@
 
 <script>
   import {CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION} from '../constants';
+  import {cardYOffset}                               from '../card_deck_helpers';
+  import AudioManager                                from '../audio_manager';
 
   export default {
     data() {
@@ -39,9 +41,8 @@
       cardCount: {type: Number, default: 52}
     },
     methods: {
-      cardYOffset(index) {
-        return index * CARD_VERTICAL_SEPARATION;
-      },
+      cardYOffset: cardYOffset,
+
       createCards() {
         return [...Array(this.cardCount)].map(() => ({r: 'a', s: 's'}));
       },
@@ -52,6 +53,7 @@
           card.move(cardInfo.pos);
           card.rotate(cardInfo.rot);
           card.setOrder(cardInfo.order);
+          AudioManager.playDealCard();
 
           setTimeout(() => resolve(), CARD_DEAL_DELAY);
         });
@@ -60,7 +62,7 @@
       dealCards() {
         let dealer = (promise, info, index) => {
           return promise.then(() => {
-            info.pos[1] -= CARD_VERTICAL_SEPARATION;
+            if (index > 0) info.pos[1] -= CARD_VERTICAL_SEPARATION;
             info.order = index;
             return this.dealCard(this.cardCount - (index + 1), info);
           });

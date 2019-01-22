@@ -20,7 +20,6 @@
 
 <script>
   import Vue                        from 'vue';
-  import AudioManager               from '../audio_manager';
   import {CARD_VERTICAL_SEPARATION} from "../constants";
 
   export default {
