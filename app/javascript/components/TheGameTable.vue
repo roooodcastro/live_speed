@@ -55,7 +55,7 @@
 
     mounted() {
       this.fetchRoundData()
-        .then(() => this.$refs['cardDeck'].dealCards())
+      // .then(() => this.$refs['cardDeck'].dealCards())
         .then(() => this.status = 'game');
       //   .then(this.stackDeck)
       //   .then(this.dealHands)
@@ -65,7 +65,7 @@
     },
 
     data() {
-      return {roundData: {}, isDragging: undefined, status: 'setup'};
+      return {roundData: {}, isDragging: undefined, dragHold: false, status: 'setup'};
     },
 
     methods: {
@@ -93,6 +93,7 @@
         if (this.isPlayerCard(card) && this.status === 'game') {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
+          this.dragHold = false;
           card.startDrag();
         }
       },
@@ -100,31 +101,54 @@
       dragEnd() {
         if (this.isDragging) {
           let card = this.isDragging;
-          if (this.centerPile.isCardOverLeftPile(card)) this.playCard(card, 0);
-          if (this.centerPile.isCardOverRightPile(card)) this.playCard(card, 1);
-          this.isDragging.endDrag();
-          this.isDragging = undefined;
+          this.dragHold = true;
+          if (this.centerPile.isCardOverLeftPile(card)) {
+            this.playCard(card, 0);
+          } else if (this.centerPile.isCardOverRightPile(card)) {
+            this.playCard(card, 1);
+          } else {
+            this.isDragging.endDrag();
+            this.isDragging = undefined;
+          }
         }
       },
 
       dragMove(ev) {
-        if (this.isDragging) {
+        if (this.isDragging && !this.dragHold) {
           this.isDragging.dragMove(ev);
         }
       },
 
       playCard(card, pileIndex) {
-        let cardIndex = this.playerHand.indexOfCard(card);
-        this.playerHand.removeCard(card)
-          .then((cardData) => this.submitPlay(cardData, pileIndex))
-          .then((cardData) => this.centerPile.place(cardData, pileIndex))
-          .then(() => this.playerHand.pullFromDraw(cardIndex));
+        let cardData  = this.playerHand.dataOfCard(card);
+
+        this.submitPlay(cardData, pileIndex)
+          .then(
+            (cardData) => { // Card was successfully played
+              let cardIndex = this.playerHand.indexOfCard(card);
+              this.playerHand.removeCard(card)
+                .then(() => this.centerPile.place(cardData, pileIndex))
+                .then(() => this.playerHand.pullFromDraw(cardIndex));
+            },
+            (error) => { // Play was invalid, card must be returned to the hand
+              // TODO: handle error
+            })
+          .finally(() => {
+            this.isDragging.endDrag();
+            this.isDragging = undefined;
+          });
       },
 
       submitPlay(cardData, pileIndex) {
-        return new Promise((resolve) => {
-          // TODO: Submit to Rails and abort play if move is invalid
-          resolve(cardData);
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            // TODO: Submit to Rails and abort play if move is invalid
+            if (true) {
+              resolve(cardData);
+            } else {
+              reject('Invalid Play');
+            }
+          }, 200);
         });
       }
     },

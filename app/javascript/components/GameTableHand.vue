@@ -66,6 +66,10 @@
         return this.handCards.indexOf(card);
       },
 
+      dataOfCard(card) {
+        return this.hand[this.indexOfCard(card)];
+      },
+
       removeCard(card) {
         return new Promise((resolve) => {
           let cardIndex = this.handCards.indexOf(card);
