@@ -19,8 +19,8 @@
 </template>
 
 <script>
-  import Vue                        from 'vue';
-  import {CARD_VERTICAL_SEPARATION} from "../constants";
+  import Vue                                         from 'vue';
+  import {CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION} from "../constants";
 
   export default {
     computed: {
@@ -62,32 +62,34 @@
         this.draw = handData.draw_pile;
       },
 
+      indexOfCard(card) {
+        return this.handCards.indexOf(card);
+      },
+
       removeCard(card) {
-        let cardIndex       = this.handCards.indexOf(card);
-        let removed         = this.hand[cardIndex];
-        let removedPosition = card.position;
-        let newFromDraw     = this.draw.pop();
-        let drawedCard      = this.filterCards('draw')[0];
-        console.log('hand cards: ' + this.printCards(this.hand));
-        console.log('removed index ' + cardIndex + ': ' + this.printCard(removed));
-        this.hand.splice(cardIndex, 1, {r: 'e', s: 'e'});
-        console.log('hand cards: ' + this.printCards(this.hand));
+        return new Promise((resolve) => {
+          let cardIndex = this.handCards.indexOf(card);
+          let removed   = this.hand[cardIndex];
+          this.hand.splice(cardIndex, 1, {r: 'e', s: 'e'});
+          Vue.nextTick(() => resolve(removed));
+        });
+      },
 
-        if (newFromDraw) {
-          this.moveCard(drawedCard, removedPosition, 0, DEFAULT_DELAY).then(() => {
-            console.log('replaced ' + this.hand[cardIndex].r + ' with ' + newFromDraw.r);
-            this.hand.splice(cardIndex, 1, newFromDraw);
-            console.log('hand cards: ' + this.printCards(this.hand));
-            // card.$el.parentNode.removeChild(card.$el);
-            Vue.nextTick(() => {
-              let card = this.filterCards('card')[cardIndex];
-              console.log(card);
-              card.flipUp();
-            });
-          });
-        }
-
-        return removed;
+      pullFromDraw(cardIndex) {
+        return new Promise((resolve) => {
+          let drawIndex = this.draw.length - 1;
+          let card = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
+          card.setOrder(100);
+          card.move(this.handCardPos(cardIndex));
+          card.flipUp();
+          setTimeout(() => {
+            let newCard = this.draw.splice(this.draw.length - 1, 1);
+            if (newCard.length > 0) {
+              this.hand.splice(cardIndex, 1, newCard[0]);
+            }
+            resolve();
+          }, CARD_DEAL_DELAY);
+        });
       },
 
       filterCards(ref) {

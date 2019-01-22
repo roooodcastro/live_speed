@@ -69,28 +69,6 @@
     },
 
     methods: {
-      stackDeck() {
-        return new Promise((resolve) => {
-          this.allCards.forEach((card, index) => card.move([0, index * -0.2]));
-          setTimeout(() => resolve(), 500);
-        });
-      },
-
-      dealHands() {
-        return new Promise((resolve) => {
-          let dealer = (promise, hand) => promise.then(() => hand.dealCards());
-          this.hands.reduce(dealer, Promise.resolve()).then(() => resolve());
-        });
-      },
-
-      revealCards() {
-        return new Promise((resolve) => {
-          this.hands.forEach((hand) => hand.revealCards());
-          this.centerPile.revealCards();
-          setTimeout(() => resolve(), 500);
-        });
-      },
-
       fetchRoundData() {
         return new Promise((resolve) => {
           axios.get('/rounds/' + this.roundId + '.json').then((response) => {
@@ -122,8 +100,8 @@
       dragEnd() {
         if (this.isDragging) {
           let card = this.isDragging;
-          if (this.centerPile.cardOverLeftPile(card)) this.playCard(card, 0);
-          if (this.centerPile.cardOverRightPile(card)) this.playCard(card, 1);
+          if (this.centerPile.isCardOverLeftPile(card)) this.playCard(card, 0);
+          if (this.centerPile.isCardOverRightPile(card)) this.playCard(card, 1);
           this.isDragging.endDrag();
           this.isDragging = undefined;
         }
@@ -136,9 +114,18 @@
       },
 
       playCard(card, pileIndex) {
-        let playedCardData = this.playerHand.removeCard(card);
-        this.centerPile.place(playedCardData, pileIndex);
-        // alert('card played at ' + pileIndex);
+        let cardIndex = this.playerHand.indexOfCard(card);
+        this.playerHand.removeCard(card)
+          .then((cardData) => this.submitPlay(cardData, pileIndex))
+          .then((cardData) => this.centerPile.place(cardData, pileIndex))
+          .then(() => this.playerHand.pullFromDraw(cardIndex));
+      },
+
+      submitPlay(cardData, pileIndex) {
+        return new Promise((resolve) => {
+          // TODO: Submit to Rails and abort play if move is invalid
+          resolve(cardData);
+        });
       }
     },
     props:   {

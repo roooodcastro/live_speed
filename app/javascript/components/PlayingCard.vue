@@ -153,7 +153,7 @@
           let deltaY        = this.pxToVh(ev.movementY * 2 * spreadY);
           this.dragPosition = [this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY];
         }
-      }
+      },
     }
   };
 </script>
