@@ -34,10 +34,17 @@
       },
 
       posX() {
+        let clientW       = document.documentElement.clientWidth;
+        let clientH       = document.documentElement.clientHeight;
         let positionX     = this.isDragging ? this.dragPosition[0] : this.position[0];
         let cardWidth     = this.width * this.scale;
         let posVw         = this.pxToVw(this.vwToPx(50) - cardWidth);
-        let correctedMove = positionX * (100 - this.pxToVw(cardWidth)) / 200;
+        let aspectRatio   = clientW / clientH;
+        let correctedMove = positionX * ((100 / aspectRatio) - this.pxToVw(cardWidth)) / 200;
+        console.log('cardWidth: ' + cardWidth);
+        console.log('posVw: ' + posVw);
+        console.log('aspectRatio: ' + aspectRatio);
+        console.log('correctedMove: ' + correctedMove);
         return (posVw + correctedMove) / this.scale;
       },
 
@@ -50,9 +57,17 @@
       },
 
       scale() {
-        let heightVh     = this.pxToVh(this.height * 1.2);
-        let targetHeight = 100 / 5;
-        return (targetHeight / heightVh) * (1 + this.altitude / 500);
+        let clientW = document.documentElement.clientWidth;
+        let clientH = document.documentElement.clientHeight;
+        if (clientW > clientH) {
+          let heightVh     = this.pxToVh(this.height * 1.2);
+          let targetHeight = 100 / 5;
+          return (targetHeight / heightVh) * (1 + this.altitude / 500);
+        } else {
+          let widthVw     = this.pxToVw(this.width * 1.2);
+          let targetWidth = 100 / 6;
+          return (targetWidth / widthVw) * (1 + this.altitude / 500);
+        }
       },
 
       width() {

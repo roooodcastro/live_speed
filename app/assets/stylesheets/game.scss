@@ -1,4 +1,5 @@
 html, body, .container {
+  box-sizing: border-box;
   display: block;
   height: 100%;
 }
@@ -6,6 +7,7 @@ html, body, .container {
 .game-table-container {
   background-image: asset-url('felt.png');
   background-repeat: repeat;
+  box-sizing: border-box;
   display: block;
   height: 100%;
   position: relative;
@@ -23,4 +25,13 @@ html, body, .container {
 
 .game-table-hand {
   position: relative;
+}
+
+.frame {
+  box-sizing: border-box;
+  position: absolute;
+  border: 2px solid red;
+  width: 100vh;
+  height: 100vh;
+  left: calc(50vw - 50vh);
 }

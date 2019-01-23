@@ -1,17 +1,18 @@
 <template>
     <div id="game_table" class="game-table-container">
+        <div class="frame"></div>
         <div v-show="status === 'game'"
              @mousedown="dragStart"
              @mouseup="dragEnd"
              @mousemove="dragMove">
             <GameTableHand ref="hand0" :player-index="0"/>
-            <GameTableHand ref="hand1" :player-index="1"/>
-            <GameTableHand ref="hand2" :player-index="2" v-if="playerCount >= 3"/>
-            <GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>
+            <!--<GameTableHand ref="hand1" :player-index="1"/>-->
+            <!--<GameTableHand ref="hand2" :player-index="2" v-if="playerCount >= 3"/>-->
+            <!--<GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>-->
 
-            <GameTableCenterPile ref="centerPile"/>
+            <!--<GameTableCenterPile ref="centerPile"/>-->
         </div>
-        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
+        <!--<playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>-->
     </div>
 </template>
 
@@ -81,7 +82,7 @@
       parseRoundData(round) {
         this.roundData = round;
         this.hands.forEach((hand, index) => hand.setHandData(round.data.hands[index]));
-        this.centerPile.setCardData(round.data);
+        // this.centerPile.setCardData(round.data);
       },
 
       isPlayerCard(card) {

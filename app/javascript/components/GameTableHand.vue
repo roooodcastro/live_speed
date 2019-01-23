@@ -1,12 +1,12 @@
 <template>
     <div class="game-table-hand">
-        <livespeed-playing-card v-for="(card, index) in draw"
-                                :rank="card.r"
-                                :suit="card.s"
-                                :initial-position="drawCardPos(index)"
-                                :initial-rotation="cardRotation"
-                                :ref="'draw_' + playerIndex + '_' + index"
-                                :key="'draw_' + playerIndex + '_' + index"/>
+        <!--<livespeed-playing-card v-for="(card, index) in draw"-->
+                                <!--:rank="card.r"-->
+                                <!--:suit="card.s"-->
+                                <!--:initial-position="drawCardPos(index)"-->
+                                <!--:initial-rotation="cardRotation"-->
+                                <!--:ref="'draw_' + playerIndex + '_' + index"-->
+                                <!--:key="'draw_' + playerIndex + '_' + index"/>-->
         <livespeed-playing-card v-for="(card, index) in hand"
                                 :rank="card.r"
                                 :suit="card.s"
@@ -96,35 +96,16 @@
         });
       },
 
-      filterCards(ref) {
-        return Object.keys(this.$refs)
-          .filter(key => key.includes(ref))
-          .map((key) => {
-            let ref = this.$refs[key];
-            return Array.isArray(ref) ? ref[0] : ref;
-          });
-      },
-
-      printCard(cardData) {
-        return cardData.r + ' of ' + cardData.s;
-      },
-
-      printCards(cards) {
-        return cards.reduce((string, card) => {
-          return string + ', ' + this.printCard(card);
-        }, '');
-      },
-
       handCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = ((cardIndex * 15) - 40) * mult;
+        let posX = ((cardIndex * 40) - 100) * mult;
         let posY = 80 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = 40 * mult;
+        let posX = 100 * mult;
         let posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }
