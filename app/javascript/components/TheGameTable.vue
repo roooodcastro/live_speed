@@ -1,6 +1,7 @@
 <template>
     <div id="game_table" class="game-table-container">
         <div class="frame"></div>
+        <div class="quarter-frame"></div>
         <div v-show="status === 'game'"
              @mousedown="dragStart"
              @mouseup="dragEnd"

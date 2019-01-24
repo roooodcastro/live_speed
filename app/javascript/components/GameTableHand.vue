@@ -1,12 +1,12 @@
 <template>
     <div class="game-table-hand">
-        <!--<livespeed-playing-card v-for="(card, index) in draw"-->
-                                <!--:rank="card.r"-->
-                                <!--:suit="card.s"-->
-                                <!--:initial-position="drawCardPos(index)"-->
-                                <!--:initial-rotation="cardRotation"-->
-                                <!--:ref="'draw_' + playerIndex + '_' + index"-->
-                                <!--:key="'draw_' + playerIndex + '_' + index"/>-->
+        <livespeed-playing-card v-for="(card, index) in draw"
+                                :rank="card.r"
+                                :suit="card.s"
+                                :initial-position="drawCardPos(index)"
+                                :initial-rotation="cardRotation"
+                                :ref="'draw_' + playerIndex + '_' + index"
+                                :key="'draw_' + playerIndex + '_' + index"/>
         <livespeed-playing-card v-for="(card, index) in hand"
                                 :rank="card.r"
                                 :suit="card.s"
@@ -98,14 +98,14 @@
 
       handCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = ((cardIndex * 40) - 100) * mult;
+        let posX = ((cardIndex * 32) - 80) * mult;
         let posY = 80 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = 100 * mult;
+        let posX = 80 * mult;
         let posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }

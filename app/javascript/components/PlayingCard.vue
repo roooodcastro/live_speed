@@ -9,6 +9,8 @@
 </template>
 
 <script>
+  import CardCoordinate from '../helpers/card_coordinate';
+
   export default {
     name:     'PlayingCard',
     computed: {
@@ -21,7 +23,7 @@
       },
 
       transform() {
-        let translate = this.posX + 'vw, ' + this.posY + 'vh';
+        let translate = this.isDragging ? this.dragPosition.pxString : this.position.pxString;
         return 'scale(' + this.scale + ') translate(' + translate + ') rotate(' + this.rotation + 'deg)';
       },
 
@@ -31,43 +33,6 @@
 
       dropShadow() {
         return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
-      },
-
-      posX() {
-        let clientW       = document.documentElement.clientWidth;
-        let clientH       = document.documentElement.clientHeight;
-        let positionX     = this.isDragging ? this.dragPosition[0] : this.position[0];
-        let cardWidth     = this.width * this.scale;
-        let posVw         = this.pxToVw(this.vwToPx(50) - cardWidth);
-        let aspectRatio   = clientW / clientH;
-        let correctedMove = positionX * ((100 / aspectRatio) - this.pxToVw(cardWidth)) / 200;
-        console.log('cardWidth: ' + cardWidth);
-        console.log('posVw: ' + posVw);
-        console.log('aspectRatio: ' + aspectRatio);
-        console.log('correctedMove: ' + correctedMove);
-        return (posVw + correctedMove) / this.scale;
-      },
-
-      posY() {
-        let positionY     = this.isDragging ? this.dragPosition[1] : this.position[1];
-        let cardHeight    = this.height * this.scale;
-        let posVh         = this.pxToVh(this.vhToPx(50) - cardHeight);
-        let correctedMove = positionY * (100 - this.pxToVh(cardHeight)) / 200;
-        return (posVh + correctedMove) / this.scale;
-      },
-
-      scale() {
-        let clientW = document.documentElement.clientWidth;
-        let clientH = document.documentElement.clientHeight;
-        if (clientW > clientH) {
-          let heightVh     = this.pxToVh(this.height * 1.2);
-          let targetHeight = 100 / 5;
-          return (targetHeight / heightVh) * (1 + this.altitude / 500);
-        } else {
-          let widthVw     = this.pxToVw(this.width * 1.2);
-          let targetWidth = 100 / 6;
-          return (targetWidth / widthVw) * (1 + this.altitude / 500);
-        }
       },
 
       width() {
@@ -92,20 +57,21 @@
         altitude:     0,
         flipped:      this.initialFlipped,
         order:        this.initialOrder,
-        position:     this.initialPosition,
+        position:     new CardCoordinate(this.initialPosition, CardCoordinate.cardScale()),
         rotation:     this.initialRotation,
-        dragPosition: [0, 0],
-        isDragging:   false
+        dragPosition: new CardCoordinate(0, 0, CardCoordinate.cardScale()),
+        isDragging:   false,
+        scale: CardCoordinate.cardScale()
       };
     },
 
     props: {
-      rank:            {type: String, default: 'a'},
-      suit:            {type: String, default: 's'},
-      initialPosition: {type: Array, default: () => [0, 0]},
-      initialRotation: {type: Number, default: 0},
-      initialFlipped:  {type: Boolean, default: true},
-      initialOrder:    {type: Number, default: 1}
+      rank:            { type: String, default: 'a' },
+      suit:            { type: String, default: 's' },
+      initialPosition: { type: Array, default: () => [0, 0] },
+      initialRotation: { type: Number, default: 0 },
+      initialFlipped:  { type: Boolean, default: true },
+      initialOrder:    { type: Number, default: 1 }
     },
 
     methods: {
@@ -118,7 +84,7 @@
       },
 
       move(position) {
-        this.position = position;
+        this.position = new CardCoordinate(position, this.scale);
       },
 
       rotate(angle) {
@@ -135,14 +101,6 @@
 
       pxToVh(px) {
         return px * (100 / document.documentElement.clientHeight);
-      },
-
-      vwToPx(vw) {
-        return vw * (document.documentElement.clientWidth / 100);
-      },
-
-      vhToPx(vh) {
-        return vh * (document.documentElement.clientHeight / 100);
       },
 
       startDrag() {
@@ -166,9 +124,9 @@
           let spreadY       = (clientH + (this.height * this.scale)) / clientH;
           let deltaX        = this.pxToVw(ev.movementX * 2 * spreadX);
           let deltaY        = this.pxToVh(ev.movementY * 2 * spreadY);
-          this.dragPosition = [this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY];
+          this.dragPosition = new CardCoordinate(this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY, this.scale);
         }
-      },
+      }
     }
   };
 </script>
