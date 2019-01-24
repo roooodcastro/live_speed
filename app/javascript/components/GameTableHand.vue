@@ -20,7 +20,7 @@
 
 <script>
   import Vue                                           from 'vue';
-  import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from "../constants";
+  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from "../constants";
 
   export default {
     computed: {
@@ -92,7 +92,7 @@
               this.hand.splice(cardIndex, 1, newCard[0]);
             }
             resolve();
-          }, CARD_DEAL_DELAY);
+          }, CARD_MOVE_DELAY);
         });
       },
 

@@ -35,13 +35,8 @@
 
     mounted() {
       this.fetchRoundData()
-      // .then(() => this.$refs['cardDeck'].dealCards())
+        .then(() => this.$refs['cardDeck'].dealCards())
         .then(() => this.status = 'game');
-      //   .then(this.stackDeck)
-      //   .then(this.dealHands)
-      //   .then(this.centerPile.dealCards)
-      //   .then(this.revealCards)
-      //   .then(() => this.status = 'game');
     },
 
     data() {
@@ -76,15 +71,15 @@
 
       dragStart(ev) {
         let card = ev.target.__vue__;
-        if (this.isPlayerCard(card) && this.status === 'game') {
+        if (this.isPlayerCard(card) && this.status === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
-          this.dragHold   = false;
           card.startDrag();
         }
       },
 
       dragEnd() {
+        this.dragHold = false;
         if (this.isDragging) {
           let card      = this.isDragging;
           this.dragHold = true;
@@ -122,6 +117,7 @@
           .finally(() => {
             this.isDragging.endDrag();
             this.isDragging = undefined;
+            this.dragHold   = false;
           });
       },
 

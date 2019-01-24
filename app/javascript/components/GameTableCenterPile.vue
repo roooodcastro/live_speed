@@ -3,7 +3,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[-15, -cardYOffset(index)]"
+                                :initial-position="[-20, -cardYOffset(index)]"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_left_' + index"
@@ -11,7 +11,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[15, -cardYOffset(index)]"
+                                :initial-position="[20, -cardYOffset(index)]"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_right_' + index"
@@ -32,7 +32,8 @@
 </template>
 
 <script>
-  import {cardYOffset} from '../card_deck_helpers';
+  import { cardYOffset } from '../card_deck_helpers';
+  import CardCoordinate  from '../helpers/card_coordinate';
 
   export default {
     computed: {
@@ -42,7 +43,7 @@
     },
 
     data() {
-      return {centerPiles: [], replacementPiles: []};
+      return { centerPiles: [], replacementPiles: [] };
     },
 
     methods: {
@@ -59,15 +60,11 @@
       },
 
       isCardOverLeftPile(card) {
-        let insideX = Math.abs(card.dragPosition[0] + 10) < card.widthVw * 1.5 && card.dragPosition[0] < 0;
-        let insideY = Math.abs(card.dragPosition[1]) < card.heightVh * 2;
-        return insideX && insideY;
+        return card.currentPosition.isOverlapping(new CardCoordinate(-20, 0));
       },
 
       isCardOverRightPile(card) {
-        let insideX = Math.abs(card.dragPosition[0] - 10) < card.widthVw * 1.5 && card.dragPosition[0] > 0;
-        let insideY = Math.abs(card.dragPosition[1]) < card.heightVh * 2;
-        return insideX && insideY;
+        return card.currentPosition.isOverlapping(new CardCoordinate(20, 0));
       },
 
       place(cardData, pileIndex) {
