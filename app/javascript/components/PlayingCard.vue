@@ -10,6 +10,7 @@
 
 <script>
   import CardCoordinate from '../helpers/card_coordinate';
+  import screen         from '../helpers/screen';
 
   export default {
     name:     'PlayingCard',
@@ -49,6 +50,10 @@
 
       heightVh() {
         return this.pxToVh(this.height * this.scale);
+      },
+
+      scale() {
+        return this.position.cardScale;
       }
     },
 
@@ -57,11 +62,10 @@
         altitude:     0,
         flipped:      this.initialFlipped,
         order:        this.initialOrder,
-        position:     new CardCoordinate(this.initialPosition, CardCoordinate.cardScale()),
+        position:     new CardCoordinate(this.initialPosition),
         rotation:     this.initialRotation,
-        dragPosition: new CardCoordinate(0, 0, CardCoordinate.cardScale()),
-        isDragging:   false,
-        scale: CardCoordinate.cardScale()
+        dragPosition: new CardCoordinate(0, 0),
+        isDragging:   false
       };
     },
 
@@ -84,7 +88,7 @@
       },
 
       move(position) {
-        this.position = new CardCoordinate(position, this.scale);
+        this.position = new CardCoordinate(position);
       },
 
       rotate(angle) {
@@ -118,13 +122,15 @@
 
       dragMove(ev) {
         if (this.isDragging) {
-          let clientW       = document.documentElement.clientWidth;
-          let clientH       = document.documentElement.clientHeight;
-          let spreadX       = (clientW + (this.width * this.scale)) / clientW;
-          let spreadY       = (clientH + (this.height * this.scale)) / clientH;
-          let deltaX        = this.pxToVw(ev.movementX * 2 * spreadX);
-          let deltaY        = this.pxToVh(ev.movementY * 2 * spreadY);
-          this.dragPosition = new CardCoordinate(this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY, this.scale);
+          // let clientW       = screen.clientWidth();
+          // let clientH       = screen.clientHeight();
+          // let spreadX       = (clientW + (this.width * this.scale)) / clientW;
+          // let spreadY       = (clientH + (this.height * this.scale)) / clientH;
+          // let deltaX        = this.pxToVw(ev.movementX * 2 * spreadX);
+          // let deltaY        = this.pxToVh(ev.movementY * 2 * spreadY);
+          // this.dragPosition = new CardCoordinate(this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY);
+
+          this.dragPosition = CardCoordinate.fromPixelPosition(ev.clientX, ev.clientY);
         }
       }
     }

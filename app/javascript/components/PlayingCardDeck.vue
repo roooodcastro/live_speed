@@ -3,7 +3,7 @@
         <livespeed-playing-card v-for="(card, index) in cards"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initialPosition="[0, 0 - cardYOffset(index)]"
+                                :initialPosition="[0, -cardYOffset(index)]"
                                 :initialOrder="card.order"/>
     </div>
 </template>

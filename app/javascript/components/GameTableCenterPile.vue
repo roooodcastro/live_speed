@@ -71,10 +71,6 @@
       place(cardData, pileIndex) {
         let newPile = this.centerPiles[pileIndex].concat([cardData]);
         this.centerPiles.splice(pileIndex, 1, newPile);
-
-        // Vue.nextTick(() => {
-        //   this.dealCards(0).then(this.revealCards);
-        // });
       }
     }
   };

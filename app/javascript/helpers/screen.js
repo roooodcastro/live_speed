@@ -9,26 +9,13 @@ export default {
     return document.documentElement.clientHeight;
   },
 
-  aspectRatio() {
-    return this.clientWidth() / this.clientHeight();
-  },
-
+  // Returns the size, in pixels, of the smaller screen measure, either horizontal or vertical.
   smallerScreenSize() {
     return Math.min(this.clientWidth(), this.clientHeight());
   },
 
+  // Returns an array with the x and y values of the center of the screen, in pixels.
   centerPosition() {
     return [this.clientWidth() / 2, this.clientHeight() / 2];
-  },
-
-  coordinatesToScreenPosition(coordX, coordY) {
-    let coordSize = this.smallerScreenSize() / GRID_SIZE;
-    let offsetX = coordX * coordSize;
-    let offsetY = coordY * coordSize;
-    return [this.centerPosition()[0] + offsetX, this.centerPosition()[1] + offsetY];
-  },
-
-  scaleOffset(size, scale) {
-    return (size - (size * scale)) / 2;
   }
 };
