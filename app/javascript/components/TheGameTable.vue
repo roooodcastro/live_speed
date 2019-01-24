@@ -1,19 +1,21 @@
 <template>
     <div id="game_table" class="game-table-container">
-        <div class="frame"></div>
-        <div class="quarter-frame"></div>
         <div v-show="status === 'game'"
+             class="game-table-gamearea"
              @mousedown="dragStart"
              @mouseup="dragEnd"
              @mousemove="dragMove">
-            <GameTableHand ref="hand0" :player-index="0"/>
-            <!--<GameTableHand ref="hand1" :player-index="1"/>-->
-            <!--<GameTableHand ref="hand2" :player-index="2" v-if="playerCount >= 3"/>-->
-            <!--<GameTableHand ref="hand3" :player-index="3" v-if="playerCount >= 4"/>-->
 
-            <!--<GameTableCenterPile ref="centerPile"/>-->
+            <GameTableHand v-for="(hand, index) in hands"
+                           :ref="'hand' + index"
+                           :key="'hand' + index"
+                           :player-index="index"
+                           :initial-hand="hand.cards"
+                           :initial-draw="hand.draw_pile"/>
+
+            <GameTableCenterPile ref="centerPile"/>
         </div>
-        <!--<playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>-->
+        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
     </div>
 </template>
 
@@ -24,35 +26,11 @@
   import PlayingCardDeck     from './PlayingCardDeck';
 
   export default {
-    components: {GameTableHand, GameTableCenterPile, PlayingCardDeck},
+    components: { GameTableHand, GameTableCenterPile, PlayingCardDeck },
     computed:   {
-      hands() {
-        return Object.keys(this.$refs)
-          .filter(key => key.includes('hand'))
-          .map((key) => {
-            return this.$refs[key];
-          });
-      },
-
-      playerHand() {
-        return this.hands[0];
-      },
-
       centerPile() {
         return this.$refs['centerPile'];
       },
-
-      allCards() {
-        let cards = this.hands.reduce((acc, hand) => {
-          return acc.concat(hand.handCards.concat(hand.drawCards));
-        }, []);
-        cards     = cards.concat(this.centerPile.allCards);
-        cards.reverse().forEach((card, index) => card.setOrder(index + 10));
-        return cards;
-      },
-      playerCount() {
-        return 2;
-      }
     },
 
     mounted() {
@@ -67,7 +45,13 @@
     },
 
     data() {
-      return {roundData: {}, isDragging: undefined, dragHold: false, status: 'setup'};
+      return {
+        dragHold:   false,
+        hands:      [],
+        isDragging: undefined,
+        roundData:  {},
+        status:     'setup'
+      };
     },
 
     methods: {
@@ -82,12 +66,12 @@
 
       parseRoundData(round) {
         this.roundData = round;
-        this.hands.forEach((hand, index) => hand.setHandData(round.data.hands[index]));
-        // this.centerPile.setCardData(round.data);
+        this.hands     = round.data.hands;
+        this.centerPile.setCardData(round.data);
       },
 
       isPlayerCard(card) {
-        return this.playerHand.handCards.includes(card);
+        return this.handComponent(0).handCards.includes(card);
       },
 
       dragStart(ev) {
@@ -95,14 +79,14 @@
         if (this.isPlayerCard(card) && this.status === 'game') {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
-          this.dragHold = false;
+          this.dragHold   = false;
           card.startDrag();
         }
       },
 
       dragEnd() {
         if (this.isDragging) {
-          let card = this.isDragging;
+          let card      = this.isDragging;
           this.dragHold = true;
           if (this.centerPile.isCardOverLeftPile(card)) {
             this.playCard(card, 0);
@@ -122,15 +106,15 @@
       },
 
       playCard(card, pileIndex) {
-        let cardData  = this.playerHand.dataOfCard(card);
+        let cardData = this.handComponent(0).dataOfCard(card);
 
         this.submitPlay(cardData, pileIndex)
           .then(
             (cardData) => { // Card was successfully played
-              let cardIndex = this.playerHand.indexOfCard(card);
-              this.playerHand.removeCard(card)
+              let cardIndex = this.handComponent(0).indexOfCard(card);
+              this.handComponent(0).removeCard(card)
                 .then(() => this.centerPile.place(cardData, pileIndex))
-                .then(() => this.playerHand.pullFromDraw(cardIndex));
+                .then(() => this.handComponent(0).pullFromDraw(cardIndex));
             },
             (error) => { // Play was invalid, card must be returned to the hand
               // TODO: handle error
@@ -152,10 +136,14 @@
             }
           }, 200);
         });
+      },
+
+      handComponent(playerIndex) {
+        return this.$refs['hand' + playerIndex][0];
       }
     },
     props:   {
-      roundId: {type: String, required: true}
+      roundId: { type: String, required: true }
     }
   };
 </script>

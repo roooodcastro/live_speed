@@ -24,8 +24,10 @@
       },
 
       transform() {
-        let translate = this.isDragging ? this.dragPosition.pxString : this.position.pxString;
-        return 'scale(' + this.scale + ') translate(' + translate + ') rotate(' + this.rotation + 'deg)';
+        let scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
+        let posTransform   = 'translate(' + this.currentPosition.pxString + ')';
+        let rotTransform   = 'rotate(' + this.rotation + 'deg)';
+        return [scaleTransform, posTransform, rotTransform].join(' ');
       },
 
       transition() {
@@ -52,8 +54,8 @@
         return this.pxToVh(this.height * this.scale);
       },
 
-      scale() {
-        return this.position.cardScale;
+      currentPosition() {
+        return this.isDragging ? this.dragPosition : this.position;
       }
     },
 
@@ -70,12 +72,12 @@
     },
 
     props: {
-      rank:            { type: String, default: 'a' },
-      suit:            { type: String, default: 's' },
-      initialPosition: { type: Array, default: () => [0, 0] },
-      initialRotation: { type: Number, default: 0 },
-      initialFlipped:  { type: Boolean, default: true },
-      initialOrder:    { type: Number, default: 1 }
+      rank:            {type: String, default: 'a'},
+      suit:            {type: String, default: 's'},
+      initialPosition: {type: Array, default: () => [0, 0]},
+      initialRotation: {type: Number, default: 0},
+      initialFlipped:  {type: Boolean, default: true},
+      initialOrder:    {type: Number, default: 1}
     },
 
     methods: {

@@ -7,6 +7,8 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+'use strict';
+
 import '../stylesheets/application';
 import TurbolinksAdapter from 'vue-turbolinks';
 import Vue               from 'vue/dist/vue.esm';

@@ -4,47 +4,48 @@
                                 :suit="card.s"
                                 :rank="card.r"
                                 :initialPosition="[0, -cardYOffset(index)]"
-                                :initialOrder="card.order"/>
+                                :initialOrder="card.order"
+                                :key="'deckCard_' + index"/>
     </div>
 </template>
 
 <script>
-  import {CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION} from '../constants';
-  import {cardYOffset}                               from '../card_deck_helpers';
-  import AudioManager                                from '../audio_manager';
+  import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from '../constants';
+  import { cardYOffset }                               from '../card_deck_helpers';
+  import AudioManager                                  from '../audio_manager';
 
   export default {
     data() {
       return {
         cards:         this.createCards(),
         cardPositions: [
-          {pos: [-40, 80], rot: 0, count: 1},
-          {pos: [-25, 80], rot: 0, count: 1},
-          {pos: [-10, 80], rot: 0, count: 1},
-          {pos: [5, 80], rot: 0, count: 1},
-          {pos: [20, 80], rot: 0, count: 1},
-          {pos: [40, 80], rot: 0, count: 15},
-          {pos: [40, -80], rot: 180, count: 1},
-          {pos: [25, -80], rot: 180, count: 1},
-          {pos: [10, -80], rot: 180, count: 1},
-          {pos: [-5, -80], rot: 180, count: 1},
-          {pos: [-20, -80], rot: 180, count: 1},
-          {pos: [-40, -80], rot: 180, count: 15},
-          {pos: [-40, 0], rot: 0, count: 5},
-          {pos: [40, 0], rot: 0, count: 5},
-          {pos: [-10, 0], rot: 0, count: 1},
-          {pos: [10, 0], rot: 0, count: 1},
+          { pos: [-40, 80], rot: 0, count: 1 },
+          { pos: [-25, 80], rot: 0, count: 1 },
+          { pos: [-10, 80], rot: 0, count: 1 },
+          { pos: [5, 80], rot: 0, count: 1 },
+          { pos: [20, 80], rot: 0, count: 1 },
+          { pos: [40, 80], rot: 0, count: 15 },
+          { pos: [40, -80], rot: 180, count: 1 },
+          { pos: [25, -80], rot: 180, count: 1 },
+          { pos: [10, -80], rot: 180, count: 1 },
+          { pos: [-5, -80], rot: 180, count: 1 },
+          { pos: [-20, -80], rot: 180, count: 1 },
+          { pos: [-40, -80], rot: 180, count: 15 },
+          { pos: [-40, 0], rot: 0, count: 5 },
+          { pos: [40, 0], rot: 0, count: 5 },
+          { pos: [-10, 0], rot: 0, count: 1 },
+          { pos: [10, 0], rot: 0, count: 1 },
         ]
       };
     },
     props:   {
-      cardCount: {type: Number, default: 52}
+      cardCount: { type: Number, default: 52 }
     },
     methods: {
       cardYOffset: cardYOffset,
 
       createCards() {
-        return [...Array(this.cardCount)].map(() => ({r: 'a', s: 's'}));
+        return [...Array(this.cardCount)].map(() => ({ r: 'a', s: 's' }));
       },
 
       dealCard(cardIndex, cardInfo) {

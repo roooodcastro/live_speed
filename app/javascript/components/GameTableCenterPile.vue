@@ -3,7 +3,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[-10, -cardYOffset(index)]"
+                                :initial-position="[-15, -cardYOffset(index)]"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_left_' + index"
@@ -11,7 +11,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[10, -cardYOffset(index)]"
+                                :initial-position="[15, -cardYOffset(index)]"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_right_' + index"
@@ -19,13 +19,15 @@
         <livespeed-playing-card v-for="(card, index) in replacementPiles[0]"
                                 :rank="card.r"
                                 :suit="card.s"
-                                :initial-position="[-40, -cardYOffset(index)]"
-                                :ref="'replacement_left_' + index"/>
+                                :initial-position="[-80, -cardYOffset(index)]"
+                                :ref="'replacement_left_' + index"
+                                :key="'replacement_left_' + index"/>
         <livespeed-playing-card v-for="(card, index) in replacementPiles[1]"
                                 :rank="card.r"
                                 :suit="card.s"
-                                :initial-position="[40, -cardYOffset(index)]"
-                                :ref="'replacement_right_' + index"/>
+                                :initial-position="[80, -cardYOffset(index)]"
+                                :ref="'replacement_right_' + index"
+                                :key="'replacement_right_' + index"/>
     </div>
 </template>
 

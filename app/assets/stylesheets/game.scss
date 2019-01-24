@@ -1,26 +1,36 @@
 html, body, .container {
   box-sizing: border-box;
-  display: block;
-  height: 100%;
+  display:    block;
+  height:     100%;
+  overflow:   hidden;
 }
 
 .game-table-container {
-  background-image: asset-url('felt.png');
+  background-image:  asset-url('felt.png');
   background-repeat: repeat;
-  box-sizing: border-box;
-  display: block;
-  height: 100%;
-  position: relative;
+  box-sizing:        border-box;
+  display:           block;
+  height:            100%;
+  position:          relative;
 
   &:before {
-    content: '';
-    background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0.4) 100%);
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    content:    '';
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
+    position:   absolute;
+    top:        0;
+    bottom:     0;
+    left:       0;
+    right:      0;
   }
+}
+
+.game-table-gamearea {
+  display:  block;
+  position: absolute;
+  top:      0;
+  bottom:   0;
+  left:     0;
+  right:    0;
 }
 
 .game-table-hand {
@@ -29,18 +39,18 @@ html, body, .container {
 
 .frame {
   box-sizing: border-box;
-  position: absolute;
-  border: 2px solid red;
-  width: 100vh;
-  height: 100vh;
-  left: calc(50vw - 50vh);
+  position:   absolute;
+  border:     2px solid red;
+  width:      100vh;
+  height:     100vh;
+  left:       calc(50vw - 50vh);
 }
 
 .quarter-frame {
   box-sizing: border-box;
-  position: absolute;
-  border: 2px solid #990;
-  width: 50vh;
-  height: 50vh;
-  left: calc(50vw - 50vh);
+  position:   absolute;
+  border:     2px solid #990;
+  width:      50vh;
+  height:     50vh;
+  left:       calc(50vw - 50vh);
 }

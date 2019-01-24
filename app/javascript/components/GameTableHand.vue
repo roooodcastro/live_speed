@@ -19,8 +19,8 @@
 </template>
 
 <script>
-  import Vue                                         from 'vue';
-  import {CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION} from "../constants";
+  import Vue                                           from 'vue';
+  import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from "../constants";
 
   export default {
     computed: {
@@ -49,19 +49,19 @@
     },
 
     data() {
-      return {hand: [], draw: []};
+      return {
+        draw: this.initialDraw,
+        hand: this.initialHand
+      };
     },
 
     props: {
-      playerIndex: {type: Number, required: true}
+      playerIndex: { type: Number, required: true },
+      initialHand: { type: Array, required: true },
+      initialDraw: { type: Array, required: true }
     },
 
     methods: {
-      setHandData(handData) {
-        this.hand = handData.cards;
-        this.draw = handData.draw_pile;
-      },
-
       indexOfCard(card) {
         return this.handCards.indexOf(card);
       },
@@ -74,7 +74,7 @@
         return new Promise((resolve) => {
           let cardIndex = this.handCards.indexOf(card);
           let removed   = this.hand[cardIndex];
-          this.hand.splice(cardIndex, 1, {r: 'e', s: 'e'});
+          this.hand.splice(cardIndex, 1, { r: 'e', s: 'e' });
           Vue.nextTick(() => resolve(removed));
         });
       },
@@ -82,7 +82,7 @@
       pullFromDraw(cardIndex) {
         return new Promise((resolve) => {
           let drawIndex = this.draw.length - 1;
-          let card = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
+          let card      = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
           card.setOrder(100);
           card.move(this.handCardPos(cardIndex));
           card.flipUp();

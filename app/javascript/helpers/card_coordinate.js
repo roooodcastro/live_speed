@@ -30,29 +30,30 @@ export default class CardCoordinate {
     }
   }
 
-  static cardGridOffset(cardPos, cardSize) {
-    let cardCenterOffset = (((cardSize * CardCoordinate.cardScale) - cardSize) / 2);
-    let gridEndOffset    = cardSize * ((cardPos + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale;
-    return cardCenterOffset - gridEndOffset;
+  static cardCenterOffset(cardSize) {
+    return (((cardSize * CardCoordinate.cardScale()) - cardSize) / 2);
   }
 
-  // Transforms a pixel position array (in the format [x, y]) into a CardCoordinate. If the pixel position
-  // is outside of the grid (if the coordinate value is outside the range -100..100), it will bound the coordinate to
-  // the grid size, so the return values will always stay within -100..100.
+  static cardGridOffset(cardPos, cardSize) {
+    let gridEndOffset    = cardSize * ((cardPos + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
+    return CardCoordinate.cardCenterOffset(cardSize) - gridEndOffset;
+  }
+
+  // Transforms a pixel position array (in the format [x, y]) into a CardCoordinate.
   static fromPixelPosition(xPixels, yPixels) {
-    // Formula: inverse the formula to transform coord into pixels
-    // pixels = (screenCenter + (coord * coordSize) + gridOffset) / scale;
-    // becomes
-    // coord =  (pixels * scale - (screenCenter + gridOffset)) / coordSize
+    // Basic untreated conversion
+    let coordX = ((xPixels - screen.centerPosition()[0]) / CardCoordinate.coordSize());
+    let coordY = ((yPixels - screen.centerPosition()[1]) / CardCoordinate.coordSize());
 
-    let adjustedPixelScaleX = xPixels * CardCoordinate.cardScale();
-    let adjustedPixelScaleY = yPixels * CardCoordinate.cardScale();
-    let gridOffsetX         = CardCoordinate.cardGridOffset(xPixels, CARD_WIDTH) + screen.centerPosition()[0];
-    let gridOffsetY         = CardCoordinate.cardGridOffset(yPixels, CARD_HEIGHT) + screen.centerPosition()[1];
-    let coordX              = (adjustedPixelScaleX - gridOffsetX) / CardCoordinate.coordSize();
-    let coordY              = (adjustedPixelScaleY - gridOffsetY) / CardCoordinate.coordSize();
+    // Calculate the offsets used to make the card fit in the grid in any direction
+    let gridEndOffsetX = CARD_WIDTH * ((coordX + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
+    let gridEndOffsetY = CARD_HEIGHT * ((coordY + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
 
-    return new CardCoordinate(Math.min(Math.max(coordX, -100, 100), Math.min(Math.max(coordY, -100, 100));
+    // Add calculated offset plus the half-sized card offset, converted from pixels to coords
+    coordX += (gridEndOffsetX + CardCoordinate.cardCenterOffset(CARD_WIDTH)) / CardCoordinate.coordSize();
+    coordY += (gridEndOffsetY + CardCoordinate.cardCenterOffset(CARD_HEIGHT)) / CardCoordinate.coordSize();
+
+    return new CardCoordinate(coordX, coordY);
   }
 
   get pxString() {
@@ -63,18 +64,14 @@ export default class CardCoordinate {
     let relativePos  = this.x * CardCoordinate.coordSize();
     let screenCenter = screen.centerPosition()[0];
     let gridOffset   = CardCoordinate.cardGridOffset(this.x, CARD_WIDTH);
-    return (screenCenter + relativePos + gridOffset) / this.cardScale;
+    return (screenCenter + relativePos + gridOffset) / CardCoordinate.cardScale();
   }
 
   get yPixels() {
     let relativePos  = this.y * CardCoordinate.coordSize();
     let screenCenter = screen.centerPosition()[1];
     let gridOffset   = CardCoordinate.cardGridOffset(this.y, CARD_HEIGHT);
-    return (screenCenter + relativePos + gridOffset) / this.cardScale;
-  }
-
-  get cardScale() {
-    return CardCoordinate.cardScale();
+    return (screenCenter + relativePos + gridOffset) / CardCoordinate.cardScale();
   }
 
   add(other) {
