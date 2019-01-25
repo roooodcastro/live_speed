@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  import axios               from 'axios';
+  import apiClient           from '../match_channel';
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
   import PlayingCardDeck     from './PlayingCardDeck';
@@ -34,9 +34,7 @@
     },
 
     mounted() {
-      this.fetchRoundData()
-      // .then(() => this.$refs['cardDeck'].dealCards())
-        .then(() => this.status = 'game');
+      this.api = apiClient.subscribeToApi(this);
     },
 
     data() {
@@ -45,28 +43,34 @@
         hands:      [],
         isDragging: undefined,
         roundData:  {},
-        status:     'setup'
+        status:     'setup',
+        timeoutId:  0,
+        api:        undefined
       };
     },
 
     methods: {
-      setupRound() {
-        App.api.fetchData();
-      },
-
       fetchRoundData() {
-        return new Promise((resolve) => {
-          axios.get('/rounds/' + this.roundId + '.json').then((response) => {
-            this.parseRoundData(response.data);
-            resolve();
-          });
-        });
+        this.api.fetchData(this.roundId);
       },
 
       parseRoundData(round) {
+        let sortedHands = round.hands.sort((h1, h2) => {
+          if (h1.player_id === this.playerId) {
+            return -1;
+          } else if (h2.player_id === this.playerId) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+
         this.roundData = round;
-        this.hands     = round.data.hands;
-        this.centerPile.setCardData(round.data);
+        this.hands     = sortedHands;
+        this.centerPile.setCardData(round);
+
+        this.$refs['cardDeck'].dealCards()
+          .then(() => this.status = 'game');
       },
 
       isPlayerCard(card) {
@@ -143,7 +147,8 @@
       }
     },
     props:   {
-      roundId: { type: String, required: true }
+      roundId:  { type: String, required: true },
+      playerId: { type: String, required: true }
     }
   };
 </script>

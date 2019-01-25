@@ -2,6 +2,7 @@
 
 class RoundsController < ApplicationController
   before_action :set_round, only: %i[show edit update]
+  before_action :require_login
 
   respond_to :html, :json
 

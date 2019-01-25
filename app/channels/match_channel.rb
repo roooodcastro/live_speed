@@ -9,9 +9,9 @@ class MatchChannel < ApplicationCable::Channel
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def fetch_data
-    puts 'Fetching round data'
-    ActionCable.server.broadcast "player_#{player_id}", { action: 'here are some data' }
+  def fetch_data(args)
+    data = Round.find(args['round_id']).data.as_json
+    ActionCable.server.broadcast "player_#{player_id}", { action: 'round_data' }.merge(data)
   end
 
   def play_card(args)

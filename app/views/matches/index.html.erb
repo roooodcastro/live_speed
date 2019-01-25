@@ -1,0 +1,9 @@
+<h1>Matches</h1>
+
+<ul>
+  <% @matches.each do |match| %>
+    <li><%= link_to match.id, match %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Log out', sessions_path, method: :delete %>

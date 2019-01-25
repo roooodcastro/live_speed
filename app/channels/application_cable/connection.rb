@@ -5,8 +5,7 @@ module ApplicationCable
     identified_by :player_id
 
     def connect
-      # self.player_id = cookies.signed[:player_id]
-      self.player_id = SecureRandom.urlsafe_base64
+      self.player_id = cookies.signed[:player_id]
     end
   end
 end

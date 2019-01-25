@@ -2,6 +2,7 @@
 
 class MatchesController < ApplicationController
   before_action :set_match, only: %i[show edit update]
+  before_action :require_login
 
   respond_to :html, :json
 

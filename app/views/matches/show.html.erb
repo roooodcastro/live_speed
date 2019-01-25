@@ -1,29 +1,5 @@
-<livespeed-gametable round-id="<%= @round.id %>"></livespeed-gametable>
-
-<!--<h1>Game <%#= @match.id %></h1>-->
-
-<!--<h3>Players:</h3>-->
-<!--<ol>-->
-  <%# @match.players.each do |player| %>
-<!--    <li><%#= player.name %></li>-->
-  <%# end %>
-<!--</ol>-->
-
-<!--<h3>Rounds: (best of <%#= @match.num_rounds %>)</h3>-->
-
-<%#= form_with model: @match do |f| %>
-  <%#= f.hidden_field :action, value: :create_next_round! %>
-  <%#= f.submit 'Create Next Round' %>
-<%# end %>
-
-<!--<ol>-->
-  <%# @match.rounds.each do |round| %>
-<!--    <li><%#= link_to "Round #{round.number}", round %></li>-->
-  <%# end %>
-<!--</ol>-->
-
-<%# if @match.winner.present? %>
-<!--  <h3>Winner:</h3>-->
-
-<!--  <h4><%#= @match.winner.name %></h4>-->
-<%# end %>
+<livespeed-gametable
+  ref="gameTable"
+  round-id="<%= @match.current_round.id %>"
+  player-id="<%= current_player.id %>">
+</livespeed-gametable>
