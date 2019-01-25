@@ -30,12 +30,12 @@
     computed:   {
       centerPile() {
         return this.$refs['centerPile'];
-      },
+      }
     },
 
     mounted() {
       this.fetchRoundData()
-        .then(() => this.$refs['cardDeck'].dealCards())
+      // .then(() => this.$refs['cardDeck'].dealCards())
         .then(() => this.status = 'game');
     },
 
@@ -50,6 +50,10 @@
     },
 
     methods: {
+      setupRound() {
+        App.api.fetchData();
+      },
+
       fetchRoundData() {
         return new Promise((resolve) => {
           axios.get('/rounds/' + this.roundId + '.json').then((response) => {

@@ -22,11 +22,10 @@ Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);
 
 document.addEventListener('turbolinks:load', () => {
-  const app = new Vue({
+  window.Vue = new Vue({
     el:         '[data-behaviour="vue"]',
     data:       {},
-    components: {TheGameTable}
+    components: { TheGameTable }
   });
-
-  window.vue = app;
+  ;
 });
