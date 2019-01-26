@@ -25,7 +25,7 @@ export default class CardCoordinate {
       return targetHeight / smallerSize;
     } else {
       let smallerSize = CARD_HEIGHT;
-      let targetWidth = (200 * CardCoordinate.coordSize()) / 6;
+      let targetWidth = (100 * CardCoordinate.coordSize()) / 4;
       return targetWidth / smallerSize;
     }
   }
@@ -35,7 +35,7 @@ export default class CardCoordinate {
   }
 
   static cardGridOffset(cardPos, cardSize) {
-    let gridEndOffset    = cardSize * ((cardPos + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
+    let gridEndOffset = cardSize * ((cardPos + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
     return CardCoordinate.cardCenterOffset(cardSize) - gridEndOffset;
   }
 
@@ -85,10 +85,10 @@ export default class CardCoordinate {
   // Calculates whether a card in this position is overlapping a card in other position. Takes the size of the
   // cards into consideration.
   isOverlapping(other) {
-    let trueCardWidth = (CARD_WIDTH * CardCoordinate.cardScale()) / CardCoordinate.coordSize();
+    let trueCardWidth  = (CARD_WIDTH * CardCoordinate.cardScale()) / CardCoordinate.coordSize();
     let trueCardHeight = (CARD_HEIGHT * CardCoordinate.cardScale()) / CardCoordinate.coordSize();
-    let overlappingX = other.x > (this.x - trueCardWidth) && other.x < (this.x + trueCardWidth);
-    let overlappingY = other.y > (this.y - trueCardHeight) && other.y < (this.y + trueCardHeight);
+    let overlappingX   = other.x > (this.x - trueCardWidth) && other.x < (this.x + trueCardWidth);
+    let overlappingY   = other.y > (this.y - trueCardHeight) && other.y < (this.y + trueCardHeight);
 
     return overlappingX && overlappingY;
   }

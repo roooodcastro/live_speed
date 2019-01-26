@@ -3,7 +3,7 @@
         <livespeed-playing-card v-for="(card, index) in cards"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initialPosition="[0, -cardYOffset(index)]"
+                                :initialPosition="[0, 45 - cardYOffset(index)]"
                                 :initialOrder="card.order"
                                 :key="'deckCard_' + index"/>
     </div>
@@ -13,29 +13,13 @@
   import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from '../constants';
   import { cardYOffset }                               from '../card_deck_helpers';
   import AudioManager                                  from '../audio_manager';
+  import placement                                     from '../helpers/card_placement';
 
   export default {
     data() {
       return {
         cards:         this.createCards(),
-        cardPositions: [
-          { pos: [-80, 80], rot: 0, count: 1 },
-          { pos: [-48, 80], rot: 0, count: 1 },
-          { pos: [-16, 80], rot: 0, count: 1 },
-          { pos: [16, 80], rot: 0, count: 1 },
-          { pos: [48, 80], rot: 0, count: 1 },
-          { pos: [80, 80], rot: 0, count: 15 },
-          { pos: [80, -80], rot: 180, count: 1 },
-          { pos: [48, -80], rot: 180, count: 1 },
-          { pos: [15, -80], rot: 180, count: 1 },
-          { pos: [-16, -80], rot: 180, count: 1 },
-          { pos: [-48, -80], rot: 180, count: 1 },
-          { pos: [-80, -80], rot: 180, count: 15 },
-          { pos: [-80, 0], rot: 0, count: 5 },
-          { pos: [80, 0], rot: 0, count: 5 },
-          { pos: [-20, 0], rot: 0, count: 1 },
-          { pos: [20, 0], rot: 0, count: 1 },
-        ]
+        cardPositions: placement.allCardPositions(2)
       };
     },
     props:   {
@@ -60,7 +44,9 @@
         });
       },
 
-      dealCards() {
+      // Runs the initial card dealing animation.
+      // roundData is used to determine how many cards must be dealt for each pile.
+      dealCards(roundData) {
         let dealer = (promise, info, index) => {
           return promise.then(() => {
             if (index > 0) info.pos[1] -= CARD_VERTICAL_SEPARATION;

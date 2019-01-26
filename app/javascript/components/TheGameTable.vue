@@ -69,8 +69,8 @@
         this.hands     = sortedHands;
         this.centerPile.setCardData(round);
 
-        this.$refs['cardDeck'].dealCards()
-          .then(() => this.status = 'game');
+        this.$refs['cardDeck'].dealCards(round);
+          // .then(() => this.status = 'game');
       },
 
       isPlayerCard(card) {
@@ -121,9 +121,9 @@
         console.log(response);
 
         if (response.success) {
-          let cardIndex = response.card_index;
+          let cardIndex     = response.card_index;
           let handComponent = this.handComponent(response.player_id);
-          let card = handComponent.handCards[cardIndex];
+          let card          = handComponent.handCards[cardIndex];
           handComponent.removeCard(card)
             .then(() => this.centerPile.place(response.card_data, response.pile_index))
             .then(() => handComponent.pullFromDraw(cardIndex));

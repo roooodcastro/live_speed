@@ -5,6 +5,10 @@ html, body, .container {
   overflow:   hidden;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Maiden Orange', serif;
+}
+
 .game-table-container {
   background-image:  asset-url('felt.png');
   background-repeat: repeat;

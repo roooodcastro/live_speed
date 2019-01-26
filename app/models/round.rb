@@ -16,7 +16,6 @@ class Round < ApplicationRecord
   ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED].freeze
 
   validates :number, presence: true, numericality: true
-  # validates :status, inclusion: { in: ALL_STATUS }
 
   delegate :players, :rules, to: :match
   delegate :print_game, :finished?, :unfinished?, to: :round_controller
@@ -49,7 +48,7 @@ class Round < ApplicationRecord
   end
 
   def status=(new_status)
-    data['status'] = new_status
+    data['status'] = new_status if new_status.in? ALL_STATUS
   end
 
   private
