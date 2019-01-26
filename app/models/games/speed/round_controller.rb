@@ -37,11 +37,13 @@ module Games
         card.present? && central_pile.can_play?(card, pile_index)
       end
 
-      def play_card!(player_id, card_index, pile_index)
-        raise InvalidPlayError unless can_play_card?(player_id, card_index, pile_index)
+      def play_card(player_id, card_index, pile_index)
+        return unless can_play_card?(player_id, card_index, pile_index)
 
         hand = player_hand(player_id)
+        card = hand.cards[card_index]
         central_pile.play_card(hand.remove_card(card_index), pile_index)
+        card.to_h
       end
 
       # Temporary method to print relevant round info so I can play on the terminal

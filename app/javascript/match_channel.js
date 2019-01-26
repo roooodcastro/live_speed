@@ -1,6 +1,6 @@
 export default {
   subscribeToApi(gameTable) {
-    return App.cable.subscriptions.create('MatchChannel', {
+    return App.cable.subscriptions.create({ channel: 'MatchChannel', round_id: gameTable.roundId }, {
       // Called when the subscription is ready for use on the server.
       connected() {
         console.log('connected!');
@@ -18,17 +18,22 @@ export default {
 
       // Called when there's incoming data on the websocket for this channel
       received(data) {
-        if (data.action === 'round_data') {
-          gameTable.parseRoundData(data);
+        switch (data.action) {
+          case 'round_data':
+            gameTable.parseRoundData(data);
+            break;
+          case 'play_response':
+            gameTable.processPlayResponse(data);
+            break;
         }
       },
 
-      fetchData(roundId) {
-        this.perform('fetch_data', { round_id: roundId });
+      fetchData() {
+        this.perform('fetch_data');
       },
 
-      playCard(card, pileIndex) {
-        this.perform('play_card', { card: card, pile_index: pileIndex });
+      playCard(cardIndex, pileIndex, playerId) {
+        this.perform('play_card', { card_index: cardIndex, pile_index: pileIndex, player_id: playerId });
       },
 
       playReplacementPile() {
@@ -36,4 +41,4 @@ export default {
       }
     });
   }
-}
+};

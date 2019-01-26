@@ -16,7 +16,7 @@ class Round < ApplicationRecord
   ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED].freeze
 
   validates :number, presence: true, numericality: true
-  validates :status, inclusion: { in: ALL_STATUS }
+  # validates :status, inclusion: { in: ALL_STATUS }
 
   delegate :players, :rules, to: :match
   delegate :print_game, :finished?, :unfinished?, to: :round_controller
@@ -26,8 +26,9 @@ class Round < ApplicationRecord
   end
 
   def play_card!(args)
-    round_controller.play_card!(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
-    update_round!
+    played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
+    update_round! if played_card.present?
+    played_card
   end
 
   def use_replacement_pile!(*)

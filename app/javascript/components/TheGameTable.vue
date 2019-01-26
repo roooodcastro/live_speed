@@ -7,8 +7,8 @@
              @mousemove="dragMove">
 
             <GameTableHand v-for="(hand, index) in hands"
-                           :ref="'hand' + index"
-                           :key="'hand' + index"
+                           :ref="'hand_' + hand.player_id"
+                           :key="'hand_' + hand.player_id"
                            :player-index="index"
                            :initial-hand="hand.cards"
                            :initial-draw="hand.draw_pile"/>
@@ -51,7 +51,7 @@
 
     methods: {
       fetchRoundData() {
-        this.api.fetchData(this.roundId);
+        this.api.fetchData();
       },
 
       parseRoundData(round) {
@@ -74,7 +74,7 @@
       },
 
       isPlayerCard(card) {
-        return this.handComponent(0).handCards.includes(card);
+        return this.handComponent(this.playerId).handCards.includes(card);
       },
 
       dragStart(ev) {
@@ -109,41 +109,34 @@
       },
 
       playCard(card, pileIndex) {
-        let cardData = this.handComponent(0).dataOfCard(card);
-
-        this.submitPlay(cardData, pileIndex)
-          .then(
-            (cardData) => { // Card was successfully played
-              let cardIndex = this.handComponent(0).indexOfCard(card);
-              this.handComponent(0).removeCard(card)
-                .then(() => this.centerPile.place(cardData, pileIndex))
-                .then(() => this.handComponent(0).pullFromDraw(cardIndex));
-            },
-            (error) => { // Play was invalid, card must be returned to the hand
-              // TODO: handle error
-            })
-          .finally(() => {
-            this.isDragging.endDrag();
-            this.isDragging = undefined;
-            this.dragHold   = false;
-          });
+        let cardIndex = this.handComponent(this.playerId).indexOfCard(card);
+        this.submitPlay(cardIndex, pileIndex);
       },
 
-      submitPlay(cardData, pileIndex) {
-        return new Promise((resolve, reject) => {
-          setTimeout(() => {
-            // TODO: Submit to Rails and abort play if move is invalid
-            if (true) {
-              resolve(cardData);
-            } else {
-              reject('Invalid Play');
-            }
-          }, 200);
-        });
+      submitPlay(cardIndex, pileIndex) {
+        this.api.playCard(cardIndex, pileIndex, this.playerId);
       },
 
-      handComponent(playerIndex) {
-        return this.$refs['hand' + playerIndex][0];
+      processPlayResponse(response) {
+        console.log(response);
+
+        if (response.success) {
+          let cardIndex = response.card_index;
+          let handComponent = this.handComponent(response.player_id);
+          let card = handComponent.handCards[cardIndex];
+          handComponent.removeCard(card)
+            .then(() => this.centerPile.place(response.card_data, response.pile_index))
+            .then(() => handComponent.pullFromDraw(cardIndex));
+        } else {
+          console.log('Invalid play!');
+        }
+        this.isDragging.endDrag();
+        this.isDragging = undefined;
+        this.dragHold   = false;
+      },
+
+      handComponent(playerId) {
+        return this.$refs['hand_' + playerId][0];
       }
     },
     props:   {

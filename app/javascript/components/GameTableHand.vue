@@ -31,6 +31,7 @@
       allCards() {
         return this.handCards.concat(this.drawCards);
       },
+
       handCards() {
         return Object.keys(this.$refs)
           .filter(key => key.includes('card'))

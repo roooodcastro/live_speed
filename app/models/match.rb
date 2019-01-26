@@ -24,6 +24,7 @@ class Match < ApplicationRecord
 
     round = rounds.new(number: round_number, data: { game_name: 'speed' })
     round.setup_round!
+    round
   end
 
   def rules

@@ -2,25 +2,38 @@
 
 class MatchChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "player_#{player_id}"
+    stream_from "round_#{params[:round_id]}"
+    @round = Round.find(params[:round_id])
   end
 
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
 
-  def fetch_data(args)
-    data = Round.find(args['round_id']).data.as_json
-    ActionCable.server.broadcast "player_#{player_id}", { action: 'round_data' }.merge(data)
+  def fetch_data
+    respond('round_data', @round.data.as_json)
   end
 
   def play_card(args)
-    card = args['card']
-    pile_index = args['pile_index']
-    puts "Playing card #{card} on pile #{pile_index}!"
+    card_info   = args.symbolize_keys
+    played_card = @round.reload.play_card!(card_info)
+    response    = {
+      success:    played_card.present?,
+      card_data:  played_card,
+      card_index: card_info[:card_index],
+      pile_index: card_info[:pile_index],
+      player_id:  card_info[:player_id]
+    }
+    respond('play_response', response)
   end
 
   def play_replacement
     puts 'Playing replacement pile!'
+  end
+
+  private
+
+  def respond(action, data)
+    ActionCable.server.broadcast "round_#{@round.id}", { action: action }.merge(data)
   end
 end
