@@ -1,5 +1,5 @@
-import screen                                 from './screen';
-import { GRID_SIZE, CARD_WIDTH, CARD_HEIGHT } from '../constants';
+import screen                                                           from './screen';
+import { GRID_SIZE, CARD_WIDTH, CARD_HEIGHT, CARD_VERTICAL_SEPARATION } from '../constants';
 
 export default class CardCoordinate {
   constructor(posX, posY) {
@@ -55,6 +55,11 @@ export default class CardCoordinate {
 
     return new CardCoordinate(coordX, coordY);
   }
+
+  static cardYOffset(cardIndex) {
+    return cardIndex * CARD_VERTICAL_SEPARATION;
+  }
+
 
   get pxString() {
     return this.xPixels + 'px,' + this.yPixels + 'px';

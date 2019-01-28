@@ -10,7 +10,6 @@
 
 <script>
   import CardCoordinate from '../helpers/card_coordinate';
-  import screen         from '../helpers/screen';
 
   export default {
     name:     'PlayingCard',
@@ -38,22 +37,6 @@
         return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
       },
 
-      width() {
-        return 216;
-      },
-
-      height() {
-        return 336;
-      },
-
-      widthVw() {
-        return this.pxToVw(this.width * this.scale);
-      },
-
-      heightVh() {
-        return this.pxToVh(this.height * this.scale);
-      },
-
       currentPosition() {
         return this.isDragging ? this.dragPosition : this.position;
       }
@@ -72,12 +55,12 @@
     },
 
     props: {
-      rank:            {type: String, default: 'a'},
-      suit:            {type: String, default: 's'},
-      initialPosition: {type: Array, default: () => [0, 0]},
-      initialRotation: {type: Number, default: 0},
-      initialFlipped:  {type: Boolean, default: true},
-      initialOrder:    {type: Number, default: 1}
+      rank:            { type: String, default: 'a' },
+      suit:            { type: String, default: 's' },
+      initialPosition: { type: Array, default: () => [0, 0] },
+      initialRotation: { type: Number, default: 0 },
+      initialFlipped:  { type: Boolean, default: true },
+      initialOrder:    { type: Number, default: 1 }
     },
 
     methods: {
@@ -99,14 +82,6 @@
 
       setOrder(newOrder) {
         this.order = newOrder;
-      },
-
-      pxToVw(px) {
-        return px * (100 / document.documentElement.clientWidth);
-      },
-
-      pxToVh(px) {
-        return px * (100 / document.documentElement.clientHeight);
       },
 
       startDrag() {

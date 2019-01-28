@@ -11,9 +11,9 @@
 
 <script>
   import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from '../constants';
-  import { cardYOffset }                               from '../card_deck_helpers';
-  import AudioManager                                  from '../audio_manager';
+  import AudioManager                                  from '../helpers/audio_manager';
   import placement                                     from '../helpers/card_placement';
+  import CardCoordinate                                from ' ../helpers/card_coordinate';
 
   export default {
     data() {
@@ -26,7 +26,7 @@
       cardCount: { type: Number, default: 52 }
     },
     methods: {
-      cardYOffset: cardYOffset,
+      cardYOffset: CardCoordinate.cardYOffset,
 
       createCards() {
         return [...Array(this.cardCount)].map(() => ({ r: 'a', s: 's' }));

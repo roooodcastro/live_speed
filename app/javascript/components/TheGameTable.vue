@@ -1,7 +1,7 @@
 <template>
     <div id="game_table" class="game-table-container">
         <div v-show="status === 'loading'">
-            <loading></loading>
+            <loading-dots />
         </div>
         <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
         <div v-show="status === 'game'"
@@ -32,12 +32,11 @@
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
   import PlayingCardDeck     from './PlayingCardDeck';
-  import Loading             from './Loading';
   import GameTableText       from './GameTableText';
   import GameTableCardSlots  from './GameTableCardSlots';
 
   export default {
-    components: { GameTableHand, GameTableCenterPile, GameTableText, GameTableCardSlots, PlayingCardDeck, Loading },
+    components: { GameTableHand, GameTableCenterPile, GameTableText, GameTableCardSlots, PlayingCardDeck },
     computed:   {
       centerPile() {
         return this.$refs['centerPile'];

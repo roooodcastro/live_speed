@@ -32,7 +32,6 @@
 </template>
 
 <script>
-  import { cardYOffset } from '../card_deck_helpers';
   import CardCoordinate  from '../helpers/card_coordinate';
 
   export default {
@@ -47,7 +46,7 @@
     },
 
     methods: {
-      cardYOffset: cardYOffset,
+      cardYOffset: CardCoordinate.cardYOffset,
 
       centerPileRot(cardIndex) {
         let randomRotation = ((Math.random() * 5) ** 2) - 10;

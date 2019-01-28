@@ -5,9 +5,7 @@ html, body, .container {
   overflow:   hidden;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Maiden Orange', serif;
-}
+h1, h2, h3, h4, h5, h6 { font-family: 'Maiden Orange', serif; }
 
 .game-table-container {
   background-image:  asset-url('felt.png');
@@ -21,20 +19,20 @@ h1, h2, h3, h4, h5, h6 {
     content:    '';
     background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0.4) 100%);
     position:   absolute;
-    top:        0;
     bottom:     0;
     left:       0;
     right:      0;
+    top:        0;
   }
 }
 
 .game-table-gamearea {
   display:  block;
   position: absolute;
-  top:      0;
   bottom:   0;
   left:     0;
   right:    0;
+  top:      0;
 }
 
 .game-table-hand { position: relative; }
@@ -42,22 +40,23 @@ h1, h2, h3, h4, h5, h6 {
 .game-table-gametext {
   color:       white;
   font-family: 'Maiden Orange', serif;
-  font-size: 3em;
-  position: absolute;
-  left: calc(50% - 5em);
-  text-align: center;
+  font-size:   3em;
+  left:        calc(50% - 5em);
+  position:    absolute;
+  text-align:  center;
   text-shadow: 1px 1px 2px black;
-  top: 25%;
-  width: 10em;
+  top:         25%;
+  width:       10em;
 }
 
 .game-table-cardslots {
   position: relative;
-}
 
-.game-table-cardslot {
-  position: absolute;
-  width: 250px;
-  height: 400px;
-  border: 1px solid red;
+  .game-table-cardslot {
+    border:        3px solid rgba(32, 32, 32, 0.5);
+    border-radius: 16px;
+    height:        336px;
+    position:      absolute;
+    width:         216px;
+  }
 }

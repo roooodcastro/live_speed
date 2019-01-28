@@ -1,9 +1,9 @@
 <template>
     <div class="game-table-cardslots">
         <div v-for="(slot, index) in slots"
-             :ref="'slot_' + index"
+             :key="'slot_' + index"
              class="game-table-cardslot"
-             :style="slotStyle(slot)">
+             :style="{ transform: slotTransform(slot) }">
         </div>
     </div>
 </template>
@@ -25,12 +25,13 @@
     },
 
     methods: {
-      slotStyle(slot) {
+      slotTransform(slot) {
         let coordinates = new CardCoordinate(slot.pos);
-        let left        = coordinates.xPixels * CardCoordinate.cardScale();
-        let top         = coordinates.yPixels * CardCoordinate.cardScale();
-        return { 'left': left + 'px', 'top': top + 'px' };
-      }
+        let scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
+        let posTransform   = 'translate(' + coordinates.pxString + ')';
+        let rotTransform   = 'rotate(' + slot.rot + 'deg)';
+        return [scaleTransform, posTransform, rotTransform].join(' ');
+      },
     }
   };
 </script>

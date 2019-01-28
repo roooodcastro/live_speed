@@ -40,7 +40,7 @@
     .loading-suits { display: flex; justify-content: center; }
 
     .loading-suits span {
-        animation:   0.9s infinite normal loadingsuit;
+        animation:   loadingsuit 1s infinite ease-in-out both;
         font-size:   5em;
         height:      1em;
         line-height: 1em;
@@ -49,19 +49,16 @@
         width:       0.75em;
     }
 
-    span.loading-suit-1 { color: #B00100; }
+    span.loading-suit-1 { color: #B00100; animation-delay: -0.48s; }
 
-    span.loading-suit-2 { color: black; animation-delay: 0.12s; }
+    span.loading-suit-2 { color: black; animation-delay: -0.32s; }
 
-    span.loading-suit-3 { color: #B00100; animation-delay: 0.24s; }
+    span.loading-suit-3 { color: #B00100; animation-delay: -0.16s; }
 
-    span.loading-suit-4 { color: black; animation-delay: 0.36s; }
+    span.loading-suit-4 { color: black; animation-delay: 0s; }
 
     @keyframes loadingsuit {
-        0% { font-size: 2.5em; }
-        20% { font-size: 2.5em; }
-        50% { font-size: 5em; }
-        80% { font-size: 2.5em; }
-        100% { font-size: 2.5em; }
+        0%, 80%, 100% { font-size: 1em; }
+        40% { font-size: 5em; }
     }
 </style>
