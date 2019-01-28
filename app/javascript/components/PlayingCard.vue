@@ -124,14 +124,6 @@
 
       dragMove(ev) {
         if (this.isDragging) {
-          // let clientW       = screen.clientWidth();
-          // let clientH       = screen.clientHeight();
-          // let spreadX       = (clientW + (this.width * this.scale)) / clientW;
-          // let spreadY       = (clientH + (this.height * this.scale)) / clientH;
-          // let deltaX        = this.pxToVw(ev.movementX * 2 * spreadX);
-          // let deltaY        = this.pxToVh(ev.movementY * 2 * spreadY);
-          // this.dragPosition = new CardCoordinate(this.dragPosition[0] + deltaX, this.dragPosition[1] + deltaY);
-
           this.dragPosition = CardCoordinate.fromPixelPosition(ev.clientX, ev.clientY);
         }
       }

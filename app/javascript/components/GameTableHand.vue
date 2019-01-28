@@ -100,14 +100,14 @@
       handCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
         let posX = ((cardIndex * 32) - 80) * mult;
-        let posY = 80 * mult;
+        let posY = 95 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
         let mult = (this.playerIndex === 0) ? 1 : -1;
         let posX = 80 * mult;
-        let posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
+        let posY = (95 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }
     }

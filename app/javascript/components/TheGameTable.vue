@@ -1,5 +1,9 @@
 <template>
     <div id="game_table" class="game-table-container">
+        <div v-show="status === 'loading'">
+            <loading></loading>
+        </div>
+        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
         <div v-show="status === 'game'"
              class="game-table-gamearea"
              @mousedown="dragStart"
@@ -14,8 +18,12 @@
                            :initial-draw="hand.draw_pile"/>
 
             <GameTableCenterPile ref="centerPile"/>
+
+            <GameTableText :text="playerMessage"></GameTableText>
+
         </div>
-        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
+        
+        <GameTableCardSlots :number-of-players="2"></GameTableCardSlots>
     </div>
 </template>
 
@@ -24,9 +32,12 @@
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
   import PlayingCardDeck     from './PlayingCardDeck';
+  import Loading             from './Loading';
+  import GameTableText       from './GameTableText';
+  import GameTableCardSlots  from './GameTableCardSlots';
 
   export default {
-    components: { GameTableHand, GameTableCenterPile, PlayingCardDeck },
+    components: { GameTableHand, GameTableCenterPile, GameTableText, GameTableCardSlots, PlayingCardDeck, Loading },
     computed:   {
       centerPile() {
         return this.$refs['centerPile'];
@@ -39,13 +50,14 @@
 
     data() {
       return {
-        dragHold:   false,
-        hands:      [],
-        isDragging: undefined,
-        roundData:  {},
-        status:     'setup',
-        timeoutId:  0,
-        api:        undefined
+        dragHold:      false,
+        hands:         [],
+        isDragging:    undefined,
+        roundData:     {},
+        status:        'loading',
+        timeoutId:     0,
+        api:           undefined,
+        playerMessage: 'Message'
       };
     },
 
@@ -67,10 +79,11 @@
 
         this.roundData = round;
         this.hands     = sortedHands;
+        this.status    = 'setup';
         this.centerPile.setCardData(round);
 
-        this.$refs['cardDeck'].dealCards(round);
-          // .then(() => this.status = 'game');
+        this.$refs['cardDeck'].dealCards(round)
+          .then(() => this.status = 'game');
       },
 
       isPlayerCard(card) {

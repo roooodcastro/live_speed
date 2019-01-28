@@ -74,14 +74,6 @@ export default class CardCoordinate {
     return (screenCenter + relativePos + gridOffset) / CardCoordinate.cardScale();
   }
 
-  add(other) {
-    return new CardCoordinate(this.x + other.x, this.y + other.y);
-  }
-
-  subtract(other) {
-    return new CardCoordinate(this.x - other.x, this.y - other.y);
-  }
-
   // Calculates whether a card in this position is overlapping a card in other position. Takes the size of the
   // cards into consideration.
   isOverlapping(other) {
