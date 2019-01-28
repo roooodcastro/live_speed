@@ -22,7 +22,7 @@
             <GameTableText :text="playerMessage"></GameTableText>
 
         </div>
-        
+
         <GameTableCardSlots :number-of-players="2"></GameTableCardSlots>
     </div>
 </template>
