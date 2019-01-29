@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 2019_01_13_174822) do
   create_table "match_players", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "match_id"
     t.uuid "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["match_id", "player_id"], name: "index_match_players_on_match_id_and_player_id"
     t.index ["match_id"], name: "index_match_players_on_match_id"
     t.index ["player_id", "match_id"], name: "index_match_players_on_player_id_and_match_id"
