@@ -89,4 +89,8 @@ export default class CardCoordinate {
 
     return overlappingX && overlappingY;
   }
+
+  add(other) {
+    return new CardCoordinate(this.x + other.x, this.y + other.y);
+  }
 }

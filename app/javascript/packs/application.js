@@ -17,11 +17,13 @@ Vue.use(TurbolinksAdapter);
 
 import PlayingCard  from '../components/PlayingCard';
 import TheGameTable from '../components/TheGameTable';
-import LoadingDots  from ' ../components/LoadingDots';
+import LoadingDots  from '../components/LoadingDots';
+import GameButton   from '../components/GameButton';
 
 Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);
 Vue.component('loading-dots', LoadingDots);
+Vue.component('game-button', GameButton);
 
 document.addEventListener('turbolinks:load', () => {
   window.vueApp = new Vue({

@@ -1,4 +1,4 @@
-export const CARD_DEAL_DELAY = 100;
+export const CARD_DEAL_DELAY = 10;
 export const CARD_MOVE_DELAY = 200;
 export const CARD_VERTICAL_SEPARATION = 0.2;
 export const GRID_SIZE = 200;

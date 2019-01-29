@@ -4,7 +4,7 @@
             <loading-dots />
         </div>
         <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
-        <div v-show="status === 'game'"
+        <div v-show="status === 'game' || status === 'ready'"
              class="game-table-gamearea"
              @mousedown="dragStart"
              @mouseup="dragEnd"
@@ -21,9 +21,13 @@
 
             <GameTableText :text="playerMessage"></GameTableText>
 
+            <div v-show="status === 'ready'">
+                <game-button :click="readyButtonClick">Ready</game-button>
+            </div>
+
         </div>
 
-        <GameTableCardSlots :number-of-players="2"></GameTableCardSlots>
+        <GameTableCardSlots v-show="status !== 'loading'" :number-of-players="2"></GameTableCardSlots>
     </div>
 </template>
 
@@ -82,7 +86,7 @@
         this.centerPile.setCardData(round);
 
         this.$refs['cardDeck'].dealCards(round)
-          .then(() => this.status = 'game');
+          .then(() => this.status = 'ready');
       },
 
       isPlayerCard(card) {
@@ -149,6 +153,10 @@
 
       handComponent(playerId) {
         return this.$refs['hand_' + playerId][0];
+      },
+
+      readyButtonClick(ev) {
+        // TODO: Sync all players and start the game when all are ready
       }
     },
     props:   {

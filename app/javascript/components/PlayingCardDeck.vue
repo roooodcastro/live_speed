@@ -13,7 +13,7 @@
   import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from '../constants';
   import AudioManager                                  from '../helpers/audio_manager';
   import placement                                     from '../helpers/card_placement';
-  import CardCoordinate                                from ' ../helpers/card_coordinate';
+  import CardCoordinate                                from '../helpers/card_coordinate';
 
   export default {
     data() {
