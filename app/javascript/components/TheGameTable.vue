@@ -1,9 +1,13 @@
 <template>
     <div id="game_table" class="game-table-container">
         <div v-show="status === 'loading'">
-            <loading-dots />
+            <loading-dots/>
         </div>
-        <playing-card-deck v-show="status === 'setup'" ref="cardDeck"/>
+
+        <div v-show="status === 'setup'">
+            <playing-card-deck ref="cardDeck"/>
+        </div>
+
         <div v-show="status === 'game' || status === 'ready'"
              class="game-table-gamearea"
              @mousedown="dragStart"
@@ -20,11 +24,13 @@
             <GameTableCenterPile ref="centerPile"/>
 
             <GameTableText :text="playerMessage"></GameTableText>
+        </div>
 
-            <div v-show="status === 'ready'">
-                <game-button :click="readyButtonClick">Ready</game-button>
-            </div>
-
+        <div v-show="status === 'ready'">
+            <livespeed-overlay>
+                <livespeed-text :pos="[0, 22.5]" :size="3">Click READY to start playing:</livespeed-text>
+                <livespeed-button :click="readyButtonClick" :pos="[0, 47.5]">Ready!</livespeed-button>
+            </livespeed-overlay>
         </div>
 
         <GameTableCardSlots v-show="status !== 'loading'" :number-of-players="2"></GameTableCardSlots>
@@ -60,7 +66,7 @@
         status:        'loading',
         timeoutId:     0,
         api:           undefined,
-        playerMessage: 'Message'
+        playerMessage: ''
       };
     },
 
@@ -156,7 +162,7 @@
       },
 
       readyButtonClick(ev) {
-        // TODO: Sync all players and start the game when all are ready
+        this.status = 'game';
       }
     },
     props:   {

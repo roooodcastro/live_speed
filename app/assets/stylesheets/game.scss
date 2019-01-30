@@ -7,7 +7,12 @@ html, body, .container {
   overflow:   hidden;
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: 'Maiden Orange', serif; }
+@font-face {
+  font-family: 'Cleveland';
+  src: asset-url('cleveland.ttf') format('truetype');
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Cleveland', serif; }
 
 .game-table-container {
   background-image:  asset-url('felt.png');
@@ -41,7 +46,7 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Maiden Orange', serif; }
 
 .game-table-gametext {
   color:       white;
-  font-family: 'Maiden Orange', serif;
+  font-family: 'Cleveland', serif;
   font-size:   3em;
   left:        calc(50% - 5em);
   position:    absolute;

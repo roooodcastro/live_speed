@@ -29,7 +29,7 @@
 
     .loading-text {
         color:       white;
-        font-family: 'Maiden Orange', serif;
+        font-family: 'Cleveland', Helvetica, Arial, sans-serif;
         font-size:   3em;
         height:      1em;
         line-height: 1em;

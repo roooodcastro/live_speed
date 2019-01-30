@@ -2,13 +2,15 @@ import screen                                                           from './
 import { GRID_SIZE, CARD_WIDTH, CARD_HEIGHT, CARD_VERTICAL_SEPARATION } from '../constants';
 
 export default class CardCoordinate {
-  constructor(posX, posY) {
+  constructor(posX, posY, cardScale) {
     if (posX.constructor === Array) {
       this.x = posX[0];
       this.y = posX[1];
+      this.scale = posY || CardCoordinate.cardScale();
     } else {
       this.x = posX;
       this.y = posY;
+      this.scale = cardScale || CardCoordinate.cardScale();
     }
   }
 
@@ -69,21 +71,21 @@ export default class CardCoordinate {
     let relativePos  = this.x * CardCoordinate.coordSize();
     let screenCenter = screen.centerPosition()[0];
     let gridOffset   = CardCoordinate.cardGridOffset(this.x, CARD_WIDTH);
-    return (screenCenter + relativePos + gridOffset) / CardCoordinate.cardScale();
+    return (screenCenter + relativePos + gridOffset) / this.scale;
   }
 
   get yPixels() {
     let relativePos  = this.y * CardCoordinate.coordSize();
     let screenCenter = screen.centerPosition()[1];
     let gridOffset   = CardCoordinate.cardGridOffset(this.y, CARD_HEIGHT);
-    return (screenCenter + relativePos + gridOffset) / CardCoordinate.cardScale();
+    return (screenCenter + relativePos + gridOffset) / this.scale;
   }
 
   // Calculates whether a card in this position is overlapping a card in other position. Takes the size of the
   // cards into consideration.
   isOverlapping(other) {
-    let trueCardWidth  = (CARD_WIDTH * CardCoordinate.cardScale()) / CardCoordinate.coordSize();
-    let trueCardHeight = (CARD_HEIGHT * CardCoordinate.cardScale()) / CardCoordinate.coordSize();
+    let trueCardWidth  = (CARD_WIDTH * this.scale) / CardCoordinate.coordSize();
+    let trueCardHeight = (CARD_HEIGHT * this.scale) / CardCoordinate.coordSize();
     let overlappingX   = other.x > (this.x - trueCardWidth) && other.x < (this.x + trueCardWidth);
     let overlappingY   = other.y > (this.y - trueCardHeight) && other.y < (this.y + trueCardHeight);
 

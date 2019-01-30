@@ -19,11 +19,15 @@ import PlayingCard  from '../components/PlayingCard';
 import TheGameTable from '../components/TheGameTable';
 import LoadingDots  from '../components/LoadingDots';
 import GameButton   from '../components/GameButton';
+import Overlay      from '../components/Overlay';
+import Text         from '../components/Text';
 
 Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);
 Vue.component('loading-dots', LoadingDots);
-Vue.component('game-button', GameButton);
+Vue.component('livespeed-button', GameButton);
+Vue.component('livespeed-overlay', Overlay);
+Vue.component('livespeed-text', Text);
 
 document.addEventListener('turbolinks:load', () => {
   window.vueApp = new Vue({
