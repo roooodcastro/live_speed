@@ -15,12 +15,13 @@ import Vue               from 'vue/dist/vue.esm';
 
 Vue.use(TurbolinksAdapter);
 
-import PlayingCard  from '../components/PlayingCard';
-import TheGameTable from '../components/TheGameTable';
-import LoadingSuits from '../components/ui/LoadingSuits';
-import Button       from '../components/ui/Button';
-import Overlay      from '../components/ui/Overlay';
-import Text         from '../components/ui/Text';
+import PlayingCard     from '../components/PlayingCard';
+import TheGameTable    from '../components/TheGameTable';
+import LoadingSuits    from '../components/ui/LoadingSuits';
+import LoadingEllipsis from '../components/ui/LoadingEllipsis';
+import Button          from '../components/ui/Button';
+import Overlay         from '../components/ui/Overlay';
+import Text            from '../components/ui/Text';
 
 Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);
@@ -28,6 +29,7 @@ Vue.component('livespeed-gametable', TheGameTable);
 // Common UI components
 Vue.component('livespeed-button', Button);
 Vue.component('livespeed-loading-suits', LoadingSuits);
+Vue.component('livespeed-loading-ellipsis', LoadingEllipsis);
 Vue.component('livespeed-overlay', Overlay);
 Vue.component('livespeed-text', Text);
 
