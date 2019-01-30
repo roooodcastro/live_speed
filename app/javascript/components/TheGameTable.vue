@@ -1,7 +1,7 @@
 <template>
     <div id="game_table" class="game-table-container">
         <div v-show="status === 'loading'">
-            <loading-dots/>
+            <livespeed-loading-suits/>
         </div>
 
         <div v-show="status === 'setup'">
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-  import apiClient           from '../match_channel';
+  import apiClient           from '../channels/match_channel';
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
   import PlayingCardDeck     from './PlayingCardDeck';

@@ -1,11 +1,11 @@
 <template>
-    <button class="game-button" @click="click" :style="{ transform: transform }">
+    <button class="livespeed-button" @click="click" :style="{ transform: transform }">
         <slot></slot>
     </button>
 </template>
 
 <script>
-  import GridCoordinate from '../helpers/grid_coordinate';
+  import GridCoordinate from '../../helpers/grid_coordinate';
 
   export default {
     computed: {
@@ -23,7 +23,7 @@
 </script>
 
 <style>
-    .game-button {
+    .livespeed-button {
         background:       transparent;
         border:           3px solid transparent;
         border-radius:    .5em;
@@ -39,9 +39,9 @@
         transition:       0.2s;
     }
 
-    .game-button:hover { color: rgba(255, 255, 255, 0.9); }
+    .livespeed-button:hover { color: rgba(255, 255, 255, 0.9); }
 
-    .game-button::before {
+    .livespeed-button::before {
         border:        3px solid rgba(255, 255, 255, 0.75);
         border-radius: .5em;
         content:       '';
@@ -53,20 +53,20 @@
         width:         100%;
     }
 
-    .game-button:hover::before {
+    .livespeed-button:hover::before {
         border-color: rgba(255, 255, 255, 0.9);
         transform:    scale(1.05);
     }
 
-    .game-button:active, .game-button:focus {
-        animation:  game-button-pulse 0.3s;
+    .livespeed-button:active, .livespeed-button:focus {
+        animation:  livespeed-button-pulse 0.3s;
         box-shadow: 0 0 0 1em rgba(255, 255, 255, 0);
         outline:    none;
     }
 
-    .game-button:active::before, .game-button:focus::before { background-color: rgba(255, 255, 255, 0.15); }
+    .livespeed-button:active::before, .livespeed-button:focus::before { background-color: rgba(255, 255, 255, 0.15); }
 
-    @keyframes game-button-pulse {
+    @keyframes livespeed-button-pulse {
         0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.5); }
     }
 </style>

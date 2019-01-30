@@ -1,5 +1,5 @@
 import screen                                                           from './screen';
-import { GRID_SIZE, CARD_WIDTH, CARD_HEIGHT, CARD_VERTICAL_SEPARATION } from '../constants';
+import { GRID_SIZE, CARD_WIDTH, CARD_HEIGHT, CARD_VERTICAL_SEPARATION } from './constants';
 
 export default class CardCoordinate {
   constructor(posX, posY, cardScale) {

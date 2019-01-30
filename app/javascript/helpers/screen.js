@@ -1,4 +1,4 @@
-import { GRID_SIZE } from '../constants';
+import { GRID_SIZE } from './constants';
 
 export default {
   clientWidth() {
