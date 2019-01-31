@@ -32,7 +32,8 @@ class MatchChannel < ApplicationCable::Channel
   end
 
   def player_ready(args)
-    puts 'Player is ready!'
+    @round.mark_player_as_ready(args['player_id'])
+    respond('player_ready', { player_id: args['player_id'], all_players_ready: @round.playing? })
   end
 
   private

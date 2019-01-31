@@ -35,6 +35,12 @@ class Round < ApplicationRecord
     update_to_cache!
   end
 
+  def mark_player_as_ready(player_id)
+    round_controller.mark_player_as_ready(player_id)
+    self.status = STATUS_PLAYING if round_controller.players_ready?
+    update_to_cache!
+  end
+
   def round_controller
     @round_controller ||= begin
       data_with_players = cached_data
@@ -53,6 +59,10 @@ class Round < ApplicationRecord
 
   def status=(new_status)
     data['status'] = new_status if new_status.in? ALL_STATUS
+  end
+
+  def playing?
+    status == STATUS_PLAYING
   end
 
   private

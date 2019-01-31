@@ -25,6 +25,9 @@ export default {
           case 'play_response':
             gameTable.processPlayResponse(data);
             break;
+          case 'player_ready':
+            gameTable.processPlayerReady(data);
+            break;
         }
       },
 

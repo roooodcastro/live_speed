@@ -160,6 +160,12 @@
         this.dragHold   = false;
       },
 
+      processPlayerReady(data) {
+        if (data['all_players_ready']) {
+          this.status = 'game';
+        }
+      },
+
       handComponent(playerId) {
         return this.$refs['hand_' + playerId][0];
       },

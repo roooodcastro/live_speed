@@ -16,7 +16,7 @@ module Games
 
       def create_objects
         num_decks         = (players.count / 2.0).ceil
-        hands             = players.map { |player| Hand.new(player: player) }
+        hands             = players.map { |player| Hand.new(player: { id: player.id, name: player.name }) }
         rep_piles         = Array.new(2) { [] }
         central_pile      = CentralPile.new(rules)
         @round_controller = RoundController.new(hands: hands, replacement_piles: rep_piles, central_pile: central_pile)

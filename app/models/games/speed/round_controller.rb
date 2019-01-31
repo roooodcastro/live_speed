@@ -26,6 +26,11 @@ module Games
         no_plays && replacement_piles[0].present?
       end
 
+      def mark_player_as_ready(player_id)
+        player_hand(player_id).mark_as_ready
+
+      end
+
       def use_replacement_pile!
         raise InvalidPlayError, 'Cannot use replacement pile!' unless can_use_replacement_piles?
 
@@ -64,27 +69,26 @@ module Games
       end
 
       def winner
-        hands.each do |hand|
-          next if hand.cards.present?
+        hands.find { |hand| hand.cards.empty? }
+      end
 
-          return hand.player
-        end
-        nil
+      def players_ready?
+        hands.map { |hand| hand.dig(:player, :ready) }.all?
       end
 
       def to_h
         {
-          game_name: 'speed',
-          hands: array_to_h(hands),
-          replacement_piles: array_to_h(replacement_piles),
-          central_pile: central_pile.to_h
+        game_name:         'speed',
+        hands:             array_to_h(hands),
+        replacement_piles: array_to_h(replacement_piles),
+        central_pile:      central_pile.to_h
         }
       end
 
       private
 
       def player_hand(player_id)
-        hands.find { |hand| hand.player_id == player_id }
+        hands.find { |hand| hand.player[:id] == player_id }
       end
     end
   end
