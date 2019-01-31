@@ -11,6 +11,7 @@ gem 'rails', '~> 5.2.2'
 
 gem 'bcrypt', '~> 3.1'
 gem 'foreman'
+gem 'hiredis'
 gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 gem 'responders'

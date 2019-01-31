@@ -1,0 +1,6 @@
+development:
+  driver: hiredis
+  url: 127.0.0.1:6379/1
+test:
+  driver: hiredis
+  url: 127.0.0.1:6379/1

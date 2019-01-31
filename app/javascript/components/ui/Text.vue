@@ -28,7 +28,7 @@
     .livespeed-text {
         color: rgba(255, 255, 255, 0.75);
         font-family: 'Cleveland', Helvetica, Arial, sans-serif;
-        position: absolute;
+        position: fixed;
         text-shadow: 1px 1px 2px black;
     }
 </style>

@@ -32,6 +32,10 @@ export default {
         this.perform('fetch_data');
       },
 
+      markReady(playerId) {
+        this.perform('player_ready', { player_id: playerId });
+      },
+
       playCard(cardIndex, pileIndex, playerId) {
         this.perform('play_card', { card_index: cardIndex, pile_index: pileIndex, player_id: playerId });
       },

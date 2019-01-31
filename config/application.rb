@@ -29,6 +29,8 @@ module LiveSpeed
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
 
+    config.cache_store = :redis_cache_store, { url: config_for(:redis)[:url] }
+
     # Don't generate system test files.
     config.generators.system_tests = nil
 

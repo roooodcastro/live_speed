@@ -21,7 +21,7 @@
 <style>
     .livespeed-loading-container {
         left:     calc(50% - 7.5em);
-        position: absolute;
+        position: fixed;
         top:      calc(50% - 4em);
     }
 

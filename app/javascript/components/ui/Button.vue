@@ -1,5 +1,5 @@
 <template>
-    <button class="livespeed-button" @click="click" :style="{ transform: transform }">
+    <button class="livespeed-button" @click="clickCallback" :style="{ transform: transform }">
         <slot></slot>
     </button>
 </template>
@@ -18,6 +18,20 @@
     props: {
       click: { type: Function, required: true },
       pos:   { type: Array, required: true }
+    },
+
+    methods: {
+      clickCallback(ev) {
+        this.click(ev, this);
+      },
+
+      setDisabled(flag) {
+        if (flag) {
+          this.$el.setAttribute('disabled', 'disabled');
+        } else {
+          this.$el.removeAttribute('disabled');
+        }
+      }
     }
   };
 </script>

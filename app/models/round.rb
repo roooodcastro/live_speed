@@ -26,21 +26,25 @@ class Round < ApplicationRecord
 
   def play_card!(args)
     played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
-    update_round! if played_card.present?
+    update_to_cache! if played_card.present?
     played_card
   end
 
   def use_replacement_pile!(*)
     round_controller.use_replacement_pile!
-    update_round!
+    update_to_cache!
   end
 
   def round_controller
     @round_controller ||= begin
-      data_with_players = data.deep_symbolize_keys
+      data_with_players = cached_data
       data_with_players[:hands].each { |hand| hand[:players] = players.to_a }
       controller_class.send(:from_h, data_with_players)
     end
+  end
+
+  def commit_changes!
+    update_round!
   end
 
   def status
@@ -77,5 +81,13 @@ class Round < ApplicationRecord
     raise StandardError, "Round Setup class for match '#{data['game_name']}' doesn't exist!" if klass.blank?
 
     klass.constantize
+  end
+
+  def cached_data
+    Rails.cache.fetch("round_data_#{id}") { data.deep_symbolize_keys }
+  end
+
+  def update_to_cache!
+    Rails.cache.write("round_data_#{id}", round_controller.to_h.merge(status: status))
   end
 end

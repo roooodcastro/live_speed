@@ -164,8 +164,9 @@
         return this.$refs['hand_' + playerId][0];
       },
 
-      readyButtonClick(ev) {
-        this.status = 'game';
+      readyButtonClick(ev, button) {
+        this.api.markReady(this.playerId);
+        button.setDisabled(true);
       }
     },
     props:   {

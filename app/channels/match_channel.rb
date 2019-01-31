@@ -31,6 +31,10 @@ class MatchChannel < ApplicationCable::Channel
     puts 'Playing replacement pile!'
   end
 
+  def player_ready(args)
+    puts 'Player is ready!'
+  end
+
   private
 
   def respond(action, data)
