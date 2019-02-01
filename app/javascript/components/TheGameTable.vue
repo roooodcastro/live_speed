@@ -36,14 +36,14 @@
 </template>
 
 <script>
-  import apiClient           from '../api/match_channel';
-  import Round               from '../games/speed/round';
-  import GameTableHand       from './GameTableHand';
-  import GameTableCenterPile from './GameTableCenterPile';
-  import PlayingCardDeck     from './PlayingCardDeck';
-  import GameTableText       from './GameTableText';
-  import GameTableCardSlots  from './GameTableCardSlots';
-  import PreGameOverlay      from './PreGameOverlay';
+  import apiClient           from 'api/match_channel';
+  import Round               from 'games/speed/round';
+  import GameTableHand       from 'components/GameTableHand';
+  import GameTableCenterPile from 'components/GameTableCenterPile';
+  import PlayingCardDeck     from 'components/PlayingCardDeck';
+  import GameTableText       from 'components/GameTableText';
+  import GameTableCardSlots  from 'components/GameTableCardSlots';
+  import PreGameOverlay      from 'components/PreGameOverlay';
 
   export default {
     components: {

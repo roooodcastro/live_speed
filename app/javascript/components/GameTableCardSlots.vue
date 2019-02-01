@@ -9,8 +9,8 @@
 </template>
 
 <script>
-  import placement      from '../helpers/card_placement';
-  import CardCoordinate from '../helpers/card_coordinate';
+  import placement      from 'helpers/card_placement';
+  import CardCoordinate from 'helpers/card_coordinate';
 
   export default {
     data() {

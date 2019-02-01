@@ -21,7 +21,7 @@
 
 <script>
   import Vue                                           from 'vue';
-  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from '../helpers/constants';
+  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from 'helpers/constants';
 
   export default {
     computed: {

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import GridCoordinate from '../../helpers/grid_coordinate';
+  import GridCoordinate from 'helpers/grid_coordinate';
 
   export default {
     computed: {

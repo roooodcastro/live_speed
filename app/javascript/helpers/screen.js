@@ -1,5 +1,3 @@
-import { GRID_SIZE } from './constants';
-
 export default {
   clientWidth() {
     return document.documentElement.clientWidth;

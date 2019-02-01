@@ -10,10 +10,10 @@
 </template>
 
 <script>
-  import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from '../helpers/constants';
-  import AudioManager                                  from '../helpers/audio_manager';
-  import placement                                     from '../helpers/card_placement';
-  import CardCoordinate                                from '../helpers/card_coordinate';
+  import { CARD_DEAL_DELAY, CARD_VERTICAL_SEPARATION } from 'helpers/constants';
+  import AudioManager                                  from 'helpers/audio_manager';
+  import placement                                     from 'helpers/card_placement';
+  import CardCoordinate                                from 'helpers/card_coordinate';
 
   export default {
     data() {

@@ -1,4 +1,4 @@
-import apiClient from '../api/match_channel';
+import apiClient from 'api/match_channel';
 
 export default class {
   constructor(playerId, onStatusChange) {

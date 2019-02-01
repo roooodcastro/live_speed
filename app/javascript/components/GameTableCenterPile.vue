@@ -32,7 +32,7 @@
 </template>
 
 <script>
-  import CardCoordinate  from '../helpers/card_coordinate';
+  import CardCoordinate  from 'helpers/card_coordinate';
 
   export default {
     computed: {
