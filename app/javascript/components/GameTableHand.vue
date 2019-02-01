@@ -15,12 +15,13 @@
                                 :initial-flipped="false"
                                 :ref="'card_' + playerIndex + '_' + index"
                                 :key="'card_' + playerIndex + '_' + index"/>
+        <livespeed-text :pos="playerNamePos">{{ player.name }}</livespeed-text>
     </div>
 </template>
 
 <script>
   import Vue                                           from 'vue';
-  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from "../helpers/constants";
+  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from '../helpers/constants';
 
   export default {
     computed: {
@@ -46,6 +47,11 @@
           .map((key) => {
             return this.$refs[key][0];
           });
+      },
+
+      playerNamePos() {
+        let mult = (this.playerIndex === 0) ? 1 : -1;
+        return [80 * mult, 70 * mult];
       }
     },
 
@@ -59,7 +65,8 @@
     props: {
       playerIndex: { type: Number, required: true },
       initialHand: { type: Array, required: true },
-      initialDraw: { type: Array, required: true }
+      initialDraw: { type: Array, required: true },
+      player:      { type: Object, required: true }
     },
 
     methods: {

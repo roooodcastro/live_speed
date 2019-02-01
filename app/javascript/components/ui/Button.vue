@@ -16,13 +16,12 @@
     },
 
     props: {
-      click: { type: Function, required: true },
       pos:   { type: Array, required: true }
     },
 
     methods: {
       clickCallback(ev) {
-        this.click(ev, this);
+        this.$emit('click', ev, this);
       },
 
       setDisabled(flag) {

@@ -15,9 +15,10 @@
              @mousemove="dragMove">
 
             <GameTableHand v-for="(hand, index) in hands"
-                           :ref="'hand_' + hand.player_id"
-                           :key="'hand_' + hand.player_id"
+                           :ref="'hand_' + hand.player.id"
+                           :key="'hand_' + hand.player.id"
                            :player-index="index"
+                           :player="hand.player"
                            :initial-hand="hand.cards"
                            :initial-draw="hand.draw_pile"/>
 
@@ -27,13 +28,7 @@
         </div>
 
         <div v-show="status === 'ready'">
-            <livespeed-overlay>
-                <livespeed-text :pos="[0, -50]" :size="3">
-                    Waiting for your opponent<livespeed-loading-ellipsis />
-                </livespeed-text>
-                <livespeed-text :pos="[0, 22.5]" :size="3">Click READY to start playing:</livespeed-text>
-                <livespeed-button :click="readyButtonClick" :pos="[0, 47.5]">Ready!</livespeed-button>
-            </livespeed-overlay>
+            <pre-game-overlay @playerReady="readyButtonClick"></pre-game-overlay>
         </div>
 
         <GameTableCardSlots v-show="status !== 'loading'" :number-of-players="2"></GameTableCardSlots>
@@ -41,16 +36,26 @@
 </template>
 
 <script>
-  import apiClient           from '../channels/match_channel';
+  import apiClient           from '../api/match_channel';
+  import Round               from '../games/speed/round';
   import GameTableHand       from './GameTableHand';
   import GameTableCenterPile from './GameTableCenterPile';
   import PlayingCardDeck     from './PlayingCardDeck';
   import GameTableText       from './GameTableText';
   import GameTableCardSlots  from './GameTableCardSlots';
+  import PreGameOverlay      from './PreGameOverlay';
 
   export default {
-    components: { GameTableHand, GameTableCenterPile, GameTableText, GameTableCardSlots, PlayingCardDeck },
-    computed:   {
+    components: {
+      GameTableHand,
+      GameTableCenterPile,
+      GameTableText,
+      GameTableCardSlots,
+      PlayingCardDeck,
+      PreGameOverlay
+    },
+
+    computed: {
       centerPile() {
         return this.$refs['centerPile'];
       }
@@ -80,9 +85,9 @@
 
       parseRoundData(round) {
         let sortedHands = round.hands.sort((h1, h2) => {
-          if (h1.player_id === this.playerId) {
+          if (h1.player.id === this.playerId) {
             return -1;
-          } else if (h2.player_id === this.playerId) {
+          } else if (h2.player.id === this.playerId) {
             return 1;
           } else {
             return 0;
