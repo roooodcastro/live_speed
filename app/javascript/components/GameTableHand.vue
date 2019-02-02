@@ -8,6 +8,7 @@
                                 :ref="'draw_' + playerIndex + '_' + index"
                                 :key="'draw_' + playerIndex + '_' + index"/>
         <livespeed-playing-card v-for="(card, index) in hand"
+                                :is-active="playerIndex === 0"
                                 :rank="card.r"
                                 :suit="card.s"
                                 :initial-position="handCardPos(index)"

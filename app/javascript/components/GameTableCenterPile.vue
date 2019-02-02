@@ -24,12 +24,13 @@
                                 :key="'replacement_left_' + index"/>
         <livespeed-playing-card v-for="(card, index) in replacementPiles[1]"
                                 :is-featured="index === 0 && canUseReplacement"
+                                :is-active="isReplacementCardActive(index)"
                                 :rank="card.r"
                                 :suit="card.s"
                                 :initial-position="[80, -cardYOffset(index)]"
                                 :ref="'replacement_right_' + index"
                                 :key="'replacement_right_' + index"/>
-        
+
         <livespeed-arrow v-show="canUseReplacement" :pos="[72, 20]" direction="up" />
     </div>
 </template>
@@ -71,6 +72,10 @@
 
       isCardOverRightPile(card) {
         return card.currentPosition.isOverlapping(new CardCoordinate(20, 0));
+      },
+
+      isReplacementCardActive(index) {
+        return index === this.replacementPiles[1].length - 1 && this.canUseReplacement;
       },
 
       place(cardData, pileIndex) {

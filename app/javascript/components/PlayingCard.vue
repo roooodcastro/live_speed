@@ -11,7 +11,10 @@
     computed: {
       cssClass() {
         if (this.rank !== 'e' && this.suit !== 'e') {
-          return 'playing-card card-' + this.suit + '_' + this.rank + (this.flipped ? ' card-f_1' : '');
+          const baseClass = 'playing-card card-' + this.suit + '_' + this.rank;
+          const flippedClass = this.flipped ? 'card-f_1' : '';
+          const activeClass = this.isActive ? 'card-active' : '';
+          return [baseClass, flippedClass, activeClass].join(' ');
         } else {
           return '';
         }
@@ -63,13 +66,14 @@
     },
 
     props: {
+      isActive:        { type: Boolean, default: false },
+      isFeatured:      { type: Boolean, default: false },
       rank:            { type: String, default: 'a' },
       suit:            { type: String, default: 's' },
       initialPosition: { type: Array, default: () => [0, 0] },
       initialRotation: { type: Number, default: 0 },
       initialFlipped:  { type: Boolean, default: true },
-      initialOrder:    { type: Number, default: 1 },
-      isFeatured:      { type: Boolean, default: false }
+      initialOrder:    { type: Number, default: 1 }
     },
 
     methods: {

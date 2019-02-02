@@ -21,6 +21,10 @@
   }
 }
 
+.playing-card.card-active:hover {
+  filter: drop-shadow(0px 0px 20px #FFFFAA) !important;
+}
+
 // Flipped cards
 .card-f_1::after { opacity: 1; }
 

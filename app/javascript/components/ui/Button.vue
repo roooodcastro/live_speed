@@ -16,7 +16,7 @@
     },
 
     props: {
-      pos:   { type: Array, required: true }
+      pos: { type: Array, required: true }
     },
 
     methods: {
@@ -50,6 +50,7 @@
         position:         relative;
         transform-origin: center;
         transition:       0.2s;
+        z-index:          500;
     }
 
     .livespeed-button:hover { color: rgba(255, 255, 255, 0.9); }

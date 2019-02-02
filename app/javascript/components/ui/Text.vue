@@ -40,5 +40,6 @@
         margin: 0;
         position: absolute;
         text-shadow: 1px 1px 2px black;
+        user-select: none;
     }
 </style>
