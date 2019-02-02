@@ -117,8 +117,6 @@
       },
 
       onCardPlay(response) {
-        console.log(response);
-
         if (response.success) {
           let cardIndex           = response.card_index;
           let playerHandComponent = this.playerHandComponent(response.player_id);
@@ -135,19 +133,28 @@
       },
 
       onPlayerReady(data) {
-        console.log(this.playerHandComponent(data.player_id).player.name + ' is ready!');
         this.controller.setPlayerAsReady(data.player_id);
         this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
       },
 
       // TODO: Use Vuex to manage state
       onControllerStateChange(oldState, newState) {
+        console.log('game changed from ' + oldState + ' to ' + newState);
+
         switch ([oldState, newState].join(':')) {
           case 'setup:ready':
             if (this.controller.allPlayersReady) this.controller.state = 'game';
             break;
+          case 'ready:game':
+            this.controller.setPlayerMessage();
+            break;
         }
-        console.log('game changed from ' + oldState + ' to ' + newState);
+      },
+
+      onReplacementResponse(data) {
+        if (!data.success) {
+          this.playerMessage = 'Waiting for your opponents...'
+        }
       },
 
       onControllerMessage(message) {

@@ -1,4 +1,9 @@
-*, *::before, *::after { box-sizing: border-box; }
+*, *::before, *::after {
+  box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
 
 html, body, .container {
   box-sizing: border-box;
@@ -48,18 +53,6 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Cleveland', serif; }
 }
 
 .game-table-hand { position: relative; }
-
-.game-table-gametext {
-  color:       white;
-  font-family: 'Cleveland', serif;
-  font-size:   3em;
-  left:        calc(50% - 5em);
-  position:    absolute;
-  text-align:  center;
-  text-shadow: 1px 1px 2px black;
-  top:         25%;
-  width:       10em;
-}
 
 .game-table-cardslots {
   position: relative;

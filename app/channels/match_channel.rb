@@ -20,13 +20,13 @@ class MatchChannel < ApplicationCable::Channel
     response    = card_info.slice(%i[card_index pile_index player_id]).merge(
       success:       played_card.present?,
       card_data:     played_card,
-      no_plays_left: @round.can_use_replacement_pile?
+      no_plays_left: @round.can_use_replacement_piles?
     )
     respond('play_response', response)
   end
 
-  def play_replacement
-    played = @round.use_replacement_pile!
+  def play_replacement(args)
+    played = @round.use_replacement_pile!(args['player_id'])
     respond('replacement_response', success: played)
   end
 

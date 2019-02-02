@@ -29,7 +29,7 @@ module Games
       end
 
       def mark_ready_to_play_replacement(ready = true)
-        player[:replacement] = ready
+        player[:ready_replacement] = ready
       end
 
       def remove_card(index)

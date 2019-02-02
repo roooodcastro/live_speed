@@ -26,6 +26,9 @@ export default {
           case 'play_response':
             gameTable.onCardPlay(data);
             break;
+          case 'replacement_response':
+            gameTable.onReplacementResponse(data);
+            break;
           case 'player_ready':
             gameTable.onPlayerReady(data);
             break;
@@ -44,8 +47,8 @@ export default {
         this.perform('play_card', { card_index: cardIndex, pile_index: pileIndex, player_id: playerId });
       },
 
-      playReplacementPile() {
-        this.perform('play_replacement');
+      playReplacementPile(playerId) {
+        this.perform('play_replacement', { player_id: playerId });
       }
     });
   }

@@ -1,9 +1,10 @@
 export default class {
-  constructor(playerId, api, onStatusChange) {
-    this._state         = 'loading';
-    this.playerId       = playerId;
-    this.onStatusChange = onStatusChange;
-    this.api            = api;
+  constructor(playerId, api, onStatusChange, onPlayerMessage) {
+    this._state          = 'loading';
+    this.playerId        = playerId;
+    this.onStatusChange  = onStatusChange;
+    this.onPlayerMessage = onPlayerMessage;
+    this.api             = api;
   }
 
   get allPlayersReady() {
@@ -31,9 +32,12 @@ export default class {
   }
 
   set state(newState) {
-    const oldState = this._state;
-    this._state    = newState;
-    this.onStatusChange(oldState, newState);
+    return new Promise(resolve => {
+      const oldState = this._state;
+      this._state    = newState;
+      this.onStatusChange(oldState, newState);
+      resolve();
+    });
   }
 
   loadData(roundData) {
@@ -62,5 +66,11 @@ export default class {
       if (hand.player.id === playerId) hand.player.ready = true;
     });
     if (this.allPlayersReady) this.state = 'game';
+  }
+
+  setPlayerMessage() {
+    if (this.canUseReplacement) {
+      this.onPlayerMessage('There are no plays left! Use the replacement pile to your right!');
+    }
   }
 }

@@ -20,7 +20,7 @@ class Round < ApplicationRecord
   validates :number, presence: true, numericality: true
 
   delegate :players, :rules, to: :match
-  delegate :print_game, :finished?, :unfinished?, :can_use_replacement_pile?, to: :round_controller
+  delegate :print_game, :finished?, :unfinished?, :can_use_replacement_piles?, to: :round_controller
 
   def setup_round!
     update!(data: setup_class.new(players, rules).to_h)
@@ -32,7 +32,10 @@ class Round < ApplicationRecord
     played_card
   end
 
-  def use_replacement_pile!
+  def use_replacement_pile!(player_id)
+    round_controller.mark_player_replacement_ready(player_id)
+    players_ready = round_controller.players_ready_for_replacement?
+    return update_round! unless players_ready
     return false unless round_controller.use_replacement_pile
 
     update_round!

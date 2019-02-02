@@ -30,10 +30,18 @@ module Games
         player_hand(player_id).mark_ready_to_play
       end
 
+      def mark_player_replacement_ready(player_id)
+        player_hand(player_id).mark_ready_to_play_replacement
+      end
+
       def use_replacement_pile
         return false unless can_use_replacement_piles?
 
         central_pile.put_initial_cards([replacement_piles[0].pop, replacement_piles[1].pop])
+
+        # Mark the players as not ready to play replacement, so the next time the replacement piles can be played,
+        # they will have to confirm it again.
+        hands.each { |hand| hand.mark_ready_to_play_replacement(false) }
       end
 
       def can_play_card?(player_id, card_index, pile_index)
@@ -73,6 +81,10 @@ module Games
 
       def players_ready?
         hands.map { |hand| hand.player[:ready] }.all?
+      end
+
+      def players_ready_for_replacement?
+        hands.map { |hand| hand.player[:ready_replacement] }.all?
       end
 
       def to_h
