@@ -28,7 +28,7 @@
         </div>
 
         <div v-show="state === 'ready'">
-            <pre-game-overlay @playerReady="onReadyClick" ref="preGameOverlay" />
+            <pre-game-overlay @playerReady="onReadyClick" ref="preGameOverlay"/>
         </div>
 
         <GameTableCardSlots v-show="state !== 'loading'" :number-of-players="2"></GameTableCardSlots>
@@ -142,7 +142,7 @@
 
       // TODO: Use Vuex to manage state
       onControllerStateChange(oldState, newState) {
-        switch ([oldState,newState].join(':')) {
+        switch ([oldState, newState].join(':')) {
           case 'setup:ready':
             if (this.controller.allPlayersReady) this.controller.state = 'game';
             break;

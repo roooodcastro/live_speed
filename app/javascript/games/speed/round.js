@@ -6,10 +6,6 @@ export default class {
     this.api            = api;
   }
 
-  get loaded() {
-    return !!this.roundData;
-  }
-
   get allPlayersReady() {
     return this.players.reduce((ready, player) => ready && player.ready, true);
   }

@@ -23,11 +23,14 @@
                                 :ref="'replacement_left_' + index"
                                 :key="'replacement_left_' + index"/>
         <livespeed-playing-card v-for="(card, index) in replacementPiles[1]"
+                                :is-featured="index === 0 && canUseReplacement"
                                 :rank="card.r"
                                 :suit="card.s"
                                 :initial-position="[80, -cardYOffset(index)]"
                                 :ref="'replacement_right_' + index"
                                 :key="'replacement_right_' + index"/>
+        
+        <livespeed-arrow v-show="canUseReplacement" :pos="[72, 20]" direction="up" />
     </div>
 </template>
 
@@ -39,6 +42,10 @@
       allCards() {
         return this.$children;
       },
+
+      canUseReplacement() {
+        return true;
+      }
     },
 
     data() {

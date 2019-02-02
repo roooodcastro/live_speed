@@ -1,11 +1,6 @@
 <template>
     <div :class="cssClass"
-         :style="{
-         transform: transform,
-         zIndex: order,
-         filter: dropShadow,
-         transition: transition,
-         }"></div>
+         :style="style"></div>
 </template>
 
 <script>
@@ -22,6 +17,15 @@
         }
       },
 
+      style() {
+        return {
+          transform:  this.transform,
+          zIndex:     this.order,
+          filter:     this.dropShadow,
+          transition: this.transition,
+        };
+      },
+
       transform() {
         let scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
         let posTransform   = 'translate(' + this.currentPosition.pxString + ')';
@@ -34,7 +38,11 @@
       },
 
       dropShadow() {
-        return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
+        if (this.isFeatured) {
+          return 'drop-shadow(0px 0px 15px #FFFFAA)';
+        } else {
+          return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
+        }
       },
 
       currentPosition() {
@@ -45,12 +53,12 @@
     data() {
       return {
         altitude:     0,
+        dragPosition: new CardCoordinate(0, 0),
         flipped:      this.initialFlipped,
+        isDragging:   false,
         order:        this.initialOrder,
         position:     new CardCoordinate(this.initialPosition),
-        rotation:     this.initialRotation,
-        dragPosition: new CardCoordinate(0, 0),
-        isDragging:   false
+        rotation:     this.initialRotation
       };
     },
 
@@ -60,7 +68,8 @@
       initialPosition: { type: Array, default: () => [0, 0] },
       initialRotation: { type: Number, default: 0 },
       initialFlipped:  { type: Boolean, default: true },
-      initialOrder:    { type: Number, default: 1 }
+      initialOrder:    { type: Number, default: 1 },
+      isFeatured:      { type: Boolean, default: false }
     },
 
     methods: {
@@ -70,6 +79,10 @@
 
       flipDown() {
         this.flipped = true;
+      },
+
+      feature(isFeatured) {
+        this.isFeatured = isFeatured;
       },
 
       move(position) {
