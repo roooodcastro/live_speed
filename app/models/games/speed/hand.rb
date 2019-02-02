@@ -19,8 +19,17 @@ module Games
         @draw_pile = draw_pile || []
       end
 
-      def mark_as_ready
+      def deal_cards(deck)
+        @cards     = deck.draw_cards(amount: 5)
+        @draw_pile = deck.draw_cards(amount: 15)
+      end
+
+      def mark_ready_to_play
         player[:ready] = true
+      end
+
+      def mark_ready_to_play_replacement(ready = true)
+        player[:replacement] = ready
       end
 
       def remove_card(index)
@@ -46,11 +55,6 @@ module Games
       end
 
       def to_h
-        puts player
-        puts player
-        puts player
-        puts player
-        puts player
         { cards: cards.map(&:to_h), draw_pile: draw_pile.map(&:to_h), player: player }
       end
     end

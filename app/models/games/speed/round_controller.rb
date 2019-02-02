@@ -27,12 +27,11 @@ module Games
       end
 
       def mark_player_as_ready(player_id)
-        player_hand(player_id).mark_as_ready
-
+        player_hand(player_id).mark_ready_to_play
       end
 
-      def use_replacement_pile!
-        raise InvalidPlayError, 'Cannot use replacement pile!' unless can_use_replacement_piles?
+      def use_replacement_pile
+        return false unless can_use_replacement_piles?
 
         central_pile.put_initial_cards([replacement_piles[0].pop, replacement_piles[1].pop])
       end
@@ -78,10 +77,11 @@ module Games
 
       def to_h
         {
-        game_name:         'speed',
-        hands:             array_to_h(hands),
-        replacement_piles: array_to_h(replacement_piles),
-        central_pile:      central_pile.to_h
+          game_name:           'speed',
+          hands:               array_to_h(hands),
+          replacement_piles:   array_to_h(replacement_piles),
+          central_pile:        central_pile.to_h,
+          can_use_replacement: can_use_replacement_piles?
         }
       end
 

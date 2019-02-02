@@ -29,7 +29,7 @@ class SessionsController < ApplicationController
 
   def login_user(user)
     session[:user_id] = user.id
-    session[:player_id] = user.get_or_create_player!.id
+    session[:player_id] = user.fetch_or_create_player!.id
     cookies.signed[:player_id] = session[:player_id]
   end
 end

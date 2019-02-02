@@ -7,5 +7,5 @@ Rails.application.routes.draw do
 
   resources :matches
   resources :rounds, except: :index
-  resource :sessions, only: [:new, :create, :destroy]
+  resource :sessions, only: %i[new create destroy]
 end

@@ -3,11 +3,11 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_one :player
+  has_one :player, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 
-  def get_or_create_player!
+  def fetch_or_create_player!
     return player if player
 
     Player.create!(user: self)

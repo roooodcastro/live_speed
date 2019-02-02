@@ -32,16 +32,17 @@ export default class {
 
   set state(newState) {
     const oldState = this._state;
-    this._state = newState;
+    this._state    = newState;
     this.onStatusChange(oldState, newState);
   }
 
   loadData(roundData) {
-    this.roundData        = roundData;
-    this.hands            = this.sortHands(roundData.hands);
-    this.centerPiles      = roundData.central_pile.piles;
-    this.replacementPiles = roundData.replacement_piles;
-    this.state            = 'setup';
+    this.roundData         = roundData;
+    this.hands             = this.sortHands(roundData.hands);
+    this.centerPiles       = roundData.central_pile.piles;
+    this.replacementPiles  = roundData.replacement_piles;
+    this.canUseReplacement = roundData.can_use_replacement;
+    this.state             = 'setup';
   }
 
   sortHands(hands) {

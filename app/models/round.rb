@@ -20,7 +20,7 @@ class Round < ApplicationRecord
   validates :number, presence: true, numericality: true
 
   delegate :players, :rules, to: :match
-  delegate :print_game, :finished?, :unfinished?, to: :round_controller
+  delegate :print_game, :finished?, :unfinished?, :can_use_replacement_pile?, to: :round_controller
 
   def setup_round!
     update!(data: setup_class.new(players, rules).to_h)
@@ -32,8 +32,9 @@ class Round < ApplicationRecord
     played_card
   end
 
-  def use_replacement_pile!(*)
-    round_controller.use_replacement_pile!
+  def use_replacement_pile!
+    return false unless round_controller.use_replacement_pile
+
     update_round!
   end
 
@@ -71,6 +72,7 @@ class Round < ApplicationRecord
     return update_to_cache! if USE_CACHE
 
     save!
+    true
   end
 
   def check_for_winner
@@ -99,5 +101,6 @@ class Round < ApplicationRecord
 
   def update_to_cache!
     Rails.cache.write("round_data_#{id}", round_controller.to_h.merge(status: status))
+    true
   end
 end

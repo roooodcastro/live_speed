@@ -68,7 +68,7 @@
 
     mounted() {
       this.api        = apiClient.subscribeToApi(this);
-      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange);
+      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange, this.onControllerMessage);
     },
 
     props: {
@@ -148,6 +148,10 @@
             break;
         }
         console.log('game changed from ' + oldState + ' to ' + newState);
+      },
+
+      onControllerMessage(message) {
+        this.playerMessage = message;
       },
 
       isPlayerCard(card) {
