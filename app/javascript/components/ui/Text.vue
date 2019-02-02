@@ -1,5 +1,5 @@
 <template>
-    <p class="livespeed-text" :style="{ transform: transform, fontSize: fontSize }"><slot></slot></p>
+    <p class="livespeed-text" :style="style"><slot></slot></p>
 </template>
 
 <script>
@@ -14,10 +14,19 @@
 
       fontSize() {
         return this.size + 'em';
+      },
+
+      style() {
+        return {
+          transform: this.transform,
+          fontFamily: this.font + ', Helvetica, Arial, sans-serif',
+          fontSize: this.fontSize,
+        }
       }
     },
 
     props: {
+      font: { type: String, default: 'Barbaro' },
       pos: { type: Array, required: true },
       size: { type: Number, default: 2 }
     }
@@ -28,7 +37,8 @@
     .livespeed-text {
         color: rgba(255, 255, 255, 0.75);
         font-family: 'Cleveland', Helvetica, Arial, sans-serif;
-        position: fixed;
+        margin: 0;
+        position: absolute;
         text-shadow: 1px 1px 2px black;
     }
 </style>

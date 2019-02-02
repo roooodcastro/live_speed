@@ -6,12 +6,10 @@ module Games
       attr_accessor :cards, :draw_pile
       attr_reader :player
 
-      delegate :id, to: :player, prefix: true
-
       def self.from_h(hash)
         cards       = hash[:cards].map { |card| Card.from_h(card) }
         draw_pile   = hash[:draw_pile].map { |card| Card.from_h(card) }
-        player_data = hash[:player]#.to_a.find { |player| player.id == hash[:player_id] }
+        player_data = hash[:player]
         Hand.new(player: player_data, cards: cards, draw_pile: draw_pile)
       end
 
@@ -48,6 +46,11 @@ module Games
       end
 
       def to_h
+        puts player
+        puts player
+        puts player
+        puts player
+        puts player
         { cards: cards.map(&:to_h), draw_pile: draw_pile.map(&:to_h), player: player }
       end
     end

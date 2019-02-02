@@ -4,7 +4,7 @@ export default {
       // Called when the subscription is ready for use on the server.
       connected() {
         console.log('connected!');
-        gameTable.fetchRoundData();
+        this.fetchData();
       },
 
       // Called when the subscription has been terminated by the server.
@@ -14,19 +14,20 @@ export default {
 
       // Called when the subscription is rejected by the server.
       rejected() {
+        console.log('server didn\'t like me :(');
       },
 
       // Called when there's incoming data on the websocket for this channel
       received(data) {
         switch (data.action) {
           case 'round_data':
-            gameTable.parseRoundData(data);
+            gameTable.onApiReceiveData(data);
             break;
           case 'play_response':
-            gameTable.processPlayResponse(data);
+            gameTable.onCardPlay(data);
             break;
           case 'player_ready':
-            gameTable.processPlayerReady(data);
+            gameTable.onPlayerReady(data);
             break;
         }
       },

@@ -15,6 +15,8 @@ class Round < ApplicationRecord
 
   ALL_STATUS = [STATUS_CREATED, STATUS_PLAYING, STATUS_PAUSED, STATUS_FINISHED].freeze
 
+  USE_CACHE = false
+
   validates :number, presence: true, numericality: true
 
   delegate :players, :rules, to: :match
@@ -26,27 +28,23 @@ class Round < ApplicationRecord
 
   def play_card!(args)
     played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
-    update_to_cache! if played_card.present?
+    update_round! if played_card.present?
     played_card
   end
 
   def use_replacement_pile!(*)
     round_controller.use_replacement_pile!
-    update_to_cache!
+    update_round!
   end
 
   def mark_player_as_ready(player_id)
     round_controller.mark_player_as_ready(player_id)
     self.status = STATUS_PLAYING if round_controller.players_ready?
-    update_to_cache!
+    update_round!
   end
 
   def round_controller
-    @round_controller ||= begin
-      data_with_players = cached_data
-      data_with_players[:hands].each { |hand| hand[:players] = players.to_a }
-      controller_class.send(:from_h, data_with_players)
-    end
+    @round_controller ||= controller_class.send(:from_h, cached_data)
   end
 
   def commit_changes!
@@ -70,9 +68,9 @@ class Round < ApplicationRecord
   def update_round!
     self.data = round_controller.to_h.merge(status: status)
     check_for_winner
-    save!
+    return update_to_cache! if USE_CACHE
 
-    round_controller.print_game
+    save!
   end
 
   def check_for_winner
@@ -94,6 +92,8 @@ class Round < ApplicationRecord
   end
 
   def cached_data
+    return data.deep_symbolize_keys unless USE_CACHE
+
     Rails.cache.fetch("round_data_#{id}") { data.deep_symbolize_keys }
   end
 

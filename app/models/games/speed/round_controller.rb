@@ -73,7 +73,7 @@ module Games
       end
 
       def players_ready?
-        hands.map { |hand| hand.dig(:player, :ready) }.all?
+        hands.map { |hand| hand.player[:ready] }.all?
       end
 
       def to_h

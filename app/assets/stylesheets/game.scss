@@ -12,6 +12,11 @@ html, body, .container {
   src: asset-url('cleveland.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Barbaro';
+  src: asset-url('barbaro.ttf') format('truetype');
+}
+
 h1, h2, h3, h4, h5, h6 { font-family: 'Cleveland', serif; }
 
 .game-table-container {

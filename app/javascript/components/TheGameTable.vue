@@ -1,14 +1,14 @@
 <template>
     <div id="game_table" class="game-table-container">
-        <div v-show="status === 'loading'">
+        <div v-show="state === 'loading'">
             <livespeed-loading-suits/>
         </div>
 
-        <div v-show="status === 'setup'">
+        <div v-show="state === 'setup'">
             <playing-card-deck ref="cardDeck"/>
         </div>
 
-        <div v-show="status === 'game' || status === 'ready'"
+        <div v-show="state === 'game' || state === 'ready'"
              class="game-table-gamearea"
              @mousedown="dragStart"
              @mouseup="dragEnd"
@@ -27,11 +27,11 @@
             <GameTableText :text="playerMessage"></GameTableText>
         </div>
 
-        <div v-show="status === 'ready'">
-            <pre-game-overlay @playerReady="readyButtonClick"></pre-game-overlay>
+        <div v-show="state === 'ready'">
+            <pre-game-overlay @playerReady="onReadyClick" ref="preGameOverlay" />
         </div>
 
-        <GameTableCardSlots v-show="status !== 'loading'" :number-of-players="2"></GameTableCardSlots>
+        <GameTableCardSlots v-show="state !== 'loading'" :number-of-players="2"></GameTableCardSlots>
     </div>
 </template>
 
@@ -58,32 +58,41 @@
     computed: {
       centerPile() {
         return this.$refs['centerPile'];
+      },
+
+      state() {
+        if (!this.controller) return 'loading';
+        return this.controller.state;
       }
     },
 
     mounted() {
-      this.api = apiClient.subscribeToApi(this);
+      this.api        = apiClient.subscribeToApi(this);
+      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange);
+    },
+
+    props: {
+      roundId:  { type: String, required: true },
+      playerId: { type: String, required: true }
     },
 
     data() {
       return {
+        api:           undefined,
         dragHold:      false,
         hands:         [],
         isDragging:    undefined,
+        playerMessage: '',
+        controller:    undefined,
         roundData:     {},
-        status:        'loading',
-        timeoutId:     0,
-        api:           undefined,
-        playerMessage: ''
+        timeoutId:     0
       };
     },
 
     methods: {
-      fetchRoundData() {
-        this.api.fetchData();
-      },
+      onApiReceiveData(round) {
+        this.controller.loadData(round);
 
-      parseRoundData(round) {
         let sortedHands = round.hands.sort((h1, h2) => {
           if (h1.player.id === this.playerId) {
             return -1;
@@ -96,20 +105,58 @@
 
         this.roundData = round;
         this.hands     = sortedHands;
-        this.status    = 'setup';
         this.centerPile.setCardData(round);
 
         this.$refs['cardDeck'].dealCards(round)
-          .then(() => this.status = 'ready');
+          .then(() => this.controller.state = 'ready');
+      },
+
+      onReadyClick(ev, button) {
+        this.api.markReady(this.playerId);
+        button.setDisabled(true);
+      },
+
+      onCardPlay(response) {
+        console.log(response);
+
+        if (response.success) {
+          let cardIndex           = response.card_index;
+          let playerHandComponent = this.playerHandComponent(response.player_id);
+          let card                = playerHandComponent.handCards[cardIndex];
+          playerHandComponent.removeCard(card)
+            .then(() => this.centerPile.place(response.card_data, response.pile_index))
+            .then(() => playerHandComponent.pullFromDraw(cardIndex));
+        } else {
+          console.log('Invalid play!');
+        }
+        this.isDragging.endDrag();
+        this.isDragging = undefined;
+        this.dragHold   = false;
+      },
+
+      onPlayerReady(data) {
+        console.log(this.playerHandComponent(data.player_id).player.name + ' is ready!');
+        this.controller.setPlayerAsReady(data.player_id);
+        this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
+      },
+
+      // TODO: Use Vuex to manage state
+      onControllerStateChange(oldState, newState) {
+        switch ([oldState,newState].join(':')) {
+          case 'setup:ready':
+            if (this.controller.allPlayersReady) this.controller.state = 'game';
+            break;
+        }
+        console.log('game changed from ' + oldState + ' to ' + newState);
       },
 
       isPlayerCard(card) {
-        return this.handComponent(this.playerId).handCards.includes(card);
+        return this.playerHandComponent(this.playerId).handCards.includes(card);
       },
 
       dragStart(ev) {
         let card = ev.target.__vue__;
-        if (this.isPlayerCard(card) && this.status === 'game' && !this.dragHold) {
+        if (this.isPlayerCard(card) && this.state === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
           card.startDrag();
@@ -139,7 +186,7 @@
       },
 
       playCard(card, pileIndex) {
-        let cardIndex = this.handComponent(this.playerId).indexOfCard(card);
+        let cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
         this.submitPlay(cardIndex, pileIndex);
       },
 
@@ -147,42 +194,9 @@
         this.api.playCard(cardIndex, pileIndex, this.playerId);
       },
 
-      processPlayResponse(response) {
-        console.log(response);
-
-        if (response.success) {
-          let cardIndex     = response.card_index;
-          let handComponent = this.handComponent(response.player_id);
-          let card          = handComponent.handCards[cardIndex];
-          handComponent.removeCard(card)
-            .then(() => this.centerPile.place(response.card_data, response.pile_index))
-            .then(() => handComponent.pullFromDraw(cardIndex));
-        } else {
-          console.log('Invalid play!');
-        }
-        this.isDragging.endDrag();
-        this.isDragging = undefined;
-        this.dragHold   = false;
-      },
-
-      processPlayerReady(data) {
-        if (data['all_players_ready']) {
-          this.status = 'game';
-        }
-      },
-
-      handComponent(playerId) {
+      playerHandComponent(playerId) {
         return this.$refs['hand_' + playerId][0];
       },
-
-      readyButtonClick(ev, button) {
-        this.api.markReady(this.playerId);
-        button.setDisabled(true);
-      }
-    },
-    props:   {
-      roundId:  { type: String, required: true },
-      playerId: { type: String, required: true }
     }
   };
 </script>

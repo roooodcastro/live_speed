@@ -14,7 +14,6 @@
 
   export default {
     data() {
-      console.log(placement.allCardPositions(this.numberOfPlayers));
       return {
         slots: placement.allCardPositions(this.numberOfPlayers)
       };

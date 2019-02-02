@@ -15,7 +15,11 @@
                                 :initial-flipped="false"
                                 :ref="'card_' + playerIndex + '_' + index"
                                 :key="'card_' + playerIndex + '_' + index"/>
-        <livespeed-text :pos="playerNamePos">{{ player.name }}</livespeed-text>
+        <livespeed-text :pos="playerNamePos"
+                        :size="1.5"
+                        font="Barbaro">
+            {{ player.name }}
+        </livespeed-text>
     </div>
 </template>
 
@@ -51,7 +55,7 @@
 
       playerNamePos() {
         let mult = (this.playerIndex === 0) ? 1 : -1;
-        return [80 * mult, 70 * mult];
+        return [75 * mult, 60 * mult];
       }
     },
 
