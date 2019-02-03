@@ -1,6 +1,7 @@
 <template>
     <div :class="cssClass"
-         :style="style"></div>
+         :style="style"
+         @click="onClick"></div>
 </template>
 
 <script>
@@ -11,9 +12,9 @@
     computed: {
       cssClass() {
         if (this.rank !== 'e' && this.suit !== 'e') {
-          const baseClass = 'playing-card card-' + this.suit + '_' + this.rank;
+          const baseClass    = 'playing-card card-' + this.suit + '_' + this.rank;
           const flippedClass = this.flipped ? 'card-f_1' : '';
-          const activeClass = this.isActive ? 'card-active' : '';
+          const activeClass  = this.isActive ? 'card-active' : '';
           return [baseClass, flippedClass, activeClass].join(' ');
         } else {
           return '';
@@ -118,6 +119,10 @@
         if (this.isDragging) {
           this.dragPosition = CardCoordinate.fromPixelPosition(ev.clientX, ev.clientY);
         }
+      },
+
+      onClick() {
+        this.$emit('click');
       }
     }
   };

@@ -11,7 +11,7 @@ class MatchChannel < ApplicationCable::Channel
   end
 
   def fetch_data
-    respond('round_data', @round.data.as_json)
+    respond('round_data', player_id: player_id, round: @round.data.as_json)
   end
 
   def play_card(args)

@@ -29,14 +29,15 @@
                                 :suit="card.s"
                                 :initial-position="[80, -cardYOffset(index)]"
                                 :ref="'replacement_right_' + index"
-                                :key="'replacement_right_' + index"/>
+                                :key="'replacement_right_' + index"
+                                @click="onReplacementClick"/>
 
-        <livespeed-arrow v-show="canUseReplacement" :pos="[72, 20]" direction="up" />
+        <livespeed-arrow v-show="canUseReplacement" :pos="[72, 20]" direction="up"/>
     </div>
 </template>
 
 <script>
-  import CardCoordinate  from 'helpers/card_coordinate';
+  import CardCoordinate from 'helpers/card_coordinate';
 
   export default {
     computed: {
@@ -81,6 +82,10 @@
       place(cardData, pileIndex) {
         let newPile = this.centerPiles[pileIndex].concat([cardData]);
         this.centerPiles.splice(pileIndex, 1, newPile);
+      },
+
+      onReplacementClick() {
+        this.$emit('replacementClick');
       }
     }
   };

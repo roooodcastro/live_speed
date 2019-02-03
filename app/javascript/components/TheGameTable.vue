@@ -22,7 +22,7 @@
                            :initial-hand="hand.cards"
                            :initial-draw="hand.draw_pile"/>
 
-            <GameTableCenterPile ref="centerPile"/>
+            <GameTableCenterPile ref="centerPile" @replacementClick="onReplacementClick"/>
 
             <GameTableText :text="playerMessage"></GameTableText>
         </div>
@@ -90,7 +90,10 @@
     },
 
     methods: {
-      onApiReceiveData(round) {
+      onApiReceiveData(data) {
+        if (data.player_id !== this.playerId) return;
+
+        const round = data.round;
         this.controller.loadData(round);
 
         let sortedHands = round.hands.sort((h1, h2) => {
@@ -114,6 +117,10 @@
       onReadyClick(ev, button) {
         this.api.markReady(this.playerId);
         button.setDisabled(true);
+      },
+
+      onReplacementClick() {
+        this.api.playReplacementPile(this.playerId);
       },
 
       onCardPlay(response) {

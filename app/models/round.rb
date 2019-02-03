@@ -35,7 +35,9 @@ class Round < ApplicationRecord
   def use_replacement_pile!(player_id)
     round_controller.mark_player_replacement_ready(player_id)
     players_ready = round_controller.players_ready_for_replacement?
-    return update_round! unless players_ready
+    update_round!
+
+    return false unless players_ready
     return false unless round_controller.use_replacement_pile
 
     update_round!
