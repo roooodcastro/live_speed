@@ -17,7 +17,7 @@ class MatchChannel < ApplicationCable::Channel
   def play_card(args)
     card_info   = args.symbolize_keys
     played_card = @round.reload.play_card!(card_info)
-    response    = card_info.slice(%i[card_index pile_index player_id]).merge(
+    response    = card_info.slice(*%i[card_index pile_index player_id]).merge(
       success:       played_card.present?,
       card_data:     played_card,
       no_plays_left: @round.can_use_replacement_piles?
