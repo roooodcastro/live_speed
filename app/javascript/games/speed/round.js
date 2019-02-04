@@ -1,3 +1,5 @@
+import Message from 'games/speed/message';
+
 export default class {
   constructor(playerId, api, onStatusChange, onPlayerMessage) {
     this._state          = 'loading';
