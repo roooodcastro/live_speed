@@ -1,12 +1,17 @@
-import Message from 'games/speed/message';
-
 export default class {
-  constructor(playerId, api, onStatusChange, onPlayerMessage) {
+  constructor(playerId, api, onStatusChange) {
     this._state          = 'loading';
     this.playerId        = playerId;
     this.onStatusChange  = onStatusChange;
-    this.onPlayerMessage = onPlayerMessage;
     this.api             = api;
+  }
+
+  // Checks all of the round's data to determine the appropriate state for this stage of the game
+  get state2() {
+    if (!this.data) return 'loading';
+
+    // TODO: Check how I can determine the "setup" state, which is when the cards are being dealt (might be a local state only)
+    // TODO: determine other states and use this method as a getter for the state. Also change thegametable's data "state" to a computed property
   }
 
   get allPlayersReady() {
@@ -43,7 +48,7 @@ export default class {
   }
 
   loadData(roundData) {
-    this.roundData         = roundData;
+    this.data              = roundData;
     this.hands             = this.sortHands(roundData.hands);
     this.centerPiles       = roundData.central_pile.piles;
     this.replacementPiles  = roundData.replacement_piles;
@@ -68,11 +73,5 @@ export default class {
       if (hand.player.id === playerId) hand.player.ready = true;
     });
     if (this.allPlayersReady) this.state = 'game';
-  }
-
-  setPlayerMessage() {
-    if (this.canUseReplacement) {
-      this.onPlayerMessage('There are no plays left! Use the replacement pile to your right!');
-    }
   }
 }

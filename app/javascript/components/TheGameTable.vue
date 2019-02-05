@@ -38,6 +38,7 @@
 <script>
   import apiClient           from 'api/match_channel';
   import Round               from 'games/speed/round';
+  import Message             from 'games/speed/message';
   import GameTableHand       from 'components/GameTableHand';
   import GameTableCenterPile from 'components/GameTableCenterPile';
   import PlayingCardDeck     from 'components/PlayingCardDeck';
@@ -63,12 +64,16 @@
       state() {
         if (!this.controller) return 'loading';
         return this.controller.state;
+      },
+
+      playerMessage() {
+        return Message.generate(this.round.data, this.playerId);
       }
     },
 
     mounted() {
       this.api        = apiClient.subscribeToApi(this);
-      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange, this.onControllerMessage);
+      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange);
     },
 
     props: {
@@ -82,7 +87,6 @@
         dragHold:      false,
         hands:         [],
         isDragging:    undefined,
-        playerMessage: '',
         controller:    undefined,
         roundData:     {},
         timeoutId:     0
@@ -153,19 +157,11 @@
             if (this.controller.allPlayersReady) this.controller.state = 'game';
             break;
           case 'ready:game':
-            this.controller.setPlayerMessage();
             break;
         }
       },
 
       onReplacementResponse(data) {
-        if (!data.success) {
-          this.playerMessage = 'Waiting for your opponents...'
-        }
-      },
-
-      onControllerMessage(message) {
-        this.playerMessage = message;
       },
 
       isPlayerCard(card) {
@@ -214,7 +210,7 @@
 
       playerHandComponent(playerId) {
         return this.$refs['hand_' + playerId][0];
-      },
+      }
     }
   };
 </script>
