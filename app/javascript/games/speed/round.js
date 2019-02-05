@@ -1,25 +1,36 @@
+import Readiness from 'games/speed/readiness';
+
 export default class {
   constructor(playerId, api, onStatusChange) {
-    this._state          = 'loading';
-    this.playerId        = playerId;
-    this.onStatusChange  = onStatusChange;
-    this.api             = api;
+    this._state         = 'loading';
+    this.playerId       = playerId;
+    this.onStatusChange = onStatusChange;
+    this.api            = api;
+    this.readyToPlay    = new Readiness(this.players, 'ready_to_play');
+    this.readyToReplace = new Readiness(this.players, 'ready_to_replace');
   }
 
   // Checks all of the round's data to determine the appropriate state for this stage of the game
   get state2() {
-    if (!this.data) return 'loading';
-
     // TODO: Check how I can determine the "setup" state, which is when the cards are being dealt (might be a local state only)
-    // TODO: determine other states and use this method as a getter for the state. Also change thegametable's data "state" to a computed property
+    if (!this.data) return 'loading';
+    // TODO: rename this state, because players are not ready in the "ready" state, d'oh
+    if (!this.readyToPlay.allPlayersReady) return 'ready';
+    if (this.canUseReplacement) return 'staled_game';
+    // TODO: Determine if the game is over
+    if (false) return 'game'; // New state for when the players can only play from the replacement piles.
+
+    // TODO: Determine end-game state
+    if (false) return 'win';
+    return 'lose';
   }
 
   get allPlayersReady() {
-    return this.players.reduce((ready, player) => ready && player.ready, true);
+    return this.readyToPlay.allPlayersReady;
   }
 
   get allOpponentsReady() {
-    return this.opponents.reduce((ready, player) => ready && player.ready, true);
+    return this.readyToPlay.opponentsReady;
   }
 
   get state() {
@@ -28,14 +39,6 @@ export default class {
 
   get players() {
     return this.hands.map(hand => hand.player);
-  }
-
-  get player() {
-    return this.hands[0].player;
-  }
-
-  get opponents() {
-    return this.players.slice(1);
   }
 
   set state(newState) {
@@ -53,7 +56,6 @@ export default class {
     this.centerPiles       = roundData.central_pile.piles;
     this.replacementPiles  = roundData.replacement_piles;
     this.canUseReplacement = roundData.can_use_replacement;
-    this.state             = 'setup';
   }
 
   sortHands(hands) {
