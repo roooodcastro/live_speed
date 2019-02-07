@@ -4,15 +4,15 @@
             <livespeed-loading-suits/>
         </div>
 
-        <div v-show="state === 'setup'">
+        <div v-show="!playedDealAnimation">
             <playing-card-deck ref="cardDeck"/>
         </div>
 
-        <div v-show="state === 'game' || state === 'ready'"
+        <div v-show="playedDealAnimation"
              class="game-table-gamearea"
-             @mousedown="dragStart"
-             @mouseup="dragEnd"
-             @mousemove="dragMove">
+             @mousedown="onDragStart"
+             @mouseup="onDragEnd"
+             @mousemove="onDragMove">
 
             <GameTableHand v-for="(hand, index) in hands"
                            :ref="'hand_' + hand.player.id"
@@ -27,7 +27,7 @@
             <GameTableText :text="playerMessage"></GameTableText>
         </div>
 
-        <div v-show="state === 'ready'">
+        <div v-show="state === 'setup' && playedDealAnimation">
             <pre-game-overlay @playerReady="onReadyClick" ref="preGameOverlay"/>
         </div>
 
@@ -87,10 +87,11 @@
 
     data() {
       return {
-        api:        undefined,
-        dragHold:   false,
-        isDragging: undefined,
-        controller: undefined
+        api:                 undefined,
+        dragHold:            false,
+        isDragging:          undefined,
+        controller:          undefined,
+        playedDealAnimation: false
       };
     },
 
@@ -102,7 +103,10 @@
         this.centerPile.setCardData(data.round);
 
         this.$refs['cardDeck'].dealCards(controller.data)
-          .then(() => this.controller.state = 'ready');
+          .then(() => {
+            this.playedDealAnimation = true;
+            if (this.controller.allPlayersReady) this.controller.state = 'game';
+          });
       },
 
       onReadyClick() {
@@ -120,7 +124,18 @@
           const card                = playerHandComponent.handCards[cardIndex];
           playerHandComponent.removeCard(card)
             .then(() => this.centerPile.place(response.card_data, response.pile_index))
-            .then(() => playerHandComponent.pullFromDraw(cardIndex));
+            .then(() => playerHandComponent.pullFromDraw(cardIndex))
+            .then(() => this.controller.update(response.round));
+
+          if (response.round.winner_id) {
+            // TODO: Someone has won! Check if it was the player or the opponent and show the appropriate interface
+            const winnerId = response.round.winner_id;
+            if (winnerId === this.playerId) {
+              console.log('You won!');
+            } else {
+              console.log('You lost!');
+            }
+          }
         } else {
           console.log('Invalid play!');
         }
@@ -139,58 +154,49 @@
         console.log('game changed from ' + oldState + ' to ' + newState);
 
         switch ([oldState, newState].join(':')) {
-          case 'setup:ready':
-            if (this.controller.allPlayersReady) this.controller.state = 'game';
+          case 'loading:setup':
             break;
-          case 'ready:game':
+          case 'setup:game':
             break;
         }
       },
 
       onReplacementResponse(data) {
+        // TODO: Make replacement animation, make replacement work
       },
 
-      isPlayerCard(card) {
-        return this.playerHandComponent(this.playerId).handCards.includes(card);
-      },
-
-      dragStart(ev) {
+      onDragStart(ev) {
         const card = ev.target.__vue__;
-        if (this.isPlayerCard(card) && this.state === 'game' && !this.dragHold) {
+        const isPlayerCard = this.playerHandComponent(this.playerId).handCards.includes(card);
+        if (isPlayerCard && this.state === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
           card.startDrag();
         }
       },
 
-      dragEnd() {
-        this.dragHold = false;
-        if (this.isDragging) {
-          const card    = this.isDragging;
-          this.dragHold = true;
-          if (this.centerPile.isCardOverLeftPile(card)) {
-            this.playCard(card, 0);
-          } else if (this.centerPile.isCardOverRightPile(card)) {
-            this.playCard(card, 1);
-          } else {
-            this.isDragging.endDrag();
-            this.isDragging = undefined;
-          }
-        }
-      },
-
-      dragMove(ev) {
+      onDragMove(ev) {
         if (this.isDragging && !this.dragHold) {
           this.isDragging.dragMove(ev);
         }
       },
 
-      playCard(card, pileIndex) {
-        const cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
-        this.submitPlay(cardIndex, pileIndex);
+      onDragEnd() {
+        this.dragHold = false;
+        if (this.isDragging) {
+          this.dragHold   = true;
+          const card      = this.isDragging;
+          const pileIndex = this.centerPile.cardOverPileIndex(card);
+
+          if (pileIndex >= 0) return this.playCard(card, pileIndex);
+
+          this.isDragging.endDrag();
+          this.isDragging = undefined;
+        }
       },
 
-      submitPlay(cardIndex, pileIndex) {
+      playCard(card, pileIndex) {
+        const cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
         this.api.playCard(cardIndex, pileIndex, this.playerId);
       },
 

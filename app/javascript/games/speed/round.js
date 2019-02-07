@@ -2,7 +2,6 @@ import Readiness from 'games/speed/readiness';
 
 export default class {
   constructor(playerId, api, onStatusChange) {
-    this._state         = 'loading';
     this.playerId       = playerId;
     this.onStatusChange = onStatusChange;
     this.api            = api;
@@ -11,18 +10,13 @@ export default class {
   }
 
   // Checks all of the round's data to determine the appropriate state for this stage of the game
-  get state2() {
-    // TODO: Check how I can determine the "setup" state, which is when the cards are being dealt (might be a local state only)
+  get state() {
     if (!this.data) return 'loading';
-    // TODO: rename this state, because players are not ready in the "ready" state, d'oh
-    if (!this.readyToPlay.allPlayersReady) return 'ready';
+    if (!this.readyToPlay.allPlayersReady) return 'setup';
     if (this.canUseReplacement) return 'staled_game';
-    // TODO: Determine if the game is over
-    if (false) return 'game'; // New state for when the players can only play from the replacement piles.
+    if (this.winner) return (this.winnerId === this.playerId) ? 'win' : 'lose';
 
-    // TODO: Determine end-game state
-    if (false) return 'win';
-    return 'lose';
+    return 'game';
   }
 
   get allPlayersReady() {
@@ -33,12 +27,12 @@ export default class {
     return this.readyToPlay.opponentsReady;
   }
 
-  get state() {
-    return this._state;
-  }
-
   get players() {
     return this.hands.map(hand => hand.player);
+  }
+
+  get winner() {
+    return this.hands.filter(hand => hand.player.id === this.winnerId)[0];
   }
 
   get hands() {
@@ -61,6 +55,16 @@ export default class {
     this.centerPiles       = roundData.central_pile.piles;
     this.replacementPiles  = roundData.replacement_piles;
     this.canUseReplacement = roundData.can_use_replacement;
+    this.winnerId          = roundData.winner_id;
+  }
+
+  update(roundData) {
+    this.data              = roundData;
+    this.hands             = this.sortHands(roundData.hands);
+    this.centerPiles       = roundData.central_pile.piles;
+    this.replacementPiles  = roundData.replacement_piles;
+    this.canUseReplacement = roundData.can_use_replacement;
+    this.winnerId          = roundData.winner_id;
   }
 
   sortHands(hands) {

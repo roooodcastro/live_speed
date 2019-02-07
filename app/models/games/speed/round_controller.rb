@@ -93,7 +93,8 @@ module Games
           hands:               array_to_h(hands),
           replacement_piles:   array_to_h(replacement_piles),
           central_pile:        central_pile.to_h,
-          can_use_replacement: can_use_replacement_piles?
+          can_use_replacement: can_use_replacement_piles?,
+          winner_id:           winner&.player&.dig(:id)
         }
       end
 

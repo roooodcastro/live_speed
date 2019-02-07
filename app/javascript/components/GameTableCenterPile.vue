@@ -67,6 +67,12 @@
         this.replacementPiles = data.replacement_piles;
       },
 
+      cardOverPileIndex(card) {
+        if (this.isCardOverLeftPile(card)) return 0;
+        if (this.isCardOverRightPile(card)) return 1;
+        return -1;
+      },
+
       isCardOverLeftPile(card) {
         return card.currentPosition.isOverlapping(new CardCoordinate(-20, 0));
       },
