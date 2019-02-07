@@ -30,6 +30,7 @@
       methods: {
         readyButtonClick(ev, button) {
           this.$emit('playerReady', ev, button);
+          button.setDisabled(true);
         },
 
         setOpponentsAsReady(isReady) {

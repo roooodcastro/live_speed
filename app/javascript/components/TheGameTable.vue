@@ -57,6 +57,10 @@
     },
 
     computed: {
+      hands() {
+        return controller.hands;
+      },
+
       centerPile() {
         return this.$refs['centerPile'];
       },
@@ -85,42 +89,24 @@
       return {
         api:           undefined,
         dragHold:      false,
-        hands:         [],
         isDragging:    undefined,
-        controller:    undefined,
-        roundData:     {},
-        timeoutId:     0
+        controller:    undefined
       };
     },
 
     methods: {
-      onApiReceiveData(data) {
+      onApiReceiveRoundData(data) {
         if (data.player_id !== this.playerId) return;
 
-        const round = data.round;
-        this.controller.loadData(round);
+        this.controller.loadData(data.round);
+        this.centerPile.setCardData(data.round);
 
-        let sortedHands = round.hands.sort((h1, h2) => {
-          if (h1.player.id === this.playerId) {
-            return -1;
-          } else if (h2.player.id === this.playerId) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
-
-        this.roundData = round;
-        this.hands     = sortedHands;
-        this.centerPile.setCardData(round);
-
-        this.$refs['cardDeck'].dealCards(round)
+        this.$refs['cardDeck'].dealCards(controller.data)
           .then(() => this.controller.state = 'ready');
       },
 
-      onReadyClick(ev, button) {
+      onReadyClick() {
         this.api.markReady(this.playerId);
-        button.setDisabled(true);
       },
 
       onReplacementClick() {

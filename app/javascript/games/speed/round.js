@@ -41,6 +41,11 @@ export default class {
     return this.hands.map(hand => hand.player);
   }
 
+  get hands() {
+    if (!this.data) return [];
+    return this.hands;
+  }
+
   set state(newState) {
     return new Promise(resolve => {
       const oldState = this._state;

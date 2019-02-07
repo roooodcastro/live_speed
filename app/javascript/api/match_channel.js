@@ -21,7 +21,7 @@ export default {
       received(data) {
         switch (data.action) {
           case 'round_data':
-            gameTable.onApiReceiveData(data);
+            gameTable.onApiReceiveRoundData(data);
             break;
           case 'play_response':
             gameTable.onCardPlay(data);
