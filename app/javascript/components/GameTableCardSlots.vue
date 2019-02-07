@@ -25,10 +25,10 @@
 
     methods: {
       slotTransform(slot) {
-        let coordinates = new CardCoordinate(slot.pos);
-        let scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
-        let posTransform   = 'translate(' + coordinates.pxString + ')';
-        let rotTransform   = 'rotate(' + slot.rot + 'deg)';
+        const coordinates = new CardCoordinate(slot.pos);
+        const scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
+        const posTransform   = 'translate(' + coordinates.pxString + ')';
+        const rotTransform   = 'rotate(' + slot.rot + 'deg)';
         return [scaleTransform, posTransform, rotTransform].join(' ');
       },
     }

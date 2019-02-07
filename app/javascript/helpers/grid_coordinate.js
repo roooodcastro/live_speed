@@ -19,8 +19,8 @@ export default class GridCoordinate {
   // Transforms a pixel position array (in the format [x, y]) into a CardCoordinate.
   static fromPixelPosition(xPixels, yPixels) {
     // Basic untreated conversion
-    let coordX = ((xPixels - screen.centerPosition()[0]) / GridCoordinate.coordSize());
-    let coordY = ((yPixels - screen.centerPosition()[1]) / GridCoordinate.coordSize());
+    const coordX = ((xPixels - screen.centerPosition()[0]) / GridCoordinate.coordSize());
+    const coordY = ((yPixels - screen.centerPosition()[1]) / GridCoordinate.coordSize());
 
     return new GridCoordinate(coordX, coordY);
   }
@@ -30,14 +30,14 @@ export default class GridCoordinate {
   }
 
   get xPixels() {
-    let relativePos  = this.x * GridCoordinate.coordSize();
-    let screenCenter = screen.centerPosition()[0];
+    const relativePos  = this.x * GridCoordinate.coordSize();
+    const screenCenter = screen.centerPosition()[0];
     return screenCenter + relativePos;
   }
 
   get yPixels() {
-    let relativePos  = this.y * GridCoordinate.coordSize();
-    let screenCenter = screen.centerPosition()[1];
+    const relativePos  = this.y * GridCoordinate.coordSize();
+    const screenCenter = screen.centerPosition()[1];
     return screenCenter + relativePos;
   }
 

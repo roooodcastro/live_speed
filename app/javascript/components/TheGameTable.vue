@@ -87,10 +87,10 @@
 
     data() {
       return {
-        api:           undefined,
-        dragHold:      false,
-        isDragging:    undefined,
-        controller:    undefined
+        api:        undefined,
+        dragHold:   false,
+        isDragging: undefined,
+        controller: undefined
       };
     },
 
@@ -115,9 +115,9 @@
 
       onCardPlay(response) {
         if (response.success) {
-          let cardIndex           = response.card_index;
-          let playerHandComponent = this.playerHandComponent(response.player_id);
-          let card                = playerHandComponent.handCards[cardIndex];
+          const cardIndex           = response.card_index;
+          const playerHandComponent = this.playerHandComponent(response.player_id);
+          const card                = playerHandComponent.handCards[cardIndex];
           playerHandComponent.removeCard(card)
             .then(() => this.centerPile.place(response.card_data, response.pile_index))
             .then(() => playerHandComponent.pullFromDraw(cardIndex));
@@ -155,7 +155,7 @@
       },
 
       dragStart(ev) {
-        let card = ev.target.__vue__;
+        const card = ev.target.__vue__;
         if (this.isPlayerCard(card) && this.state === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
@@ -166,7 +166,7 @@
       dragEnd() {
         this.dragHold = false;
         if (this.isDragging) {
-          let card      = this.isDragging;
+          const card    = this.isDragging;
           this.dragHold = true;
           if (this.centerPile.isCardOverLeftPile(card)) {
             this.playCard(card, 0);
@@ -186,7 +186,7 @@
       },
 
       playCard(card, pileIndex) {
-        let cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
+        const cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
         this.submitPlay(cardIndex, pileIndex);
       },
 

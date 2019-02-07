@@ -10,7 +10,7 @@
   export default {
     computed: {
       transform() {
-        let coordinates = new GridCoordinate(this.pos, 1);
+        const coordinates = new GridCoordinate(this.pos, 1);
         return 'translate(' + coordinates.pxString + ')';
       }
     },

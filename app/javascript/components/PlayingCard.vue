@@ -31,9 +31,9 @@
       },
 
       transform() {
-        let scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
-        let posTransform   = 'translate(' + this.currentPosition.pxString + ')';
-        let rotTransform   = 'rotate(' + this.rotation + 'deg)';
+        const scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
+        const posTransform   = 'translate(' + this.currentPosition.pxString + ')';
+        const rotTransform   = 'rotate(' + this.rotation + 'deg)';
         return [scaleTransform, posTransform, rotTransform].join(' ');
       },
 

@@ -58,7 +58,7 @@
       cardYOffset: CardCoordinate.cardYOffset,
 
       centerPileRot(cardIndex) {
-        let randomRotation = ((Math.random() * 5) ** 2) - 10;
+        const randomRotation = ((Math.random() * 5) ** 2) - 10;
         return (cardIndex === 0) ? 0 : randomRotation;
       },
 
@@ -80,7 +80,7 @@
       },
 
       place(cardData, pileIndex) {
-        let newPile = this.centerPiles[pileIndex].concat([cardData]);
+        const newPile = this.centerPiles[pileIndex].concat([cardData]);
         this.centerPiles.splice(pileIndex, 1, newPile);
       },
 

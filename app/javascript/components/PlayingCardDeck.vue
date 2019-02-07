@@ -33,7 +33,7 @@
       },
 
       dealCard(cardIndex, cardInfo) {
-        let card = this.$children[cardIndex];
+        const card = this.$children[cardIndex];
         return new Promise((resolve) => {
           card.move(cardInfo.pos);
           card.rotate(cardInfo.rot);
@@ -47,7 +47,7 @@
       // Runs the initial card dealing animation.
       // roundData is used to determine how many cards must be dealt for each pile.
       dealCards(roundData) {
-        let dealer = (promise, info, index) => {
+        const dealer = (promise, info, index) => {
           return promise.then(() => {
             if (index > 0) info.pos[1] -= CARD_VERTICAL_SEPARATION;
             info.order = index;
@@ -55,7 +55,7 @@
           });
         };
 
-        let allCardsInfo = this.cardPositions.reduce((acc, info) => acc.concat(Array(info.count).fill(info)), []);
+        const allCardsInfo = this.cardPositions.reduce((acc, info) => acc.concat(Array(info.count).fill(info)), []);
         return allCardsInfo.reduce(dealer, Promise.resolve());
       }
     }

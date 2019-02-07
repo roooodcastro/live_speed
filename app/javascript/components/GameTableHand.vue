@@ -55,7 +55,7 @@
       },
 
       playerNamePos() {
-        let mult = (this.playerIndex === 0) ? 1 : -1;
+        const mult = (this.playerIndex === 0) ? 1 : -1;
         return [75 * mult, 60 * mult];
       }
     },
@@ -85,8 +85,8 @@
 
       removeCard(card) {
         return new Promise((resolve) => {
-          let cardIndex = this.handCards.indexOf(card);
-          let removed   = this.hand[cardIndex];
+          const cardIndex = this.handCards.indexOf(card);
+          const removed   = this.hand[cardIndex];
           this.hand.splice(cardIndex, 1, { r: 'e', s: 'e' });
           Vue.nextTick(() => resolve(removed));
         });
@@ -94,13 +94,13 @@
 
       pullFromDraw(cardIndex) {
         return new Promise((resolve) => {
-          let drawIndex = this.draw.length - 1;
-          let card      = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
+          const drawIndex = this.draw.length - 1;
+          const card      = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
           card.setOrder(100);
           card.move(this.handCardPos(cardIndex));
           card.flipUp();
           setTimeout(() => {
-            let newCard = this.draw.splice(this.draw.length - 1, 1);
+            const newCard = this.draw.splice(this.draw.length - 1, 1);
             if (newCard.length > 0) {
               this.hand.splice(cardIndex, 1, newCard[0]);
             }
@@ -110,16 +110,16 @@
       },
 
       handCardPos(cardIndex) {
-        let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = ((cardIndex * 32) - 80) * mult;
-        let posY = 95 * mult;
+        const mult = (this.playerIndex === 0) ? 1 : -1;
+        const posX = ((cardIndex * 32) - 80) * mult;
+        const posY = 95 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
-        let mult = (this.playerIndex === 0) ? 1 : -1;
-        let posX = 80 * mult;
-        let posY = (95 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
+        const mult = (this.playerIndex === 0) ? 1 : -1;
+        const posX = 80 * mult;
+        const posY = (95 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }
     }
