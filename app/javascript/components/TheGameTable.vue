@@ -175,8 +175,8 @@
       },
 
       onReplacementResponse(data) {
-        this.updateData(data);
-        // TODO: Make replacement animation, make replacement work
+        this.centerPileComponent.pullFromReplacements()
+          .then(() => this.updateData(data));
       },
 
       onDragStart(ev) {

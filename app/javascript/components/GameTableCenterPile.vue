@@ -3,7 +3,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[-20, -cardYOffset(index)]"
+                                :initial-position="leftCenterPilePosition(index)"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_left_' + index"
@@ -11,7 +11,7 @@
         <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
                                 :suit="card.s"
                                 :rank="card.r"
-                                :initial-position="[20, -cardYOffset(index)]"
+                                :initial-position="rightCenterPilePosition(index)"
                                 :initial-rotation="centerPileRot(index)"
                                 :initial-flipped="false"
                                 :ref="'center_right_' + index"
@@ -85,7 +85,30 @@
 
       onReplacementClick() {
         this.$emit('replacementClick');
-      }
+      },
+
+      leftCenterPilePosition(cardIndex) {
+        return [-20, -this.cardYOffset(cardIndex)];
+      },
+
+      rightCenterPilePosition(cardIndex) {
+        return [20, -this.cardYOffset(cardIndex)];
+      },
+
+      pullFromReplacements() {
+        return new Promise((resolve) => {
+          const repIndex = this.replacementPiles[0].length - 1;
+          const leftCard  = this.$refs['replacement_left_' + repIndex][0];
+          const rightCard  = this.$refs['replacement_right_' + repIndex][0];
+          leftCard.setOrder(100);
+          leftCard.move(this.leftCenterPilePosition(this.centerPiles[0].length));
+          leftCard.flipUp();
+          rightCard.setOrder(100);
+          rightCard.move(this.rightCenterPilePosition(this.centerPiles[1].length));
+          rightCard.flipUp();
+          setTimeout(() => resolve(), CARD_MOVE_DELAY);
+        });
+      },
     }
   };
 </script>
