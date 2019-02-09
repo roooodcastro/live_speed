@@ -38,6 +38,7 @@
 
 <script>
   import CardCoordinate from 'helpers/card_coordinate';
+  import { CARD_MOVE_DELAY } from 'helpers/constants';
 
   export default {
     computed: {

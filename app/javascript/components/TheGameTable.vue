@@ -152,9 +152,11 @@
         } else {
           console.log('Invalid play!');
         }
-        this.isDragging.endDrag();
-        this.isDragging = undefined;
-        this.dragHold   = false;
+        if (this.isDragging) {
+          this.isDragging.endDrag();
+          this.isDragging = undefined;
+          this.dragHold   = false;
+        }
       },
 
       onPlayerReady(data) {

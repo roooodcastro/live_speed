@@ -69,6 +69,10 @@ class Round < ApplicationRecord
     status == STATUS_PLAYING
   end
 
+  def reload_controller
+    @round_controller = controller_class.send(:from_h, cached_data)
+  end
+
   private
 
   def update_round!

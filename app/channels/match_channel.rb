@@ -15,21 +15,24 @@ class MatchChannel < ApplicationCable::Channel
   end
 
   def play_card(args)
+    @round.reload.reload_controller
     card_info   = args.symbolize_keys
-    played_card = @round.reload.play_card!(card_info)
+    played_card = @round.play_card!(card_info)
     response    = card_info.slice(*%i[card_index pile_index player_id]).merge(
-      success:       played_card.present?,
-      card_data:     played_card,
+      success:   played_card.present?,
+      card_data: played_card,
     )
     respond('play_response', response)
   end
 
   def play_replacement(args)
+    @round.reload.reload_controller
     played = @round.use_replacement_pile!(args['player_id'])
     respond('replacement_response', success: played)
   end
 
   def player_ready(args)
+    @round.reload.reload_controller
     @round.mark_player_as_ready(args['player_id'])
     respond('player_ready', player_id: args['player_id'], all_players_ready: @round.playing?)
   end
