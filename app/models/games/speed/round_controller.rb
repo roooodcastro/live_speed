@@ -68,15 +68,15 @@ module Games
       end
 
       def finished?
-        winner.present?
+        winner_id.present?
       end
 
       def unfinished?
         !finished?
       end
 
-      def winner
-        hands.find { |hand| hand.cards.empty? }
+      def winner_id
+        hands.find { |hand| hand.cards.empty? }&.player&.dig(:id)
       end
 
       def players_ready?
@@ -94,7 +94,7 @@ module Games
           replacement_piles:   array_to_h(replacement_piles),
           central_pile:        central_pile.to_h,
           can_use_replacement: can_use_replacement_piles?,
-          winner_id:           winner&.player&.dig(:id)
+          winner_id:           winner_id
         }
       end
 

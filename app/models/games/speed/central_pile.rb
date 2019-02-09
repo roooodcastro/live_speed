@@ -19,8 +19,8 @@ module Games
       def put_initial_cards(cards)
         raise "Exactly 2 cards, not #{cards.size}, are required to setup the central piles." unless cards.size == 2
 
-        @piles[0] << cards.first
-        @piles[1] << cards.last
+        @piles[0] << Speed::Card.from_h(cards.first.to_h)
+        @piles[1] << Speed::Card.from_h(cards.last.to_h)
       end
 
       def play_card(card, pile_index)

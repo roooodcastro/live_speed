@@ -81,7 +81,7 @@ class Round < ApplicationRecord
   end
 
   def check_for_winner
-    self.winner = round_controller.winner if round_controller.finished?
+    self.winner_id = round_controller.winner_id if round_controller.finished?
   end
 
   def controller_class

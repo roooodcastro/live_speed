@@ -95,7 +95,10 @@
       pullFromDraw(cardIndex) {
         return new Promise((resolve) => {
           const drawIndex = this.draw.length - 1;
-          const card      = this.$refs['draw_' + this.playerIndex + '_' + drawIndex][0];
+          const drawCards = this.$refs['draw_' + this.playerIndex + '_' + drawIndex];
+          if (!drawCards) return resolve();
+
+          const card = drawCards[0];
           card.setOrder(100);
           card.move(this.handCardPos(cardIndex));
           card.flipUp();

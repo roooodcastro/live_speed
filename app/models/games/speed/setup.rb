@@ -23,7 +23,7 @@ module Games
       end
 
       def deal_cards
-        hands.each { |hand| hand.draw_cards(deck) }
+        hands.each { |hand| hand.deal_cards(deck) }
         replacement_piles.each { |pile| pile.concat deck.draw_cards(amount: 5) }
         central_pile.put_initial_cards(deck.draw_cards(amount: 2))
       end

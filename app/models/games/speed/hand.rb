@@ -7,8 +7,8 @@ module Games
       attr_reader :player
 
       def self.from_h(hash)
-        cards       = hash[:cards].map { |card| Card.from_h(card) }
-        draw_pile   = hash[:draw_pile].map { |card| Card.from_h(card) }
+        cards       = hash[:cards].map { |card| Speed::Card.from_h(card) }
+        draw_pile   = hash[:draw_pile].map { |card| Speed::Card.from_h(card) }
         player_data = hash[:player]
         Hand.new(player: player_data, cards: cards, draw_pile: draw_pile)
       end
@@ -20,8 +20,8 @@ module Games
       end
 
       def deal_cards(deck)
-        @cards     = deck.draw_cards(amount: 5)
-        @draw_pile = deck.draw_cards(amount: 15)
+        @cards     = deck.draw_cards(amount: 5).map { |card| Speed::Card.from_h(card.to_h) }
+        @draw_pile = deck.draw_cards(amount: 15).map { |card| Speed::Card.from_h(card.to_h) }
       end
 
       def mark_ready_to_play
