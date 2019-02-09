@@ -1,10 +1,36 @@
 import Readiness from 'games/speed/readiness';
 
 export default class {
-  constructor(playerId, api, onStatusChange) {
+  static parseRoundData(roundData, playerId) {
+    roundData.hands   = this.sortHands(roundData.hands, playerId);
+    roundData.players = roundData.hands.map(hand => hand.player);
+    return roundData;
+  }
+
+  static sortHands(hands, playerId) {
+    return hands.sort((h1, h2) => {
+      if (h1.player.id === playerId) {
+        return -1;
+      } else if (h2.player.id === playerId) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  }
+
+  static state(roundData, playerId) {
+    if (!roundData || !roundData.hands) return 'loading';
+    if (!new Readiness(roundData.players, 'ready_to_play').allPlayersReady) return 'setup';
+    if (roundData.canUseReplacement) return 'staled_game';
+    if (roundData.winner) return (roundData.winnerId === playerId) ? 'win' : 'lose';
+
+    return 'game';
+  }
+
+  constructor(playerId, onStatusChange) {
     this.playerId       = playerId;
     this.onStatusChange = onStatusChange;
-    this.api            = api;
     this.readyToPlay    = new Readiness(this.players, 'ready_to_play');
     this.readyToReplace = new Readiness(this.players, 'ready_to_replace');
   }
@@ -37,7 +63,11 @@ export default class {
 
   get hands() {
     if (!this.data) return [];
-    return this.hands;
+    return this._hands;
+  }
+
+  get loaded() {
+    return !!this.data;
   }
 
   set state(newState) {
@@ -49,40 +79,14 @@ export default class {
     });
   }
 
-  loadData(roundData) {
+  updateData(roundData) {
     this.data              = roundData;
-    this.hands             = this.sortHands(roundData.hands);
+    this._hands            = roundData.hands;
     this.centerPiles       = roundData.central_pile.piles;
     this.replacementPiles  = roundData.replacement_piles;
     this.canUseReplacement = roundData.can_use_replacement;
     this.winnerId          = roundData.winner_id;
-  }
-
-  update(roundData) {
-    this.data              = roundData;
-    this.hands             = this.sortHands(roundData.hands);
-    this.centerPiles       = roundData.central_pile.piles;
-    this.replacementPiles  = roundData.replacement_piles;
-    this.canUseReplacement = roundData.can_use_replacement;
-    this.winnerId          = roundData.winner_id;
-  }
-
-  sortHands(hands) {
-    return hands.sort((h1, h2) => {
-      if (h1.player.id === this.playerId) {
-        return -1;
-      } else if (h2.player.id === this.playerId) {
-        return 1;
-      } else {
-        return 0;
-      }
-    });
-  }
-
-  setPlayerAsReady(playerId) {
-    this.hands.forEach(hand => {
-      if (hand.player.id === playerId) hand.player.ready = true;
-    });
-    if (this.allPlayersReady) this.state = 'game';
+    this.readyToPlay       = new Readiness(this.players, 'ready_to_play');
+    this.readyToReplace    = new Readiness(this.players, 'ready_to_replace');
   }
 }

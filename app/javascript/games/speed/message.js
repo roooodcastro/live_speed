@@ -1,11 +1,12 @@
 export default {
-  generate(round, playerId) {
-    switch (round.state) {
+  generate(round, state, playerId) {
+    switch (state) {
       case 'setup':
         return this.setupMessage(round, playerId);
       case 'game':
         return this.gameMessage(round, playerId);
     }
+    return '';
   },
 
   setupStateVars(round, playerId) {
@@ -13,7 +14,6 @@ export default {
     const opponentsReady = round.hands
       .filter(hand => hand.player.id !== playerId)
       .reduce((ready, hand) => ready && hand.player.ready, true);
-
     return { ready: playerReady, opponentsReady: opponentsReady };
   },
 

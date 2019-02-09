@@ -43,15 +43,13 @@
     computed: {
       allCards() {
         return this.$children;
-      },
-
-      canUseReplacement() {
-        return true;
       }
     },
 
-    data() {
-      return { centerPiles: [], replacementPiles: [] };
+    props: {
+      centerPiles:       { type: Array, required: true },
+      replacementPiles:  { type: Array, required: true },
+      canUseReplacement: { type: Boolean, required: true }
     },
 
     methods: {
@@ -60,11 +58,6 @@
       centerPileRot(cardIndex) {
         const randomRotation = ((Math.random() * 5) ** 2) - 10;
         return (cardIndex === 0) ? 0 : randomRotation;
-      },
-
-      setCardData(data) {
-        this.centerPiles      = data.central_pile.piles;
-        this.replacementPiles = data.replacement_piles;
       },
 
       cardOverPileIndex(card) {

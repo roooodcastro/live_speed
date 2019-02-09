@@ -22,7 +22,11 @@
                            :initial-hand="hand.cards"
                            :initial-draw="hand.draw_pile"/>
 
-            <GameTableCenterPile ref="centerPile" @replacementClick="onReplacementClick"/>
+            <GameTableCenterPile ref="centerPile"
+                                 @replacementClick="onReplacementClick"
+                                 :center-piles="centerPiles"
+                                 :replacement-piles="replacementPiles"
+                                 :can-use-replacement="canUseReplacement"/>
 
             <GameTableText :text="playerMessage"></GameTableText>
         </div>
@@ -58,26 +62,37 @@
 
     computed: {
       hands() {
-        return controller.hands;
-      },
-
-      centerPile() {
-        return this.$refs['centerPile'];
+        return this.roundData.hands;
       },
 
       state() {
-        if (!this.controller) return 'loading';
-        return this.controller.state;
+        return Round.state(this.roundData, this.playerId);
+      },
+
+      centerPileComponent() {
+        return this.$refs['centerPile'];
       },
 
       playerMessage() {
-        return Message.generate(this.round.data, this.playerId);
+        return Message.generate(this.roundData, this.state, this.playerId);
+      },
+
+      centerPiles() {
+        if (!this.roundData.central_pile) return [];
+        return this.roundData.central_pile.piles;
+      },
+
+      replacementPiles() {
+        return this.roundData.replacement_piles || [];
+      },
+
+      canUseReplacement() {
+        return this.roundData.can_use_replacement || false;
       }
     },
 
     mounted() {
-      this.api        = apiClient.subscribeToApi(this);
-      this.controller = new Round(this.playerId, this.api, this.onControllerStateChange);
+      this.api = apiClient.subscribeToApi(this);
     },
 
     props: {
@@ -90,8 +105,10 @@
         api:                 undefined,
         dragHold:            false,
         isDragging:          undefined,
-        controller:          undefined,
-        playedDealAnimation: false
+        controller:          new Round(this.playerId, this.onControllerStateChange),
+        playedDealAnimation: false,
+
+        roundData: {}
       };
     },
 
@@ -99,14 +116,10 @@
       onApiReceiveRoundData(data) {
         if (data.player_id !== this.playerId) return;
 
-        this.controller.loadData(data.round);
-        this.centerPile.setCardData(data.round);
+        this.updateData(data);
 
-        this.$refs['cardDeck'].dealCards(controller.data)
-          .then(() => {
-            this.playedDealAnimation = true;
-            if (this.controller.allPlayersReady) this.controller.state = 'game';
-          });
+        this.$refs['cardDeck'].dealCards(this.controller.data)
+          .then(() => this.playedDealAnimation = true);
       },
 
       onReadyClick() {
@@ -123,9 +136,9 @@
           const playerHandComponent = this.playerHandComponent(response.player_id);
           const card                = playerHandComponent.handCards[cardIndex];
           playerHandComponent.removeCard(card)
-            .then(() => this.centerPile.place(response.card_data, response.pile_index))
+            .then(() => this.centerPileComponent.place(response.card_data, response.pile_index))
             .then(() => playerHandComponent.pullFromDraw(cardIndex))
-            .then(() => this.controller.update(response.round));
+            .then(() => this.updateData(response));
 
           if (response.round.winner_id) {
             // TODO: Someone has won! Check if it was the player or the opponent and show the appropriate interface
@@ -145,7 +158,7 @@
       },
 
       onPlayerReady(data) {
-        this.controller.setPlayerAsReady(data.player_id);
+        this.updateData(data);
         this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
       },
 
@@ -162,11 +175,12 @@
       },
 
       onReplacementResponse(data) {
+        this.updateData(data);
         // TODO: Make replacement animation, make replacement work
       },
 
       onDragStart(ev) {
-        const card = ev.target.__vue__;
+        const card         = ev.target.__vue__;
         const isPlayerCard = this.playerHandComponent(this.playerId).handCards.includes(card);
         if (isPlayerCard && this.state === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
@@ -186,7 +200,7 @@
         if (this.isDragging) {
           this.dragHold   = true;
           const card      = this.isDragging;
-          const pileIndex = this.centerPile.cardOverPileIndex(card);
+          const pileIndex = this.centerPileComponent.cardOverPileIndex(card);
 
           if (pileIndex >= 0) return this.playCard(card, pileIndex);
 
@@ -202,6 +216,11 @@
 
       playerHandComponent(playerId) {
         return this.$refs['hand_' + playerId][0];
+      },
+
+      updateData(data) {
+        this.roundData = Round.parseRoundData(data.round, this.playerId);
+        this.controller.updateData(data.round);
       }
     }
   };

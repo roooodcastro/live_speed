@@ -25,7 +25,7 @@ module Games
       end
 
       def mark_ready_to_play
-        player[:ready] = true
+        player[:ready_to_play] = true
       end
 
       def mark_ready_to_play_replacement(ready = true)

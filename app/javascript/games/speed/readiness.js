@@ -1,8 +1,7 @@
 export default class {
   // players is assumed to be an array containing either 2 or 4 players, having the first player (index 0) always be
   // this browser client's player.
-  constructor(data, players, name) {
-    this.data     = data;
+  constructor(players, name) {
     this.players  = players;
     this.name     = name;
   }
@@ -16,14 +15,14 @@ export default class {
   }
 
   get playerReady() {
-    return player[name];
+    return this.player[this.name];
   }
 
   get opponentsReady() {
-    return opponents.reduce((ready, opponent) => ready && opponent[name], true);
+    return this.opponents.reduce((ready, opponent) => ready && opponent[this.name], true);
   }
 
   get allPlayersReady() {
-    return this.isPlayerReady() && this.areOpponentsReady();
+    return this.playerReady && this.opponentsReady;
   }
 }

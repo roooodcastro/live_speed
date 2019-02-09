@@ -40,6 +40,7 @@ class Round < ApplicationRecord
     return false unless players_ready
     return false unless round_controller.use_replacement_pile
 
+    true
     # update_round!
   end
 

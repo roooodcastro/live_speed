@@ -11,7 +11,7 @@ class MatchChannel < ApplicationCable::Channel
   end
 
   def fetch_data
-    respond('round_data', player_id: player_id, round: @round.data.as_json)
+    respond('round_data', player_id: player_id)
   end
 
   def play_card(args)
@@ -20,7 +20,6 @@ class MatchChannel < ApplicationCable::Channel
     response    = card_info.slice(*%i[card_index pile_index player_id]).merge(
       success:       played_card.present?,
       card_data:     played_card,
-      round:         @round.as_json
     )
     respond('play_response', response)
   end
@@ -38,6 +37,6 @@ class MatchChannel < ApplicationCable::Channel
   private
 
   def respond(action, data)
-    ActionCable.server.broadcast "round_#{@round.id}", { action: action }.merge(data)
+    ActionCable.server.broadcast "round_#{@round.id}", { action: action, round: @round.data.as_json }.merge(data)
   end
 end

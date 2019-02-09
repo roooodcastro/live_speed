@@ -80,7 +80,7 @@ module Games
       end
 
       def players_ready?
-        hands.map { |hand| hand.player[:ready] }.all?
+        hands.map { |hand| hand.player[:ready_to_play] }.all?
       end
 
       def players_ready_for_replacement?
