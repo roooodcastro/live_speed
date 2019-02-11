@@ -141,7 +141,6 @@
             .then(() => this.updateData(response));
 
           if (response.round.winner_id) {
-            // TODO: Someone has won! Check if it was the player or the opponent and show the appropriate interface
             const winnerId = response.round.winner_id;
             if (winnerId === this.playerId) {
               console.log('You won!');

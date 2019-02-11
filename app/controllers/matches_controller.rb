@@ -35,6 +35,13 @@ class MatchesController < ApplicationController
     respond_with(@match)
   end
 
+  def join
+    match = params[:match_id].present? ? Match.find(params[:match_id]) : Match.unmatched.sample
+    if match.add_player(current_player)
+    else
+    end
+  end
+
   def destroy
     @match.destroy
     respond_with(@match)

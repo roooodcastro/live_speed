@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# TODO: Rename to Match, use Redis to store round data while playing, add state to round.
 class Match < ApplicationRecord
   belongs_to :winner, class_name: 'Player', optional: true
   has_many :rounds, dependent: :destroy
@@ -8,7 +7,21 @@ class Match < ApplicationRecord
   has_many :players, through: :match_players
 
   validates :num_rounds, presence: true, numericality: true
-  validates :players, length: { in: 2..4 }
+  validates :players, length: { in: 1..4 }
+
+  # TODO: Make this configurable, when creating a match, the player can choose the number of opponents
+  NUMBER_OF_PLAYERS = 2
+
+  scope :unmatched, lambda {
+    joins(:players)
+      .group('matches.id')
+      .having(Arel.sql("count(players.id) < #{NUMBER_OF_PLAYERS}"))
+  }
+
+  def add_player!(player)
+    players << player
+    save
+  end
 
   def current_round
     return rounds.last if rounds.last&.unfinished?
