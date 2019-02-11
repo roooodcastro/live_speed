@@ -1,0 +1,15 @@
+<h1>Create new Match</h1>
+
+<%= form_with(model: @match) do |f| %>
+  <p>
+    <%= f.label :num_players, 'Number of Players' %>
+    <%= f.text_field :num_players %>
+  </p>
+  <p>
+    <%= f.label :num_rounds, 'Number of Rounds' %>
+    <%= f.text_field :num_rounds %>
+  </p>
+  <p>
+    <%= f.button 'Create Match' %>
+  </p>
+<% end %>

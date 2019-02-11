@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
-  before_action :set_match, only: %i[show edit update]
+  before_action :set_match, only: %i[show play edit update]
   before_action :require_login
 
   respond_to :html, :json
@@ -16,6 +16,12 @@ class MatchesController < ApplicationController
     respond_with(@match)
   end
 
+  def play
+    return redirect_to @match unless @match.can_play?
+
+    respond_with(@match)
+  end
+
   def edit
     respond_with(@match)
   end
@@ -26,12 +32,12 @@ class MatchesController < ApplicationController
   end
 
   def create
-    @match = Match.create(match_params)
+    @match = current_player.matches.create(match_params)
     respond_with(@match)
   end
 
   def update
-    @match.send(match_params[:action])
+    @match.update(match_params)
     respond_with(@match)
   end
 
@@ -54,6 +60,6 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params[:match].permit(:num_rounds, :action)
+    params[:match].permit(:num_rounds, :num_players)
   end
 end

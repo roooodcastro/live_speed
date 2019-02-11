@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_13_174822) do
+ActiveRecord::Schema.define(version: 2019_02_11_225717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_01_13_174822) do
     t.uuid "winner_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "num_players", default: 2, null: false
     t.index ["winner_id"], name: "index_matches_on_winner_id"
   end
 

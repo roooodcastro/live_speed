@@ -5,7 +5,11 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  resources :matches
+  resources :matches do
+    collection { post :join }
+    member { get :play }
+  end
+
   resources :rounds, except: :index
   resource :sessions, only: %i[new create destroy]
 end
