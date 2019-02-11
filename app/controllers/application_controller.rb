@@ -11,10 +11,14 @@ class ApplicationController < ActionController::Base
     session[:player_id].present?
   end
 
-  def current_player
-    return nil unless session[:player_id]
+  def current_player_id
+    session[:player_id]
+  end
 
-    Player.find(session[:player_id])
+  def current_player
+    return nil unless current_player_id
+
+    Player.find(current_player_id)
   end
 
   def require_login
