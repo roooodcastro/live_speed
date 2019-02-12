@@ -1,0 +1,7 @@
+<h1>Matches waiting for more players:</h1>
+
+<ul>
+  <% @matches.each do |match| %>
+    <%= link_to match.description, join_matches_path(match_id: match.id), method: :post %>
+  <% end %>
+</ul>

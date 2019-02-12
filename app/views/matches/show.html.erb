@@ -1,5 +1,9 @@
 <h1>Match <%= @match.id %></h1>
 
+<% if @match.can_play? %>
+  <%= link_to 'Play Match!', play_match_path(@match) %>
+<% end %>
+
 <h3>Players (<%= @match.players.size %>/<%= @match.num_players %>):</h3>
 <ol>
   <% @match.players.each do |player| %>

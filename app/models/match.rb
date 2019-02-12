@@ -18,7 +18,6 @@ class Match < ApplicationRecord
 
   def add_player!(player)
     players << player
-    save
   end
 
   def current_round
@@ -56,6 +55,10 @@ class Match < ApplicationRecord
 
   def can_play?
     match_players.size == num_players && !winner_id
+  end
+
+  def description
+    "Best of #{num_rounds} rounds, #{players.size}/#{num_players} players"
   end
 
   def rules

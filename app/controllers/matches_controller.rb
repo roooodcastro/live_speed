@@ -43,8 +43,11 @@ class MatchesController < ApplicationController
 
   def join
     match = params[:match_id].present? ? Match.find(params[:match_id]) : Match.unmatched.sample
-    if match.add_player(current_player)
+    if match.add_player!(current_player)
+      redirect_to match
     else
+      flash[:error] = 'Cannot join match!'
+      redirect_to lobby_path
     end
   end
 

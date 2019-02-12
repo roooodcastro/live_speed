@@ -5,6 +5,8 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+  resource :lobby, only: [:show], controller: :lobby
+
   resources :matches do
     collection { post :join }
     member { get :play }
