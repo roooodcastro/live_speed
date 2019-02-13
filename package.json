@@ -4,6 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "3.5",
     "axios": "^0.18.0",
+    "eslint": "^5.13.0",
+    "eslint-plugin-vue": "^5.1.0",
     "normalize.css": "^8.0.1",
     "vue": "^2.5.22",
     "vue-loader": "14.2.2",

@@ -29,7 +29,9 @@ end
 
 group :development do
   gem 'awesome_print', require: 'ap'
+  gem 'bundle-audit', require: false
   gem 'listen', '>= 3.0.5', '< 3.2'
-  gem 'rubocop'
+  gem 'overcommit', require: false
+  gem 'rubocop', require: false
   gem 'web-console', '>= 3.3.0'
 end
