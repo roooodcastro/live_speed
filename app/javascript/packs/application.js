@@ -39,7 +39,7 @@ Vue.component('livespeed-text', Text);
 document.addEventListener('turbolinks:load', () => {
   window.vueApp = new Vue({
     el:         '[data-behaviour="vue"]',
-    data:       {},
-    components: { TheGameTable }
+    components: { TheGameTable },
+    data:       {}
   });
 });

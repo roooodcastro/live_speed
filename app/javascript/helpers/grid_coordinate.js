@@ -26,7 +26,7 @@ export default class GridCoordinate {
   }
 
   get pxString() {
-    return 'calc(' + this.xPixels + 'px - 50%),' + 'calc(' + this.yPixels + 'px - 50%)';
+    return 'calc(' + this.xPixels + 'px - 50%),calc(' + this.yPixels + 'px - 50%)';
   }
 
   get xPixels() {

@@ -1,5 +1,6 @@
 export default {
   play(audioName, volume = 1.0) {
+    return volume;
     // const audio  = new Audio(audioName);
     // audio.volume = volume;
     // return audio.play();
@@ -12,9 +13,9 @@ export default {
   },
 
   cardPlaceAudios() {
-    const files = Array.from(Array(4).keys()).forEach((i) => 'assets/cardPlace' + i + '.wav');
-    return files.map((fileName) => {
-      return newAudio(fileName);
-    });
+    // const files = Array.from(Array(4).keys()).forEach((i) => 'assets/cardPlace' + i + '.wav');
+    // return files.map((fileName) => {
+    //   return newAudio(fileName);
+    // });
   }
 };
