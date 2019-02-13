@@ -13,41 +13,21 @@ module.exports = {
     App: true
   },
   rules: {
-    'no-var': 'error',
-    'switch-colon-spacing': 'error',
-    'object-curly-spacing': ['error', 'always'],
-    'no-tabs': 'error',
-    'comma-spacing': 'error',
-    'comma-dangle': 'error',
-    'keyword-spacing': 'error',
-    'brace-style': 'error',
-    'eol-last': 'error',
-    'no-undefined': 'error',
-    'no-with': 'error',
-    'no-useless-return': 'error',
-    'no-eq-null': 'error',
-    'eqeqeq': 'error',
-    'complexity': 'error',
-    //'class-methods-use-this': 'error',
-    'no-useless-concat': 'error',
     'block-scoped-var': 'error',
-    'no-lonely-if': 'error',
-    'no-whitespace-before-property': 'error',
-    'no-return-assign': ['error', 'always'],
-    'space-before-blocks': 'error',
-    'no-console': 'warn',
-    'yoda': 'error',
+    'brace-style': 'error',
+    'comma-dangle': 'error',
+    'comma-spacing': 'error',
+    'complexity': 'error',
+    'eol-last': 'error',
+    'eqeqeq': 'error',
     'init-declarations': ['error', 'always'],
-    'space-before-function-paren': ['error', {
-      anonymous: 'always',
-      named: 'never',
-      asyncArrow: 'always'
+    'keyword-spacing': 'error',
+    'max-len': ['error', {
+      code: 120
     }],
-    'space-in-parens': ['error', 'never'],
-    'space-infix-ops': 'error',
-    'spaced-comment': ['error', 'always', {
-      exceptions: ['-', '+']
-    }],
+    'no-console': 'warn',
+    'no-eq-null': 'error',
+    'no-lonely-if': 'error',
     'no-multi-spaces': ['error', {
       exceptions: {
         'VariableDeclarator': true,
@@ -56,12 +36,29 @@ module.exports = {
         'AssignmentExpression': true
       }
     }],
-    'max-len': ['error', {
-      code: 120
-    }],
+    'no-return-assign': ['error', 'always'],
+    'no-tabs': 'error',
+    'no-var': 'error',
+    'no-undefined': 'error',
+    'no-useless-concat': 'error',
+    'no-useless-return': 'error',
+    'no-with': 'error',
+    'no-whitespace-before-property': 'error',
+    'object-curly-spacing': ['error', 'always'],
     'quotes': ["error", "single", {
       "allowTemplateLiterals": true
-    }]
+    }],
+    'space-before-blocks': 'error',
+    'space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'never',
+      asyncArrow: 'always'
+    }],
+    'space-in-parens': ['error', 'never'],
+    'space-infix-ops': 'error',
+    'spaced-comment': ['error', 'always', { exceptions: ['-', '+'] }],
+    'switch-colon-spacing': 'error',
+    'yoda': 'error'
   },
   env: {
     browser: true,
