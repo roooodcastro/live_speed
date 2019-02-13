@@ -54,3 +54,8 @@ PreCommit:
 
   YarnCheck:
     enabled: true
+
+PrePush:
+  Brakeman:
+    enabled: true
+    on_fail: warn
