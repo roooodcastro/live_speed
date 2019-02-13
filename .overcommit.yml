@@ -17,6 +17,19 @@
 
 verify_signatures: false
 
+CommitMsg:
+  CapitalizedSubject:
+    enabled: true
+
+  EmptyMessage:
+    enabled: true
+
+  TrailingPeriod:
+    enabled: true
+
+  TextWidth:
+    enabled: false
+
 PreCommit:
   ALL:
     exclude: &default_excludes
