@@ -18,9 +18,9 @@ class MatchChannel < ApplicationCable::Channel
     @round.reload.reload_controller
     card_info   = args.symbolize_keys
     played_card = @round.play_card!(card_info)
-    response    = card_info.slice(*%i[card_index pile_index player_id]).merge(
+    response    = card_info.slice(:card_index, :pile_index, :player_id).merge(
       success:   played_card.present?,
-      card_data: played_card,
+      card_data: played_card
     )
     respond('play_response', response)
   end

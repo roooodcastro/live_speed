@@ -13,7 +13,7 @@ class Match < ApplicationRecord
   scope :unmatched, lambda {
     joins(:players)
       .group('matches.id')
-      .having(Arel.sql("count(players.id) < num_players"))
+      .having(Arel.sql('count(players.id) < num_players'))
   }
 
   def add_player!(player)
@@ -21,7 +21,7 @@ class Match < ApplicationRecord
   end
 
   def current_round
-    return rounds.last
+    rounds.last
     # return rounds.last if rounds.last&.unfinished?
 
     # create_next_round!
@@ -40,10 +40,10 @@ class Match < ApplicationRecord
 
   def winner_id
     round_winners = rounds.pluck(:winner_id)
-                      .group_by(&:itself)
-                      .transform_values(&:size)
-                      .except(nil)
-    most_round_wins = round_winners.sort_by(&:last).last
+                          .group_by(&:itself)
+                          .transform_values(&:size)
+                          .except(nil)
+    most_round_wins = round_winners.max_by(&:last)
     return unless most_round_wins # If no one has won a round yet
 
     most_round_wins.first if most_round_wins.last > num_rounds / 2
