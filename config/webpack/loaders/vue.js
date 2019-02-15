@@ -10,4 +10,4 @@ module.exports = {
     loader: 'vue-loader',
     options: { extractCSS }
   }]
-}
+};

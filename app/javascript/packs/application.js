@@ -15,31 +15,14 @@ import Vue               from 'vue/dist/vue.esm';
 
 Vue.use(TurbolinksAdapter);
 
-import PlayingCard     from '../components/PlayingCard';
-import TheGameTable    from '../components/TheGameTable';
+import PlayerNameInput from 'components/players/PlayerNameInput';
 
-import Arrow           from '../components/ui/Arrow';
-import Button          from '../components/ui/Button';
-import LoadingEllipsis from '../components/ui/LoadingEllipsis';
-import LoadingSuits    from '../components/ui/LoadingSuits';
-import Overlay         from '../components/ui/Overlay';
-import Text            from '../components/ui/Text';
+Vue.component('player-name-input', PlayerNameInput);
 
-Vue.component('livespeed-playing-card', PlayingCard);
-Vue.component('livespeed-gametable', TheGameTable);
-
-// Common UI components
-Vue.component('livespeed-arrow', Arrow);
-Vue.component('livespeed-button', Button);
-Vue.component('livespeed-loading-ellipsis', LoadingEllipsis);
-Vue.component('livespeed-loading-suits', LoadingSuits);
-Vue.component('livespeed-overlay', Overlay);
-Vue.component('livespeed-text', Text);
-
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({
     el:         '[data-behaviour="vue"]',
-    components: { TheGameTable },
+    components: {},
     data:       {}
   });
 });

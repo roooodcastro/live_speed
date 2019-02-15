@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     member { get :play }
   end
 
+  resources :players, only: %i[new create]
+  resources :player_name_validators, only: :create
   resources :rounds, except: :index
   resource :sessions, only: %i[new create destroy]
 end

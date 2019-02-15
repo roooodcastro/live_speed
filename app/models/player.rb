@@ -14,4 +14,12 @@ class Player < ApplicationRecord
 
     own_name
   end
+
+  # Needs to check if there's another Player or User with this name.
+  def self.validate_name(name)
+    return '' if name.blank? # Not valid, but don't show any error
+    return 'Name is too short, minimum size: 4 characters' if name.size < 4
+    return "Name \"#{name}\" is already taken" if Player.exists?(own_name: name)
+    return "Name \"#{name}\" is already taken" if User.exists?(name: name)
+  end
 end

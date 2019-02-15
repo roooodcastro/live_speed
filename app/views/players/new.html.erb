@@ -1,0 +1,5 @@
+<h1>Identify yourself:</h1>
+
+<%= form_with(model: @player, local: true) do |f| %>
+  <%= vue_component('player-name-input', props: { initialName: @player.name }) %>
+<% end %>
