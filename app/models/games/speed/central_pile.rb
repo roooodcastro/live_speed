@@ -38,6 +38,11 @@ module Games
         piles.map(&:last)
       end
 
+      # Used to refill the replacement piles after they run out of cards. Also returns the removed cards
+      def remove_all_but_top_cards
+        piles.map { |pile| pile.slice!(0, pile.size - 1) }
+      end
+
       def to_h
         {
           piles: [

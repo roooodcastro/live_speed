@@ -22,8 +22,7 @@ module Games
 
       # Can only use the replacement piles if there's no possible plays left for both players.
       def can_use_replacement_piles?
-        no_plays = hands.product(central_pile.top_cards).map { |hand, card| hand.possible_play?(card) }.none?
-        no_plays && replacement_piles[0].present?
+        hands.product(central_pile.top_cards).map { |hand, card| hand.possible_play?(card) }.none?
       end
 
       def mark_player_as_ready(player_id)
@@ -37,7 +36,7 @@ module Games
       def use_replacement_pile
         return false unless can_use_replacement_piles?
 
-        central_pile.put_initial_cards([replacement_piles[0].pop, replacement_piles[1].pop])
+        central_pile.put_initial_cards(pop_replacement_cards)
 
         # Mark the players as not ready to play replacement, so the next time the replacement piles can be played,
         # they will have to confirm it again.
@@ -102,6 +101,18 @@ module Games
 
       def player_hand(player_id)
         hands.find { |hand| hand.player[:id] == player_id }
+      end
+
+      # Pops and returns 2 replacement cards, one from each pile. If the piles are empty, get all cards from the
+      # central piles - except the top cards - and place them in the replacement piles, shuffled.
+      def pop_replacement_cards
+        refill_replacement_piles if replacement_piles[0].blank?
+        [replacement_piles[0].pop, replacement_piles[1].pop]
+      end
+
+      def refill_replacement_piles
+        new_replacement_cards = central_pile.remove_all_but_top_cards.map(&:shuffle)
+        new_replacement_cards.each_with_index { |new_cards, index| replacement_piles[index] += new_cards }
       end
     end
   end

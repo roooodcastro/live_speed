@@ -109,6 +109,7 @@
       },
 
       pullFromReplacements() {
+        // TODO: Detect if there are no cards left so we will need to refill it with the center cards.
         return new Promise((resolve) => {
           const repIndex = this.replacementPiles[0].length - 1;
           const leftCard  = this.$refs['replacement_left_' + repIndex][0];
