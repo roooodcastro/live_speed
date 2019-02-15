@@ -1,10 +1,10 @@
 <template>
-    <div class="livespeed-overlay">
-        <div class="livespeed-overlay-back"></div>
-        <div class="livespeed-overlay-front">
-            <slot></slot>
-        </div>
+  <div class="livespeed-overlay">
+    <div class="livespeed-overlay-back" />
+    <div class="livespeed-overlay-front">
+      <slot />
     </div>
+  </div>
 </template>
 
 <script>

@@ -1,11 +1,22 @@
 <template>
-    <p class="livespeed-text" :style="style"><slot></slot></p>
+  <p
+    class="livespeed-text"
+    :style="style"
+  >
+    <slot />
+  </p>
 </template>
 
 <script>
   import GridCoordinate from 'helpers/grid_coordinate';
 
   export default {
+
+    props: {
+      font: { type: String, default: 'Barbaro' },
+      pos: { type: Array, required: true },
+      size: { type: Number, default: 2 }
+    },
     computed: {
       transform() {
         const coordinates = new GridCoordinate(this.pos, 1);
@@ -20,15 +31,9 @@
         return {
           transform: this.transform,
           fontFamily: this.font + ', Helvetica, Arial, sans-serif',
-          fontSize: this.fontSize,
+          fontSize: this.fontSize
         }
       }
-    },
-
-    props: {
-      font: { type: String, default: 'Barbaro' },
-      pos: { type: Array, required: true },
-      size: { type: Number, default: 2 }
     }
   };
 </script>

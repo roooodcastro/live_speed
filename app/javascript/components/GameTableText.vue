@@ -1,11 +1,17 @@
 <template>
-    <div class="game-table-gametext">{{ text }}</div>
+  <div class="game-table-gametext">
+    {{ text }}
+  </div>
 </template>
 
 <script>
   import screen from 'helpers/screen';
 
   export default {
+
+    props: {
+      text: { type: String, required: true }
+    },
     computed: {
       width() {
         return screen.smallerScreenSize() + 'px';
@@ -16,10 +22,6 @@
           width: this.width
         };
       }
-    },
-
-    props: {
-      text: { type: String, required: true }
     }
   };
 </script>

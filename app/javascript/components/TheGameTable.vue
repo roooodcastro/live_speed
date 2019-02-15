@@ -1,42 +1,56 @@
 <template>
-    <div id="game_table" class="game-table-container">
-        <div v-show="state === 'loading'">
-            <livespeed-loading-suits/>
-        </div>
-
-        <div v-show="!playedDealAnimation">
-            <playing-card-deck ref="cardDeck"/>
-        </div>
-
-        <div v-show="playedDealAnimation"
-             class="game-table-gamearea"
-             @mousedown="onDragStart"
-             @mouseup="onDragEnd"
-             @mousemove="onDragMove">
-
-            <GameTableHand v-for="(hand, index) in hands"
-                           :ref="'hand_' + hand.player.id"
-                           :key="'hand_' + hand.player.id"
-                           :player-index="index"
-                           :player="hand.player"
-                           :initial-hand="hand.cards"
-                           :initial-draw="hand.draw_pile"/>
-
-            <GameTableCenterPile ref="centerPile"
-                                 @replacementClick="onReplacementClick"
-                                 :center-piles="centerPiles"
-                                 :replacement-piles="replacementPiles"
-                                 :can-use-replacement="canUseReplacement"/>
-
-            <GameTableText :text="playerMessage"></GameTableText>
-        </div>
-
-        <div v-show="state === 'setup' && playedDealAnimation">
-            <pre-game-overlay @playerReady="onReadyClick" ref="preGameOverlay"/>
-        </div>
-
-        <GameTableCardSlots v-show="state !== 'loading'" :number-of-players="2"></GameTableCardSlots>
+  <div
+    id="game_table"
+    class="game-table-container"
+  >
+    <div v-show="state === 'loading'">
+      <livespeed-loading-suits />
     </div>
+
+    <div v-show="!playedDealAnimation">
+      <playing-card-deck ref="cardDeck" />
+    </div>
+
+    <div
+      v-show="playedDealAnimation"
+      class="game-table-gamearea"
+      @mousedown="onDragStart"
+      @mouseup="onDragEnd"
+      @mousemove="onDragMove"
+    >
+      <GameTableHand
+        v-for="(hand, index) in hands"
+        :ref="'hand_' + hand.player.id"
+        :key="'hand_' + hand.player.id"
+        :player-index="index"
+        :player="hand.player"
+        :initial-hand="hand.cards"
+        :initial-draw="hand.draw_pile"
+      />
+
+      <GameTableCenterPile
+        ref="centerPile"
+        :center-piles="centerPiles"
+        :replacement-piles="replacementPiles"
+        :can-use-replacement="canUseReplacement"
+        @replacementClick="onReplacementClick"
+      />
+
+      <GameTableText :text="playerMessage" />
+    </div>
+
+    <div v-show="state === 'setup' && playedDealAnimation">
+      <pre-game-overlay
+        ref="preGameOverlay"
+        @playerReady="onReadyClick"
+      />
+    </div>
+
+    <GameTableCardSlots
+      v-show="state !== 'loading'"
+      :number-of-players="2"
+    />
+  </div>
 </template>
 
 <script>
@@ -58,6 +72,23 @@
       GameTableCardSlots,
       PlayingCardDeck,
       PreGameOverlay
+    },
+
+    props: {
+      roundId:  { type: String, required: true },
+      playerId: { type: String, required: true }
+    },
+
+    data() {
+      return {
+        api:                 null,
+        dragHold:            false,
+        isDragging:          null,
+        controller:          new Round(this.playerId, this.onControllerStateChange),
+        playedDealAnimation: false,
+
+        roundData: {}
+      };
     },
 
     computed: {
@@ -95,23 +126,6 @@
       this.api = apiClient.subscribeToApi(this);
     },
 
-    props: {
-      roundId:  { type: String, required: true },
-      playerId: { type: String, required: true }
-    },
-
-    data() {
-      return {
-        api:                 undefined,
-        dragHold:            false,
-        isDragging:          undefined,
-        controller:          new Round(this.playerId, this.onControllerStateChange),
-        playedDealAnimation: false,
-
-        roundData: {}
-      };
-    },
-
     methods: {
       onApiReceiveRoundData(data) {
         if (data.player_id !== this.playerId) return;
@@ -119,7 +133,9 @@
         this.updateData(data);
 
         this.$refs['cardDeck'].dealCards(this.controller.data)
-          .then(() => this.playedDealAnimation = true);
+          .then(function () {
+            this.playedDealAnimation = true;
+          });
       },
 
       onReadyClick() {
@@ -153,7 +169,7 @@
         }
         if (this.isDragging) {
           this.isDragging.endDrag();
-          this.isDragging = undefined;
+          this.isDragging = null;
           this.dragHold   = false;
         }
       },
@@ -206,7 +222,7 @@
           if (pileIndex >= 0) return this.playCard(card, pileIndex);
 
           this.isDragging.endDrag();
-          this.isDragging = undefined;
+          this.isDragging = null;
         }
       },
 

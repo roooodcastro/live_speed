@@ -1,21 +1,25 @@
 <template>
-    <span class="livespeed-loading-ellipsis">{{ text }}</span>
+  <span class="livespeed-loading-ellipsis">
+    {{ text }}
+  </span>
 </template>
 
 <script>
     export default {
+
+      data() {
+        return { dotCount: 0, intervalId: -1 };
+      },
       computed: {
         text() {
           return '.'.repeat(Math.min(this.dotCount, 3));
         }
       },
 
-      data() {
-        return { dotCount: 0, intervalId: -1 };
-      },
-
       mounted() {
-        this.intervalId = setInterval(() => this.dotCount = (this.dotCount + 1) % 5, 200);
+        this.intervalId = setInterval(function () {
+          this.dotCount = (this.dotCount + 1) % 5, 200;
+        });
       },
 
       beforeDestroy() {

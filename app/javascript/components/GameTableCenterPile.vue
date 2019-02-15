@@ -1,39 +1,51 @@
 <template>
-    <div class="game-table-hand">
-        <livespeed-playing-card v-for="(card, index) in centerPiles[0]"
-                                :suit="card.s"
-                                :rank="card.r"
-                                :initial-position="leftCenterPilePosition(index)"
-                                :initial-rotation="centerPileRot(index)"
-                                :initial-flipped="false"
-                                :ref="'center_left_' + index"
-                                :key="'center_left_' + index"/>
-        <livespeed-playing-card v-for="(card, index) in centerPiles[1]"
-                                :suit="card.s"
-                                :rank="card.r"
-                                :initial-position="rightCenterPilePosition(index)"
-                                :initial-rotation="centerPileRot(index)"
-                                :initial-flipped="false"
-                                :ref="'center_right_' + index"
-                                :key="'center_right_' + index"/>
-        <livespeed-playing-card v-for="(card, index) in replacementPiles[0]"
-                                :rank="card.r"
-                                :suit="card.s"
-                                :initial-position="[-80, -cardYOffset(index)]"
-                                :ref="'replacement_left_' + index"
-                                :key="'replacement_left_' + index"/>
-        <livespeed-playing-card v-for="(card, index) in replacementPiles[1]"
-                                :is-featured="index === 0 && canUseReplacement"
-                                :is-active="isReplacementCardActive(index)"
-                                :rank="card.r"
-                                :suit="card.s"
-                                :initial-position="[80, -cardYOffset(index)]"
-                                :ref="'replacement_right_' + index"
-                                :key="'replacement_right_' + index"
-                                @click="onReplacementClick"/>
+  <div class="game-table-hand">
+    <livespeed-playing-card
+      v-for="(card, index) in centerPiles[0]"
+      :ref="'center_left_' + index"
+      :key="'center_left_' + index"
+      :suit="card.s"
+      :rank="card.r"
+      :initial-position="leftCenterPilePosition(index)"
+      :initial-rotation="centerPileRot(index)"
+      :initial-flipped="false"
+    />
+    <livespeed-playing-card
+      v-for="(card, index) in centerPiles[1]"
+      :ref="'center_right_' + index"
+      :key="'center_right_' + index"
+      :suit="card.s"
+      :rank="card.r"
+      :initial-position="rightCenterPilePosition(index)"
+      :initial-rotation="centerPileRot(index)"
+      :initial-flipped="false"
+    />
+    <livespeed-playing-card
+      v-for="(card, index) in replacementPiles[0]"
+      :ref="'replacement_left_' + index"
+      :key="'replacement_left_' + index"
+      :rank="card.r"
+      :suit="card.s"
+      :initial-position="[-80, -cardYOffset(index)]"
+    />
+    <livespeed-playing-card
+      v-for="(card, index) in replacementPiles[1]"
+      :ref="'replacement_right_' + index"
+      :key="'replacement_right_' + index"
+      :is-featured="index === 0 && canUseReplacement"
+      :is-active="isReplacementCardActive(index)"
+      :rank="card.r"
+      :suit="card.s"
+      :initial-position="[80, -cardYOffset(index)]"
+      @click="onReplacementClick"
+    />
 
-        <livespeed-arrow v-show="canUseReplacement" :pos="[72, 20]" direction="up"/>
-    </div>
+    <livespeed-arrow
+      v-show="canUseReplacement"
+      :pos="[72, 20]"
+      direction="up"
+    />
+  </div>
 </template>
 
 <script>
@@ -41,16 +53,16 @@
   import { CARD_MOVE_DELAY } from 'helpers/constants';
 
   export default {
-    computed: {
-      allCards() {
-        return this.$children;
-      }
-    },
 
     props: {
       centerPiles:       { type: Array, required: true },
       replacementPiles:  { type: Array, required: true },
       canUseReplacement: { type: Boolean, required: true }
+    },
+    computed: {
+      allCards() {
+        return this.$children;
+      }
     },
 
     methods: {
@@ -109,7 +121,7 @@
           rightCard.flipUp();
           setTimeout(() => resolve(), CARD_MOVE_DELAY);
         });
-      },
+      }
     }
   };
 </script>

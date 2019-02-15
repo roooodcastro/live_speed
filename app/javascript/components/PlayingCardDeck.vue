@@ -1,12 +1,14 @@
 <template>
-    <div>
-        <livespeed-playing-card v-for="(card, index) in cards"
-                                :suit="card.s"
-                                :rank="card.r"
-                                :initialPosition="[0, 45 - cardYOffset(index)]"
-                                :initialOrder="card.order"
-                                :key="'deckCard_' + index"/>
-    </div>
+  <div>
+    <livespeed-playing-card
+      v-for="(card, index) in cards"
+      :key="'deckCard_' + index"
+      :suit="card.s"
+      :rank="card.r"
+      :initial-position="[0, 45 - cardYOffset(index)]"
+      :initial-order="card.order"
+    />
+  </div>
 </template>
 
 <script>
@@ -16,14 +18,14 @@
   import CardCoordinate                                from 'helpers/card_coordinate';
 
   export default {
+    props:   {
+      cardCount: { type: Number, default: 52 }
+    },
     data() {
       return {
         cards:         this.createCards(),
         cardPositions: placement.allCardPositions(2)
       };
-    },
-    props:   {
-      cardCount: { type: Number, default: 52 }
     },
     methods: {
       cardYOffset: CardCoordinate.cardYOffset,
@@ -45,8 +47,8 @@
       },
 
       // Runs the initial card dealing animation.
-      // roundData is used to determine how many cards must be dealt for each pile.
-      dealCards(roundData) {
+      // TODO: use roundData to determine how many cards must be dealt for each pile.
+      dealCards() {
         const dealer = (promise, info, index) => {
           return promise.then(() => {
             if (index > 0) info.pos[1] -= CARD_VERTICAL_SEPARATION;

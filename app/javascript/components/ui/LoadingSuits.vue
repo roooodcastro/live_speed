@@ -1,13 +1,26 @@
 <template>
-    <div class="livespeed-loading-container">
-        <livespeed-text :pos="[0, -5]" :size="3">{{  loadingText }}&hellip;</livespeed-text>
-        <div class="livespeed-loading-suits">
-            <span class="livespeed-loading-suit-1">&diams;</span>
-            <span class="livespeed-loading-suit-2">&clubs;</span>
-            <span class="livespeed-loading-suit-3">&hearts;</span>
-            <span class="livespeed-loading-suit-4">&spades;</span>
-        </div>
+  <div class="livespeed-loading-container">
+    <livespeed-text
+      :pos="[0, -5]"
+      :size="3"
+    >
+      {{ loadingText }}&hellip;
+    </livespeed-text>
+    <div class="livespeed-loading-suits">
+      <span class="livespeed-loading-suit-1">
+        &diams;
+      </span>
+      <span class="livespeed-loading-suit-2">
+        &clubs;
+      </span>
+      <span class="livespeed-loading-suit-3">
+        &hearts;
+      </span>
+      <span class="livespeed-loading-suit-4">
+        &spades;
+      </span>
     </div>
+  </div>
 </template>
 
 <script>

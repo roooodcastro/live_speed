@@ -1,11 +1,22 @@
 <template>
-    <livespeed-text class="livespeed-arrow" font="Arial" :pos="pos">
-        <span :style="style">{{ arrowChar }}</span>
-    </livespeed-text>
+  <livespeed-text
+    class="livespeed-arrow"
+    font="Arial"
+    :pos="pos"
+  >
+    <span :style="style">
+      {{ arrowChar }}
+    </span>
+  </livespeed-text>
 </template>
 
 <script>
   export default {
+
+    props: {
+      pos:       { type: Array, required: true },
+      direction: { type: String, default: 'up' }
+    },
     computed: {
       style() {
         return {
@@ -25,6 +36,8 @@
           case 'right':
             return '▶';
         }
+
+        return '';
       },
 
       animationName() {
@@ -36,13 +49,10 @@
           case 'right':
             return 'livespeed-arrow-frames-horizontal';
         }
-      }
-    },
 
-    props: {
-      pos:       { type: Array, required: true },
-      direction: { type: String, default: 'up' }
-    },
+        return '';
+      }
+    }
   };
 </script>
 

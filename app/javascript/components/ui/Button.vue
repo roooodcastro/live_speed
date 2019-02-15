@@ -1,22 +1,26 @@
 <template>
-    <button class="livespeed-button" @click="clickCallback" :style="{ transform: transform }">
-        <slot></slot>
-    </button>
+  <button
+    class="livespeed-button"
+    :style="{ transform: transform }"
+    @click="clickCallback"
+  >
+    <slot />
+  </button>
 </template>
 
 <script>
   import GridCoordinate from 'helpers/grid_coordinate';
 
   export default {
+
+    props: {
+      pos: { type: Array, required: true }
+    },
     computed: {
       transform() {
         const coordinates = new GridCoordinate(this.pos, 1);
         return 'translate(' + coordinates.pxString + ')';
       }
-    },
-
-    props: {
-      pos: { type: Array, required: true }
     },
 
     methods: {

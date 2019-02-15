@@ -1,7 +1,9 @@
 <template>
-    <div :class="cssClass"
-         :style="style"
-         @click="onClick"></div>
+  <div
+    :class="cssClass"
+    :style="style"
+    @click="onClick"
+  />
 </template>
 
 <script>
@@ -9,6 +11,29 @@
 
   export default {
     name:     'PlayingCard',
+
+    props: {
+      isActive:        { type: Boolean, default: false },
+      isFeatured:      { type: Boolean, default: false },
+      rank:            { type: String, default: 'a' },
+      suit:            { type: String, default: 's' },
+      initialPosition: { type: Array, default: () => [0, 0] },
+      initialRotation: { type: Number, default: 0 },
+      initialFlipped:  { type: Boolean, default: true },
+      initialOrder:    { type: Number, default: 1 }
+    },
+
+    data() {
+      return {
+        altitude:     0,
+        dragPosition: new CardCoordinate(0, 0),
+        flipped:      this.initialFlipped,
+        isDragging:   false,
+        order:        this.initialOrder,
+        position:     new CardCoordinate(this.initialPosition),
+        rotation:     this.initialRotation
+      };
+    },
     computed: {
       cssClass() {
         if (this.rank !== 'e' && this.suit !== 'e') {
@@ -26,7 +51,7 @@
           transform:  this.transform,
           zIndex:     this.order,
           filter:     this.dropShadow,
-          transition: this.transition,
+          transition: this.transition
         };
       },
 
@@ -52,29 +77,6 @@
       currentPosition() {
         return this.isDragging ? this.dragPosition : this.position;
       }
-    },
-
-    data() {
-      return {
-        altitude:     0,
-        dragPosition: new CardCoordinate(0, 0),
-        flipped:      this.initialFlipped,
-        isDragging:   false,
-        order:        this.initialOrder,
-        position:     new CardCoordinate(this.initialPosition),
-        rotation:     this.initialRotation
-      };
-    },
-
-    props: {
-      isActive:        { type: Boolean, default: false },
-      isFeatured:      { type: Boolean, default: false },
-      rank:            { type: String, default: 'a' },
-      suit:            { type: String, default: 's' },
-      initialPosition: { type: Array, default: () => [0, 0] },
-      initialRotation: { type: Number, default: 0 },
-      initialFlipped:  { type: Boolean, default: true },
-      initialOrder:    { type: Number, default: 1 }
     },
 
     methods: {
