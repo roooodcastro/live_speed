@@ -5,6 +5,7 @@ class MatchesController < ApplicationController
   before_action :require_login
 
   respond_to :html, :json
+  layout 'game', only: :play
 
   def index
     @matches = Match.all
