@@ -5,7 +5,14 @@
     <h1>Choose a name to play:</h1>
 
     <%= form_with(model: @player, local: true, html: { autocomplete: 'off' }) do |f| %>
-      <%= vue_component('player-name-input', props: { initialName: @player.name }) %>
+      <%= vue_component('new-player-form', props: { initialName: @player.name }) %>
     <% end %>
+  </div>
+
+  <div class="signup-brand-info">
+    <div class="signup-logo">
+      <br/>Logo goes here
+    </div>
+    <h2>Live Speed</h2>
   </div>
 </div>

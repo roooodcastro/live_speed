@@ -1,8 +1,37 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-image:  url('/assets/felt.png');
+  background-repeat: repeat;
+  box-sizing:        border-box;
+  display:           flex;
+  flex-grow:         1;
+  font-family:       'Open Sans', Arial, sans-serif;
+  font-size:         16px;
+  position:          relative;
+
+  &:before {
+    content:    '';
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.75) 100%);
+    position:   absolute;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    top:        0;
+    z-index:    -1;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'CardChars', serif;
+  color:       $brand-white;
+}
+
 .container {
   padding: 1rem;
 }
 
 .box {
   background-color: $brand-white;
-  padding: 1rem;
+  padding:          1rem;
 }

@@ -16,8 +16,10 @@ import Vue               from 'vue/dist/vue.esm';
 Vue.use(TurbolinksAdapter);
 
 import PlayerNameInput from 'components/players/PlayerNameInput';
+import NewPlayerForm from 'components/players/NewPlayerForm';
 
 Vue.component('player-name-input', PlayerNameInput);
+Vue.component('new-player-form', NewPlayerForm);
 
 document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({

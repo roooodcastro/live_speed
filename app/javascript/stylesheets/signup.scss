@@ -5,7 +5,9 @@
 .signup-box {
   background: $brand-1;
   background: linear-gradient(135deg, $brand-1 0%, $brand-alt-1 100%);
+  display: flex;
   height: 35rem;
+  justify-content: space-between;
   margin: calc(50vh - 17.5rem) auto 0 auto;
   max-width: 80rem;
   position: relative;
@@ -13,14 +15,14 @@
 
 .signup-card {
   background-color: $white;
-  border: 1px solid $brand-gray-2;
+  border: 1px solid $border-color;
   border-radius: 8px;
   box-shadow: 0 0 2rem $brand-gray-2;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 38rem;
-  left: 3rem;
+  left: 6rem;
   padding: 3rem;
   position: relative;
   text-align: center;
@@ -54,6 +56,59 @@
     color: $brand-black;
     font-size: 1.5rem;
     font-weight: normal;
-    margin: 0 0 2rem 0;
+    margin: 0 0 4rem 0;
+  }
+}
+
+.signup-btn {
+  background-color: $brand;
+  border: 1px solid $brand-4;
+  border-radius: 4px;
+  box-shadow: 0 0 0 $brand-black;
+  color: $brand-white;
+  display: block;
+  font-family: 'CardChars', serif;
+  line-height: 3rem;
+  outline: none;
+  margin-top: 2rem;
+  transition: all 0.1s;
+  width: 100%;
+
+  &:hover:enabled {
+    color: $white;
+    transform: scale(1.025);
+  }
+
+  &:active:enabled, &:focus:enabled {
+    box-shadow: 0 0 0.4rem 0.1rem $brand-4;
+    color: $white;
+  }
+
+  &:disabled {
+    background-color: $brand-gray-5;
+    border-color: $border-color;
+  }
+}
+
+.signup-brand-info {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 6rem;
+  padding: 2rem 1rem;
+
+  h2 {
+    color: $brand-white;
+    font-size: 3rem;
+    text-shadow: 0 0 0.5rem $brand-black;
+    font-variant: small-caps;
+  }
+
+  .signup-logo {
+    background-color: $brand-gray-8;
+    border-radius: 5rem;
+    height: 10rem;
+    width: 10rem;
   }
 }

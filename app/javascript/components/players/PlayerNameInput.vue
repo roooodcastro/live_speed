@@ -12,7 +12,8 @@
     <span
       v-show="state === ''"
       class="player-name-input-result"
-    >&nbsp;
+    >
+      &nbsp;
     </span>
 
     <span
@@ -59,6 +60,12 @@
       };
     },
 
+    computed: {
+      validName() {
+        return this.state === 'valid';
+      }
+    },
+
     created() {
       this.debouncedValidateName = debounced(500, this.validateName);
     },
@@ -66,6 +73,7 @@
     methods: {
       onNameInput(ev) {
         this.state = 'validating';
+        this.$emit('validatedName', this.state === 'valid');
         this.name  = ev.target.value;
         this.debouncedValidateName();
       },
@@ -81,6 +89,7 @@
             } else {
               this.state = '';
             }
+            this.$emit('validatedName', this.state === 'valid');
           });
       }
     }
@@ -102,7 +111,7 @@
     }
 
     input {
-      border:        1px solid $brand-gray-7;
+      border:        1px solid $input-border-color;
       border-radius: 4px;
       color:         $brand-black;
       font-size:     1.2rem;
