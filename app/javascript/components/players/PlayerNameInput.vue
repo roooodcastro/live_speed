@@ -1,7 +1,8 @@
 <template>
   <div class="player-name-input">
     <input
-      id="player_name"
+      id="player_own_name"
+      name="player[own_name]"
       type="text"
       :value="name"
       aria-label="Type your player name"

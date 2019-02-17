@@ -5,6 +5,7 @@ body {
   background-repeat: repeat;
   box-sizing:        border-box;
   display:           flex;
+  flex-direction:    column;
   flex-grow:         1;
   font-family:       'Open Sans', Arial, sans-serif;
   font-size:         16px;
