@@ -135,7 +135,7 @@
         this.$refs['cardDeck'].dealCards(this.controller.data)
           .then(function () {
             this.playedDealAnimation = true;
-          });
+          }.bind(this));
       },
 
       onReadyClick() {

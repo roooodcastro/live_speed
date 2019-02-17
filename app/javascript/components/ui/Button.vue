@@ -46,7 +46,7 @@
         border-radius:    .5em;
         color:            rgba(255, 255, 255, 0.6);
         font-size:        1.5em;
-        font-family:      'Cleveland', Helvetica, Arial, sans-serif;
+        font-family:      'CardChars', Helvetica, Arial, sans-serif;
         line-height:      2em;
         min-width:        10em;
         outline:          none;

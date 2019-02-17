@@ -12,9 +12,9 @@
 
   export default {
 
-    props: {
+    props:    {
       font: { type: String, default: 'Barbaro' },
-      pos: { type: Array, required: true },
+      pos:  { type: Array, required: true },
       size: { type: Number, default: 2 }
     },
     computed: {
@@ -29,10 +29,10 @@
 
       style() {
         return {
-          transform: this.transform,
+          transform:  this.transform,
           fontFamily: this.font + ', Helvetica, Arial, sans-serif',
-          fontSize: this.fontSize
-        }
+          fontSize:   this.fontSize
+        };
       }
     }
   };
@@ -40,10 +40,9 @@
 
 <style>
     .livespeed-text {
-        color: rgba(255, 255, 255, 0.75);
-        font-family: 'Cleveland', Helvetica, Arial, sans-serif;
-        margin: 0;
-        position: absolute;
+        color:       rgba(255, 255, 255, 0.75);
+        margin:      0;
+        position:    absolute;
         text-shadow: 1px 1px 2px black;
         user-select: none;
     }

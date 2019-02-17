@@ -13,8 +13,8 @@ html, body, .container {
 }
 
 @font-face {
-  font-family: 'Cleveland';
-  src: asset-url('cleveland.ttf') format('truetype');
+  font-family: 'CardChars';
+  src: asset-url('cardchars.ttf') format('truetype');
 }
 
 @font-face {
@@ -22,7 +22,7 @@ html, body, .container {
   src: asset-url('barbaro.ttf') format('truetype');
 }
 
-h1, h2, h3, h4, h5, h6 { font-family: 'Cleveland', serif; }
+h1, h2, h3, h4, h5, h6 { font-family: 'CardChars', serif; }
 
 .game-table-container {
   background-image:  asset-url('felt.png');

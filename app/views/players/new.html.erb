@@ -1,5 +1,11 @@
-<h1>Identify yourself:</h1>
+<%= content_for(:body_class) { 'signup-container' } %>
 
-<%= form_with(model: @player, local: true) do |f| %>
-  <%= vue_component('player-name-input', props: { initialName: @player.name }) %>
-<% end %>
+<div class="signup-box">
+  <div class="signup-card">
+    <h1>Choose a name to play:</h1>
+
+    <%= form_with(model: @player, local: true, html: { autocomplete: 'off' }) do |f| %>
+      <%= vue_component('player-name-input', props: { initialName: @player.name }) %>
+    <% end %>
+  </div>
+</div>

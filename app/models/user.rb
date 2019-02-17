@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_one :player, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
+  validates :own_name, length: { minimum: 4 }
 
   def fetch_or_create_player!
     return player if player

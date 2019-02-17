@@ -1,1 +1,43 @@
 @import 'normalize.css';
+@import '_variables';
+@import 'main';
+@import 'signup';
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
+
+@font-face {
+  font-family: 'CardChars';
+  src: asset-url('cardchars.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Barbaro';
+  src: asset-url('barbaro.ttf') format('truetype');
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  background-image:  url('/assets/felt.png');
+  background-repeat: repeat;
+  box-sizing:        border-box;
+  display:           flex;
+  flex-grow:         1;
+  position:          relative;
+
+  &:before {
+    content:    '';
+    background: radial-gradient(circle, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.75) 100%);
+    position:   absolute;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    top:        0;
+    z-index:    -1;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'CardChars', serif;
+  color: $brand-white;
+}
