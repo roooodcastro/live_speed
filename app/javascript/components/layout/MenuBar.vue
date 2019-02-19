@@ -16,9 +16,7 @@
   @import 'stylesheets/_variables.scss';
 
   .menu-bar {
-    background: $brand-black;
-    background: linear-gradient(180deg, lighten($brand-black, 5%) 0%, $brand-black 100%);
-    box-shadow: 0 0 1rem $brand-black;
+    background: rgba($brand, 0.5);
     height: 4rem;
   }
 </style>

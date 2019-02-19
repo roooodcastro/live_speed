@@ -1,15 +1,24 @@
 <template>
-  <a :href="href"
-     class="menu-bar-link">
-    <span>{{ label }}</span>
+  <a
+    :href="href"
+    class="menu-bar-link"
+  >
+    {{ label }}
   </a>
 </template>
 
 <script>
   export default {
     props: {
-      label: { type: String, required: true },
-      href:  { type: String, default: '#' }
+      active: { type: Boolean, default: false },
+      href:   { type: String, default: '#' },
+      label:  { type: String, required: true }
+    },
+
+    computed: {
+      activeClass() {
+        return this.active ? 'active' : '';
+      }
     }
   };
 </script>
@@ -27,8 +36,6 @@
     position:        relative;
     text-decoration: none;
 
-    span { display: inline-block; transition: all 0.2s; }
-
     &:before {
       background-color: $brand-alt-1;
       bottom:           0;
@@ -40,25 +47,6 @@
       transition:       all 0.15s;
     }
 
-    &:after {
-      background-color: $brand-alt-1;
-      top:              0;
-      content:          '';
-      height:           0;
-      left:             0;
-      position:         absolute;
-      right:            0;
-      transition:       all 0.15s;
-    }
-
-    &:hover {
-      &:before { height: 0.3rem; }
-
-      &:after { height: 0.3rem; }
-
-      span {
-        transform: scale(1.025);
-      }
-    }
+    &:hover:before { height: 0.4rem; }
   }
 </style>
