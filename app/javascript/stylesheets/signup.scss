@@ -55,8 +55,15 @@
   h1 {
     color: $brand-black;
     font-size: 1.5rem;
+    margin: 0 0 2rem 0;
+  }
+
+  h2 {
+    margin-top: 0;
+    color: $brand-gray-5;
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.2rem;
     font-weight: normal;
-    margin: 0 0 4rem 0;
   }
 }
 

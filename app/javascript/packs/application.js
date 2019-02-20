@@ -18,10 +18,12 @@ Vue.use(TurbolinksAdapter);
 import PlayerNameInput from 'components/players/PlayerNameInput';
 import NewPlayerForm from 'components/players/NewPlayerForm';
 import MenuBar from 'components/layout/MenuBar';
+import MenuBarLink from 'components/layout/MenuBarLink';
 
 Vue.component('player-name-input', PlayerNameInput);
 Vue.component('new-player-form', NewPlayerForm);
 Vue.component('menu-bar', MenuBar);
+Vue.component('menu-bar-link', MenuBarLink);
 
 document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({

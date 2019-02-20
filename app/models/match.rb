@@ -10,6 +10,8 @@ class Match < ApplicationRecord
   validates :num_players, numericality: { between: 2..4 }
   validates :match_players, length: { in: 1..4 }
 
+  scope :from_player, ->(player_id) { joins(:match_players).where match_players: { player_id: player_id } }
+
   scope :unmatched, lambda {
     joins(:players)
       .group('matches.id')

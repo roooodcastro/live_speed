@@ -3,7 +3,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_player
+  helper_method :current_player, :logged_in?
 
   private
 

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
+  resource :how_to_play, only: :show, controller: :how_to_play
   resource :lobby, only: [:show], controller: :lobby
 
   resources :matches do

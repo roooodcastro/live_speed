@@ -8,7 +8,7 @@ class MatchesController < ApplicationController
   layout 'game', only: :play
 
   def index
-    @matches = Match.all
+    @matches = Match.from_player(current_player_id)
 
     respond_with(@matches)
   end

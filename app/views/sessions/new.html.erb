@@ -1,17 +1,34 @@
-<h1>Login</h1>
+<div class="signup-box">
+  <div class="signup-card">
+    <h1>Login</h1>
+    <h2>Welcome back! Enter your login information to keep playing:</h2>
 
-<h3>Who are you?</h3>
+    <%= form_tag sessions_path do %>
+      <p>
+        <%= label_tag :email, 'Email' %>
+        <%= text_field_tag :email %>
+      </p>
+      <p>
+        <%= label_tag :password, 'Password' %>
+        <%= password_field_tag :password %>
+      </p>
+      <p>
+        <%= button_tag 'Login' %>
+      </p>
+    <% end %>
 
-<%= form_tag sessions_path do %>
-  <p>
-    <%= label_tag :email, 'Email' %>
-    <%= text_field_tag :email %>
-  </p>
-  <p>
-    <%= label_tag :password, 'Password' %>
-    <%= password_field_tag :password %>
-  </p>
-  <p>
-    <%= button_tag 'Login' %>
-  </p>
-<% end %>
+    <hr />
+
+    <h2>First timer?</h2>
+
+    <%= link_to 'Start Playing', new_player_path %>
+  </div>
+
+  <div class="signup-brand-info">
+    <div class="signup-logo">
+      <br/>Logo goes here
+    </div>
+    <h2>Live Speed</h2>
+  </div>
+</div>
+

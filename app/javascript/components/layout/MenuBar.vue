@@ -1,22 +1,18 @@
 <template>
   <div class="menu-bar">
-    <MenuBarItem :label="'How to Play'" />
+    <slot />
   </div>
 </template>
 
 <script>
-  import MenuBarItem from 'components/layout/MenuBarLink';
-
-  export default {
-    components: { MenuBarItem }
-  };
+  export default {};
 </script>
 
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
   .menu-bar {
-    background: rgba($brand, 0.5);
+    background: rgba($brand, 0.2);
     height: 4rem;
   }
 </style>
