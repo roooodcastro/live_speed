@@ -12,7 +12,7 @@
   @import 'stylesheets/_variables.scss';
 
   .menu-bar {
-    background: rgba($brand, 0.2);
+    background: rgba($brand, 0.4);
     height: 4rem;
   }
 </style>

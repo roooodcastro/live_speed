@@ -35,6 +35,7 @@
     padding:         1rem 2rem;
     position:        relative;
     text-decoration: none;
+    transition:       all 0.15s;
 
     &:before {
       background-color: $brand-alt-1;
@@ -47,6 +48,9 @@
       transition:       all 0.15s;
     }
 
-    &:hover:before { height: 0.4rem; }
+    &:hover {
+      background-color: rgba($brand-white, 0.1);
+      &:before { height: 0.4rem; }
+    }
   }
 </style>
