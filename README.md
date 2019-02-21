@@ -40,7 +40,18 @@ main game piles, in which most of the action occurs.
 
 The game table looks something like this:
 
-(use unicode cards and a table to simulate a game)
+```
+     Player 2 draw cards   Player 2 hand
+                       ↓   ↓ ↓ ↓ ↓ ↓
+                       🂠   🂣 🂣 🂣 🂣 🂣
+Left replacement pile ↘         ↙ Right center pile
+                       🂠    🂣 🂣    🂠
+          Left center pile ↗        ↖ Right replacement pile
+                       🂣 🂣 🂣 🂣 🂣   🂠
+                       ↑ ↑ ↑ ↑ ↑    ↑
+                   Player 1 hand    Player 1 draw cards
+```
+
 
 ### Play:
 
@@ -112,6 +123,9 @@ Here's a quick overview of the project's progress:
 - [x] List matches that are waiting for players
 - [x] Allow player to join a match
 - [x] Able to start playing a round/new round from a match page
+- [ ] Add How to Play page with good instructions
+- [ ] Define and implement full flow of player/user signup/login/upgrade
+- [ ] Let players check their matches history
 
 ### Admin site
 

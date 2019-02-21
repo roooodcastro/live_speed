@@ -2,6 +2,9 @@
 
 class PlayersController < ApplicationController
   def new
+    # TODO: Do a single page with the new user and player forms, both as playing cards on top of another. When the user
+    # TODO: decides to change between creating a player or an account, have the bottom card swipe right/up while the
+    # TODO: top card swipe in the opposite direction, and then change their z-index so the desired one stays on top.
     @player = Player.new
   end
 

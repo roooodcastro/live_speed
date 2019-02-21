@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
 class MatchesController < ApplicationController
-  before_action :set_match, only: %i[show play edit update]
-  before_action :require_login
+  require_player_login
 
   respond_to :html, :json
+
   layout 'game', only: :play
+
+  before_action :set_match, only: %i[show play edit update]
 
   def index
     @matches = Match.from_player(current_player_id)

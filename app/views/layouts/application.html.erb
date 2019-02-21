@@ -16,7 +16,7 @@
 <body>
 <div class="container" data-behaviour="vue">
   <menu-bar>
-    <% if logged_in? %>
+    <% if player_logged_in? %>
       <%= vue_component('menu-bar-link', props: { href: lobby_path, label: 'Find a Match' }) %>
       <%= vue_component('menu-bar-link', props: { href: matches_path, label: 'My Matches' }) %>
       <%= vue_component('menu-bar-link', props: { href: how_to_play_path, label: 'How to Play' }) %>

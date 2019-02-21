@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class RoundsController < ApplicationController
-  before_action :set_round, only: %i[show edit update]
-  before_action :require_login
+  require_player_login
 
   respond_to :html, :json
+
+  before_action :set_round, only: %i[show edit update]
 
   def show
     respond_with(@round)
