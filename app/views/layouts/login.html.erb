@@ -29,9 +29,7 @@
     <% end %>
   </menu-bar>
   <div class="<%= yield(:body_class) if content_for?(:body_class) %>">
-    <main>
-      <%= yield %>
-    </main>
+    <%= yield %>
   </div>
 </div>
 </body>

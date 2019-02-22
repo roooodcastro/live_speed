@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  layout 'login'
+
   def new
     redirect_to root_path if user_logged_in?
   end

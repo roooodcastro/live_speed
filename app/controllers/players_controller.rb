@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController
+  layout 'login', only: :new
+
   def new
     # TODO: Do a single page with the new user and player forms, both as playing cards on top of another. When the user
     # TODO: decides to change between creating a player or an account, have the bottom card swipe right/up while the

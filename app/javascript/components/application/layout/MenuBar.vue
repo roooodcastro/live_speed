@@ -22,10 +22,14 @@
   @import 'stylesheets/_variables.scss';
 
   .menu-bar {
-    background:  rgba($brand, 0.4);
+    background:  rgba($brand-3, 0.9);
     display:     flex;
     align-items: center;
     height:      4rem;
+    left:        0;
+    position:    fixed;
+    right:       0;
+    top:         0;
     overflow:    hidden;
   }
 

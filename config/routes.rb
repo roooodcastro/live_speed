@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => '/cable'
 
-  resource :how_to_play, only: :show, controller: :how_to_play
   resource :lobby, only: [:show], controller: :lobby
 
   resources :matches do
@@ -17,4 +16,6 @@ Rails.application.routes.draw do
   resources :player_name_validators, only: :create
   resources :rounds, except: :index
   resource :sessions, only: %i[new create destroy]
+
+  get :how_to_play, to: 'static_pages#how_to_play'
 end
