@@ -10,7 +10,10 @@
 'use strict';
 
 import '../stylesheets/application';
-import TurbolinksAdapter from 'helpers/row_vue_turbolinks';
+
+// Implemented own version of VueTurbolinks because of flickering issues
+// https://github.com/jeffreyguenther/vue-turbolinks/issues/25
+import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
 import Vue               from 'vue/dist/vue.esm';
 
 Vue.use(TurbolinksAdapter);
