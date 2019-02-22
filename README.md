@@ -4,8 +4,6 @@
     <img alt="Live Speed Logo" src="https://github.com/roooodcastro/live_speed/raw/master/app/javascript/images/livespeed_logo.png" height="400px">
 </div>
 
----
-
 ## What is this?
 
 Speed is a card game, played with a standard 52-card deck. The main goal is to
@@ -149,4 +147,4 @@ Playing Cards SVGs: Adrian Kennard from www.me.uk/cards
 
 ## License
 
-[MIT License](LICENSE.md)
+This project is licensed under the [MIT License](LICENSE.md).
