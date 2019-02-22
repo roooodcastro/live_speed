@@ -138,6 +138,12 @@ Here's a quick overview of the project's progress:
 - [ ] Setup AWS deploy
 - [ ] Add monitoring service
 - [ ] Tests!
+- [ ] Use Webpacker version of ActionCable
+- [ ] Add JSRoutes with webpacker
+- [ ] Generate favicons in webpacker instead of sprockets
+- [ ] Add i18n to Rails
+- [ ] Add i18n to JS/webpacker
+- [ ] Completely remove Sprockets in favour of Webpacker
 
 ## Credits
 
