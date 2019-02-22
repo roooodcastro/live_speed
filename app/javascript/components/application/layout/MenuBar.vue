@@ -6,8 +6,9 @@
     >
       <img
         alt="Live Speed Logo"
-        :src="require('images/logo_text.svg')"
+        :src="require('images/logo_cards.svg')"
       >
+      LiveSpeed
     </a>
     <slot />
   </div>
@@ -25,16 +26,22 @@
     display:     flex;
     align-items: center;
     height:      4rem;
+    overflow:    hidden;
   }
 
   .menu-logo {
-    display:     flex;
-    height:      100%;
-    align-items: center;
-    padding:     0 1rem;
-    transition:  all 0.15s;
+    color:           $brand-white;
+    display:         flex;
+    font-family:     'CardChars', serif;
+    font-size:       1.5rem;
+    height:          100%;
+    align-items:     center;
+    padding:         0 1rem;
+    text-decoration: none;
+    text-shadow:     2px 2px 4px $brand-alt-4;
+    transition:      all 0.15s;
 
-    img { height: 3rem; width: 10rem; }
+    img { height: 3rem; width: 3rem; }
 
     &:hover { background-color: rgba($brand-white, 0.1); }
   }

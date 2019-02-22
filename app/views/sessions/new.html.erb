@@ -4,17 +4,18 @@
     <h2>Welcome back! Enter your login information to keep playing:</h2>
 
     <%= form_tag sessions_path do %>
-      <p>
+      <div class="form-control">
         <%= label_tag :email, 'Email' %>
         <%= text_field_tag :email %>
-      </p>
-      <p>
+      </div>
+      <div class="form-control">
         <%= label_tag :password, 'Password' %>
         <%= password_field_tag :password %>
-      </p>
-      <p>
-        <%= button_tag 'Login to my Account' %>
-      </p>
+        <%= link_to 'Forgot your password?', root_path, class: 'form-text', tabindex: -1 %>
+      </div>
+      <div class="form-control">
+        <%= button_tag 'Login to my Account', class: 'btn btn-signup' %>
+      </div>
     <% end %>
   </div>
 
@@ -28,4 +29,3 @@
     </div>
   </div>
 </div>
-

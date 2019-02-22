@@ -28,4 +28,16 @@ $white: white;
 $black: black;
 
 $border-color: $brand-gray-4;
+$border-color-active: $brand-gray-5;
 $input-border-color: $brand-gray-7;
+
+$text-color: $brand-black;
+$text-color-faded: $brand-gray-4;
+
+$grid-breakpoints: (
+                       xs: 0,
+                       sm: 576px,
+                       md: 768px,
+                       lg: 992px,
+                       xl: 1368px
+                   ) !default;

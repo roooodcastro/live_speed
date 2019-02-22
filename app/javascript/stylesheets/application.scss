@@ -1,17 +1,19 @@
 @import 'normalize.css';
 @import '_variables';
+@import '_grid';
 @import 'main';
 @import 'button';
+@import 'forms.scss';
 @import 'signup';
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin-ext');
 
 @font-face {
   font-family: 'CardChars';
-  src: asset-url('cardchars.ttf') format('truetype');
+  src: url('../fonts/cardchars.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Barbaro';
-  src: asset-url('barbaro.ttf') format('truetype');
+  src: asset-url('../fonts/barbaro.ttf') format('truetype');
 }

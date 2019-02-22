@@ -1,3 +1,39 @@
-%input-outline {
+.form-control {
+  label {
+    color: $text-color-faded;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+    text-align: left;
+  }
 
+  input[type="text"], input[type="password"] {
+    border:        1px solid $input-border-color;
+    border-radius: 4px;
+    color:         $brand-black;
+    font-size:     1.2rem;
+    line-height:   2.4rem;
+    outline:       none;
+    padding:       0 1rem;
+    width:         100%;
+
+    &::placeholder {
+      color: $brand-gray-5;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0.5rem $brand-1;
+    }
+  }
+
+  .form-text {
+    color: $text-color-faded;
+    display: block;
+    margin-top: 0.25rem;
+    text-align: left;
+  }
+
+  a.form-text:hover { color: $text-color; }
 }
+
+.form-control + .form-control { margin-top: 1rem; }

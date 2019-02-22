@@ -9,6 +9,7 @@ body {
   flex-grow:        1;
   font-family:      'Open Sans', Arial, sans-serif;
   font-size:        16px;
+  overflow:         hidden;
   position:         relative;
 
   &:before {
@@ -25,7 +26,12 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'CardChars', serif;
-  color:       $brand-white;
+  color:       $brand-4;
+}
+
+h1 {
+  border-bottom: 1px solid $border-color;
+  padding-bottom: 1rem;
 }
 
 .main-content {
@@ -35,4 +41,12 @@ h1, h2, h3, h4, h5, h6 {
 .box {
   background-color: $brand-white;
   padding:          1rem;
+}
+
+main {
+  @extend %grid;
+
+  background-color: $brand-white;
+  padding:          1rem;
+  box-shadow:       2px 2px 5px $brand-black;
 }

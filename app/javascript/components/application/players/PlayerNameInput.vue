@@ -98,8 +98,8 @@
 </script>
 
 <style lang="scss">
-  @import 'stylesheets/forms.scss';
   @import 'stylesheets/_variables.scss';
+  @import 'stylesheets/forms.scss';
 
   .player-name-input {
     font-family: 'Open Sans', Arial, sans-serif;

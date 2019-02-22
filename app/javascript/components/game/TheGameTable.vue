@@ -242,3 +242,49 @@
     }
   };
 </script>
+
+<style lang="scss">
+  .game-table-container {
+    background-image:  asset-url('felt.png');
+    background-repeat: repeat;
+    box-sizing:        border-box;
+    display:           block;
+    height:            100%;
+    position:          relative;
+
+    &:before {
+      content:    '';
+      background: radial-gradient(circle, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+      position:   absolute;
+      bottom:     0;
+      left:       0;
+      right:      0;
+      top:        0;
+    }
+  }
+
+  .game-table-gamearea {
+    display:  block;
+    position: absolute;
+    bottom:   0;
+    left:     0;
+    right:    0;
+    top:      0;
+  }
+
+  .game-table-hand { position: relative; }
+
+  .game-table-cardslots {
+    position: relative;
+
+    .game-table-cardslot {
+      border:        6px solid rgba(255, 255, 255, 0.7);
+      border-radius: 24px;
+      height:        324px;
+      position:      absolute;
+      width:         216px;
+      top:           6px;
+      left:          0;
+    }
+  }
+</style>

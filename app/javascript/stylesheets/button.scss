@@ -14,8 +14,9 @@
   transition: all 0.1s;
 
   &:hover:enabled {
+    border-color: $brand-1;
     color: $white;
-    transform: scale(1.025);
+    cursor: pointer;
   }
 
   &:active:enabled, &:focus:enabled {
@@ -29,10 +30,10 @@
   }
 
   &.btn-outline {
-    background-color: rgba($brand, 0.2);
-    color: $brand-4;
+    background-color: rgba($brand-1, 0.3);
+    color: $brand-3;
     &:hover:enabled, &:active:enabled, &:focus:enabled {
-      color: $brand-3;
+      color: $brand;
     }
   }
 }

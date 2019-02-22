@@ -35,7 +35,8 @@
     padding:         1rem 2rem;
     position:        relative;
     text-decoration: none;
-    transition:       all 0.15s;
+    text-shadow:     1px 1px 2px $brand-alt-4;
+    transition:      all 0.15s;
 
     &:before {
       background-color: $brand-alt-1;
@@ -50,6 +51,7 @@
 
     &:hover {
       background-color: rgba($brand-white, 0.1);
+
       &:before { height: 0.4rem; }
     }
   }
