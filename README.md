@@ -1,6 +1,6 @@
 # Live Speed
 
-![Live Speed Logo](app/javascript/images/livespeed_logo.svg "Live Speed")
+<img alt="Live Speed Logo" src="https://github.com/roooodcastro/live_speed/raw/master/app/javascript/images/livespeed_logo.png" height="400px">
 
 ---
 
