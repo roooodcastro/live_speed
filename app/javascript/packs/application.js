@@ -10,15 +10,15 @@
 'use strict';
 
 import '../stylesheets/application';
-import TurbolinksAdapter from 'vue-turbolinks';
+import TurbolinksAdapter from 'helpers/row_vue_turbolinks';
 import Vue               from 'vue/dist/vue.esm';
 
 Vue.use(TurbolinksAdapter);
 
-import PlayerNameInput from 'components/players/PlayerNameInput';
-import NewPlayerForm from 'components/players/NewPlayerForm';
-import MenuBar from 'components/layout/MenuBar';
-import MenuBarLink from 'components/layout/MenuBarLink';
+import PlayerNameInput from 'components/application/players/PlayerNameInput';
+import NewPlayerForm from 'components/application/players/NewPlayerForm';
+import MenuBar from 'components/application/layout/MenuBar';
+import MenuBarLink from 'components/application/layout/MenuBarLink';
 
 Vue.component('player-name-input', PlayerNameInput);
 Vue.component('new-player-form', NewPlayerForm);

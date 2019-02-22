@@ -15,15 +15,15 @@ import Vue               from 'vue/dist/vue.esm';
 
 Vue.use(TurbolinksAdapter);
 
-import PlayingCard     from '../components/PlayingCard';
-import TheGameTable    from '../components/TheGameTable';
+import PlayingCard  from 'components/game/PlayingCard';
+import TheGameTable from 'components/game/TheGameTable';
 
-import Arrow           from '../components/ui/Arrow';
-import Button          from '../components/ui/Button';
-import LoadingEllipsis from '../components/ui/LoadingEllipsis';
-import LoadingSuits    from '../components/ui/LoadingSuits';
-import Overlay         from '../components/ui/Overlay';
-import Text            from '../components/ui/Text';
+import Arrow           from 'components/game/ui/Arrow';
+import Button          from 'components/game/ui/Button';
+import LoadingEllipsis from 'components/game/ui/LoadingEllipsis';
+import LoadingSuits    from 'components/game/ui/LoadingSuits';
+import Overlay         from 'components/game/ui/Overlay';
+import Text            from 'components/game/ui/Text';
 
 Vue.component('livespeed-playing-card', PlayingCard);
 Vue.component('livespeed-gametable', TheGameTable);

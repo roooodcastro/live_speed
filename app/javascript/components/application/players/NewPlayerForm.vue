@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import PlayerNameInput from 'components/players/PlayerNameInput';
+  import PlayerNameInput from 'components/application/players/PlayerNameInput';
 
   export default {
     components: { PlayerNameInput },

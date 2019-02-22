@@ -1,7 +1,7 @@
 <template>
   <div class="menu-bar">
     <a
-      href="/"
+      href="/app/assets/config"
       class="menu-logo"
     >
       <img

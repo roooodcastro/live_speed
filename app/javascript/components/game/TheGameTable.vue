@@ -57,12 +57,12 @@
   import apiClient           from 'api/match_channel';
   import Round               from 'games/speed/round';
   import Message             from 'games/speed/message';
-  import GameTableHand       from 'components/GameTableHand';
-  import GameTableCenterPile from 'components/GameTableCenterPile';
-  import PlayingCardDeck     from 'components/PlayingCardDeck';
-  import GameTableText       from 'components/GameTableText';
-  import GameTableCardSlots  from 'components/GameTableCardSlots';
-  import PreGameOverlay      from 'components/PreGameOverlay';
+  import GameTableHand       from 'components/game/GameTableHand';
+  import GameTableCenterPile from 'components/game/GameTableCenterPile';
+  import PlayingCardDeck     from 'components/game/PlayingCardDeck';
+  import GameTableText       from 'components/game/GameTableText';
+  import GameTableCardSlots  from 'components/game/GameTableCardSlots';
+  import PreGameOverlay      from 'components/game/PreGameOverlay';
 
   export default {
     components: {
