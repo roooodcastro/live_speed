@@ -13,22 +13,19 @@
         <%= password_field_tag :password %>
       </p>
       <p>
-        <%= button_tag 'Login' %>
+        <%= button_tag 'Login to my Account' %>
       </p>
     <% end %>
-
-    <hr />
-
-    <h2>First timer?</h2>
-
-    <%= link_to 'Start Playing', new_player_path %>
   </div>
 
   <div class="signup-brand-info">
-    <div class="signup-logo">
-      <br/>Logo goes here
+    <%= image_tag('logo/logo.svg', alt: 'Live Speed Logo', class: 'signup-logo') %>
+    <p>First timer?</p>
+
+    <div class="btn-col signup-alternatives-box">
+      <%= link_to 'Start Playing Now', new_player_path, class: 'btn' %>
+      <%= link_to 'Sign Up For an Account', new_sessions_path, class: 'btn btn-outline' %>
     </div>
-    <h2>Live Speed</h2>
   </div>
 </div>
 
