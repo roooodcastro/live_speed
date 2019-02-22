@@ -25,6 +25,7 @@ gem 'bootsnap', '>= 1.1', require: false
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'pry'
+  gem 'rails_real_favicon'
 end
 
 group :development do

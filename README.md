@@ -1,5 +1,7 @@
 # Live Speed
 
+![Live Speed Logo](app/javascript/images/livespeed_logo.svg "Live Speed")
+
 ---
 
 ## What is this?
