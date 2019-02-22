@@ -1,6 +1,6 @@
 # Live Speed
 
-<div style="text-align: center">
+<div align="center">
     <img alt="Live Speed Logo" src="https://github.com/roooodcastro/live_speed/raw/master/app/javascript/images/livespeed_logo.png" height="400px">
 </div>
 
