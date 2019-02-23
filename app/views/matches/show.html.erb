@@ -1,7 +1,7 @@
-<h1>Match <%= @match.id %></h1>
+<%= title "Match: #{@match.description}" %>
 
 <% if @match.can_play? %>
-  <%= link_to 'Play Match!', play_match_path(@match) %>
+  <%= link_to 'Play Match!', play_match_path(@match), class: 'btn' %>
 <% end %>
 
 <h3>Players (<%= @match.players.size %>/<%= @match.num_players %>):</h3>

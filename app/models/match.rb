@@ -55,12 +55,17 @@ class Match < ApplicationRecord
     players.find_by(id: winner_id)
   end
 
+  def finished?
+    winner_id.present?
+  end
+
   def can_play?
     match_players.size == num_players && !winner_id
   end
 
   def description
-    "Best of #{num_rounds} rounds, #{players.size}/#{num_players} players"
+    winner_desc = finished? ? " - #{winner.name} won" : ''
+    "Best of #{num_rounds} rounds, #{num_players} players#{winner_desc}"
   end
 
   def rules

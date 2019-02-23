@@ -1,15 +1,16 @@
-<h1>Create new Match</h1>
+<%= title 'Create new Match' %>
 
 <%= form_with(model: @match) do |f| %>
-  <p>
+  <div class="form-control">
     <%= f.label :num_players, 'Number of Players' %>
     <%= f.text_field :num_players %>
-  </p>
-  <p>
+  </div>
+  <div class="form-control">
     <%= f.label :num_rounds, 'Number of Rounds' %>
     <%= f.text_field :num_rounds %>
-  </p>
-  <p>
-    <%= f.button 'Create Match' %>
-  </p>
+  </div>
+  <div class="form-control">
+    <%= link_to 'Back', :back, class: 'btn btn-outline' %>
+    <%= f.button 'Create Match', class: 'btn' %>
+  </div>
 <% end %>

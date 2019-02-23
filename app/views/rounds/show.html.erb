@@ -1,4 +1,4 @@
-<h1>Round <%= @round.number %> for Game <%= @round.match.id %><%= ' - FINISHED' if @round.winner %></h1>
+<%= title "Round #{@round.number} for Game #{@round.match.id}#{' - FINISHED' if @round.winner}" %>
 
 <%= link_to 'Back to Match', match_path(@round.match) %>
 

@@ -1,9 +1,9 @@
-<h1>Matches</h1>
+<%= title 'My Matches' %>
+
+<%= link_to 'Create new Match', new_match_path, class: 'btn' %>
 
 <ul>
   <% @matches.each do |match| %>
-    <li><%= link_to match.id, match %></li>
+    <li><%= link_to match.description, match %></li>
   <% end %>
 </ul>
-
-<%= link_to 'Log out', sessions_path, method: :delete %>

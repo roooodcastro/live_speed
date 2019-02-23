@@ -147,7 +147,7 @@ Here's a quick overview of the project's progress:
 
 ## Credits
 
-Author: Rodrigo Castro
+Author, Design & Implementation: Rodrigo Castro
 
 Playing Cards SVGs: Adrian Kennard from www.me.uk/cards
 
