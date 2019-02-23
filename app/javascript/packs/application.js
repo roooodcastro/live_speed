@@ -9,19 +9,23 @@
 
 'use strict';
 
+require('@rails/ujs').start();
+
 import '../stylesheets/application';
 
 // Implemented own version of VueTurbolinks because of flickering issues
 // https://github.com/jeffreyguenther/vue-turbolinks/issues/25
+import Turbolinks        from 'turbolinks';
 import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
 import Vue               from 'vue/dist/vue.esm';
 
+Turbolinks.start();
 Vue.use(TurbolinksAdapter);
 
 import PlayerNameInput from 'components/application/players/PlayerNameInput';
-import NewPlayerForm from 'components/application/players/NewPlayerForm';
-import MenuBar from 'components/application/layout/MenuBar';
-import MenuBarLink from 'components/application/layout/MenuBarLink';
+import NewPlayerForm   from 'components/application/players/NewPlayerForm';
+import MenuBar         from 'components/application/layout/MenuBar';
+import MenuBarLink     from 'components/application/layout/MenuBarLink';
 
 Vue.component('player-name-input', PlayerNameInput);
 Vue.component('new-player-form', NewPlayerForm);

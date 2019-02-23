@@ -108,7 +108,7 @@ Here's a quick overview of the project's progress:
 ### Interface
 
 - [x] Choose brand colours
-- [ ] Create basic layout
+- [x] Create basic layout
 - [ ] Create basic Vue components (buttons, links, form inputs, etc)
 - [x] Style player creation page
 - [ ] Style landing page
@@ -138,7 +138,7 @@ Here's a quick overview of the project's progress:
 - [ ] Setup AWS deploy
 - [ ] Add monitoring service
 - [ ] Tests!
-- [ ] Use Webpacker version of ActionCable
+- [x] Use Webpacker version of ActionCable and Turbolinks
 - [ ] Add JSRoutes with webpacker
 - [ ] Generate favicons in webpacker instead of sprockets
 - [ ] Add i18n to Rails

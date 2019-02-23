@@ -4,7 +4,7 @@ module UserLogin
   extend ActiveSupport::Concern
 
   included do
-    helper_method :user_logged_in?
+    helper_method :user_logged_in?, :current_user
 
     def self.require_user_login(opts = {})
       before_action :require_user_login, opts

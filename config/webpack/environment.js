@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker');
+
 const vue =  require('./loaders/vue');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 

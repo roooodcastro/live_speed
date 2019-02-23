@@ -1,20 +1,19 @@
+import createChannel from 'helpers/cable';
+
 export default {
   subscribeToApi(gameTable) {
-    return App.cable.subscriptions.create({ channel: 'MatchChannel', round_id: gameTable.roundId }, {
+    return createChannel({ channel: 'MatchChannel', round_id: gameTable.roundId }, {
       // Called when the subscription is ready for use on the server.
       connected() {
-        console.log('connected!');
         this.fetchData();
       },
 
       // Called when the subscription has been terminated by the server.
       disconnected() {
-        console.log('server died');
       },
 
       // Called when the subscription is rejected by the server.
       rejected() {
-        console.log('server didn\'t like me :(');
       },
 
       // Called when there's incoming data on the websocket for this channel
