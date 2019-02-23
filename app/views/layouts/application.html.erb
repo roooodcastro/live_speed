@@ -19,15 +19,8 @@
 
 <body>
 <div class="container" data-behaviour="vue">
-  <menu-bar>
-    <% if player_logged_in? %>
-      <%= vue_component('menu-bar-link', props: { href: lobby_path, label: 'Find a Match' }) %>
-      <%= vue_component('menu-bar-link', props: { href: matches_path, label: 'My Matches' }) %>
-      <%= vue_component('menu-bar-link', props: { href: how_to_play_path, label: 'How to Play' }) %>
-    <% else %>
-      <%= vue_component('menu-bar-link', props: { href: new_sessions_path, label: 'Login' }) %>
-    <% end %>
-  </menu-bar>
+  <%= render partial: 'layouts/menu_bar' %>
+
   <div class="<%= yield(:body_class) if content_for?(:body_class) %>">
     <main>
       <%= yield %>

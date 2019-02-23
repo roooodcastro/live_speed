@@ -1,7 +1,7 @@
 <template>
   <div class="menu-bar">
     <a
-      href="/app/assets/config"
+      href="/"
       class="menu-logo"
     >
       <img
@@ -10,7 +10,11 @@
       >
       LiveSpeed
     </a>
-    <slot />
+    <slot name="left-menu" />
+
+    <div class="menu-right">
+      <slot name="right-menu" />
+    </div>
   </div>
 </template>
 
@@ -48,5 +52,9 @@
     img { height: 3rem; width: 3rem; }
 
     &:hover { background-color: rgba($brand-white, 0.1); }
+  }
+
+  .menu-right {
+    margin-left: auto;
   }
 </style>

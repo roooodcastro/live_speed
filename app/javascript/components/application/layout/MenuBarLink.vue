@@ -2,6 +2,7 @@
   <a
     :href="href"
     class="menu-bar-link"
+    :data-method="method"
   >
     {{ label }}
   </a>
@@ -12,7 +13,8 @@
     props: {
       active: { type: Boolean, default: false },
       href:   { type: String, default: '#' },
-      label:  { type: String, required: true }
+      label:  { type: String, required: true },
+      method: { type: String, default: 'get' }
     },
 
     computed: {
