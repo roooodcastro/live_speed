@@ -10,7 +10,7 @@ class MatchesController < ApplicationController
   before_action :set_match, only: %i[show play edit update]
 
   def index
-    @matches = Match.from_player(current_player_id)
+    @matches = Match.from_player(current_player_id).with_players.with_rounds
 
     respond_with(@matches)
   end
@@ -62,7 +62,7 @@ class MatchesController < ApplicationController
   private
 
   def set_match
-    @match = Match.find(params[:id])
+    @match = Match.with_players.with_rounds.find(params[:id])
   end
 
   def match_params

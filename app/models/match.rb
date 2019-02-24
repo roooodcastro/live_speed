@@ -11,6 +11,8 @@ class Match < ApplicationRecord
   validates :match_players, length: { in: 1..4 }
 
   scope :from_player, ->(player_id) { joins(:match_players).where match_players: { player_id: player_id } }
+  scope :with_players, -> { includes players: :user }
+  scope :with_rounds, -> { includes :rounds }
 
   scope :unmatched, lambda {
     joins(:players)
@@ -52,7 +54,7 @@ class Match < ApplicationRecord
   end
 
   def winner
-    players.find_by(id: winner_id)
+    players.to_a.find { |player| (player.id == winner_id) }
   end
 
   def finished?
