@@ -143,7 +143,7 @@ Here's a quick overview of the project's progress:
 - [ ] Generate favicons in webpacker instead of sprockets
 - [ ] Add i18n to Rails
 - [ ] Add i18n to JS/webpacker
-- [ ] Completely remove Sprockets in favour of Webpacker
+- [x] Completely remove Sprockets in favour of Webpacker
 
 ## Credits
 

@@ -1,1 +1,27 @@
 @import 'normalize.css';
+
+@font-face {
+  font-family: 'CardChars';
+  src: url('../fonts/cardchars.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Barbaro';
+  src: url('../fonts/barbaro.ttf') format('truetype');
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+html, body, .container {
+  box-sizing: border-box;
+  display:    block;
+  height:     100%;
+  overflow:   hidden;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'CardChars', serif; }

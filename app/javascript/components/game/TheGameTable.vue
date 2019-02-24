@@ -245,7 +245,7 @@
 
 <style lang="scss">
   .game-table-container {
-    background-image:  asset-url('felt.png');
+    background-image:  url('../../images/felt.png');
     background-repeat: repeat;
     box-sizing:        border-box;
     display:           block;
