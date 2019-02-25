@@ -2,11 +2,11 @@
   <div class="game-table-container">
     <div id="game_table" class="game-table">
       <div v-show="state === 'loading'">
-        <livespeed-loading-suits/>
+        <livespeed-loading-suits />
       </div>
 
       <div v-show="!playedDealAnimation">
-        <playing-card-deck ref="cardDeck"/>
+        <playing-card-deck ref="cardDeck" />
       </div>
 
       <div
@@ -34,7 +34,7 @@
           @replacementClick="onReplacementClick"
         />
 
-        <GameTableText :text="playerMessage"/>
+        <GameTableText :text="playerMessage" />
       </div>
 
       <div v-show="state === 'setup' && playedDealAnimation">
