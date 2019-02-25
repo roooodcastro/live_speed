@@ -64,25 +64,27 @@ export default class CardCoordinate {
 
 
   get pxString() {
-    return this.xPixels + 'px,' + this.yPixels + 'px';
+    return this.xPixels + 'vmin,' + this.yPixels + 'vmin';
   }
 
   get xPixels() {
-    const relativePos  = this.x * CardCoordinate.coordSize();
-    const screenCenter = screen.centerPosition()[0];
-    const gridOffset   = CardCoordinate.cardGridOffset(this.x, CARD_WIDTH);
-    return (screenCenter + relativePos + gridOffset) / this.scale;
+    return (this.x / 2) / this.scale;
+    // const relativePos  = this.x * CardCoordinate.coordSize();
+    // const screenCenter = screen.centerPosition()[0];
+    // const gridOffset   = CardCoordinate.cardGridOffset(this.x, CARD_WIDTH);
+    // return (screenCenter + relativePos + gridOffset) / this.scale;
   }
 
   get yPixels() {
-    const relativePos  = this.y * CardCoordinate.coordSize();
-    const screenCenter = screen.centerPosition()[1];
-    const gridOffset   = CardCoordinate.cardGridOffset(this.y, CARD_HEIGHT);
-    return (screenCenter + relativePos + gridOffset) / this.scale;
+    return (this.y / 2) / this.scale;
+    // const relativePos  = this.y * CardCoordinate.coordSize();
+    // const screenCenter = screen.centerPosition()[1];
+    // const gridOffset   = CardCoordinate.cardGridOffset(this.y, CARD_HEIGHT);
+    // return (screenCenter + relativePos + gridOffset) / this.scale;
   }
 
-  // Calculates whether a card in this position is overlapping a card in other position. Takes the size of the
-  // cards into consideration.
+  // Calculates whether a card in this position is overlapping a card in other position.
+  // Takes the size of the cards into consideration.
   isOverlapping(other) {
     const trueCardWidth  = (CARD_WIDTH * this.scale) / CardCoordinate.coordSize();
     const trueCardHeight = (CARD_HEIGHT * this.scale) / CardCoordinate.coordSize();

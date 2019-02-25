@@ -26,19 +26,21 @@ export default class GridCoordinate {
   }
 
   get pxString() {
-    return 'calc(' + this.xPixels + 'px - 50%),calc(' + this.yPixels + 'px - 50%)';
+    return this.xPixels + 'vmin,' + this.yPixels + 'vmin';
   }
 
   get xPixels() {
-    const relativePos  = this.x * GridCoordinate.coordSize();
-    const screenCenter = screen.centerPosition()[0];
-    return screenCenter + relativePos;
+    return 50 + this.x / 2;
+    // const relativePos  = this.x * GridCoordinate.coordSize();
+    // const screenCenter = screen.centerPosition()[0];
+    // return screenCenter + relativePos;
   }
 
   get yPixels() {
-    const relativePos  = this.y * GridCoordinate.coordSize();
-    const screenCenter = screen.centerPosition()[1];
-    return screenCenter + relativePos;
+    return 50 + this.y / 2;
+    // const relativePos  = this.y * GridCoordinate.coordSize();
+    // const screenCenter = screen.centerPosition()[1];
+    // return screenCenter + relativePos;
   }
 
   add(other) {

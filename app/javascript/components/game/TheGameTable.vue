@@ -1,55 +1,54 @@
 <template>
-  <div
-    id="game_table"
-    class="game-table-container"
-  >
-    <div v-show="state === 'loading'">
-      <livespeed-loading-suits />
-    </div>
+  <div class="game-table-container">
+    <div id="game_table" class="game-table">
+      <div v-show="state === 'loading'">
+        <livespeed-loading-suits/>
+      </div>
 
-    <div v-show="!playedDealAnimation">
-      <playing-card-deck ref="cardDeck" />
-    </div>
+      <div v-show="!playedDealAnimation">
+        <playing-card-deck ref="cardDeck"/>
+      </div>
 
-    <div
-      v-show="playedDealAnimation"
-      class="game-table-gamearea"
-      @mousedown="onDragStart"
-      @mouseup="onDragEnd"
-      @mousemove="onDragMove"
-    >
-      <GameTableHand
-        v-for="(hand, index) in hands"
-        :ref="'hand_' + hand.player.id"
-        :key="'hand_' + hand.player.id"
-        :player-index="index"
-        :player="hand.player"
-        :initial-hand="hand.cards"
-        :initial-draw="hand.draw_pile"
+      <div
+        v-show="playedDealAnimation"
+        class="game-table-gamearea"
+        @mousedown="onDragStart"
+        @mouseup="onDragEnd"
+        @mousemove="onDragMove"
+      >
+        <GameTableHand
+          v-for="(hand, index) in hands"
+          :ref="'hand_' + hand.player.id"
+          :key="'hand_' + hand.player.id"
+          :player-index="index"
+          :player="hand.player"
+          :initial-hand="hand.cards"
+          :initial-draw="hand.draw_pile"
+        />
+
+        <GameTableCenterPile
+          ref="centerPile"
+          :center-piles="centerPiles"
+          :replacement-piles="replacementPiles"
+          :can-use-replacement="canUseReplacement"
+          @replacementClick="onReplacementClick"
+        />
+
+        <GameTableText :text="playerMessage"/>
+      </div>
+
+      <div v-show="state === 'setup' && playedDealAnimation">
+        <pre-game-overlay
+          ref="preGameOverlay"
+          @playerReady="onReadyClick"
+        />
+      </div>
+
+      <GameTableCardSlots
+        v-show="state !== 'loading'"
+        :number-of-players="2"
       />
-
-      <GameTableCenterPile
-        ref="centerPile"
-        :center-piles="centerPiles"
-        :replacement-piles="replacementPiles"
-        :can-use-replacement="canUseReplacement"
-        @replacementClick="onReplacementClick"
-      />
-
-      <GameTableText :text="playerMessage" />
     </div>
-
-    <div v-show="state === 'setup' && playedDealAnimation">
-      <pre-game-overlay
-        ref="preGameOverlay"
-        @playerReady="onReadyClick"
-      />
-    </div>
-
-    <GameTableCardSlots
-      v-show="state !== 'loading'"
-      :number-of-players="2"
-    />
   </div>
 </template>
 
@@ -245,12 +244,17 @@
 
 <style lang="scss">
   .game-table-container {
+    align-items:       center;
     background-image:  url('../../images/felt.png');
     background-repeat: repeat;
+    bottom:            0;
     box-sizing:        border-box;
-    display:           block;
-    height:            100%;
-    position:          relative;
+    display:           flex;
+    justify-content:   center;
+    left:              0;
+    position:          absolute;
+    right:             0;
+    top:               0;
 
     &:before {
       content:    '';
@@ -261,6 +265,13 @@
       right:      0;
       top:        0;
     }
+  }
+
+  .game-table {
+    background: rgba(150, 0, 150, 0.3);
+    height:     100vmin;
+    position:   relative;
+    width:      100vmin;
   }
 
   .game-table-gamearea {
