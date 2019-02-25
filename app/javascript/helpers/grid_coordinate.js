@@ -22,7 +22,7 @@ export default class GridCoordinate {
     const coordX = ((xPixels - screen.centerPosition()[0]) / GridCoordinate.coordSize());
     const coordY = ((yPixels - screen.centerPosition()[1]) / GridCoordinate.coordSize());
 
-    return new GridCoordinate(coordX, coordY);
+    return new this.prototype.constructor(coordX, coordY);
   }
 
   get toString() {
@@ -32,6 +32,6 @@ export default class GridCoordinate {
   }
 
   add(other) {
-    return new GridCoordinate(this.x + other.x, this.y + other.y);
+    return new this.prototype.constructor(this.x + other.x, this.y + other.y);
   }
 }
