@@ -25,10 +25,10 @@ export default class GridCoordinate {
     return new GridCoordinate(coordX, coordY);
   }
 
-  get pxString() {
+  get toString() {
     const xVmin = 50 + this.x / 2;
     const yVmin = 50 + this.y / 2;
-    return xVmin + 'vmin,' + yVmin + 'vmin';
+    return 'calc(' + xVmin + 'vmin - 50%), calc(' + yVmin + 'vmin - 50%)';
   }
 
   add(other) {

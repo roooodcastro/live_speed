@@ -35,7 +35,13 @@
           @replacementClick="onReplacementClick"
         />
 
-        <GameTableText :text="playerMessage" />
+        <livespeed-text
+          :pos="[0, -35]"
+          :size="6"
+          font="Barbaro"
+        >
+          {{ playerMessage }}
+        </livespeed-text>
       </div>
 
       <div v-show="state === 'setup' && playedDealAnimation">
@@ -60,7 +66,6 @@
   import GameTableHand       from 'components/game/GameTableHand';
   import GameTableCenterPile from 'components/game/GameTableCenterPile';
   import PlayingCardDeck     from 'components/game/PlayingCardDeck';
-  import GameTableText       from 'components/game/GameTableText';
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
   import PreGameOverlay      from 'components/game/PreGameOverlay';
 
@@ -68,7 +73,6 @@
     components: {
       GameTableHand,
       GameTableCenterPile,
-      GameTableText,
       GameTableCardSlots,
       PlayingCardDeck,
       PreGameOverlay
@@ -124,6 +128,11 @@
 
     mounted() {
       this.api = apiClient.subscribeToApi(this);
+      window.addEventListener('resize', this.onWindowResize);
+    },
+
+    beforeDestroy: function () {
+      window.removeEventListener('resize', this.onWindowResize);
     },
 
     methods: {
@@ -226,6 +235,10 @@
         }
       },
 
+      onWindowResize() {
+        // TODO: Find a way to make the game resize dynamically;
+      },
+
       playCard(card, pileIndex) {
         const cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
         this.api.playCard(cardIndex, pileIndex, this.playerId);
@@ -269,7 +282,7 @@
   }
 
   .game-table {
-    background: rgba(0, 255, 0, 0.1);
+    /*background: rgba(0, 255, 0, 0.1); // To debug game area boundaries*/
     height:     100vmin;
     position:   relative;
     width:      100vmin;

@@ -19,7 +19,7 @@
     computed: {
       transform() {
         const coordinates = new GridCoordinate(this.pos, 1);
-        return 'translate(' + coordinates.pxString + ')';
+        return 'translate(' + coordinates.toString + ')';
       }
     },
 

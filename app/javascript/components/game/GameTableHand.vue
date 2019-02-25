@@ -22,7 +22,7 @@
     />
     <livespeed-text
       :pos="playerNamePos"
-      :size="1.5"
+      :size="4"
       font="Barbaro"
     >
       {{ player.name }}
@@ -76,7 +76,7 @@
 
       playerNamePos() {
         const mult = (this.playerIndex === 0) ? 1 : -1;
-        return [75 * mult, 60 * mult];
+        return [80 * mult, 58 * mult];
       }
     },
 

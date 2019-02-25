@@ -9,6 +9,7 @@
 
 <script>
   import GridCoordinate from 'helpers/grid_coordinate';
+  import CardCoordinate from 'helpers/card_coordinate';
 
   export default {
 
@@ -19,12 +20,12 @@
     },
     computed: {
       transform() {
-        const coordinates = new GridCoordinate(this.pos, 1);
-        return 'translate(' + coordinates.pxString + ')';
+        const coordinates = new GridCoordinate(this.pos);
+        return 'translate(' + coordinates.toString + ')';
       },
 
       fontSize() {
-        return this.size + 'em';
+        return (this.size * CardCoordinate.cardScale()) + 'rem';
       },
 
       style() {
@@ -39,11 +40,13 @@
 </script>
 
 <style>
-    .livespeed-text {
-        color:       rgba(255, 255, 255, 0.75);
-        margin:      0;
-        position:    absolute;
-        text-shadow: 1px 1px 2px black;
-        user-select: none;
-    }
+  .livespeed-text {
+    color:       rgba(255, 255, 255, 0.9);
+    margin:      0;
+    padding:     0 1rem;
+    position:    absolute;
+    text-align:  center;
+    text-shadow: 1px 1px 2px black;
+    user-select: none;
+  }
 </style>

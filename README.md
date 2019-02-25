@@ -98,12 +98,13 @@ Here's a quick overview of the project's progress:
 - [x] Play replacement cards
 - [ ] Shuffle center piles back into replacement piles
 - [ ] End-game feedback
-- [ ] Redo card positioning to make it work for mobile
+- [x] Redo card positioning to make it work for mobile
 - [ ] Fix visual bugs
 - [ ] Improve card hover animation
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects
 - [ ] Implement a better HUD for displaying more information about the game
+- [ ] Add help timer to warn players os possible plays when they stay a long time without any moves
 
 ### Interface
 

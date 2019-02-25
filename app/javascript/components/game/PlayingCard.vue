@@ -76,7 +76,7 @@
         if (this.isFeatured) {
           return 'drop-shadow(0px 0px 15px #FFFFAA)';
         } else {
-          return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px black)';
+          return 'drop-shadow(0px 0px ' + (2 + this.altitude) + 'px rgba(0, 0, 0, 0.5))';
         }
       },
 
@@ -141,12 +141,8 @@
     background-image:           url("../../images/playing_cards.svg");
     background-repeat:          no-repeat;
     background-size:            1000% 600%;
-    filter:                     drop-shadow(0px 0px 2px black);
-    height:                     336px;
     position:                   absolute;
-    transform:                  scale(0.625);
     transition-timing-function: ease-in-out;
-    width:                      216px;
 
     &:after {
       content:         "";
