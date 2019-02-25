@@ -2,7 +2,6 @@
   <div class="game-table-container">
     <div id="game_table" class="game-table">
       <div v-show="state === 'loading'">
-        <livespeed-loading-suits />
       </div>
 
       <div v-show="!playedDealAnimation">
@@ -127,6 +126,8 @@
 
     methods: {
       onApiReceiveRoundData(data) {
+        return;
+
         if (data.player_id !== this.playerId) return;
 
         this.updateData(data);

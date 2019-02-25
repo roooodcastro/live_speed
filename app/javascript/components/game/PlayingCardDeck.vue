@@ -19,7 +19,7 @@
 
   export default {
     props:   {
-      cardCount: { type: Number, default: 52 }
+      cardCount: { type: Number, default: 1 }
     },
     data() {
       return {
