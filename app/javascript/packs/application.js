@@ -11,6 +11,8 @@
 
 require('@rails/ujs').start();
 
+require.context('../images', true);
+
 import '../stylesheets/application';
 
 // Implemented own version of VueTurbolinks because of flickering issues
