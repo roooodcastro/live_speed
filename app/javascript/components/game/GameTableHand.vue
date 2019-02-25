@@ -121,14 +121,14 @@
       handCardPos(cardIndex) {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = ((cardIndex * 32) - 80) * mult;
-        const posY = 95 * mult;
+        const posY = 80 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = 80 * mult;
-        const posY = (95 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
+        const posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }
     }

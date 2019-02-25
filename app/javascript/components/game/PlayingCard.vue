@@ -7,7 +7,8 @@
 </template>
 
 <script>
-  import CardCoordinate from 'helpers/card_coordinate';
+  import CardCoordinate              from 'helpers/card_coordinate';
+  import { CARD_WIDTH, CARD_HEIGHT } from 'helpers/constants';
 
   export default {
     name: 'PlayingCard',
@@ -48,18 +49,23 @@
 
       style() {
         return {
-          transform:  this.transform,
-          zIndex:     this.order,
-          filter:     this.dropShadow,
-          transition: this.transition
+          transform:      this.transform,
+          zIndex:         this.order,
+          filter:         this.dropShadow,
+          transition:     this.transition,
+          width:          this.cssSize[0] + 'px',
+          height:         this.cssSize[1] + 'px'
         };
       },
 
+      cssSize() {
+        return [CARD_WIDTH * CardCoordinate.cardScale(), CARD_HEIGHT * CardCoordinate.cardScale()];
+      },
+
       transform() {
-        const scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
-        const posTransform   = 'translate(' + this.currentPosition.pxString + ')';
-        const rotTransform   = 'rotate(' + this.rotation + 'deg)';
-        return [scaleTransform, posTransform, rotTransform].join(' ');
+        const posTransform = 'translate(' + this.currentPosition.toString + ')';
+        const rotTransform = 'rotate(' + this.rotation + 'deg)';
+        return [posTransform, rotTransform].join(' ');
       },
 
       transition() {
@@ -134,6 +140,7 @@
   .playing-card {
     background-image:           url("../../images/playing_cards.svg");
     background-repeat:          no-repeat;
+    background-size:            1000% 600%;
     filter:                     drop-shadow(0px 0px 2px black);
     height:                     336px;
     position:                   absolute;
@@ -142,20 +149,21 @@
     width:                      216px;
 
     &:after {
-      content:    "";
-      background: url("../../images/playing_cards.svg") 11.11111111111111% 0 no-repeat;
-      opacity:    0;
-      transition: opacity 0.5s;
-      position:   absolute;
-      top:        0;
-      right:      0;
-      bottom:     0;
-      left:       0;
+      content:         "";
+      background:      url("../../images/playing_cards.svg") 11.11111111111111% 0 no-repeat;
+      background-size: 1000% 600%;
+      opacity:         0;
+      transition:      opacity 0.5s;
+      position:        absolute;
+      top:             0;
+      right:           0;
+      bottom:          0;
+      left:            0;
     }
   }
 
   .playing-card.card-active:hover {
-    filter: drop-shadow(0px 0px 20px #FFFFAA) !important;
+    filter: drop-shadow(0px 0px 10px #FFFFAA) !important;
   }
 
   // Flipped cards

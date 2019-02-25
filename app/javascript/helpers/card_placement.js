@@ -6,7 +6,7 @@ export default {
       return acc.concat(this.handPositions(index, numberOfPlayers));
     }, []);
 
-    const centerDistanceFactor = (numberOfPlayers === 2) ? 1 : 0.7;
+    const centerDistanceFactor = (numberOfPlayers === 2) ? 1 : 0.6;
     const centerPiles = [
       { pos: [centerDistanceFactor * -80, 0], rot: 0 },
       { pos: [centerDistanceFactor * 80, 0], rot: 0 },
@@ -20,17 +20,17 @@ export default {
   handPositions(playerIndex, numberOfPlayers) {
     const basePositions = [-80, -48, -16, 16, 48, 80];
     const rotation = playerIndex * -(360 / numberOfPlayers);
-    const distanceFactor = (numberOfPlayers === 2) ? 1 : 0.8;
+    const distanceFactor = (numberOfPlayers === 2) ? 1 : 0.675;
 
     if (numberOfPlayers === 2) {
       const mult = (playerIndex === 0) ? 1 : -1;
-      return basePositions.map((pos) => ({ pos: [pos * mult, 95 * mult], rot: rotation }));
+      return basePositions.map((pos) => ({ pos: [pos * mult, 80 * mult], rot: rotation }));
     } else {
       const multIndex = (playerIndex % 2 === 0) ? 0 : 3;
       const mult = (playerIndex === multIndex) ? 1 : -1;
       const positionFunc = (pos, mult) => {
-        const positionHoriz = [pos * mult * distanceFactor, 95 * mult];
-        const positionVert = [-95 * mult, pos * mult * distanceFactor];
+        const positionHoriz = [pos * mult * distanceFactor, 80 * mult];
+        const positionVert = [-80 * mult, pos * mult * distanceFactor];
         return (multIndex === 0) ? positionHoriz : positionVert;
       };
 

@@ -1,8 +1,10 @@
 <template>
   <div class="game-table-container">
-    <div id="game_table" class="game-table">
-      <div v-show="state === 'loading'">
-      </div>
+    <div
+      id="game_table"
+      class="game-table"
+    >
+      <div v-show="state === 'loading'" />
 
       <div v-show="!playedDealAnimation">
         <playing-card-deck ref="cardDeck" />
@@ -126,8 +128,6 @@
 
     methods: {
       onApiReceiveRoundData(data) {
-        return;
-
         if (data.player_id !== this.playerId) return;
 
         this.updateData(data);
@@ -269,7 +269,7 @@
   }
 
   .game-table {
-    background: rgba(150, 0, 150, 0.3);
+    background: rgba(0, 255, 0, 0.1);
     height:     100vmin;
     position:   relative;
     width:      100vmin;
@@ -285,18 +285,4 @@
   }
 
   .game-table-hand { position: relative; }
-
-  .game-table-cardslots {
-    position: relative;
-
-    .game-table-cardslot {
-      border:        6px solid rgba(255, 255, 255, 0.7);
-      border-radius: 24px;
-      height:        324px;
-      position:      absolute;
-      width:         216px;
-      top:           6px;
-      left:          0;
-    }
-  }
 </style>

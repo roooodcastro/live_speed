@@ -43,44 +43,36 @@ export default class CardCoordinate {
 
   // Transforms a pixel position array (in the format [x, y]) into a CardCoordinate.
   static fromPixelPosition(xPixels, yPixels) {
-    // Basic untreated conversion
-    let coordX = ((xPixels - screen.centerPosition()[0]) / CardCoordinate.coordSize());
-    let coordY = ((yPixels - screen.centerPosition()[1]) / CardCoordinate.coordSize());
-
-    // Calculate the offsets used to make the card fit in the grid in any direction
-    const gridEndOffsetX = CARD_WIDTH * ((coordX + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
-    const gridEndOffsetY = CARD_HEIGHT * ((coordY + (GRID_SIZE / 2)) / GRID_SIZE) * CardCoordinate.cardScale();
-
-    // Add calculated offset plus the half-sized card offset, converted from pixels to coords
-    coordX += (gridEndOffsetX + CardCoordinate.cardCenterOffset(CARD_WIDTH) / 2) / CardCoordinate.coordSize();
-    coordY += (gridEndOffsetY + CardCoordinate.cardCenterOffset(CARD_HEIGHT) / 2) / CardCoordinate.coordSize();
+    let coordX = (xPixels - screen.centerPosition()[0]) / screen.vminSize() * 2;
+    let coordY = (yPixels - screen.centerPosition()[1]) / screen.vminSize() * 2;
 
     return new CardCoordinate(coordX, coordY);
   }
 
+  // Returns the vertical offset of a specific card in a card stack. The greater the cardIndex, the greater the offset
+  // will be. This is used to simulate a 3D representation of a card stack, giving a sense of depth.
   static cardYOffset(cardIndex) {
     return cardIndex * CARD_VERTICAL_SEPARATION;
   }
 
-
-  get pxString() {
-    return this.xPixels + 'vmin,' + this.yPixels + 'vmin';
+  static get scaledCardWidth() {
+    return CARD_WIDTH * CardCoordinate.cardScale();
   }
 
-  get xPixels() {
-    return (this.x / 2) / this.scale;
-    // const relativePos  = this.x * CardCoordinate.coordSize();
-    // const screenCenter = screen.centerPosition()[0];
-    // const gridOffset   = CardCoordinate.cardGridOffset(this.x, CARD_WIDTH);
-    // return (screenCenter + relativePos + gridOffset) / this.scale;
+  static get scaledCardHeight() {
+    return CARD_HEIGHT * CardCoordinate.cardScale();
   }
 
-  get yPixels() {
-    return (this.y / 2) / this.scale;
-    // const relativePos  = this.y * CardCoordinate.coordSize();
-    // const screenCenter = screen.centerPosition()[1];
-    // const gridOffset   = CardCoordinate.cardGridOffset(this.y, CARD_HEIGHT);
-    // return (screenCenter + relativePos + gridOffset) / this.scale;
+  get toString() {
+    return this.xVmin + 'vmin,' + this.yVmin + 'vmin';
+  }
+
+  get xVmin() {
+    return 50 + (this.x / 2) - screen.pxToVmin(CardCoordinate.scaledCardWidth / 2);
+  }
+
+  get yVmin() {
+    return 50 + (this.y / 2) - screen.pxToVmin(CardCoordinate.scaledCardHeight / 2);
   }
 
   // Calculates whether a card in this position is overlapping a card in other position.

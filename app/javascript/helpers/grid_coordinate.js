@@ -26,21 +26,9 @@ export default class GridCoordinate {
   }
 
   get pxString() {
-    return this.xPixels + 'vmin,' + this.yPixels + 'vmin';
-  }
-
-  get xPixels() {
-    return 50 + this.x / 2;
-    // const relativePos  = this.x * GridCoordinate.coordSize();
-    // const screenCenter = screen.centerPosition()[0];
-    // return screenCenter + relativePos;
-  }
-
-  get yPixels() {
-    return 50 + this.y / 2;
-    // const relativePos  = this.y * GridCoordinate.coordSize();
-    // const screenCenter = screen.centerPosition()[1];
-    // return screenCenter + relativePos;
+    const xVmin = 50 + this.x / 2;
+    const yVmin = 50 + this.y / 2;
+    return xVmin + 'vmin,' + yVmin + 'vmin';
   }
 
   add(other) {

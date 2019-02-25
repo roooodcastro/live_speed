@@ -4,7 +4,7 @@
       v-for="(slot, index) in slots"
       :key="'slot_' + index"
       class="game-table-cardslot"
-      :style="{ transform: slotTransform(slot) }"
+      :style="style(slot)"
     />
   </div>
 </template>
@@ -14,24 +14,45 @@
   import CardCoordinate from 'helpers/card_coordinate';
 
   export default {
-
     props: {
       numberOfPlayers: { type: Number, required: true }
     },
+
     data() {
       return {
         slots: placement.allCardPositions(this.numberOfPlayers)
       };
     },
 
+
     methods: {
       slotTransform(slot) {
-        const coordinates = new CardCoordinate(slot.pos);
-        const scaleTransform = 'scale(' + CardCoordinate.cardScale() + ')';
-        const posTransform   = 'translate(' + coordinates.pxString + ')';
-        const rotTransform   = 'rotate(' + slot.rot + 'deg)';
-        return [scaleTransform, posTransform, rotTransform].join(' ');
+        const coordinates  = new CardCoordinate(slot.pos);
+        const posTransform = 'translate(' + coordinates.toString + ')';
+        const rotTransform = 'rotate(' + slot.rot + 'deg)';
+        return [posTransform, rotTransform].join(' ');
+      },
+
+      style(slot) {
+        return {
+          transform: this.slotTransform(slot),
+          height:    CardCoordinate.scaledCardHeight + 'px',
+          width:     CardCoordinate.scaledCardWidth + 'px'
+        };
       }
     }
   };
 </script>
+
+<style lang="scss">
+  .game-table-cardslots {
+    position: relative;
+
+    .game-table-cardslot {
+      border:        0.2rem solid rgba(255, 255, 255, 0.7);
+      border-radius: 0.5rem;
+      position:      absolute;
+      left:          0;
+    }
+  }
+</style>
