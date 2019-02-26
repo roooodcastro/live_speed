@@ -55,6 +55,7 @@
         v-show="state !== 'loading'"
         :number-of-players="2"
       />
+      <GameMenu />
     </div>
   </div>
 </template>
@@ -68,9 +69,11 @@
   import PlayingCardDeck     from 'components/game/PlayingCardDeck';
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
   import PreGameOverlay      from 'components/game/PreGameOverlay';
+  import GameMenu            from 'components/game/ui/GameMenu';
 
   export default {
     components: {
+      GameMenu,
       GameTableHand,
       GameTableCenterPile,
       GameTableCardSlots,
@@ -283,9 +286,9 @@
 
   .game-table {
     /*background: rgba(0, 255, 0, 0.1); // To debug game area boundaries*/
-    height:     100vmin;
-    position:   relative;
-    width:      100vmin;
+    height:   100vmin;
+    position: relative;
+    width:    100vmin;
   }
 
   .game-table-gamearea {

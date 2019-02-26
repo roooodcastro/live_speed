@@ -76,7 +76,7 @@
 
       playerNamePos() {
         const mult = (this.playerIndex === 0) ? 1 : -1;
-        return [80 * mult, 58 * mult];
+        return [80 * mult, 53 * mult];
       }
     },
 
@@ -121,14 +121,14 @@
       handCardPos(cardIndex) {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = ((cardIndex * 32) - 80) * mult;
-        const posY = 80 * mult;
+        const posY = 75 * mult;
         return [posX, posY];
       },
 
       drawCardPos(cardIndex) {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = 80 * mult;
-        const posY = (80 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
+        const posY = (75 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY];
       }
     }

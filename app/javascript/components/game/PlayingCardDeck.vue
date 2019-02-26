@@ -5,7 +5,7 @@
       :key="'deckCard_' + index"
       :suit="card.s"
       :rank="card.r"
-      :initial-position="[0, 45 - cardYOffset(index)]"
+      :initial-position="[0, 40 - cardYOffset(index)]"
       :initial-order="card.order"
     />
   </div>

@@ -24,7 +24,7 @@ export default {
 
     if (numberOfPlayers === 2) {
       const mult = (playerIndex === 0) ? 1 : -1;
-      return basePositions.map((pos) => ({ pos: [pos * mult, 80 * mult], rot: rotation }));
+      return basePositions.map((pos) => ({ pos: [pos * mult, 75 * mult], rot: rotation }));
     } else {
       const multIndex = (playerIndex % 2 === 0) ? 0 : 3;
       const mult = (playerIndex === multIndex) ? 1 : -1;
