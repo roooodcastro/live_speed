@@ -105,6 +105,7 @@ Here's a quick overview of the project's progress:
 - [ ] Implement controls for disabling sound effects
 - [ ] Implement a better HUD for displaying more information about the game
 - [ ] Add help timer to warn players os possible plays when they stay a long time without any moves
+- [ ] Implement AI to serve as a tutorial
 
 ### Interface
 

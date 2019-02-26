@@ -43,7 +43,7 @@ Vue.component('livespeed-loading-suits', LoadingSuits);
 Vue.component('livespeed-overlay', Overlay);
 Vue.component('livespeed-text', Text);
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('turbolinks:load', function () {
   window.gameApp = new Vue({
     el:         '[data-behaviour="vue"]',
     components: { TheGameTable },

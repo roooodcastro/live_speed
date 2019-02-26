@@ -49,19 +49,30 @@
 </template>
 
 <script>
-  import CardCoordinate from 'helpers/card_coordinate';
+  import CardCoordinate      from 'helpers/card_coordinate';
   import { CARD_MOVE_DELAY } from 'helpers/constants';
+  import cardPlacement       from 'helpers/card_placement';
 
   export default {
-
     props: {
       centerPiles:       { type: Array, required: true },
       replacementPiles:  { type: Array, required: true },
       canUseReplacement: { type: Boolean, required: true }
     },
+
     computed: {
       allCards() {
         return this.$children;
+      },
+
+      allCenterCards() {
+        return Object.keys(this.$refs)
+          .filter(key => key.includes('center_'))
+          .map((key) => this.$refs[key][0]);
+      },
+
+      emptyReplacementPiles() {
+        return this.replacementPiles[0].length === 0;
       }
     },
 
@@ -108,19 +119,56 @@
         return [20, -this.cardYOffset(cardIndex)];
       },
 
+      leftRepPilePosition(cardIndex) {
+        return [-80, -this.cardYOffset(cardIndex)];
+      },
+
+      rightRepPilePosition(cardIndex) {
+        return [80, -this.cardYOffset(cardIndex)];
+      },
+
       pullFromReplacements() {
         // TODO: Detect if there are no cards left so we will need to refill it with the center cards.
         return new Promise((resolve) => {
-          const repIndex = this.replacementPiles[0].length - 1;
+          const repIndex  = this.replacementPiles[0].length - 1;
           const leftCard  = this.$refs['replacement_left_' + repIndex][0];
-          const rightCard  = this.$refs['replacement_right_' + repIndex][0];
+          const rightCard = this.$refs['replacement_right_' + repIndex][0];
           leftCard.setOrder(100);
           leftCard.move(this.leftCenterPilePosition(this.centerPiles[0].length));
           leftCard.flipUp();
           rightCard.setOrder(100);
           rightCard.move(this.rightCenterPilePosition(this.centerPiles[1].length));
           rightCard.flipUp();
-          setTimeout(() => resolve(), CARD_MOVE_DELAY);
+          setTimeout(() => {
+            if (this.replacementPiles[0].length > 1) {
+              resolve();
+            } else {
+              this.reshuffleCenterPilesIntoReplacement(leftCard, rightCard)
+                .then(() => resolve());
+            }
+          }, CARD_MOVE_DELAY);
+        });
+      },
+
+      reshuffleCenterPilesIntoReplacement(leftCard, rightCard) {
+        return new Promise(resolve => {
+          // Define properties for the card dealer
+          const cardInfo = this.allCenterCards.map((card, index) => {
+            const posFunction = (index % 2 === 0) ? this.leftRepPilePosition : this.rightRepPilePosition;
+            return {
+              card:     card,
+              pos:      posFunction(Math.floor(index / 2)),
+              delay:    CARD_MOVE_DELAY / 5,
+              flipDown: true
+            };
+          });
+
+          // Return the top cards to the correct position (remove the vertical offset)
+          leftCard.move(this.leftCenterPilePosition(0));
+          rightCard.move(this.rightCenterPilePosition(0));
+
+          // Start the dealer
+          cardInfo.reduce(cardPlacement.dealer, Promise.resolve()).then(() => resolve());
         });
       }
     }
