@@ -23,7 +23,7 @@ export default class {
     if (!roundData || !roundData.hands) return 'loading';
     if (!new Readiness(roundData.players, 'ready_to_play').allPlayersReady) return 'setup';
     if (roundData.canUseReplacement) return 'staled_game';
-    if (roundData.winner) return (roundData.winnerId === playerId) ? 'win' : 'lose';
+    if (roundData.winner_id) return (roundData.winner_id === playerId) ? 'win' : 'lose';
 
     return 'game';
   }

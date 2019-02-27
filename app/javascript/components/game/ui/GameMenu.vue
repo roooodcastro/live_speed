@@ -65,8 +65,9 @@
   .game-menu-container {
     bottom:   0;
     left:     0;
-    position: absolute;
+    position: fixed;
     right:    0;
+    z-index:  1002;
   }
 
   .game-menu {
@@ -83,7 +84,7 @@
     overflow:      hidden;
     right:         0;
     transition:    all 0.3s;
-    z-index:       1002;
+    z-index:       1003;
 
     &.active { bottom: 0; }
   }

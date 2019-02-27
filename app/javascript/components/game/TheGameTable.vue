@@ -4,7 +4,9 @@
       id="game_table"
       class="game-table"
     >
-      <div v-show="state === 'loading'" />
+      <div v-show="state === 'loading'">
+        <livespeed-loading-suits />
+      </div>
 
       <div v-show="!playedDealAnimation">
         <playing-card-deck
@@ -174,14 +176,12 @@
             .then(() => playerHandComponent.pullFromDraw(cardIndex))
             .then(() => this.updateData(response));
 
-          if (response.round.winner_id) {
-            const winnerId = response.round.winner_id;
-            if (winnerId === this.playerId) {
-              console.log('You won!');
-            } else {
-              console.log('You lost!');
-            }
-          }
+          // if (response.round.winner_id) {
+            // const winnerId = response.round.winner_id;
+            // if (winnerId === this.playerId) {
+            // } else {
+            // }
+          // }
         } else {
           console.log('Invalid play!');
         }

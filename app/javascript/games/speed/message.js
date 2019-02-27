@@ -7,6 +7,10 @@ export default {
         return this.setupMessage(round, playerId);
       case 'game':
         return this.gameMessage(round, playerId);
+      case 'win':
+        return 'Congratulations, you have won this round!';
+      case 'lose':
+        return 'You have lost this round...';
     }
     return '';
   },

@@ -1,6 +1,6 @@
 en:
   game:
-    loading: 'Loading'
+    loading: 'Loading…'
     ready:   'READY'
 
     message:
