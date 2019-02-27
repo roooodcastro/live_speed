@@ -2,7 +2,7 @@
 
 class Match < ApplicationRecord
   belongs_to :winner, class_name: 'Player', optional: true
-  has_many :rounds, dependent: :destroy
+  has_many :rounds, -> { order(created_at: :asc) }, dependent: :destroy, inverse_of: :match
   has_many :match_players, dependent: :destroy
   has_many :players, through: :match_players, inverse_of: :matches
 
@@ -40,7 +40,7 @@ class Match < ApplicationRecord
   end
 
   def latest_round
-    rounds.order(:created_at).last
+    rounds.last
   end
 
   def winner_id
