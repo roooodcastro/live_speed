@@ -58,6 +58,7 @@
         v-show="state !== 'loading'"
         :number-of-players="2"
       />
+
       <GameMenu />
     </div>
   </div>

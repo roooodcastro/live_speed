@@ -25,21 +25,22 @@ class Match < ApplicationRecord
   end
 
   def current_round
-    rounds.last
-    # return rounds.last if rounds.last&.unfinished?
+    return latest_round if latest_round&.unfinished?
 
-    # create_next_round!
+    create_next_round!
   end
 
   def create_next_round!
-    return rounds.last if rounds.last&.unfinished?
-
     round_number = rounds.count + 1
-    return nil if round_number > num_rounds
+    return latest_round if round_number > num_rounds
 
     round = rounds.new(number: round_number, data: { game_name: 'speed' })
     round.setup_round!
     round
+  end
+
+  def latest_round
+    rounds.order(:created_at).last
   end
 
   def winner_id

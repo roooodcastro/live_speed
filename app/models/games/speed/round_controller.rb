@@ -66,7 +66,7 @@ module Games
       end
 
       def winner_id
-        hands.find { |hand| hand.cards.empty? }&.player&.dig(:id)
+        hands.find { |hand| hand.cards.compact.empty? }&.player&.dig(:id)
       end
 
       def players_ready?

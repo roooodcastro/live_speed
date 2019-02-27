@@ -49,12 +49,13 @@
 
       style() {
         return {
-          transform:      this.transform,
-          zIndex:         this.order,
-          filter:         this.dropShadow,
-          transition:     this.transition,
-          width:          this.cssSize[0] + 'px',
-          height:         this.cssSize[1] + 'px'
+          transform:  this.transform,
+          zIndex:     this.order,
+          filter:     this.dropShadow,
+          position:   'absolute',
+          transition: this.transition,
+          width:      this.cssSize[0] + 'px',
+          height:     this.cssSize[1] + 'px'
         };
       },
 
