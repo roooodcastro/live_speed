@@ -4,7 +4,7 @@
   <%= link_to t('.play_btn'), play_match_path(@match), class: 'btn' %>
 <% end %>
 
-<h3><%= Players.model_name.human(count: @match.num_players) %></h3>
+<h3><%= Player.model_name.human(count: 2) %></h3>
 <ol>
   <% @match.players.each do |player| %>
     <li><%= player.name %></li>

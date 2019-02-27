@@ -44,10 +44,10 @@ class Match < ApplicationRecord
   end
 
   def winner_id
-    round_winners = rounds.pluck(:winner_id)
-                          .group_by(&:itself)
-                          .transform_values(&:size)
-                          .except(nil)
+    round_winners   = rounds.pluck(:winner_id)
+                            .group_by(&:itself)
+                            .transform_values(&:size)
+                            .except(nil)
     most_round_wins = round_winners.max_by(&:last)
     return unless most_round_wins # If no one has won a round yet
 
@@ -69,7 +69,7 @@ class Match < ApplicationRecord
   def description
     key_name = finished? ? 'description_finished' : 'description_unfinished'
 
-    I18n.t("active_record.attributes.match.#{key_name}",
+    I18n.t("activerecord.attributes.match.#{key_name}",
            players: num_players, rounds: num_rounds, winner: winner&.name)
   end
 

@@ -24,23 +24,26 @@ h1 {
   padding-bottom: 1rem;
 }
 
+.content { margin-top: 4rem; }
+
 main {
   @extend %grid;
 
   background-color: $brand-white;
   margin-bottom:    2rem;
-  margin-top:       6rem;
+  margin-top:       2rem;
   padding:          2rem;
   box-shadow:       2px 2px 5px $brand-black;
 
   a {
-    color: $brand-alt-2;
+    color:       $brand-alt-2;
     font-weight: bold;
+
     &:hover { color: $brand-alt; }
   }
 
   p {
-    font-size: 1rem;
+    font-size:   1rem;
     line-height: 2rem;
   }
 }
@@ -56,10 +59,10 @@ article {
 
   h1, h2, h3, h4, h5, h6 {
     .header-anchor {
-      display: inline-block;
-      margin-right: 1rem;
+      display:         inline-block;
+      margin-right:    1rem;
       text-decoration: none;
-      transition: all 0.2s;
+      transition:      all 0.2s;
     }
   }
 }

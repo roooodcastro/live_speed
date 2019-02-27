@@ -34,6 +34,12 @@ en:
       signup_btn: 'Sign Up For an Account'
 
   sessions:
+    create:
+      error_title: 'Could not authenticate!'
+      error:       'Email or password invalid. Please check your credentials and try again.'
+      success:     'You have been signed into your account!'
+    destroy:
+      success: 'You have been signed out of your account!'
     new:
       title:           'Login'
       subtitle:        'Welcome back! Enter your login information to keep playing:'
@@ -42,8 +48,6 @@ en:
       new_player_btn:  'Start Playing Now'
       submit:          'Login to my Account'
       signup_btn:      'Sign Up For an Account'
-    create:
-      error: 'Email or password invalid!'
 
   static_pages:
     how_to_play:

@@ -10,7 +10,9 @@
 <div class="container" data-behaviour="vue">
   <%= render partial: 'layouts/menu_bar' %>
 
-  <div class="<%= yield(:body_class) if content_for?(:body_class) %>">
+  <div class="content <%= yield(:body_class) if content_for?(:body_class) %>">
+    <%= vue_flash %>
+
     <main>
       <%= yield %>
     </main>

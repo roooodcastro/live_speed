@@ -1,5 +1,5 @@
 en:
-  active_record:
+  activerecord:
     models:
       player:
         one:   'Player'
