@@ -57,15 +57,6 @@ module Games
         card.to_h
       end
 
-      # Temporary method to print relevant round info so I can play on the terminal
-      def print_game
-        hands.each_with_index do |hand, index|
-          Rails.logger.info "Hand #{index}: #{hand.cards.join(' ')}, #{hand.draw_pile.size} extra"
-        end
-
-        Rails.logger.info "\nPiles: #{central_pile.piles.map(&:last)}"
-      end
-
       def finished?
         winner_id.present?
       end

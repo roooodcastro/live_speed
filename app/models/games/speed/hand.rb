@@ -34,11 +34,10 @@ module Games
 
       def remove_card(index)
         raise "Player #{player[:name]} has no cards left to play!" if cards.empty?
-        return cards.delete_at(index) if draw_pile.empty?
 
-        card         = cards[index]
-        cards[index] = draw_pile.pop
-        card
+        removed_card = cards[index]
+        cards[index] = draw_pile.empty? ? nil : draw_pile.pop
+        removed_card
       end
 
       def possible_plays(pile_cards)

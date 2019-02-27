@@ -16,6 +16,8 @@ class Card
   end
 
   def self.from_h(hash)
+    return if hash.blank?
+
     new(suit: hash[:s].to_sym, rank: hash[:r].to_sym)
   end
 
@@ -28,7 +30,9 @@ class Card
   def to_s
     return to_unicode if USE_UNICODE
 
-    "#{full_rank_name} of #{full_suit_name}"
+    rank_name = { a: 'Ace', j: 'Jack', q: 'Queen', k: 'King' }[rank] || rank.to_s
+    suit_name = { c: 'clubs', d: 'diamonds', h: 'hearts', s: 'spades' }[suit]
+    "#{rank_name} of #{suit_name}"
   end
   alias inspect to_s
 
@@ -76,13 +80,5 @@ class Card
   def validate_card
     raise ArgumentError, "Suit '#{suit}' does not exist" unless SUITS.include?(suit.to_s.to_sym)
     raise ArgumentError, "Rank '#{rank}' does not exist" unless RANKS.include?(rank.to_s.to_sym)
-  end
-
-  def full_rank_name
-    { a: 'Ace', j: 'Jack', q: 'Queen', k: 'King' }[rank] || rank.to_s
-  end
-
-  def full_suit_name
-    { c: 'clubs', d: 'diamonds', h: 'hearts', s: 'spades' }[suit]
   end
 end

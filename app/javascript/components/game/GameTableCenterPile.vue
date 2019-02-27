@@ -42,7 +42,7 @@
 
     <livespeed-arrow
       v-show="canUseReplacement"
-      :pos="[72, 20]"
+      :pos="[80, 20]"
       direction="up"
     />
   </div>

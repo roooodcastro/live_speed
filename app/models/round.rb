@@ -20,7 +20,7 @@ class Round < ApplicationRecord
   validates :number, presence: true, numericality: true
 
   delegate :players, :rules, to: :match
-  delegate :print_game, :finished?, :unfinished?, :can_use_replacement_piles?, to: :round_controller
+  delegate :finished?, :unfinished?, :can_use_replacement_piles?, to: :round_controller
 
   def setup_round!
     update!(data: setup_class.new(players, rules).to_h)

@@ -3,6 +3,7 @@
     class="livespeed-arrow"
     font="Arial"
     :pos="pos"
+    :size="4"
   >
     <span :style="style">
       {{ arrowChar }}

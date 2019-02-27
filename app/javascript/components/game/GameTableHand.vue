@@ -11,6 +11,7 @@
     />
     <livespeed-playing-card
       v-for="(card, index) in hand"
+      v-show="!!card.s"
       :ref="'card_' + playerIndex + '_' + index"
       :key="'card_' + playerIndex + '_' + index"
       :is-active="playerIndex === 0"
