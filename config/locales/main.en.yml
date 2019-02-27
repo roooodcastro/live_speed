@@ -1,0 +1,52 @@
+en:
+  title:    'LiveSpeed'
+  logo_alt: 'LiveSpeed Logo'
+  back:     'Back'
+
+  home:
+    index:
+      title: 'Home'
+
+  lobby:
+    show:
+      title: 'Matches waiting for more players'
+
+  matches:
+    index:
+      title:         'My Matches'
+      new_match_btn: 'Create new Match'
+    new:
+      title:  'Create new Match'
+      submit: 'Create Match'
+
+    show:
+      title:        "Match: %{description}"
+      play_btn:     'Play Match!'
+      winner:       'Winner:'
+      not_finished: 'Not finished'
+
+  players:
+    new:
+      title_html: 'Almost There!<br/>We just need one more thing:'
+      subtitle:   'Choose a name to play:'
+      login_btn:  'Sign In'
+      options:    'You can also:'
+      signup_btn: 'Sign Up For an Account'
+
+  sessions:
+    new:
+      title:           'Login'
+      subtitle:        'Welcome back! Enter your login information to keep playing:'
+      first_timer:     'First timer?'
+      forgot_password: 'Forgot your password?'
+      new_player_btn:  'Start Playing Now'
+      submit:          'Login to my Account'
+      signup_btn:      'Sign Up For an Account'
+    create:
+      error: 'Email or password invalid!'
+
+  static_pages:
+    how_to_play:
+      title:          'How to Play'
+      setup_subtitle: 'Setup:'
+      play_subtitle:  'Play:'

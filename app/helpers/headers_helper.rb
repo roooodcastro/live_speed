@@ -2,6 +2,7 @@
 
 module HeadersHelper
   def title(title)
+    content_for(:title) { [title, t(:title)].join(' - ') }
     content_tag(:h1, title)
   end
 

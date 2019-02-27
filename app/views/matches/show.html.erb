@@ -1,10 +1,10 @@
-<%= title "Match: #{@match.description}" %>
+<%= title t('.title', description: @match.description) %>
 
 <% if @match.can_play? %>
-  <%= link_to 'Play Match!', play_match_path(@match), class: 'btn' %>
+  <%= link_to t('.play_btn'), play_match_path(@match), class: 'btn' %>
 <% end %>
 
-<h3>Players (<%= @match.players.size %>/<%= @match.num_players %>):</h3>
+<h3><%= Players.model_name.human(count: @match.num_players) %></h3>
 <ol>
   <% @match.players.each do |player| %>
     <li><%= player.name %></li>
@@ -12,14 +12,14 @@
 </ol>
 
 <% if @match.winner_id %>
-  <h3>Winner:</h3>
+  <h3><%= t('.winner') %></h3>
   <p><%= @match.winner.name %></p>
 <% end %>
 
-<h3>Rounds (<%= @match.rounds.size %> / <%= @match.num_rounds %>):</h3>
+<h3><%= Round.model_name.human(count: @match.num_rounds) %></h3>
 
 <ol>
   <% @match.rounds.each do |round| %>
-    <li>Winner: <%= round.winner&.name || 'Not finished' %></li>
+    <li><%= t('.winner') %> <%= round.winner&.name || t('.not_finished') %></li>
   <% end %>
 </ol>

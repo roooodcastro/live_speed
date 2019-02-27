@@ -1,0 +1,18 @@
+en:
+  active_record:
+    models:
+      player:
+        one:   'Player'
+        other: 'Players'
+      round:
+        one:   'Round'
+        other: 'Rounds'
+    attributes:
+      match:
+        description_finished:   "Best of %{rounds} rounds, %{players} - %{winner} won"
+        description_unfinished: "Best of %{rounds} rounds, %{players} players"
+        num_players:            'Number of Players'
+        num_rounds:             'Number of Rounds'
+      user:
+        email:    'Email'
+        password: 'Password'

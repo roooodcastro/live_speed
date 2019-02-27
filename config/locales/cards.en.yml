@@ -1,0 +1,14 @@
+en:
+  cards:
+    full_name: "%{rank} of %{suit}"
+
+    suits:
+      c: 'Clubs'
+      d: 'Diamonds'
+      h: 'Hearts'
+      s: 'Spades'
+    ranks:
+      a: 'Ace'
+      j: 'Jack'
+      q: 'Queen'
+      k: 'King'

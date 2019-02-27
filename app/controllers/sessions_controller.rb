@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       login_user(user)
       redirect_back(fallback_location: root_path)
     else
-      render :new, error: 'Email or password invalid!'
+      render :new, error: t('.error')
     end
   end
 

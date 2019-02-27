@@ -2,12 +2,8 @@
 
 <div class="signup-box">
   <div class="signup-card">
-    <h1>
-      Almost there!
-      <br />
-      We just need one more thing:
-    </h1>
-    <h2>Choose a name to play:</h2>
+    <h1><%= t('.title_html') %></h1>
+    <h2><%= t('.subtitle') %></h2>
 
     <%= form_with(model: @player, local: true, html: { autocomplete: 'off' }) do |f| %>
       <%= vue_component('new-player-form', props: { initialName: @player.name }) %>
@@ -15,12 +11,12 @@
   </div>
 
   <div class="signup-brand-info">
-    <%= image_tag(asset_pack_path('images/logo.svg'), alt: 'Live Speed Logo', class: 'signup-logo') %>
-    <p>You can also:</p>
+    <%= image_tag(asset_pack_path('images/logo.svg'), alt: t(:logo_alt), class: 'signup-logo') %>
+    <p><%= t('.options') %></p>
 
     <div class="btn-col signup-alternatives-box">
-      <%= link_to 'Sign In', new_sessions_path, class: 'btn' %>
-      <%= link_to 'Sign Up For an Account', new_sessions_path, class: 'btn btn-outline' %>
+      <%= link_to t('.login_btn'), new_sessions_path, class: 'btn' %>
+      <%= link_to t('.signup_btn'), new_sessions_path, class: 'btn btn-outline' %>
     </div>
   </div>
 </div>

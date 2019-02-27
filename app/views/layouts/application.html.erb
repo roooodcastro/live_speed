@@ -1,16 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>LiveSpeed</title>
-  <%= csrf_meta_tags %>
-  <%= csp_meta_tag %>
-
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-
-  <%= render partial: 'application/favicon' %>
+  <%= render partial: 'layouts/header', locals: { pack_name: 'application' } %>
 
   <%= yield :head %>
 </head>

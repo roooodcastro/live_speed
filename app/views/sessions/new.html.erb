@@ -1,31 +1,31 @@
 <div class="signup-box">
   <div class="signup-card">
-    <h1>Login</h1>
-    <h2>Welcome back! Enter your login information to keep playing:</h2>
+    <h1><%= t('.title') %></h1>
+    <h2><%= t('.subtitle') %></h2>
 
     <%= form_tag sessions_path do %>
       <div class="form-control">
-        <%= label_tag :email, 'Email' %>
+        <%= label_tag :email, User.human_attribute_name(:email) %>
         <%= text_field_tag :email %>
       </div>
       <div class="form-control">
-        <%= label_tag :password, 'Password' %>
+        <%= label_tag :password, User.human_attribute_name(:password) %>
         <%= password_field_tag :password %>
-        <%= link_to 'Forgot your password?', root_path, class: 'form-text', tabindex: -1 %>
+        <%= link_to t('.forgot_password'), root_path, class: 'form-text', tabindex: -1 %>
       </div>
       <div class="form-control">
-        <%= button_tag 'Login to my Account', class: 'btn btn-signup' %>
+        <%= button_tag t('.submit'), class: 'btn btn-signup' %>
       </div>
     <% end %>
   </div>
 
   <div class="signup-brand-info">
-    <%= image_tag(asset_pack_path('images/logo.svg'), alt: 'Live Speed Logo', class: 'signup-logo') %>
-    <p>First timer?</p>
+    <%= image_tag(asset_pack_path('images/logo.svg'), alt: t(:logo_alt), class: 'signup-logo') %>
+    <p><%= t('.first_timer') %></p>
 
     <div class="btn-col signup-alternatives-box">
-      <%= link_to 'Start Playing Now', new_player_path, class: 'btn' %>
-      <%= link_to 'Sign Up For an Account', new_sessions_path, class: 'btn btn-outline' %>
+      <%= link_to t('.new_player_btn'), new_player_path, class: 'btn' %>
+      <%= link_to t('.signup_btn'), new_sessions_path, class: 'btn btn-outline' %>
     </div>
   </div>
 </div>

@@ -67,8 +67,10 @@ class Match < ApplicationRecord
   end
 
   def description
-    winner_desc = finished? ? " - #{winner.name} won" : ''
-    "Best of #{num_rounds} rounds, #{num_players} players#{winner_desc}"
+    key_name = finished? ? 'description_finished' : 'description_unfinished'
+
+    I18n.t("active_record.attributes.match.#{key_name}",
+           players: num_players, rounds: num_rounds, winner: winner&.name)
   end
 
   def rules

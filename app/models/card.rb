@@ -30,9 +30,9 @@ class Card
   def to_s
     return to_unicode if USE_UNICODE
 
-    rank_name = { a: 'Ace', j: 'Jack', q: 'Queen', k: 'King' }[rank] || rank.to_s
-    suit_name = { c: 'clubs', d: 'diamonds', h: 'hearts', s: 'spades' }[suit]
-    "#{rank_name} of #{suit_name}"
+    rank_name = I18n.t(rank, scope: 'cards.ranks', default: rank.to_s)
+    suit_name = I18n.t(suit, scope: 'cards.suits', default: suit.to_s)
+    I18n.t('cards.full_name', rank: rank_name, suit: suit_name)
   end
   alias inspect to_s
 

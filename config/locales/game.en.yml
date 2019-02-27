@@ -1,0 +1,28 @@
+en:
+  game:
+    loading: 'Loading'
+    ready:   'READY'
+
+    message:
+      setup:
+        click_ready: 'Click READY to start the round:'
+        starting:    'Round starting'
+        waiting:     'Waiting for opponent(s)'
+      play:
+        no_plays:  'There are no plays left! Click on the replacement pile to your right to use it!'
+        drawing:   'Drawing cards from the replacement piles'
+        waiting:   'Waiting for opponent(s)'
+        play_hint: 'Drag a card that is in your hand over to one of the centre piles to play it!'
+      paused:
+        waiting: 'The game is paused because your opponent has disconnected.'
+      finish:
+        win:       'Congratulations, you have won this round!'
+        lose:      'You have lost this round...'
+        play_next: 'Next Round'
+        quit:      'Exit Game'
+        continue:  'Continue'
+
+    menu:
+      quit:         'Exit Game'
+      confirm_quit: 'Are you sure? By exiting, this round will be forfeit and your opponent will be given a win!'
+      volume:       'Volume'
