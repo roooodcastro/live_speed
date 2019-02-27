@@ -69,7 +69,7 @@
       },
 
       transition() {
-        return this.isDragging ? 'none' : 'transform 0.2s';
+        return this.isDragging ? 'none' : 'transform 0.3s';
       },
 
       dropShadow() {

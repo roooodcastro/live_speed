@@ -96,10 +96,10 @@ Here's a quick overview of the project's progress:
 - [x] Draw card from draw pile
 - [x] Wait until players ready for replacement play
 - [x] Play replacement cards
-- [ ] Shuffle center piles back into replacement piles
+- [x] Shuffle center piles back into replacement piles
 - [ ] End-game feedback
 - [x] Redo card positioning to make it work for mobile
-- [ ] Fix visual bugs
+- [x] Fix visual bugs
 - [ ] Improve card hover animation
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects

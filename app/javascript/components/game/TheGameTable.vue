@@ -7,7 +7,10 @@
       <div v-show="state === 'loading'" />
 
       <div v-show="!playedDealAnimation">
-        <playing-card-deck ref="cardDeck" />
+        <playing-card-deck
+          ref="cardDeck"
+          :round-data="roundData"
+        />
       </div>
 
       <div
@@ -144,10 +147,12 @@
 
         this.updateData(data);
 
-        this.$refs['cardDeck'].dealCards(this.controller.data)
-          .then(function () {
-            this.playedDealAnimation = true;
-          }.bind(this));
+        this.$nextTick(() => {
+          this.$refs['cardDeck'].dealCards(this.controller.data)
+            .then(function () {
+              this.playedDealAnimation = true;
+            }.bind(this));
+        });
       },
 
       onReadyClick() {
