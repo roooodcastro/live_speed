@@ -6,7 +6,7 @@
     >
       <div v-show="state === 'loading'" />
 
-      <div v-show="false">
+      <div v-show="!playedDealAnimation">
         <playing-card-deck
           ref="cardDeck"
           :round-data="roundData"
@@ -14,7 +14,7 @@
       </div>
 
       <div
-        v-show="false"
+        v-show="playedDealAnimation"
         class="game-table-gamearea"
         @mousedown="onDragStart"
         @mouseup="onDragEnd"
@@ -47,7 +47,7 @@
         </livespeed-text>
       </div>
 
-      <div v-show="false">
+      <div v-show="state === 'setup' && playedDealAnimation">
         <pre-game-overlay
           ref="preGameOverlay"
           @playerReady="onReadyClick"
@@ -55,7 +55,7 @@
       </div>
 
       <GameTableCardSlots
-        v-show="false"
+        v-show="state !== 'loading'"
         :number-of-players="2"
       />
 
