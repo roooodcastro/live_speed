@@ -55,6 +55,11 @@ en:
       submit:          'Login to my Account'
       signup_btn:      'Sign Up For an Account'
 
+  users:
+    create:
+      error: "User could not be created, because %{error}"
+      success: 'Your user was created! Welcome!'
+
   static_pages:
     how_to_play:
       title:          'How to Play'
