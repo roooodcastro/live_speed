@@ -18,6 +18,9 @@ import '../stylesheets/game';
 import Turbolinks        from 'turbolinks';
 import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
 import Vue               from 'vue/dist/vue.esm';
+import I18n              from 'vendor/i18n-js.js.erb';
+
+window.i18n = I18n;
 
 Turbolinks.start();
 Vue.use(TurbolinksAdapter);
