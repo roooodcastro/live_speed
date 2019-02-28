@@ -41,11 +41,22 @@
         />
 
         <livespeed-text
+          ref="playerMessage"
           :pos="[0, -35]"
           :size="6"
           font="Barbaro"
         >
           {{ playerMessage }}
+        </livespeed-text>
+
+        <livespeed-text
+          ref="submessage"
+          :pos="[0, 35]"
+          :size="6"
+          :fade-in="playerSubMessageTimer"
+          font="Barbaro"
+        >
+          {{ playerSubMessage }}
         </livespeed-text>
       </div>
 
@@ -94,11 +105,13 @@
 
     data() {
       return {
-        api:                 null,
-        dragHold:            false,
-        isDragging:          null,
-        controller:          new Round(this.playerId, this.onControllerStateChange),
-        playedDealAnimation: false,
+        api:                   null,
+        dragHold:              false,
+        isDragging:            null,
+        controller:            new Round(this.playerId, this.onControllerStateChange),
+        playedDealAnimation:   false,
+        playerSubMessage:      '',
+        playerSubMessageTimer: 2000,
 
         roundData: {}
       };
@@ -162,9 +175,35 @@
         this.api.markReady(this.playerId);
       },
 
+      onPlayerReady(data) {
+        this.updateData(data);
+        this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
+      },
+
+      onPlayerConnected(data) {
+        this.updateData(data);
+        const playerName = this.controller.playerHand(data.player_id).player.name;
+        this.setPlayerSubmessage(Message.playerConnected(playerName), 5000);
+      },
+
+      onPlayerDisconnected(data) {
+        this.updateData(data);
+        const playerName = this.controller.playerHand(data.player_id).player.name;
+        this.setPlayerSubmessage(Message.playerDisconnected(playerName), 5000);
+      },
+
       onReplacementClick() {
         if (this.canUseReplacement) {
           this.api.playReplacementPile(this.playerId);
+        } else {
+          this.setPlayerSubmessage(Message.invalidReplacement(), 2000);
+        }
+      },
+
+      onReplacementResponse(data) {
+        if (this.controller.allReadyToReplace) {
+          this.centerPileComponent.pullFromReplacements()
+            .then(() => this.updateData(data));
         }
       },
 
@@ -177,44 +216,13 @@
             .then(() => this.centerPileComponent.place(response.card_data, response.pile_index))
             .then(() => playerHandComponent.pullFromDraw(cardIndex))
             .then(() => this.updateData(response));
-
-          // if (response.round.winner_id) {
-            // const winnerId = response.round.winner_id;
-            // if (winnerId === this.playerId) {
-            // } else {
-            // }
-          // }
         } else {
-          console.log('Invalid play!');
+          this.setPlayerSubmessage(Message.invalidPlay(), 2000);
         }
         if (this.isDragging) {
           this.isDragging.endDrag();
           this.isDragging = null;
           this.dragHold   = false;
-        }
-      },
-
-      onPlayerReady(data) {
-        this.updateData(data);
-        this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
-      },
-
-      // TODO: Use Vuex to manage state
-      onControllerStateChange(oldState, newState) {
-        console.log('game changed from ' + oldState + ' to ' + newState);
-
-        switch ([oldState, newState].join(':')) {
-          case 'loading:setup':
-            break;
-          case 'setup:game':
-            break;
-        }
-      },
-
-      onReplacementResponse(data) {
-        if (this.controller.allReadyToReplace) {
-          this.centerPileComponent.pullFromReplacements()
-            .then(() => this.updateData(data));
         }
       },
 
@@ -264,6 +272,12 @@
       updateData(data) {
         this.roundData = Round.parseRoundData(data.round, this.playerId);
         this.controller.updateData(data.round);
+      },
+
+      setPlayerSubmessage(message, timer) {
+        if (timer) this.playerSubMessageTimer = timer;
+        this.playerSubMessage = message;
+        this.$refs.submessage.resetFade();
       }
     }
   };

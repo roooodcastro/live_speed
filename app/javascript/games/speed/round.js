@@ -93,4 +93,8 @@ export default class {
     this.readyToPlay       = new Readiness(this.players, 'ready_to_play');
     this.readyToReplace    = new Readiness(this.players, 'ready_to_replace');
   }
+
+  playerHand(playerId) {
+    return this.hands.filter((hand) => hand.player.id === playerId)[0];
+  }
 }

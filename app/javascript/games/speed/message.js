@@ -49,5 +49,21 @@ export default {
     if (vars.opponentsReady) return I18n.t('game.message.play.drawing');
 
     return I18n.t('game.message.play.waiting');
+  },
+
+  invalidPlay() {
+    return I18n.t('game.message.play.invalid_play');
+  },
+
+  invalidReplacement() {
+    return I18n.t('game.message.play.invalid_rep');
+  },
+
+  playerConnected(playerName) {
+    return I18n.t('game.message.play.connected', { name: playerName });
+  },
+
+  playerDisconnected(playerName) {
+    return I18n.t('game.message.play.disconnected', { name: playerName });
   }
 };

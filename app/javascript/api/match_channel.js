@@ -31,6 +31,12 @@ export default {
           case 'player_ready':
             gameTable.onPlayerReady(data);
             break;
+          case 'player_connected':
+            gameTable.onPlayerConnected(data);
+            break;
+          case 'player_disconnected':
+            gameTable.onPlayerDisconnected(data);
+            break;
         }
       },
 

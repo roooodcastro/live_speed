@@ -49,6 +49,11 @@ class Round < ApplicationRecord
     update_round!
   end
 
+  def mark_player_connected(player_id, connected)
+    round_controller.mark_player_connected(player_id, connected)
+    update_round!
+  end
+
   def round_controller
     @round_controller ||= controller_class.send(:from_h, cached_data)
   end
@@ -67,10 +72,6 @@ class Round < ApplicationRecord
 
   def playing?
     status == STATUS_PLAYING
-  end
-
-  def reload_controller
-    @round_controller = controller_class.send(:from_h, cached_data)
   end
 
   private

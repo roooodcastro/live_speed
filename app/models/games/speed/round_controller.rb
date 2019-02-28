@@ -29,6 +29,10 @@ module Games
         player_hand(player_id).mark_ready_to_play
       end
 
+      def mark_player_connected(player_id, connected)
+        player_hand(player_id).mark_player_connected(connected)
+      end
+
       def mark_player_replacement_ready(player_id)
         player_hand(player_id).mark_ready_to_play_replacement
       end
@@ -71,6 +75,11 @@ module Games
 
       def players_ready?
         hands.map { |hand| hand.player[:ready_to_play] }.all?
+      end
+
+      # Return true if all players are connected at the same time (if they're all playing this game)
+      def players_connected?
+        hands.map { |hand| hand.player[:connected] }.all?
       end
 
       def players_ready_for_replacement?

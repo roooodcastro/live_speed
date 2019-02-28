@@ -28,6 +28,10 @@ module Games
         player[:ready_to_play] = true
       end
 
+      def mark_player_connected(connected)
+        player[:connected] = connected
+      end
+
       def mark_ready_to_play_replacement(ready = true)
         player[:ready_replacement] = ready
       end
