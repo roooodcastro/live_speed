@@ -6,13 +6,21 @@
     />
 
     <div class="game-menu-container">
-      <GameMenuButton @click="toggleMenu" />
+      <GameMenuButton
+        :menu-opened="visible"
+        @click="toggleMenu"
+      />
 
       <div
         class="game-menu"
-        :style="menuStyle"
+        :class="{ active: visible }"
       >
-        Item
+        <div>
+          <GameMenuItem :label="'Volume'" />
+        </div>
+        <div>
+          <GameMenuItem :label="'Close'" />
+        </div>
       </div>
     </div>
   </div>
@@ -20,10 +28,12 @@
 
 <script>
   import GameMenuButton from 'components/game/ui/GameMenuButton';
+  import GameMenuItem   from 'components/game/ui/GameMenuItem';
 
   export default {
     components: {
-      GameMenuButton
+      GameMenuButton,
+      GameMenuItem
     },
 
     data() {
@@ -59,14 +69,21 @@
   }
 
   .game-menu {
+    align-items:   center;
     background:    $brand-gray-8;
     border-radius: 1rem 1rem 0 0;
-    bottom:        0;
+    bottom:        -5rem;
     box-shadow:    inset 0 0 10px $brand-gray-2;
+    display:       flex;
+    height:        5rem;
     left:          0;
+    padding:       0.5rem 1rem;
     position:      relative;
+    overflow:      hidden;
     right:         0;
     transition:    all 0.3s;
     z-index:       1002;
+
+    &.active { bottom: 0; }
   }
 </style>

@@ -1,6 +1,7 @@
 <template>
   <div
     class="game-menu-button"
+    :class="{ active: menuOpened }"
     @click="onClick"
   >
     . . .
@@ -9,6 +10,10 @@
 
 <script>
   export default {
+    props: {
+      menuOpened: { type: Boolean, required: true }
+    },
+
     methods: {
       onClick(ev) {
         this.$emit('click', ev);
@@ -21,6 +26,7 @@
   .game-menu-button {
     background-color: #CCD0CD;
     border-radius:    1rem 1rem 0 0;
+    bottom:           -5rem;
     box-shadow:       inset 0 -2px 10px #344339;
     color:            white;
     font-size:        2rem;
@@ -37,6 +43,11 @@
     &:hover {
       cursor: pointer;
       height: 1.5rem;
+    }
+
+    &.active {
+      height: 1.5rem;
+      bottom: 0;
     }
   }
 </style>
