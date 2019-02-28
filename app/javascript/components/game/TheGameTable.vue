@@ -163,7 +163,9 @@
       },
 
       onReplacementClick() {
-        this.api.playReplacementPile(this.playerId);
+        if (this.canUseReplacement) {
+          this.api.playReplacementPile(this.playerId);
+        }
       },
 
       onCardPlay(response) {
@@ -210,8 +212,10 @@
       },
 
       onReplacementResponse(data) {
-        this.centerPileComponent.pullFromReplacements()
-          .then(() => this.updateData(data));
+        if (this.controller.allReadyToReplace) {
+          this.centerPileComponent.pullFromReplacements()
+            .then(() => this.updateData(data));
+        }
       },
 
       onDragStart(ev) {

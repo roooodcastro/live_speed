@@ -16,7 +16,10 @@
         :class="{ active: visible }"
       >
         <GameMenuItem :label="t('game.menu.volume')" />
-        <GameMenuItem :label="t('game.menu.quit')" />
+        <GameMenuItem
+          :label="t('game.menu.quit')"
+          @click="quitClick"
+        />
       </div>
     </div>
   </div>
@@ -54,6 +57,10 @@
 
       toggleMenu() {
         this.visible = !this.visible;
+      },
+
+      quitClick() {
+        window.location = '/matches';
       }
     }
   };
@@ -64,9 +71,9 @@
 
   .game-menu-container {
     bottom:   0;
-    left:     0;
+    left: 50%;
     position: fixed;
-    right:    0;
+    transform: translate(-50%);
     z-index:  1002;
   }
 
@@ -78,11 +85,9 @@
     box-shadow:    inset 0 0 10px $brand-gray-2;
     display:       flex;
     height:        5rem;
-    left:          0;
     padding:       0.5rem 1rem;
     position:      relative;
     overflow:      hidden;
-    right:         0;
     transition:    all 0.3s;
     z-index:       1003;
 

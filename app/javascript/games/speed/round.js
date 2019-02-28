@@ -53,6 +53,10 @@ export default class {
     return this.readyToPlay.opponentsReady;
   }
 
+  get allReadyToReplace() {
+    return this.readyToReplace.allPlayersReady;
+  }
+
   get players() {
     return this.hands.map(hand => hand.player);
   }
