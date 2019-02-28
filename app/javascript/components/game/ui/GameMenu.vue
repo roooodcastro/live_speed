@@ -15,18 +15,15 @@
         class="game-menu"
         :class="{ active: visible }"
       >
-        <div>
-          <GameMenuItem :label="'Volume'" />
-        </div>
-        <div>
-          <GameMenuItem :label="'Close'" />
-        </div>
+        <GameMenuItem :label="t('game.menu.volume')" />
+        <GameMenuItem :label="t('game.menu.quit')" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import I18n           from 'vendor/i18n-js.js.erb';
   import GameMenuButton from 'components/game/ui/GameMenuButton';
   import GameMenuItem   from 'components/game/ui/GameMenuItem';
 
@@ -51,6 +48,10 @@
     },
 
     methods: {
+      t(name) {
+        return I18n.t(name);
+      },
+
       toggleMenu() {
         this.visible = !this.visible;
       }

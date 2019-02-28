@@ -33,11 +33,15 @@
     border:        none;
     border-radius: 0.5rem;
     color:         $brand-alt-2;
+    font-family:   'CardChars', 'Barbaro', serif;
+    font-size:     0.9rem;
     height:        4rem;
-    width:         6rem;
+    width:         8rem;
 
     &:hover {
       background: rgba($brand-black, 0.2);
+      color:      $brand-alt;
+      cursor:     pointer;
     }
   }
 
@@ -46,7 +50,7 @@
   }
 
   .game-menu-icon {
-    display: block;
+    display:     block;
     font-family: Arial sans-serif;
     font-size:   2rem;
   }

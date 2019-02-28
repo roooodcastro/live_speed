@@ -24,9 +24,11 @@
 </template>
 
 <script>
+  import I18n from 'vendor/i18n-js.js.erb';
+
   export default {
     props: {
-      loadingText: { type: String, default: 'Loading' }
+      loadingText: { type: String, default: I18n.t('game.loading') }
     }
   };
 </script>

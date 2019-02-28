@@ -143,8 +143,8 @@ Here's a quick overview of the project's progress:
 - [x] Use Webpacker version of ActionCable and Turbolinks
 - [ ] Add JSRoutes with webpacker
 - [ ] Generate favicons in webpacker instead of sprockets
-- [ ] Add i18n to Rails
-- [ ] Add i18n to JS/webpacker
+- [x] Add i18n to Rails
+- [x] Add i18n to JS/webpacker
 - [x] Completely remove Sprockets in favour of Webpacker
 
 ## Credits

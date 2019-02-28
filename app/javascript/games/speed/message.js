@@ -1,3 +1,5 @@
+import I18n from 'vendor/i18n-js.js.erb';
+
 export default {
   generate(round, state, playerId) {
     switch (state) {
@@ -29,19 +31,19 @@ export default {
   setupMessage(round, playerId) {
     const vars = this.setupStateVars(round, playerId);
 
-    if (!vars.ready) return 'Click READY to start the round:';
-    if (vars.opponentsReady) return 'Round starting...';
+    if (!vars.ready) return I18n.t('game.message.setup.click_ready');
+    if (vars.opponentsReady) return I18n.t('game.message.setup.starting');
 
-    return 'Waiting for opponent(s)...';
+    return I18n.t('game.message.setup.waiting');
   },
 
   gameMessage(round, playerId) {
     const vars = this.gameStateVars(round, playerId);
 
     if (!vars.canPlayReplacement) return '';
-    if (!vars.ready) return 'There are no plays left! Click on the replacement pile to your right to use it!';
-    if (vars.opponentsReady) return 'Drawing cards from the replacement piles...';
+    if (!vars.ready) return I18n.t('game.message.play.no_plays');
+    if (vars.opponentsReady) return I18n.t('game.message.play.drawing');
 
-    return 'Waiting for opponent(s)...';
+    return I18n.t('game.message.play.waiting');
   }
 };

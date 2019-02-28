@@ -27,11 +27,17 @@ en:
 
   players:
     new:
-      title_html: 'Almost There!<br/>We just need one more thing:'
-      subtitle:   'Choose a name to play:'
-      login_btn:  'Sign In'
-      options:    'You can also:'
-      signup_btn: 'Sign Up For an Account'
+      title_html:       'Almost There!<br/>We just need one more thing:'
+      subtitle:         'Choose a name to play:'
+      login_btn:        'Sign In'
+      options:          'You can also:'
+      signup_btn:       'Sign Up For an Account'
+      checking_name:    'Checking name...'
+      valid_name:       '✓ This name is valid!'
+      name_placeholder: 'Player Name'
+      name_aria_label:  'Type your player name'
+      error:            'An error has occurred. Please contact an administrator or try again.'
+      submit:           'Confirm'
 
   sessions:
     create:

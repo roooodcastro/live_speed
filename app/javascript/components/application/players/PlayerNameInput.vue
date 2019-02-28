@@ -5,8 +5,8 @@
       name="player[own_name]"
       type="text"
       :value="name"
-      aria-label="Type your player name"
-      placeholder="Player Name"
+      :aria-label="t('players.new.name_aria_label')"
+      :placeholder="t('players.new.name_placeholder')"
       @input="onNameInput"
     >
 
@@ -21,14 +21,14 @@
       v-show="state === 'validating'"
       class="player-name-input-result validating"
     >
-      Checking name…
+      {{ t('players.new.checking_name') }}
     </span>
 
     <span
       v-show="state === 'valid'"
       class="player-name-input-result valid"
     >
-      ✓ This name is valid!
+      {{ t('players.new.valid_name') }}
     </span>
 
     <span
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+  import I18n          from 'vendor/i18n-js.js.erb';
   import axios         from 'axios';
   import { debounced } from 'helpers/forms';
 
@@ -72,17 +73,21 @@
     },
 
     methods: {
+      t(name) {
+        return I18n.t(name);
+      },
+
       onNameInput(ev) {
         this.state = 'validating';
         this.$emit('validatedName', this.state === 'valid');
-        this.name  = ev.target.value;
+        this.name = ev.target.value;
         this.debouncedValidateName();
       },
 
       validateName() {
         api
           .post('/', { name: this.name })
-          .catch(() => Promise.reject(['Unexpected error. Please contact an administrator.']))
+          .catch(() => Promise.reject([I18n.t('players.new.error')]))
           .then(({ data }) => {
             if (this.name.length > 0) {
               this.state = data.valid ? 'valid' : 'error';

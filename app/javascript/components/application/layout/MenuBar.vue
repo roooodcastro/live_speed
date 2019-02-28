@@ -5,10 +5,10 @@
       class="menu-logo"
     >
       <img
-        alt="Live Speed Logo"
+        :alt="t('logo_alt')"
         :src="require('images/logo_cards.svg')"
       >
-      LiveSpeed
+      {{ t('title') }}
     </a>
     <slot name="left-menu" />
 
@@ -19,7 +19,15 @@
 </template>
 
 <script>
-  export default {};
+  import I18n from 'vendor/i18n-js.js.erb';
+
+  export default {
+    methods: {
+      t(name) {
+        return I18n.t(name);
+      }
+    }
+  };
 </script>
 
 <style lang="scss">

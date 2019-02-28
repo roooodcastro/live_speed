@@ -10,12 +10,13 @@
       class="btn signup-btn"
       :disabled="btnDisabled"
     >
-      Confirm
+      {{ t('players.new.submit') }}
     </button>
   </div>
 </template>
 
 <script>
+  import I18n            from 'vendor/i18n-js.js.erb';
   import PlayerNameInput from 'components/application/players/PlayerNameInput';
 
   export default {
@@ -38,6 +39,10 @@
     },
 
     methods: {
+      t(name) {
+        return I18n.t(name);
+      },
+
       onNameChange(validName) {
         this.validName = validName;
       }
