@@ -1,13 +1,9 @@
 # frozen_string_literal: true
 
-if User.find_by(name: 'Rodrigo').blank?
-  user1 = User.create name: 'Rodrigo', email: 'rodrigo@email.com', password: '123456'
+users = Array.new(2) do
+  user_name = Faker::Name.first_name
+  User.create_with_player name: user_name, email: "#{user_name.downcase}@email.com", password: '123456'
 end
 
-user2 = User.create name: 'Gabi', email: 'gabi@email.com', password: '123456' if User.find_by(name: 'Gabi').blank?
-
-player1 = Player.find_or_create_by user: user1
-player2 = Player.find_or_create_by user: user2
-
-match = Match.find_or_create_by num_rounds: 5, players: [player1, player2]
+match = Match.find_or_create_by num_rounds: 5, num_players: users.size, players: users.map(&:player)
 match.current_round

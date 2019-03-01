@@ -18,15 +18,27 @@ class UsersController < ApplicationController
     @user = User.create(user_params)
     return login_and_redirect(@user) if @user.persisted?
 
-    flash[:error] = t('.error', error: @user.errors.full_messages.join(', '))
+    error_flash(@user)
     render :new
   end
 
   def edit; end
 
-  def update; end
+  def update
+    updated = @user.update(user_params)
+    return redirect_to @user if updated
 
-  def destroy; end
+    error_flash(@user)
+    render :edit
+  end
+
+  def destroy
+    destroyed = @user.destroy_and_anonymize_player
+    return logout_and_redirect if destroyed
+
+    error_flash(@user)
+    render :show
+  end
 
   private
 
@@ -42,5 +54,17 @@ class UsersController < ApplicationController
     login_user(user)
     flash[:notice] = t('.success')
     redirect_back(fallback_location: root_path)
+  end
+
+  def logout_and_redirect
+    reset_session
+    cookies.clear
+    flash[:notice] = t('.success')
+    redirect_to root_path
+  end
+
+  def error_flash(user)
+    subtitle = user.errors.full_messages.join("\n")
+    flash[:error] = [t('.error'), subtitle]
   end
 end

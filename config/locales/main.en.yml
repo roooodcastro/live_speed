@@ -62,9 +62,12 @@ en:
       new_player_btn:   'Start Playing Now'
       options:          'You can also:'
       login_btn:        'Sign In'
+    update:
+      error:   'We could not update your account :('
+      success: 'You account details were updated!'
     create:
-      error:   "User could not be created, because %{error}"
-      success: 'Your user was created! Welcome!'
+      error:   'We could not create your account :('
+      success: 'You now have an account with us! Welcome!'
 
   static_pages:
     how_to_play:
