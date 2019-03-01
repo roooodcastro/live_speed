@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     member { get :play }
   end
 
+  resource :my_account, only: %i[show edit update destroy], controller: :my_account
   resources :players, only: %i[new create]
   resources :player_name_validators, only: :create
   resources :rounds, except: :index

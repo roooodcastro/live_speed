@@ -25,6 +25,18 @@ en:
       winner:       'Winner:'
       not_finished: 'Not finished'
 
+  my_account:
+    show:
+      title: 'My Account'
+    edit:
+      title: 'Edit my account details'
+    update:
+      error:   'We could not update your account :('
+      success: 'You account details were updated!'
+    destroy:
+      error:   'We could not remove your account, please talk to an admin :('
+      success: "We're sad to see you go, your account has been deleted, forever."
+
   players:
     new:
       title_html:       'Almost There!<br/>We just need one more thing:'

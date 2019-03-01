@@ -1,26 +1,11 @@
 # frozen_string_literal: true
 
-class UsersController < ApplicationController
+class MyAccountController < ApplicationController
   require_user_login
-  skip_user_login only: %i[new create]
-
-  layout 'login', only: :new
 
   before_action :set_user, only: %i[show edit update destroy]
 
   def show; end
-
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.create(user_params)
-    return login_and_redirect(@user) if @user.persisted?
-
-    error_flash(@user)
-    render :new
-  end
 
   def edit; end
 
@@ -43,7 +28,7 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = current_user
   end
 
   def user_params
