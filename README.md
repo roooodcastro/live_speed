@@ -23,6 +23,12 @@ I've developed this as a learning project to learn more about ActionCable,
 Webpacker and more importantly, VueJS. The plan is to finish the game and grow
 it into a finished product that can actually be useful.
 
+There is **zero** automated testing being done on this project, and that is on
+purpose. I've noticed that writing tests would always slow me down on a
+personal project and eventually make me completely lose interest in it. I
+still do tests and TDD on professional projects, but this is for fun, so I do
+whatever I want basically.
+
 ## How to Play
 
 You can currently play Live Speed matches with 2 players. Future expansion
@@ -106,6 +112,9 @@ Here's a quick overview of the project's progress:
 - [ ] Implement a better HUD for displaying more information about the game
 - [ ] Add help timer to warn players os possible plays when they stay a long time without any moves
 - [ ] Implement AI to serve as a tutorial
+- [ ] Pause game when player disconnects, give him a time limit to rejoin
+- [ ] End abandoned match by W.O., giving victory to remaining player
+- [ ] Only reveal cards once both players are ready
 
 ### Interface
 
@@ -139,7 +148,6 @@ Here's a quick overview of the project's progress:
 
 - [ ] Setup AWS deploy
 - [ ] Add monitoring service
-- [ ] Tests!
 - [x] Use Webpacker version of ActionCable and Turbolinks
 - [ ] Add JSRoutes with webpacker
 - [ ] Generate favicons in webpacker instead of sprockets
