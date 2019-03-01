@@ -2,11 +2,11 @@
 
 <div class="signup-box">
   <div class="signup-card">
-    <h1><%= t('.title_html') %></h1>
+    <h1><%= t('.title') %></h1>
     <h2><%= t('.subtitle') %></h2>
 
-    <%= form_with(model: @player, local: true, html: { autocomplete: 'off' }) do |f| %>
-      <%= vue_component('new-player-form', props: { initialName: @player.name }) %>
+    <%= form_with(model: @user, local: true, html: { autocomplete: 'off' }) do |f| %>
+      <%= vue_component('new-player-form', props: { initialName: @user.name }) %>
     <% end %>
   </div>
 
@@ -16,7 +16,7 @@
 
     <div class="btn-col signup-alternatives-box">
       <%= link_to t('.login_btn'), new_sessions_path, class: 'btn btn-lg' %>
-      <%= link_to t('.signup_btn'), new_user_path, class: 'btn btn-lg btn-outline' %>
+      <%= link_to t('.new_player_btn'), new_player_path, class: 'btn btn-lg btn-outline' %>
     </div>
   </div>
 </div>

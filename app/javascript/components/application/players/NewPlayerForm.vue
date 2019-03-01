@@ -7,7 +7,7 @@
 
     <button
       type="submit"
-      class="btn signup-btn"
+      class="btn btn-lg signup-btn"
       :disabled="btnDisabled"
     >
       {{ t('players.new.submit') }}

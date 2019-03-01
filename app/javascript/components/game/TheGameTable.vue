@@ -243,7 +243,6 @@
       },
 
       onDragEnd() {
-        this.dragHold = false;
         if (this.isDragging) {
           this.dragHold   = true;
           const card      = this.isDragging;
@@ -254,6 +253,7 @@
           this.isDragging.endDrag();
           this.isDragging = null;
         }
+        this.dragHold = false;
       },
 
       onWindowResize() {

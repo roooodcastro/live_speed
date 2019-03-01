@@ -56,8 +56,14 @@ en:
       signup_btn:      'Sign Up For an Account'
 
   users:
+    new:
+      title:            'Create your account'
+      subtitle:         'We just need a few details:'
+      new_player_btn:   'Start Playing Now'
+      options:          'You can also:'
+      login_btn:        'Sign In'
     create:
-      error: "User could not be created, because %{error}"
+      error:   "User could not be created, because %{error}"
       success: 'Your user was created! Welcome!'
 
   static_pages:

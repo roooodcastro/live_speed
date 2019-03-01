@@ -14,7 +14,7 @@
         <%= link_to t('.forgot_password'), root_path, class: 'form-text', tabindex: -1 %>
       </div>
       <div class="form-control">
-        <%= button_tag t('.submit'), class: 'btn btn-signup' %>
+        <%= button_tag t('.submit'), class: 'btn btn-lg btn-signup' %>
       </div>
     <% end %>
   </div>
@@ -24,8 +24,8 @@
     <p><%= t('.first_timer') %></p>
 
     <div class="btn-col signup-alternatives-box">
-      <%= link_to t('.new_player_btn'), new_player_path, class: 'btn' %>
-      <%= link_to t('.signup_btn'), new_sessions_path, class: 'btn btn-outline' %>
+      <%= link_to t('.new_player_btn'), new_player_path, class: 'btn btn-lg' %>
+      <%= link_to t('.signup_btn'), new_user_path, class: 'btn btn-lg btn-outline' %>
     </div>
   </div>
 </div>

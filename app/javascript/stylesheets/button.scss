@@ -1,40 +1,48 @@
 .btn {
   background-color: $brand;
-  border: 1px solid $brand-4;
-  border-radius: 4px;
-  box-shadow: 0 0 0 $brand-black;
-  color: $brand-white;
-  display: inline-block;
-  font-family: 'CardChars', serif;
-  line-height: 3rem;
-  outline: none;
-  padding: 0 2rem;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.1s;
+  border:           1px solid $brand-4;
+  border-radius:    4px;
+  box-shadow:       0 0 0 $brand-black;
+  color:            $brand-white;
+  display:          inline-block;
+  font-family:      'CardChars', serif;
+  font-size:        0.8rem;
+  line-height:      2rem;
+  outline:          none;
+  padding:          0 1rem;
+  text-align:       center;
+  text-decoration:  none;
+  transition:       all 0.1s;
 
   &:hover:enabled {
     border-color: $brand-1;
-    color: $white;
-    cursor: pointer;
+    color:        $white;
+    cursor:       pointer;
   }
 
   &:active:enabled, &:focus:enabled {
     box-shadow: 0 0 0.4rem 0.1rem $brand-4;
-    color: $white;
+    color:      $white;
   }
 
   &:disabled {
     background-color: $brand-gray-5;
-    border-color: $border-color;
+    border-color:     $border-color;
   }
 
   &.btn-outline {
     background-color: rgba($brand-1, 0.3);
-    color: $brand-3;
+    color:            $brand-3;
+
     &:hover:enabled, &:active:enabled, &:focus:enabled {
       color: $brand;
     }
+  }
+
+  &.btn-lg {
+    font-size:   1rem;
+    line-height: 2.5rem;
+    padding:     0 2rem;
   }
 }
 
@@ -44,8 +52,9 @@
 
 .btn-col {
   .btn { display: block; }
+
   .btn + .btn {
     margin-left: 0;
-    margin-top: 0.5rem;
+    margin-top:  0.5rem;
   }
 }
