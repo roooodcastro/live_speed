@@ -1,6 +1,9 @@
-development:
-  driver: hiredis
-  url: redis://localhost:6379/1
 test:
   driver: hiredis
-  url: redis://localhost:6379/1
+  url:    redis://localhost:6379/1
+development:
+  driver: hiredis
+  url:    redis://localhost:6379/1
+production:
+  driver: hiredis
+  url:    <%= ENV['REDIS_URL'] %>
