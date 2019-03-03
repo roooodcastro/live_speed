@@ -18,6 +18,7 @@ one or more friends or strangers. It was developed using the following stack:
 * VueJS 2.5
 * Websockets w/ ActionCable
 * PostgreSQL
+* Hosted on Heroku
 
 I've developed this as a learning project to learn more about ActionCable,
 Webpacker and more importantly, VueJS. The plan is to finish the game and grow
@@ -28,6 +29,10 @@ purpose. I've noticed that writing tests would always slow me down on a
 personal project and eventually make me completely lose interest in it. I
 still do tests and TDD on professional projects, but this is for fun, so I do
 whatever I want basically.
+
+## Where is it?
+
+It's currently hosted on Heroku: [LiveSpeed](https://livespeed.herokuapp.com)
 
 ## How to Play
 
