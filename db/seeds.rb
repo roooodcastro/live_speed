@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'faker'
+
 User.create_with_player name: 'Admin', email: 'admin@email.com', password: '123456'
 
 users = Array.new(2) do
