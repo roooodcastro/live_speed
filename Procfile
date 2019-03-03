@@ -1,2 +1,2 @@
-web: rails s -b 0.0.0.0 -p 3000
+web: bundle exec rails s -p $PORT
 assets: bin/webpack-dev-server
