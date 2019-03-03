@@ -30,9 +30,7 @@ personal project and eventually make me completely lose interest in it. I
 still do tests and TDD on professional projects, but this is for fun, so I do
 whatever I want basically.
 
-## Where is it?
-
-It's currently hosted on Heroku: [LiveSpeed](https://livespeed.herokuapp.com)
+You can access the game on: http://livespeed.rooood.com
 
 ## How to Play
 
