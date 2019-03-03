@@ -146,7 +146,7 @@ Here's a quick overview of the project's progress:
 
 ### Deployment/misc
 
-- [ ] Setup AWS deploy
+- [x] Setup Heroku deploy
 - [ ] Add monitoring service
 - [x] Use Webpacker version of ActionCable and Turbolinks
 - [ ] Add JSRoutes with webpacker
