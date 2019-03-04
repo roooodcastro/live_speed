@@ -2,6 +2,7 @@ en:
   game:
     loading: 'Loading…'
     ready:   'READY'
+    error:   "We're sorry, but an error has occurred. Please reload the game and try again. Error message: %{error}"
 
     message:
       setup:

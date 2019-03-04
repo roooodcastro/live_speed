@@ -1,4 +1,5 @@
 import createChannel from 'helpers/cable';
+import I18n          from 'vendor/i18n-js.js.erb';
 
 export default {
   subscribeToApi(gameTable) {
@@ -19,6 +20,9 @@ export default {
       // Called when there's incoming data on the websocket for this channel
       received(data) {
         switch (data.action) {
+          case 'error':
+            alert(I18n.t('game.error', { error: data.message }));
+            break;
           case 'round_data':
             gameTable.onApiReceiveRoundData(data);
             break;
