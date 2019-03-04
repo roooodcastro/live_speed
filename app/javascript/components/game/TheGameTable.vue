@@ -158,7 +158,7 @@
     },
 
     methods: {
-      onApiReceiveRoundData(data) {
+      onRoundData(data) {
         if (data.player_id !== this.playerId) return;
 
         this.updateData(data);
@@ -207,7 +207,7 @@
         }
       },
 
-      onCardPlay(response) {
+      onPlayResponse(response) {
         if (response.success) {
           const cardIndex           = response.card_index;
           const playerHandComponent = this.playerHandComponent(response.player_id);

@@ -19,28 +19,11 @@ export default {
 
       // Called when there's incoming data on the websocket for this channel
       received(data) {
-        switch (data.action) {
-          case 'error':
-            alert(I18n.t('game.error', { error: data.message }));
-            break;
-          case 'round_data':
-            gameTable.onApiReceiveRoundData(data);
-            break;
-          case 'play_response':
-            gameTable.onCardPlay(data);
-            break;
-          case 'replacement_response':
-            gameTable.onReplacementResponse(data);
-            break;
-          case 'player_ready':
-            gameTable.onPlayerReady(data);
-            break;
-          case 'player_connected':
-            gameTable.onPlayerConnected(data);
-            break;
-          case 'player_disconnected':
-            gameTable.onPlayerDisconnected(data);
-            break;
+        if (data.action === 'error') {
+          alert(I18n.t('game.error', { error: data.message }));
+        } else {
+          const callbackName = ('on_' + data.action).toCamelCase();
+          gameTable[callbackName](data);
         }
       },
 

@@ -10,6 +10,7 @@
 'use strict';
 
 require('@rails/ujs').start();
+require('helpers/string');
 
 import '../stylesheets/game';
 
@@ -18,6 +19,7 @@ import '../stylesheets/game';
 import Turbolinks        from 'turbolinks';
 import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
 import Vue               from 'vue/dist/vue.esm';
+
 
 Turbolinks.start();
 Vue.use(TurbolinksAdapter);

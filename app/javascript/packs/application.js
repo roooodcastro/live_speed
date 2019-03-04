@@ -9,9 +9,9 @@
 
 'use strict';
 
-require('@rails/ujs').start();
-
 require.context('../images', true);
+require('@rails/ujs').start();
+require('helpers/string');
 
 import '../stylesheets/application';
 
