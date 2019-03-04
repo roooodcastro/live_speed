@@ -15,13 +15,13 @@ module UserLogin
     end
   end
 
-  def login_and_redirect(user)
+  def login_and_redirect_user(user)
     login_user(user)
     flash[:notice] = t('sessions.create.success')
-    redirect_back(fallback_location: root_path)
+    redirect_to lobby_path
   end
 
-  def logout_and_redirect(path = root_path)
+  def logout_and_redirect_user(path = root_path)
     reset_session
     cookies.clear
     flash[:notice] = t('sessions.destroy.success')
@@ -46,5 +46,11 @@ module UserLogin
 
   def require_user_login
     redirect_to new_sessions_path unless user_logged_in?
+  end
+
+  def login_user(user)
+    session[:user_id] = user.id
+    session[:player_id] = user.player_id
+    cookies.signed[:player_id] = session[:player_id]
   end
 end

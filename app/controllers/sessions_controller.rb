@@ -13,36 +13,19 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: login_params[:email])
-    if user&.authenticate(login_params[:password])
-      login_and_redirect(user)
-    else
-      flash.now[:error] = [t('.error_title'), t('.error')]
-      render :new
-    end
+    return login_and_redirect_user(user) if user&.authenticate(login_params[:password])
+
+    flash.now[:error] = [t('.error_title'), t('.error')]
+    render :new
   end
 
   def destroy
-    reset_session
-    cookies.clear
-    flash[:notice] = t('.success')
-    redirect_to new_sessions_path
+    logout_and_redirect_user(new_sessions_path)
   end
 
   private
 
   def login_params
     params.permit(:email, :password)
-  end
-
-  def login_user(user)
-    session[:user_id] = user.id
-    session[:player_id] = user.player_id
-    cookies.signed[:player_id] = session[:player_id]
-  end
-
-  def login_and_redirect(user)
-    login_user(user)
-    flash[:notice] = t('.success')
-    redirect_back(fallback_location: root_path)
   end
 end

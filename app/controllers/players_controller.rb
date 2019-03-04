@@ -11,13 +11,10 @@ class PlayersController < ApplicationController
   end
 
   def create
-    player = Player.create!(player_params)
-    session[:player_id] = player.id
-    flash[:notice] = "You're all set! You can now enter an existing match or create your own!"
-    redirect_to lobby_path
+    login_and_redirect_player(Player.create!(player_params))
   rescue StandardError => e
-    Rails.logger.error(e.full_message)
-    flash[:error] = 'An error occurred. Please try again.'
+    Rails.logger.error(e.message)
+    flash[:error] = t('.error')
     redirect_to new_player_path
   end
 

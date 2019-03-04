@@ -38,6 +38,11 @@ en:
       success: "We're sad to see you go, your account has been deleted, forever."
 
   players:
+    create:
+      error:   'Unfortunately an error occurred. Please try again.'
+      success: "You're all set! You can now enter an existing match or create your own!"
+    destroy:
+      success: "You have been signed out of the anonymous player account."
     new:
       title_html:       'Almost There!<br/>We just need one more thing:'
       subtitle:         'Choose a name to play:'
