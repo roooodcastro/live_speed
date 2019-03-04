@@ -1,4 +1,7 @@
 .signup-container {
+  height: 100%;
+  max-height: 100vh;
+  overflow: hidden;
   text-align: center;
 }
 
@@ -8,9 +11,11 @@
   display: flex;
   height: 35rem;
   justify-content: space-between;
-  margin: calc(50vh - 17.5rem + 2rem) auto 0 auto; // Half page height - half self height - half of the menu bar
+  margin: calc(50vh + 2rem) auto 0 auto; // Half page height - half self height - half of the menu bar
+  max-height: calc(100vh - 8rem);
   max-width: 80rem;
   position: relative;
+  transform: translate(0, -50%);
 }
 
 .signup-card {
@@ -23,6 +28,7 @@
   justify-content: center;
   height: 38rem;
   left: 6rem;
+  max-height: calc(100vh - 5rem);
   padding: 3rem;
   position: relative;
   text-align: center;
