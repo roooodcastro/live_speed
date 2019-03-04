@@ -15,8 +15,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    return login_and_redirect(@user) if @user.persisted?
+    @user = User.create_with_player(user_params)
+    return login_and_redirect_user(@user) if @user.persisted?
 
     error_flash(@user)
     render :new
