@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   require_user_login
   skip_user_login only: %i[new create]
 
-  layout 'login', only: :new
+  layout 'login', only: %i[new create]
 
   before_action :set_user, only: %i[show edit update destroy]
 

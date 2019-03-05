@@ -10,11 +10,12 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { minimum: 4 }
 
   def self.create_with_player(params)
+    user = User.new(params)
     rescued_transaction do
-      user = User.create!(params)
+      user.save!
       Player.create!(user: user)
-      user
     end
+    user
   end
 
   def destroy_and_anonymize_player
