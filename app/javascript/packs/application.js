@@ -26,15 +26,19 @@ Vue.use(TurbolinksAdapter);
 
 import PlayerNameInput from 'components/application/players/PlayerNameInput';
 import NewPlayerForm   from 'components/application/players/NewPlayerForm';
+import NewUserForm     from 'components/application/users/NewUserForm';
 import MenuBar         from 'components/application/layout/MenuBar';
 import MenuBarLink     from 'components/application/layout/MenuBarLink';
 import AlertsContainer from 'components/application/layout/AlertsContainer';
+import FormInput       from 'components/application/forms/FormInput';
 
 Vue.component('player-name-input', PlayerNameInput);
 Vue.component('new-player-form', NewPlayerForm);
+Vue.component('new-user-form', NewUserForm);
 Vue.component('menu-bar', MenuBar);
 Vue.component('menu-bar-link', MenuBarLink);
 Vue.component('alerts-container', AlertsContainer);
+Vue.component('form-input', FormInput);
 
 document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({

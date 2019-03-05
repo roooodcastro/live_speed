@@ -2,6 +2,7 @@ en:
   title:    'LiveSpeed'
   logo_alt: 'LiveSpeed Logo'
   back:     'Back'
+  generic_error:  'An error has occurred. Please contact an administrator or try again.'
 
   home:
     index:
@@ -53,7 +54,6 @@ en:
       valid_name:       '✓ This name is valid!'
       name_placeholder: 'Player Name'
       name_aria_label:  'Type your player name'
-      error:            'An error has occurred. Please contact an administrator or try again.'
       submit:           'Confirm'
 
   sessions:
@@ -74,11 +74,17 @@ en:
 
   users:
     new:
-      title:            'Create your account'
-      subtitle:         'We just need a few details:'
-      new_player_btn:   'Start Playing Now'
-      options:          'You can also:'
-      login_btn:        'Sign In'
+      title:          'Create your account'
+      subtitle:       'We just need a few details:'
+      label_username: 'Choose a username:'
+      label_email:    'Inform your e-mail:'
+      label_password: 'Create a new password:'
+      login_btn:      'Sign In'
+      new_player_btn: 'Start Playing Now'
+      options:        'You can also:'
+      password_error: 'Password must contain at least 6 characters.'
+      submit:         'Create My Account'
+      username_error: ''
     update:
       error:   'We could not update your account :('
       success: 'You account details were updated!'

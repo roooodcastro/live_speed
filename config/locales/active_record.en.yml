@@ -15,4 +15,5 @@ en:
         num_rounds:             'Number of Rounds'
       user:
         email:    'Email'
+        name:     'Username'
         password: 'Password'

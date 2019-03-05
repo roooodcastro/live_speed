@@ -87,7 +87,7 @@
       validateName() {
         api
           .post('/', { name: this.name })
-          .catch(() => Promise.reject([I18n.t('players.new.error')]))
+          .catch(() => Promise.reject([I18n.t('generic_error')]))
           .then(({ data }) => {
             if (this.name.length > 0) {
               this.state = data.valid ? 'valid' : 'error';
@@ -144,7 +144,7 @@
 
     &.valid { color: $brand; }
 
-    &.error { color: $brand-alt; }
+    &.error { color: $red; }
 
     &.validating { color: $brand-gray-4; }
   }
