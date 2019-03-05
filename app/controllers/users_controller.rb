@@ -2,11 +2,15 @@
 
 class UsersController < ApplicationController
   require_user_login
-  skip_user_login only: %i[new create]
+  skip_user_login only: %i[index new create]
 
   layout 'login', only: %i[new create]
 
   before_action :set_user, only: %i[show edit update destroy]
+
+  def index
+    redirect_to new_user_path unless user_logged_in?
+  end
 
   def show; end
 
@@ -52,6 +56,6 @@ class UsersController < ApplicationController
 
   def error_flash(user)
     subtitle = user.errors.full_messages.join("\n")
-    flash[:error] = [t('.error'), subtitle]
+    flash.now[:error] = [t('.error'), subtitle]
   end
 end
