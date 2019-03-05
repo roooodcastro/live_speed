@@ -142,6 +142,7 @@ Here's a quick overview of the project's progress:
 - [ ] Add How to Play page with good instructions
 - [ ] Define and implement full flow of player/user signup/login/upgrade
 - [ ] Let players check their matches history
+- [ ] Implement public/private player profiles, show statistics on profile page
 
 ### Admin site
 
@@ -157,6 +158,7 @@ Here's a quick overview of the project's progress:
 - [x] Add i18n to Rails
 - [x] Add i18n to JS/webpacker
 - [x] Completely remove Sprockets in favour of Webpacker
+- [ ] Add some SEO stuff
 
 ## Credits
 
