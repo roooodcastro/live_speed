@@ -8,6 +8,7 @@ class User < ApplicationRecord
   delegate :id, to: :player, prefix: true
 
   validates :name, presence: true, uniqueness: true, length: { minimum: 4 }
+  validates :email, presence: true, uniqueness: true
 
   def self.create_with_player(params)
     user = User.new(params)
@@ -16,6 +17,12 @@ class User < ApplicationRecord
       Player.create!(user: user)
     end
     user
+  end
+
+  def self.validate_input(attr, value)
+    user = User.new(attr => value)
+    user.valid?
+    user.errors.full_messages_for(attr)
   end
 
   def destroy_and_anonymize_player

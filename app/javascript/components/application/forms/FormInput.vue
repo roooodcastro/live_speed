@@ -13,7 +13,7 @@
       :value="value"
       :aria-label="computedAriaLabel"
       :placeholder="placeholder"
-      :class="{ error: hasError }"
+      :class="cssClass"
       :autocomplete="autocomplete"
       @input="onInput"
     >
@@ -27,14 +27,6 @@
 </template>
 
 <script>
-  import I18n          from 'vendor/i18n-js.js.erb';
-  import axios         from 'axios';
-  import { debounced } from 'helpers/forms';
-
-  const api = axios.create({
-    baseURL: '/'
-  });
-
   export default {
     props: {
       type:                { type: String, default: 'text' },
@@ -44,16 +36,13 @@
       label:               { type: String, default: null },
       ariaLabel:           { type: String, default: null },
       autocomplete:        { type: String, default: null },
-      placeholder:         { type: String, default: null },
-      validationUrl:       { type: String, default: null },
-      validationParamName: { type: String, default: 'value' }
+      placeholder:         { type: String, default: null }
     },
 
     data() {
       return {
         error: '',
-        value: this.initialValue,
-        state: ''
+        value: this.initialValue
       };
     },
 
@@ -74,50 +63,38 @@
 
       hasError() {
         return !!this.error;
-      }
-    },
+      },
 
-    created() {
-      this.debouncedValidation = debounced(500, this.validateValue);
+      hasValue() {
+        return this.value && this.value.length > 0;
+      },
+
+      state() {
+        if (this.hasError && this.hasValue) {
+          return 'error';
+        } else if (this.hasValue) {
+          return 'valid';
+        } else {
+          return '';
+        }
+      },
+
+      cssClass() {
+        return {
+          error: this.state === 'error',
+          valid: this.state === 'valid'
+        };
+      }
     },
 
     methods: {
       setError(error) {
-        if (error && this.value.length > 0) {
-          this.state = 'error';
-        } else if (this.value.length > 0) {
-          this.state = 'valid';
-        } else {
-          this.state = '';
-        }
-
         this.error = error;
       },
 
       onInput(ev) {
         this.value = ev.target.value;
-        if (this.validationUrl) {
-          this.state = 'validating';
-          this.debouncedValidation();
-        }
-        this.$emit('input', this.value, this.state);
-      },
-
-      validateValue() {
-        const params                     = {};
-        params[this.validationParamName] = this.value;
-        api
-          .post(this.validationUrl, params)
-          .catch(() => Promise.reject([I18n.t('generic_error')]))
-          .then(({ data }) => {
-            if (this.value.length > 0) {
-              this.state = data.valid ? 'valid' : 'error';
-              this.error = data.error;
-            } else {
-              this.state = '';
-            }
-            this.$emit('input', this.value, this.state);
-          });
+        this.$emit('input', this.value);
       }
     }
   };
@@ -160,6 +137,14 @@
 
         &:focus {
           box-shadow: 0 0 0.5rem $red;
+        }
+      }
+
+      &.valid {
+        border-color: $green;
+
+        &:focus {
+          box-shadow: 0 0 0.5rem $green;
         }
       }
     }

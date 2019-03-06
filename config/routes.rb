@@ -17,7 +17,9 @@ Rails.application.routes.draw do
   resources :player_name_validators, only: :create
   resources :rounds, except: :index
   resource :sessions, only: %i[show new create destroy]
-  resources :users
+  resources :users do
+    collection { get :validate }
+  end
 
   get :how_to_play, to: 'static_pages#how_to_play'
 end

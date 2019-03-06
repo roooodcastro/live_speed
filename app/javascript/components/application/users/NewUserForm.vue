@@ -1,33 +1,33 @@
 <template>
   <div>
-    <form-input
-      id="user_name"
+    <rails-form-input
       ref="username"
-      name="user[name]"
+      model="user"
+      column="name"
       autocomplete="new-password"
-      validation-url="/player_name_validators"
       :label="t('users.new.label_username')"
       :placeholder="t('activerecord.attributes.user.name')"
       @input="onNameChange"
     />
 
-    <form-input
-      id="user_email"
+    <rails-form-input
       ref="email"
+      model="user"
+      column="email"
       type="email"
-      name="user[email]"
       autocomplete="new-password"
       :label="t('users.new.label_email')"
       :placeholder="t('activerecord.attributes.user.email')"
       @input="onEmailChange"
     />
 
-    <form-input
-      id="user_password"
+    <rails-form-input
       ref="password"
+      model="user"
+      column="password"
       type="password"
-      name="user[password]"
       autocomplete="new-password"
+      :validate="false"
       :label="t('users.new.label_password')"
       :placeholder="t('activerecord.attributes.user.password')"
       @input="onPasswordChange"

@@ -10,6 +10,7 @@
     "eslint-plugin-vue": "^5.1.0",
     "i18n-js": "^3.2.1",
     "normalize.css": "^8.0.1",
+    "pluralize": "^7.0.0",
     "rails-erb-loader": "^5.5.2",
     "sass-loader": "^7.1.0",
     "turbolinks": "^5.2.0",

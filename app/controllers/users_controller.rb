@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   require_user_login
-  skip_user_login only: %i[index new create]
+  skip_user_login only: %i[index new create validate]
 
   layout 'login', only: %i[new create]
 
@@ -42,6 +42,11 @@ class UsersController < ApplicationController
 
     error_flash(@user)
     render :show
+  end
+
+  def validate
+    errors = User.validate_input(params[:column], params[:value])
+    render json: { valid: errors.blank?, errors: errors }
   end
 
   private
