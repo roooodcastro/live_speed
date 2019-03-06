@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  include AttributeValidator
+
   require_user_login
   skip_user_login only: %i[index new create validate]
 
@@ -42,11 +44,6 @@ class UsersController < ApplicationController
 
     error_flash(@user)
     render :show
-  end
-
-  def validate
-    errors = User.validate_input(params[:column], params[:value])
-    render json: { valid: errors.blank?, errors: errors }
   end
 
   private

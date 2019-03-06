@@ -13,13 +13,10 @@ Rails.application.routes.draw do
   end
 
   resource :my_account, only: %i[show edit update destroy], controller: :my_account
-  resources :players, only: %i[new create]
-  resources :player_name_validators, only: :create
+  resources(:players, only: %i[new create]) { collection { get :validate } }
   resources :rounds, except: :index
   resource :sessions, only: %i[show new create destroy]
-  resources :users do
-    collection { get :validate }
-  end
+  resources(:users) { collection { get :validate } }
 
   get :how_to_play, to: 'static_pages#how_to_play'
 end

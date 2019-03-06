@@ -1,8 +1,15 @@
 <template>
   <div>
-    <PlayerNameInput
-      :initial-name="initialName"
-      @validatedName="onNameChange"
+    <rails-form-input
+      ref="username"
+      model="player"
+      column="own_name"
+      autocomplete="new-password"
+      label=""
+      :aria-label="t('players.new.name_aria_label')"
+      :placeholder="t('players.new.name_placeholder')"
+      :initial-value="initialName"
+      @input="onNameChange"
     />
 
     <button
@@ -16,12 +23,9 @@
 </template>
 
 <script>
-  import I18n            from 'vendor/i18n-js.js.erb';
-  import PlayerNameInput from 'components/application/players/PlayerNameInput';
+  import I18n from 'vendor/i18n-js.js.erb';
 
   export default {
-    components: { PlayerNameInput },
-
     props: {
       initialName: { type: String, default: '' }
     },

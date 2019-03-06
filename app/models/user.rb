@@ -3,6 +3,8 @@
 class User < ApplicationRecord
   has_secure_password
 
+  include AttributeValidator
+
   has_one :player, dependent: :nullify
 
   delegate :id, to: :player, prefix: true
@@ -17,12 +19,6 @@ class User < ApplicationRecord
       Player.create!(user: user)
     end
     user
-  end
-
-  def self.validate_input(attr, value)
-    user = User.new(attr => value)
-    user.valid?
-    user.errors.full_messages_for(attr)
   end
 
   def destroy_and_anonymize_player
