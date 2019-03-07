@@ -1,0 +1,14 @@
+<% content_for(:before_container) do %>
+  <div class="landing-logo-container">
+    <%= image_tag asset_pack_path('images/logo_cards.svg') %>
+    <%= image_tag asset_pack_path('images/logo_text.svg') %>
+  </div>
+<% end %>
+
+<%= title t('.title') %>
+
+<%= render partial: 'home/game_description' %>
+
+<p class="centered">
+<%= image_tag asset_pack_path('images/ss/game1.png'), class: 'landing-game-demo' %>
+</p>

@@ -118,14 +118,15 @@ Here's a quick overview of the project's progress:
 - [ ] Pause game when player disconnects, give him a time limit to rejoin
 - [ ] End abandoned match by W.O., giving victory to remaining player
 - [ ] Only reveal cards once both players are ready
+- [ ] Implement demo version of game to display on landing page
 
 ### Interface
 
 - [x] Choose brand colours
 - [x] Create basic layout
-- [ ] Create basic Vue components (buttons, links, form inputs, etc)
+- [x] Create basic Vue components (buttons, links, form inputs, etc)
 - [x] Style player creation page
-- [ ] Style landing page
+- [x] Create landing page
 - [ ] Style rest of the site
 - [ ] Add Google Analytics or similar user tracking service
 - [ ] Implement GDPR
@@ -140,7 +141,8 @@ Here's a quick overview of the project's progress:
 - [x] Allow player to join a match
 - [x] Able to start playing a round/new round from a match page
 - [ ] Add How to Play page with good instructions
-- [ ] Define and implement full flow of player/user signup/login/upgrade
+- [x] Define and implement full flow of player/user signup/login
+- [ ] Let players with no account create an account with their existing Player
 - [ ] Let players check their matches history
 - [ ] Implement public/private player profiles, show statistics on profile page
 

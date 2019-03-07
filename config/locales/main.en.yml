@@ -10,6 +10,8 @@ en:
   home:
     index:
       title: 'Home'
+    landing_page:
+      title: 'Play Speed Card Game With LiveSpeed!'
 
   lobby:
     show:

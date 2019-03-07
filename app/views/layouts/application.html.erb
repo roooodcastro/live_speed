@@ -7,6 +7,13 @@
 </head>
 
 <body>
+
+<% if content_for?(:before_container) %>
+  <div class="before-container">
+    <%= yield :before_container %>
+  </div>
+<% end %>
+
 <div class="container" data-behaviour="vue">
   <%= render partial: 'layouts/menu_bar' %>
 

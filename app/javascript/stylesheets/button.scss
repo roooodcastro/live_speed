@@ -39,10 +39,23 @@
     }
   }
 
+  &.btn-alt {
+    background-color: $brand-alt;
+    border-color: $brand-alt-4;
+    &:hover:enabled { border-color: $brand-alt-1; }
+  }
+
   &.btn-lg {
     font-size:   1rem;
     line-height: 2.5rem;
     padding:     0 2rem;
+  }
+
+  &.btn-hero {
+    font-size:   1.5rem;
+    line-height: 4rem;
+    padding:     0 5rem;
+    &:hover:enabled { transform: scale(1.1); }
   }
 }
 
