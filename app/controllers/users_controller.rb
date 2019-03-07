@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  include AttributeValidator
+  include ControllerAttributeValidator
 
   require_user_login
   skip_user_login only: %i[index new create validate]

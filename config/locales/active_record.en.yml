@@ -13,6 +13,8 @@ en:
         description_unfinished: "Best of %{rounds} rounds, %{players} players"
         num_players:            'Number of Players'
         num_rounds:             'Number of Rounds'
+      player:
+        own_name: 'Player Name'
       user:
         email:    'Email'
         name:     'Username'

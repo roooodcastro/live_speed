@@ -11,7 +11,7 @@
   display: flex;
   height: 35rem;
   justify-content: space-between;
-  margin: calc(50vh + 2rem) auto 0 auto; // Half page height - half self height - half of the menu bar
+  margin: calc(50vh + (#{$menu-bar-height} / 2)) auto 0 auto; // 1/2 page height - 1/2 self height - 1/2 of menu bar
   max-height: calc(100vh - 8rem);
   max-width: 80rem;
   position: relative;

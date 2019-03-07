@@ -20,8 +20,9 @@
 
     <span
       class="form-input-error"
+      :class="errorCssClass"
     >
-      {{ errorMessage }}
+      {{ errorMessage || loadText }}
     </span>
   </div>
 </template>
@@ -29,19 +30,20 @@
 <script>
   export default {
     props: {
-      type:                { type: String, default: 'text' },
-      name:                { type: String, required: true },
-      id:                  { type: String, default: null },
-      initialValue:        { type: String, default: null },
-      label:               { type: String, default: null },
-      ariaLabel:           { type: String, default: null },
-      autocomplete:        { type: String, default: null },
-      placeholder:         { type: String, default: null }
+      type:         { type: String, default: 'text' },
+      name:         { type: String, required: true },
+      id:           { type: String, default: null },
+      initialValue: { type: String, default: null },
+      label:        { type: String, default: null },
+      ariaLabel:    { type: String, default: null },
+      autocomplete: { type: String, default: null },
+      placeholder:  { type: String, default: null }
     },
 
     data() {
       return {
         error: '',
+        loadText: '',
         value: this.initialValue
       };
     },
@@ -65,12 +67,18 @@
         return !!this.error;
       },
 
+      hasLoadText() {
+        return !!this.loadText;
+      },
+
       hasValue() {
         return this.value && this.value.length > 0;
       },
 
       state() {
-        if (this.hasError && this.hasValue) {
+        if (this.hasLoadText) {
+          return 'loading';
+        } else if (this.hasError && this.hasValue) {
           return 'error';
         } else if (this.hasValue) {
           return 'valid';
@@ -84,12 +92,20 @@
           error: this.state === 'error',
           valid: this.state === 'valid'
         };
+      },
+
+      errorCssClass() {
+        return { loading: this.hasLoadText };
       }
     },
 
     methods: {
       setError(error) {
         this.error = error;
+      },
+
+      setLoadingText(text) {
+        this.loadText = text;
       },
 
       onInput(ev) {
@@ -151,10 +167,12 @@
   }
 
   .form-input-error {
-    color:       $red;
-    display:     block;
-    font-size:   0.8rem;
-    line-height: 2rem;
-    text-align:  left;
+    color:      $red;
+    display:    block;
+    font-size:  0.8rem;
+    margin-top: 0.5rem;
+    text-align: left;
+
+    &.loading { color: $text-color-faded; }
   }
 </style>

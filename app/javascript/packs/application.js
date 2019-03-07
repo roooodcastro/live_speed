@@ -24,7 +24,6 @@ import Vue               from 'vue/dist/vue.esm';
 Turbolinks.start();
 Vue.use(TurbolinksAdapter);
 
-import PlayerNameInput from 'components/application/players/PlayerNameInput';
 import NewPlayerForm   from 'components/application/players/NewPlayerForm';
 import NewUserForm     from 'components/application/users/NewUserForm';
 import MenuBar         from 'components/application/layout/MenuBar';
@@ -33,7 +32,6 @@ import AlertsContainer from 'components/application/layout/AlertsContainer';
 import FormInput       from 'components/application/forms/FormInput';
 import RailsFormInput  from 'components/application/forms/RailsFormInput';
 
-Vue.component('player-name-input', PlayerNameInput);
 Vue.component('new-player-form', NewPlayerForm);
 Vue.component('new-user-form', NewUserForm);
 Vue.component('menu-bar', MenuBar);

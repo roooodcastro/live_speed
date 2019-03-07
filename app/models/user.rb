@@ -3,14 +3,14 @@
 class User < ApplicationRecord
   has_secure_password
 
-  include AttributeValidator
+  include ModelAttributeValidator
 
   has_one :player, dependent: :nullify
 
   delegate :id, to: :player, prefix: true
 
-  validates :name, presence: true, uniqueness: true, length: { minimum: 4 }
-  validates :email, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: { allow_nil: true }, length: { minimum: 4 }
+  validates :email, presence: true, uniqueness: { allow_nil: true }
 
   def self.create_with_player(params)
     user = User.new(params)

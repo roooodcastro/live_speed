@@ -37,7 +37,7 @@
     background:  rgba($brand-3, 0.9);
     display:     flex;
     align-items: center;
-    height:      4rem;
+    height:      $menu-bar-height;
     left:        0;
     position:    fixed;
     right:       0;
@@ -49,7 +49,7 @@
     color:           $brand-white;
     display:         flex;
     font-family:     'CardChars', serif;
-    font-size:       1.5rem;
+    font-size:       $menu-bar-height / 2.5;
     height:          100%;
     align-items:     center;
     padding:         0 1rem;
@@ -57,7 +57,7 @@
     text-shadow:     2px 2px 4px $brand-alt-4;
     transition:      all 0.15s;
 
-    img { height: 3rem; width: 3rem; }
+    img { height: $menu-bar-height - 0.5rem; width: $menu-bar-height - 0.5rem; }
 
     &:hover { background-color: rgba($brand-white, 0.1); }
   }

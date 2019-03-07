@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PlayersController < ApplicationController
-  include AttributeValidator
+  include ControllerAttributeValidator
 
   layout 'login', only: :new
 

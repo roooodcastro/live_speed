@@ -29,6 +29,7 @@
       model:        { type: String, default: null },
       column:       { type: String, required: true },
       validate:     { type: Boolean, default: true },
+      showLabel:    { type: Boolean, default: false },
       initialValue: { type: String, default: null },
       label:        { type: String, default: null },
       ariaLabel:    { type: String, default: null },
@@ -55,7 +56,12 @@
       },
 
       inputLabel() {
-        if (this.label) return this.label;
+        if (this.label || !this.showLabel) return this.label;
+
+        return this.humanizedColumnName();
+      },
+
+      humanizedColumnName() {
         if (this.column && this.model) return I18n.t('activerecord.attributes.' + this.model + '.' + this.column);
 
         return null;
@@ -78,6 +84,7 @@
         if (this.validationUrl && this.validate) {
           this.value = value;
           this.state = 'validating';
+          this.$refs.input.setLoadingText(I18n.t('forms.validating', { attr: this.humanizedColumnName }));
           this.debouncedValidation();
         }
         this.$emit('input', value, this.state);
@@ -97,7 +104,8 @@
               this.$refs.input.setError(null);
             }
             this.$emit('input', this.value, this.state);
-          });
+          })
+          .finally(() => this.$refs.input.setLoadingText(''));
       },
 
       setError(error) {

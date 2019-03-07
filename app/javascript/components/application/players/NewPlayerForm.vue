@@ -5,7 +5,7 @@
       model="player"
       column="own_name"
       autocomplete="new-password"
-      label=""
+      :show-label="false"
       :aria-label="t('players.new.name_aria_label')"
       :placeholder="t('players.new.name_placeholder')"
       :initial-value="initialName"

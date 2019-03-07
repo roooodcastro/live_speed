@@ -31,10 +31,10 @@
   .menu-bar-link {
     color:           $brand-white;
     display:         inline-block;
-    font-size:       1.2rem;
+    font-size:       $menu-bar-height / 3;
     font-weight:     normal;
-    line-height:     2rem;
-    padding:         1rem 2rem;
+    line-height:     $menu-bar-height;
+    padding:         0 2rem;
     position:        relative;
     text-decoration: none;
     text-shadow:     1px 1px 2px $brand-alt-4;
@@ -54,7 +54,7 @@
     &:hover {
       background-color: rgba($brand-white, 0.1);
 
-      &:before { height: 0.4rem; }
+      &:before { height: $menu-bar-height / 10; }
     }
   }
 </style>

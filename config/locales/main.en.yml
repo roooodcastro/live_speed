@@ -4,6 +4,9 @@ en:
   back:     'Back'
   generic_error:  'An error has occurred. Please contact an administrator or try again.'
 
+  forms:
+    validating: "Validating %{attr}..."
+
   home:
     index:
       title: 'Home'

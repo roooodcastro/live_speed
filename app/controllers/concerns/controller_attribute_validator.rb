@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AttributeValidator
+module ControllerAttributeValidator
   include ActiveSupport::Concern
 
   def validate

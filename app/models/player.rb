@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Player < ApplicationRecord
-  include AttributeValidator
+  include ModelAttributeValidator
 
   belongs_to :user, optional: true
   has_many :match_players, dependent: :destroy
@@ -16,12 +16,6 @@ class Player < ApplicationRecord
     return user.name if user
 
     own_name
-  end
-
-  def self.validate_input(attr, value)
-    player = Player.new(attr => value)
-    player.valid?
-    player.errors.full_messages_for(attr)
   end
 
   # Needs to check if there's another Player or User with this name.
