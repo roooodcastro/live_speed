@@ -15,7 +15,7 @@
 
 <script>
   import pluralize     from 'pluralize';
-  import I18n          from 'vendor/i18n-js.js.erb';
+  import I18n          from 'vendor/i18n-js-app.js.erb';
   import axios         from 'axios';
   import { debounced } from 'helpers/forms';
 

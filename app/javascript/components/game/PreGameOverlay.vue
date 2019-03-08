@@ -25,7 +25,7 @@
 </template>
 
 <script>
-  import I18n from 'vendor/i18n-js.js.erb';
+  import I18n from 'vendor/i18n-js-game.js.erb';
 
   export default {
 

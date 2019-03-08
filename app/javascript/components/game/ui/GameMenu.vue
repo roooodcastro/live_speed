@@ -26,7 +26,7 @@
 </template>
 
 <script>
-  import I18n           from 'vendor/i18n-js.js.erb';
+  import I18n           from 'vendor/i18n-js-game.js.erb';
   import GameMenuButton from 'components/game/ui/GameMenuButton';
   import GameMenuItem   from 'components/game/ui/GameMenuItem';
 

@@ -1,0 +1,2 @@
+translations:
+  - except: ['*.date', '*.time', '*.support', '*.errors', '*.datetime', '*.faker', '*.game']
