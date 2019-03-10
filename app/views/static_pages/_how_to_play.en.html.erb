@@ -19,20 +19,24 @@
 </p>
 
 <p>
-  The game table looks something like this:
+  This is what the game table looks like:
+</p>
+
+<p class="centered">
+  <%= image_tag asset_pack_path('images/ss/game1_annotated.png') %>
 </p>
 
 <p>
-  Player 2 draw cards Player 2 hand
-  ↓ ↓ ↓ ↓ ↓ ↓
-  🂠 🂣 🂣 🂣 🂣 🂣
-  Left replacement pile ↘ ↙ Right center pile
-  🂠 🂣 🂣 🂠
-  Left center pile ↗ ↖ Right replacement pile
-  🂣 🂣 🂣 🂣 🂣 🂠
-  ↑ ↑ ↑ ↑ ↑ ↑
-  Player 1 hand Player 1 draw cards
+  Here's a summary of what each label means:
 </p>
+
+<ol>
+  <li>Your hand cards. These are the cards that are currently available for you to play.</li>
+  <li>Your draw pile. You start with 15 of these, your goal is to get rid of them all.</li>
+  <li>The 2 central piles. This is where all the action happens. Play your cards here!</li>
+  <li>The replacement piles. These will be used when neither play has any more valid plays to make.</li>
+  <li>Your opponent's hand. There's nothing for you here, but you can use it to spy on your opponent!</li>
+</ol>
 
 <%= anchored_header(t('.play_subtitle')) %>
 
