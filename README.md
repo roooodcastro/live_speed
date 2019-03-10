@@ -53,13 +53,13 @@ The game table looks something like this:
 
 ```
      Player 2 draw cards   Player 2 hand
-                       ↓   ↓ ↓ ↓ ↓ ↓
+                       ↓   ↓  ↓  ↓  ↓  ↓
                        🂠   🂣 🂣 🂣 🂣 🂣
 Left replacement pile ↘         ↙ Right center pile
                        🂠    🂣 🂣    🂠
-          Left center pile ↗        ↖ Right replacement pile
+           Left center pile ↗         ↖ Right replacement pile
                        🂣 🂣 🂣 🂣 🂣   🂠
-                       ↑ ↑ ↑ ↑ ↑    ↑
+                       ↑  ↑  ↑  ↑  ↑   ↑
                    Player 1 hand    Player 1 draw cards
 ```
 
