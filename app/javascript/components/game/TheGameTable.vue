@@ -44,6 +44,7 @@
           ref="playerMessage"
           :pos="[0, -35]"
           :size="6"
+          :animated="state === 'win'"
           font="Barbaro"
         >
           {{ playerMessage }}
@@ -67,6 +68,22 @@
         />
       </div>
 
+      <div v-show="state === 'win' || state === 'lose'">
+        <livespeed-button
+          :pos="[47.5, 35]"
+          @click="onNextRoundClick"
+        >
+          {{ t('game.menu.next_round') }}
+        </livespeed-button>
+
+        <livespeed-button
+          :pos="[-47.5, 35]"
+          @click="onQuitGameClick"
+        >
+          {{ t('game.menu.quit') }}
+        </livespeed-button>
+      </div>
+
       <GameTableCardSlots
         v-show="state !== 'loading'"
         :number-of-players="2"
@@ -87,6 +104,7 @@
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
   import PreGameOverlay      from 'components/game/PreGameOverlay';
   import GameMenu            from 'components/game/ui/GameMenu';
+  import I18n                from 'vendor/i18n-js-game.js.erb';
 
   export default {
     components: {
@@ -144,7 +162,7 @@
       },
 
       canUseReplacement() {
-        return this.roundData.can_use_replacement || false;
+        return !!this.roundData.can_use_replacement && !this.controller.playerReadyToReplace;
       }
     },
 
@@ -201,9 +219,11 @@
       },
 
       onReplacementResponse(data) {
-        if (this.controller.allReadyToReplace) {
+        if (!data.round.can_use_replacement) {
           this.centerPileComponent.pullFromReplacements()
             .then(() => this.updateData(data));
+        } else {
+          this.updateData(data);
         }
       },
 
@@ -260,6 +280,14 @@
         // TODO: Find a way to make the game resize dynamically;
       },
 
+      onNextRoundClick() {
+        window.location = '/matches/' + this.controller.matchId + '/play';
+      },
+
+      onQuitGameClick() {
+        window.location = '/matches';
+      },
+
       playCard(card, pileIndex) {
         const cardIndex = this.playerHandComponent(this.playerId).indexOfCard(card);
         this.api.playCard(cardIndex, pileIndex, this.playerId);
@@ -278,6 +306,10 @@
         if (timer) this.playerSubMessageTimer = timer;
         this.playerSubMessage = message;
         this.$refs.submessage.resetFade();
+      },
+
+      t(name) {
+        return I18n.t(name);
       }
     }
   };

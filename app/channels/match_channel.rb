@@ -58,11 +58,20 @@ class MatchChannel < ApplicationCable::Channel
   private
 
   def load_round
-    Round.find(@round_id)
+    # puts "\n\n\n"
+    # puts "LOADING ROUND FOR #{Player.find(player_id).name}"
+    # puts "\n\n\n"
+    round = Round.find(@round_id).reload
+    # puts round.round_controller.hands.map(&:cards)
+    round
+  end
+
+  def round_data(round)
+    round.reload.data.as_json.merge(match_id: round.match_id)
   end
 
   def respond(action, round, data)
-    ActionCable.server.broadcast "round_#{round.id}", { action: action, round: round.data.as_json }.merge(data)
+    ActionCable.server.broadcast "round_#{round.id}", { action: action, round: round_data(round) }.merge(data)
   end
 
   def handle_error(error)

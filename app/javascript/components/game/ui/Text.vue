@@ -1,6 +1,6 @@
 <template>
   <p
-    :class="{ 'livespeed-text-invisible': !visible }"
+    :class="{ 'livespeed-text-invisible': !visible, 'livespeed-text-animated': animated }"
     class="livespeed-text"
     :style="style"
   >
@@ -14,10 +14,11 @@
 
   export default {
     props: {
-      font:   { type: String, default: 'CardChars' },
-      pos:    { type: Array, required: true },
-      size:   { type: Number, default: 2 },
-      fadeIn: { type: Number, default: 0 }
+      animated: { type: Boolean, default: false },
+      font:     { type: String, default: 'CardChars' },
+      pos:      { type: Array, required: true },
+      size:     { type: Number, default: 2 },
+      fadeIn:   { type: Number, default: 0 }
     },
 
     data() {
@@ -65,20 +66,51 @@
   };
 </script>
 
-<style>
+<style lang="scss">
+  @import 'stylesheets/_variables.scss';
+
   .livespeed-text {
-    color:       rgba(255, 255, 255, 0.9);
+    color:       $brand-white;
     margin:      0;
     opacity:     1;
     padding:     0 1rem;
     position:    absolute;
     text-align:  center;
-    text-shadow: 1px 1px 2px black;
+    text-shadow: 1px 1px 2px $brand-black;
     transition:  all 0.5s;
     user-select: none;
   }
 
   .livespeed-text-invisible {
     opacity: 0;
+  }
+
+  .livespeed-text-animated {
+    animation: livespeed-text-animation 0.5s infinite ease-in-out,
+               livespeed-text-rainbow 5s infinite linear both;
+    text-shadow: 0 0 10px $brand-black;
+  }
+
+  @keyframes livespeed-text-animation {
+    0%, 100% { font-size: 5.75vmin; }
+    50% { font-size: 6vmin; }
+  }
+
+  @keyframes livespeed-text-rainbow {
+    0% { color: violet; }
+    7% { color: indigo; }
+    14% { color: blue; }
+    22% { color: cyan; }
+    29% { color: green; }
+    36% { color: yellow; }
+    43% { color: orange; }
+    50% { color: red; }
+    57% { color: orange; }
+    64% { color: yellow; }
+    71% { color: green; }
+    79% { color: cyan; }
+    87% { color: blue; }
+    93% { color: indigo; }
+    100% { color: violet; }
   }
 </style>

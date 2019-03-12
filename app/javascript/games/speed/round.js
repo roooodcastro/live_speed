@@ -57,6 +57,10 @@ export default class {
     return this.readyToReplace.allPlayersReady;
   }
 
+  get playerReadyToReplace() {
+    return this.readyToReplace.playerReady;
+  }
+
   get players() {
     return this.hands.map(hand => hand.player);
   }
@@ -91,7 +95,8 @@ export default class {
     this.canUseReplacement = roundData.can_use_replacement;
     this.winnerId          = roundData.winner_id;
     this.readyToPlay       = new Readiness(this.players, 'ready_to_play');
-    this.readyToReplace    = new Readiness(this.players, 'ready_to_replace');
+    this.readyToReplace    = new Readiness(this.players, 'ready_replacement');
+    this.matchId           = roundData.match_id;
   }
 
   playerHand(playerId) {

@@ -28,12 +28,12 @@
   import I18n from 'vendor/i18n-js-game.js.erb';
 
   export default {
-
     data() {
       return {
         opponentsReady: false
       };
     },
+
     computed: {
       opponentsText() {
         if (this.opponentsReady) {

@@ -106,10 +106,9 @@ Here's a quick overview of the project's progress:
 - [x] Wait until players ready for replacement play
 - [x] Play replacement cards
 - [x] Shuffle center piles back into replacement piles
-- [ ] End-game feedback
+- [x] End-game feedback
 - [x] Redo card positioning to make it work for mobile
 - [x] Fix visual bugs
-- [ ] Improve card hover animation
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects
 - [ ] Implement a better HUD for displaying more information about the game
@@ -119,6 +118,7 @@ Here's a quick overview of the project's progress:
 - [ ] End abandoned match by W.O., giving victory to remaining player
 - [ ] Only reveal cards once both players are ready
 - [ ] Implement demo version of game to display on landing page
+- [ ] Windows Solitaire card dropping animation
 
 ### Interface
 
