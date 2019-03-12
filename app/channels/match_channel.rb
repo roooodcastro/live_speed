@@ -58,12 +58,7 @@ class MatchChannel < ApplicationCable::Channel
   private
 
   def load_round
-    # puts "\n\n\n"
-    # puts "LOADING ROUND FOR #{Player.find(player_id).name}"
-    # puts "\n\n\n"
-    round = Round.find(@round_id).reload
-    # puts round.round_controller.hands.map(&:cards)
-    round
+    Round.find(@round_id).reload
   end
 
   def round_data(round)
