@@ -8,7 +8,7 @@ en:
       setup:
         click_ready:    'Click READY to start the round:'
         starting:       'Round starting'
-        waiting:        'Waiting for opponent(s)'
+        waiting:        'Waiting for opponent(s)...'
         opponent_ready: 'Your opponent is ready!'
       play:
         no_plays:     'There are no plays left! Click on the replacement pile to your right to use it!'

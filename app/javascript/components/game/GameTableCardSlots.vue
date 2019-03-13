@@ -49,8 +49,8 @@
     position: relative;
 
     .game-table-cardslot {
-      border:        0.2rem solid rgba(255, 255, 255, 0.7);
-      border-radius: 0.5rem;
+      border:        0.2vmin solid rgba(255, 255, 255, 0.7);
+      border-radius: 1vmin;
       position:      absolute;
       left:          0;
     }

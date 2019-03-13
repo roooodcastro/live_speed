@@ -8,7 +8,7 @@
       :rank="card.r"
       :initial-position="leftCenterPilePosition(index)"
       :initial-rotation="centerPileRot(index)"
-      :initial-flipped="false"
+      :initial-flipped="hideCards"
     />
     <livespeed-playing-card
       v-for="(card, index) in centerPiles[1]"
@@ -18,7 +18,7 @@
       :rank="card.r"
       :initial-position="rightCenterPilePosition(index)"
       :initial-rotation="centerPileRot(index)"
-      :initial-flipped="false"
+      :initial-flipped="hideCards"
     />
     <livespeed-playing-card
       v-for="(card, index) in replacementPiles[0]"
@@ -57,7 +57,8 @@
     props: {
       centerPiles:       { type: Array, required: true },
       replacementPiles:  { type: Array, required: true },
-      canUseReplacement: { type: Boolean, required: true }
+      canUseReplacement: { type: Boolean, required: true },
+      gameState:         { type: String, required: true }
     },
 
     computed: {
@@ -71,8 +72,8 @@
           .map((key) => this.$refs[key][0]);
       },
 
-      emptyReplacementPiles() {
-        return this.replacementPiles[0].length === 0;
+      hideCards() {
+        return ['loading', 'setup'].includes(this.gameState);
       }
     },
 

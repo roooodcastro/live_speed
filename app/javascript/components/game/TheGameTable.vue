@@ -30,6 +30,7 @@
           :player="hand.player"
           :initial-hand="hand.cards"
           :initial-draw="hand.draw_pile"
+          :game-state="state"
         />
 
         <GameTableCenterPile
@@ -37,6 +38,7 @@
           :center-piles="centerPiles"
           :replacement-piles="replacementPiles"
           :can-use-replacement="canUseReplacement"
+          :game-state="state"
           @replacementClick="onReplacementClick"
         />
 
@@ -61,14 +63,7 @@
         </livespeed-text>
       </div>
 
-      <div v-show="state === 'setup' && playedDealAnimation">
-        <pre-game-overlay
-          ref="preGameOverlay"
-          @playerReady="onReadyClick"
-        />
-      </div>
-
-      <div v-show="state === 'win' || state === 'lose'">
+      <div v-show="(state === 'win' || state === 'lose') && playedDealAnimation">
         <livespeed-button
           :pos="[47.5, 35]"
           @click="onNextRoundClick"
@@ -83,6 +78,14 @@
           {{ t('game.menu.quit') }}
         </livespeed-button>
       </div>
+
+      <livespeed-button
+        v-show="showReadyButton"
+        :pos="[0, 35]"
+        @click="onReadyClick"
+      >
+        {{ t('game.ready') }}
+      </livespeed-button>
 
       <GameTableCardSlots
         v-show="state !== 'loading'"
@@ -102,7 +105,6 @@
   import GameTableCenterPile from 'components/game/GameTableCenterPile';
   import PlayingCardDeck     from 'components/game/PlayingCardDeck';
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
-  import PreGameOverlay      from 'components/game/PreGameOverlay';
   import GameMenu            from 'components/game/ui/GameMenu';
   import I18n                from 'vendor/i18n-js-game.js.erb';
 
@@ -112,8 +114,7 @@
       GameTableHand,
       GameTableCenterPile,
       GameTableCardSlots,
-      PlayingCardDeck,
-      PreGameOverlay
+      PlayingCardDeck
     },
 
     props: {
@@ -163,6 +164,10 @@
 
       canUseReplacement() {
         return !!this.roundData.can_use_replacement && !this.controller.playerReadyToReplace;
+      },
+
+      showReadyButton() {
+        return this.state === 'setup' && this.playedDealAnimation && !this.controller.playerReadyToPlay;
       }
     },
 
@@ -195,26 +200,33 @@
 
       onPlayerReady(data) {
         this.updateData(data);
-        this.$refs['preGameOverlay'].setOpponentsAsReady(this.controller.allOpponentsReady);
       },
 
       onPlayerConnected(data) {
         this.updateData(data);
-        const playerName = this.controller.playerHand(data.player_id).player.name;
-        this.setPlayerSubmessage(Message.playerConnected(playerName), 5000);
+
+        if (this.playerId !== data.player_id) {
+          const playerName = this.controller.playerHand(data.player_id).player.name;
+          this.setPlayerSubmessage(Message.playerConnected(playerName), 5000);
+        }
       },
 
       onPlayerDisconnected(data) {
         this.updateData(data);
-        const playerName = this.controller.playerHand(data.player_id).player.name;
-        this.setPlayerSubmessage(Message.playerDisconnected(playerName), 5000);
+
+        if (this.playerId !== data.player_id) {
+          const playerName = this.controller.playerHand(data.player_id).player.name;
+          this.setPlayerSubmessage(Message.playerDisconnected(playerName), 5000);
+        }
       },
 
       onReplacementClick() {
-        if (this.canUseReplacement) {
-          this.api.playReplacementPile(this.playerId);
-        } else {
-          this.setPlayerSubmessage(Message.invalidReplacement(), 2000);
+        if (['game', 'staled_game'].includes(this.state)) {
+          if (this.canUseReplacement) {
+            this.api.playReplacementPile(this.playerId);
+          } else {
+            this.setPlayerSubmessage(Message.invalidReplacement(), 2000);
+          }
         }
       },
 

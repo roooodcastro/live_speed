@@ -60,24 +60,24 @@
   .livespeed-button {
     background:    transparent;
     border:        0.2vmin solid transparent;
-    border-radius: .5rem;
-    color:         rgba($brand-white, 0.6);
+    border-radius: 1vmin;
+    color:         rgba($brand-white, 0.8);
     width:         40vmin;
     outline:       none;
-    padding:       0.6rem 1rem;
+    padding:       1vmin 2vmin;
     position:      absolute;
     transition:    0.2s;
     z-index:       500;
   }
 
   .livespeed-button:hover {
-    color: rgba($brand-white, 0.9);
+    color: $brand-white;
     cursor: pointer;
   }
 
   .livespeed-button::before {
-    border:        3px solid rgba($brand-white, 0.75);
-    border-radius: .5em;
+    border:        0.2vmin solid rgba($brand-white, 0.8);
+    border-radius: 1vmin;
     content:       '';
     height:        100%;
     left:          0;
@@ -88,7 +88,7 @@
   }
 
   .livespeed-button:hover::before {
-    border-color: rgba($brand-white, 0.9);
+    border-color: $brand-white;
     transform:    scale(1.05);
   }
 

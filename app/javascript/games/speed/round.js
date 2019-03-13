@@ -57,6 +57,10 @@ export default class {
     return this.readyToReplace.allPlayersReady;
   }
 
+  get playerReadyToPlay() {
+    return this.readyToPlay.playerReady;
+  }
+
   get playerReadyToReplace() {
     return this.readyToReplace.playerReady;
   }

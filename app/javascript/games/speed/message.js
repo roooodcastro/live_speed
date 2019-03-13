@@ -16,10 +16,10 @@ export default {
   },
 
   setupStateVars(round, playerId) {
-    const playerReady    = round.hands.filter(hand => hand.player.id === playerId)[0].player.ready;
+    const playerReady    = round.hands.filter(hand => hand.player.id === playerId)[0].player.ready_to_play;
     const opponentsReady = round.hands
       .filter(hand => hand.player.id !== playerId)
-      .reduce((ready, hand) => ready && hand.player.ready, true);
+      .reduce((ready, hand) => ready && hand.player.ready_to_play, true);
     return { ready: playerReady, opponentsReady: opponentsReady };
   },
 

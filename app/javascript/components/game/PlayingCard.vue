@@ -163,6 +163,8 @@
     filter: drop-shadow(0px 0px 10px #FFFFAA) !important;
   }
 
+  .playing-card.card-f_1.card-active:hover { filter: none !important; }
+
   // Flipped cards
   .card-f_1::after { opacity: 1; }
 

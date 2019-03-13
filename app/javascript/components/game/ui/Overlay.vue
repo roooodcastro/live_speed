@@ -42,7 +42,7 @@
   .livespeed-overlay-front {
     bottom:   0;
     left:     0;
-    position: absolute;
+    position: relative;
     right:    0;
     top:      0;
   }

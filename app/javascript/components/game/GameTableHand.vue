@@ -19,7 +19,7 @@
       :suit="card.s"
       :initial-position="handCardPos(index)"
       :initial-rotation="cardRotation"
-      :initial-flipped="false"
+      :initial-flipped="hideCards"
     />
     <livespeed-text
       :pos="playerNamePos"
@@ -41,7 +41,8 @@
       playerIndex: { type: Number, required: true },
       initialHand: { type: Array, required: true },
       initialDraw: { type: Array, required: true },
-      player:      { type: Object, required: true }
+      player:      { type: Object, required: true },
+      gameState:   { type: String, required: true }
     },
 
     data() {
@@ -78,6 +79,10 @@
       playerNamePos() {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         return [80 * mult, 53 * mult];
+      },
+
+      hideCards() {
+        return ['loading', 'setup'].includes(this.gameState);
       }
     },
 
