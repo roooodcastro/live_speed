@@ -30,21 +30,21 @@
 <script>
   export default {
     props: {
-      type:         { type: String, default: 'text' },
-      name:         { type: String, required: true },
-      id:           { type: String, default: null },
-      initialValue: { type: String, default: null },
-      label:        { type: String, default: null },
-      ariaLabel:    { type: String, default: null },
-      autocomplete: { type: String, default: null },
-      placeholder:  { type: String, default: null }
+      type:         { type: String, default: 'text', },
+      name:         { type: String, required: true, },
+      id:           { type: String, default: null, },
+      initialValue: { type: String, default: null, },
+      label:        { type: String, default: null, },
+      ariaLabel:    { type: String, default: null, },
+      autocomplete: { type: String, default: null, },
+      placeholder:  { type: String, default: null, },
     },
 
     data() {
       return {
         error: '',
         loadText: '',
-        value: this.initialValue
+        value: this.initialValue,
       };
     },
 
@@ -90,13 +90,13 @@
       cssClass() {
         return {
           error: this.state === 'error',
-          valid: this.state === 'valid'
+          valid: this.state === 'valid',
         };
       },
 
       errorCssClass() {
-        return { loading: this.hasLoadText };
-      }
+        return { loading: this.hasLoadText, };
+      },
     },
 
     methods: {
@@ -111,8 +111,8 @@
       onInput(ev) {
         this.value = ev.target.value;
         this.$emit('input', this.value);
-      }
-    }
+      },
+    },
   };
 </script>
 

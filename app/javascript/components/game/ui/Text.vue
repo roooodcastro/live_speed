@@ -14,17 +14,17 @@
 
   export default {
     props: {
-      animated: { type: Boolean, default: false },
-      font:     { type: String, default: 'CardChars' },
-      pos:      { type: Array, required: true },
-      size:     { type: Number, default: 2 },
-      fadeIn:   { type: Number, default: 0 }
+      animated: { type: Boolean, default: false, },
+      font:     { type: String, default: 'CardChars', },
+      pos:      { type: Array, required: true, },
+      size:     { type: Number, default: 2, },
+      fadeIn:   { type: Number, default: 0, },
     },
 
     data() {
       return {
         visible:   true,
-        timeoutId: null
+        timeoutId: null,
       };
     },
 
@@ -42,9 +42,9 @@
         return {
           transform:  this.transform,
           fontFamily: this.font + ', Helvetica, Arial, sans-serif',
-          fontSize:   this.fontSize
+          fontSize:   this.fontSize,
         };
-      }
+      },
     },
 
     mounted() {
@@ -61,8 +61,8 @@
             this.visible = false;
           }.bind(this), this.fadeIn);
         }
-      }
-    }
+      },
+    },
   };
 </script>
 

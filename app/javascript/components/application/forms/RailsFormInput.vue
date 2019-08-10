@@ -17,31 +17,31 @@
   import pluralize     from 'pluralize';
   import I18n          from 'vendor/i18n-js-app.js.erb';
   import axios         from 'axios';
-  import { debounced } from 'helpers/forms';
+  import { debounced, } from 'helpers/forms';
 
   const api = axios.create({
-    baseURL: '/'
+    baseURL: '/',
   });
 
   export default {
     props: {
-      type:         { type: String, default: 'text' },
-      model:        { type: String, default: null },
-      column:       { type: String, required: true },
-      validate:     { type: Boolean, default: true },
-      showLabel:    { type: Boolean, default: false },
-      initialValue: { type: String, default: null },
-      label:        { type: String, default: null },
-      ariaLabel:    { type: String, default: null },
-      autocomplete: { type: String, default: null },
-      placeholder:  { type: String, default: null }
+      type:         { type: String, default: 'text', },
+      model:        { type: String, default: null, },
+      column:       { type: String, required: true, },
+      validate:     { type: Boolean, default: true, },
+      showLabel:    { type: Boolean, default: false, },
+      initialValue: { type: String, default: null, },
+      label:        { type: String, default: null, },
+      ariaLabel:    { type: String, default: null, },
+      autocomplete: { type: String, default: null, },
+      placeholder:  { type: String, default: null, },
     },
 
     data() {
       return {
         value: this.initialValue,
         error: '',
-        state: ''
+        state: '',
       };
     },
 
@@ -52,7 +52,7 @@
       },
 
       inputId() {
-        return [this.model, this.column].filter(Boolean).join('_');
+        return [this.model, this.column, ].filter(Boolean).join('_');
       },
 
       inputLabel() {
@@ -72,7 +72,7 @@
 
         const pluralModel = pluralize(this.model);
         return '/' + pluralModel + '/validate';
-      }
+      },
     },
 
     created() {
@@ -84,18 +84,18 @@
         if (this.validationUrl && this.validate) {
           this.value = value;
           this.state = 'validating';
-          this.$refs.input.setLoadingText(I18n.t('forms.validating', { attr: this.humanizedColumnName }));
+          this.$refs.input.setLoadingText(I18n.t('forms.validating', { attr: this.humanizedColumnName, }));
           this.debouncedValidation();
         }
         this.$emit('input', value, this.state);
       },
 
       validateValue() {
-        const params = { column: this.column, value: this.value };
+        const params = { column: this.column, value: this.value, };
         api
-          .get(this.validationUrl, { params: params })
-          .catch(() => Promise.reject([I18n.t('generic_error')]))
-          .then(({ data }) => {
+          .get(this.validationUrl, { params: params, })
+          .catch(() => Promise.reject([I18n.t('generic_error'), ]))
+          .then(({ data, }) => {
             if (this.value.length > 0) {
               this.state = data.valid ? 'valid' : 'error';
               this.$refs.input.setError(data.errors.join('<br />'));
@@ -110,7 +110,7 @@
 
       setError(error) {
         this.$refs.input.setError(error);
-      }
-    }
+      },
+    },
   };
 </script>

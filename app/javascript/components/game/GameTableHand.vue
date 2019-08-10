@@ -33,22 +33,22 @@
 
 <script>
   import Vue                                           from 'vue';
-  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION } from 'helpers/constants';
+  import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
 
   export default {
 
     props: {
-      playerIndex: { type: Number, required: true },
-      initialHand: { type: Array, required: true },
-      initialDraw: { type: Array, required: true },
-      player:      { type: Object, required: true },
-      gameState:   { type: String, required: true }
+      playerIndex: { type: Number, required: true, },
+      initialHand: { type: Array, required: true, },
+      initialDraw: { type: Array, required: true, },
+      player:      { type: Object, required: true, },
+      gameState:   { type: String, required: true, },
     },
 
     data() {
       return {
         draw: this.initialDraw,
-        hand: this.initialHand
+        hand: this.initialHand,
       };
     },
     computed: {
@@ -78,12 +78,12 @@
 
       playerNamePos() {
         const mult = (this.playerIndex === 0) ? 1 : -1;
-        return [80 * mult, 53 * mult];
+        return [80 * mult, 53 * mult, ];
       },
 
       hideCards() {
-        return ['loading', 'setup'].includes(this.gameState);
-      }
+        return ['loading', 'setup', ].includes(this.gameState);
+      },
     },
 
     methods: {
@@ -99,7 +99,7 @@
         return new Promise((resolve) => {
           const cardIndex = this.handCards.indexOf(card);
           const removed   = this.hand[cardIndex];
-          this.hand.splice(cardIndex, 1, { r: 'e', s: 'e' });
+          this.hand.splice(cardIndex, 1, { r: 'e', s: 'e', });
           Vue.nextTick(() => resolve(removed));
         });
       },
@@ -128,15 +128,15 @@
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = ((cardIndex * 32) - 80) * mult;
         const posY = 75 * mult;
-        return [posX, posY];
+        return [posX, posY, ];
       },
 
       drawCardPos(cardIndex) {
         const mult = (this.playerIndex === 0) ? 1 : -1;
         const posX = 80 * mult;
         const posY = (75 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
-        return [posX, posY];
-      }
-    }
+        return [posX, posY, ];
+      },
+    },
   };
 </script>

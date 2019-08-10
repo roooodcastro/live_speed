@@ -20,7 +20,7 @@ export default {
     const opponentsReady = round.hands
       .filter(hand => hand.player.id !== playerId)
       .reduce((ready, hand) => ready && hand.player.ready_to_play, true);
-    return { ready: playerReady, opponentsReady: opponentsReady };
+    return { ready: playerReady, opponentsReady: opponentsReady, };
   },
 
   gameStateVars(round, playerId) {
@@ -29,7 +29,7 @@ export default {
       .filter(hand => hand.player.id !== playerId)
       .reduce((ready, hand) => ready && hand.player.ready_replacement, true);
 
-    return { canPlayReplacement: round.can_use_replacement, ready: playerReady, opponentsReady: opponentsReady };
+    return { canPlayReplacement: round.can_use_replacement, ready: playerReady, opponentsReady: opponentsReady, };
   },
 
   setupMessage(round, playerId) {
@@ -60,10 +60,10 @@ export default {
   },
 
   playerConnected(playerName) {
-    return I18n.t('game.message.play.connected', { name: playerName });
+    return I18n.t('game.message.play.connected', { name: playerName, });
   },
 
   playerDisconnected(playerName) {
-    return I18n.t('game.message.play.disconnected', { name: playerName });
-  }
+    return I18n.t('game.message.play.disconnected', { name: playerName, });
+  },
 };

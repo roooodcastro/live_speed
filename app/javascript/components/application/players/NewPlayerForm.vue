@@ -27,19 +27,19 @@
 
   export default {
     props: {
-      initialName: { type: String, default: '' }
+      initialName: { type: String, default: '', },
     },
 
     data() {
       return {
-        validName: false
+        validName: false,
       };
     },
 
     computed: {
       btnDisabled() {
         return !this.validName;
-      }
+      },
     },
 
     methods: {
@@ -49,7 +49,7 @@
 
       onNameChange(validName) {
         this.validName = validName;
-      }
-    }
+      },
+    },
   };
 </script>

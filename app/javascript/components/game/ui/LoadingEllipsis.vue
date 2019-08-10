@@ -7,13 +7,13 @@
 <script>
   export default {
     data() {
-      return { dotCount: 0, intervalId: -1 };
+      return { dotCount: 0, intervalId: -1, };
     },
 
     computed: {
       text() {
         return '.'.repeat(Math.min(this.dotCount, 3));
-      }
+      },
     },
 
     mounted() {
@@ -24,7 +24,7 @@
 
     beforeDestroy() {
       clearInterval(this.intervalId);
-    }
+    },
   };
 </script>
 

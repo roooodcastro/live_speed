@@ -15,14 +15,14 @@
   export default {
 
     props: {
-      pos:       { type: Array, required: true },
-      direction: { type: String, default: 'up' }
+      pos:       { type: Array, required: true, },
+      direction: { type: String, default: 'up', },
     },
     computed: {
       style() {
         return {
           transform:     'rotate(' + this.rotation + 'deg)',
-          animationName: this.animationName
+          animationName: this.animationName,
         };
       },
 
@@ -52,8 +52,8 @@
         }
 
         return '';
-      }
-    }
+      },
+    },
   };
 </script>
 

@@ -11,17 +11,17 @@
 <script>
   export default {
     props: {
-      active: { type: Boolean, default: false },
-      href:   { type: String, default: '#' },
-      label:  { type: String, required: true },
-      method: { type: String, default: 'get' }
+      active: { type: Boolean, default: false, },
+      href:   { type: String, default: '#', },
+      label:  { type: String, required: true, },
+      method: { type: String, default: 'get', },
     },
 
     computed: {
       activeClass() {
         return this.active ? 'active' : '';
-      }
-    }
+      },
+    },
   };
 </script>
 

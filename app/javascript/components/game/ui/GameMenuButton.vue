@@ -11,14 +11,14 @@
 <script>
   export default {
     props: {
-      menuOpened: { type: Boolean, required: true }
+      menuOpened: { type: Boolean, required: true, },
     },
 
     methods: {
       onClick(ev) {
         this.$emit('click', ev);
-      }
-    }
+      },
+    },
   };
 </script>
 

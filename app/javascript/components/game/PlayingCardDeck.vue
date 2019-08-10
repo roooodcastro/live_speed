@@ -12,18 +12,18 @@
 </template>
 
 <script>
-  import { CARD_VERTICAL_SEPARATION } from 'helpers/constants';
+  import { CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
   import placement                    from 'helpers/card_placement';
   import CardCoordinate               from 'helpers/card_coordinate';
 
   export default {
     props: {
-      roundData: { type: Object, required: true }
+      roundData: { type: Object, required: true, },
     },
 
     computed: {
       cards() {
-        return [...Array(this.cardCount)].map(() => ({ r: 'a', s: 's' }));
+        return [...Array(this.cardCount), ].map(() => ({ r: 'a', s: 's', }));
       },
 
       numPlayers() {
@@ -35,7 +35,7 @@
       cardCount() {
         const numberOfDecks = Math.ceil(this.numPlayers / 2);
         return numberOfDecks * 52;
-      }
+      },
     },
 
     methods: {
@@ -63,7 +63,7 @@
           this.roundData.replacement_piles[0].length,
           this.roundData.replacement_piles[1].length,
           this.roundData.central_pile.piles[0].length,
-          this.roundData.central_pile.piles[1].length
+          this.roundData.central_pile.piles[1].length,
         ];
 
         // Access the correct index to get the card components (the counts above mess up the indexes)
@@ -75,15 +75,15 @@
           return acc.concat(stack.map((cardInfo, stackIndex) => {
             return {
               card:  this.$children[cardIndex--],
-              pos:   [cardInfo.pos[0], cardInfo.pos[1] - (CARD_VERTICAL_SEPARATION * stackIndex)],
+              pos:   [cardInfo.pos[0], cardInfo.pos[1] - (CARD_VERTICAL_SEPARATION * stackIndex), ],
               rot:   cardInfo.rot,
-              order: 100 + stackIndex
+              order: 100 + stackIndex,
             };
           }));
         }, []);
 
         return allCardsInfo.reduce(placement.dealer, Promise.resolve());
-      }
-    }
+      },
+    },
   };
 </script>

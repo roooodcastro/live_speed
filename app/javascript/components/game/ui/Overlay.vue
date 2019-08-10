@@ -15,8 +15,8 @@
     methods: {
       onClick(ev) {
         this.$emit('click', ev);
-      }
-    }
+      },
+    },
   };
 </script>
 

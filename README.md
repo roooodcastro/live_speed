@@ -26,9 +26,7 @@ it into a finished product that can actually be useful.
 
 There is **zero** automated testing being done on this project, and that is on
 purpose. I've noticed that writing tests would always slow me down on a
-personal project and eventually make me completely lose interest in it. I
-still do tests and TDD on professional projects, but this is for fun, so I do
-whatever I want basically.
+personal project and eventually make me completely lose interest in it.
 
 You can access the game on: http://livespeed.rooood.com
 

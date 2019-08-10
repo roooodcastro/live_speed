@@ -17,12 +17,12 @@
   import Alert from 'components/application/layout/Alert';
 
   export default {
-    components: { Alert },
+    components: { Alert, },
 
     props: {
-      alerts: { type: Array, required: true },
-      float: { type: Boolean, default: false }
-    }
+      alerts: { type: Array, required: true, },
+      float: { type: Boolean, default: false, },
+    },
   };
 </script>
 

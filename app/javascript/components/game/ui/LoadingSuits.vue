@@ -28,8 +28,8 @@
 
   export default {
     props: {
-      loadingText: { type: String, default: I18n.t('game.loading') }
-    }
+      loadingText: { type: String, default: I18n.t('game.loading'), },
+    },
   };
 </script>
 

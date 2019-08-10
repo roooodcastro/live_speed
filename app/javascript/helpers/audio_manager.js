@@ -7,7 +7,7 @@ const AUDIOS = [
   cardPlace1,
   cardPlace2,
   cardPlace3,
-  cardPlace4
+  cardPlace4,
 ];
 
 export default {
@@ -28,5 +28,5 @@ export default {
     // return files.map((fileName) => {
     //   return newAudio(fileName);
     // });
-  }
+  },
 };

@@ -2,7 +2,7 @@ import screen         from 'helpers/screen';
 import {
   CARD_WIDTH,
   CARD_HEIGHT,
-  CARD_VERTICAL_SEPARATION
+  CARD_VERTICAL_SEPARATION,
 }                     from 'helpers/constants';
 import GridCoordinate from 'helpers/grid_coordinate';
 

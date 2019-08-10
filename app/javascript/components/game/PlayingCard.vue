@@ -8,20 +8,20 @@
 
 <script>
   import CardCoordinate              from 'helpers/card_coordinate';
-  import { CARD_WIDTH, CARD_HEIGHT } from 'helpers/constants';
+  import { CARD_WIDTH, CARD_HEIGHT, } from 'helpers/constants';
 
   export default {
     name: 'PlayingCard',
 
     props: {
-      isActive:        { type: Boolean, default: false },
-      isFeatured:      { type: Boolean, default: false },
-      rank:            { type: String, default: 'a' },
-      suit:            { type: String, default: 's' },
-      initialPosition: { type: Array, default: () => [0, 0] },
-      initialRotation: { type: Number, default: 0 },
-      initialFlipped:  { type: Boolean, default: true },
-      initialOrder:    { type: Number, default: 1 }
+      isActive:        { type: Boolean, default: false, },
+      isFeatured:      { type: Boolean, default: false, },
+      rank:            { type: String, default: 'a', },
+      suit:            { type: String, default: 's', },
+      initialPosition: { type: Array, default: () => [0, 0, ], },
+      initialRotation: { type: Number, default: 0, },
+      initialFlipped:  { type: Boolean, default: true, },
+      initialOrder:    { type: Number, default: 1, },
     },
 
     data() {
@@ -32,7 +32,7 @@
         isDragging:   false,
         order:        this.initialOrder,
         position:     new CardCoordinate(this.initialPosition),
-        rotation:     this.initialRotation
+        rotation:     this.initialRotation,
       };
     },
     computed: {
@@ -41,7 +41,7 @@
           const baseClass    = 'playing-card card-' + this.suit + '_' + this.rank;
           const flippedClass = this.flipped ? 'card-f_1' : '';
           const activeClass  = this.isActive ? 'card-active' : '';
-          return [baseClass, flippedClass, activeClass].join(' ');
+          return [baseClass, flippedClass, activeClass, ].join(' ');
         } else {
           return '';
         }
@@ -55,18 +55,18 @@
           position:   'absolute',
           transition: this.transition,
           width:      this.cssSize[0] + 'px',
-          height:     this.cssSize[1] + 'px'
+          height:     this.cssSize[1] + 'px',
         };
       },
 
       cssSize() {
-        return [CARD_WIDTH * CardCoordinate.cardScale(), CARD_HEIGHT * CardCoordinate.cardScale()];
+        return [CARD_WIDTH * CardCoordinate.cardScale(), CARD_HEIGHT * CardCoordinate.cardScale(), ];
       },
 
       transform() {
         const posTransform = 'translate(' + this.currentPosition.toString + ')';
         const rotTransform = 'rotate(' + this.rotation + 'deg)';
-        return [posTransform, rotTransform].join(' ');
+        return [posTransform, rotTransform, ].join(' ');
       },
 
       transition() {
@@ -83,7 +83,7 @@
 
       currentPosition() {
         return this.isDragging ? this.dragPosition : this.position;
-      }
+      },
     },
 
     methods: {
@@ -132,8 +132,8 @@
 
       onClick() {
         this.$emit('click');
-      }
-    }
+      },
+    },
   };
 </script>
 

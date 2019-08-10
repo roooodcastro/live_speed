@@ -15,12 +15,12 @@
 
   export default {
     props: {
-      numberOfPlayers: { type: Number, required: true }
+      numberOfPlayers: { type: Number, required: true, },
     },
 
     data() {
       return {
-        slots: placement.allCardPositions(this.numberOfPlayers)
+        slots: placement.allCardPositions(this.numberOfPlayers),
       };
     },
 
@@ -30,17 +30,17 @@
         const coordinates  = new CardCoordinate(slot.pos);
         const posTransform = 'translate(' + coordinates.toString + ')';
         const rotTransform = 'rotate(' + slot.rot + 'deg)';
-        return [posTransform, rotTransform].join(' ');
+        return [posTransform, rotTransform, ].join(' ');
       },
 
       style(slot) {
         return {
           transform: this.slotTransform(slot),
           height:    CardCoordinate.scaledCardHeight + 'px',
-          width:     CardCoordinate.scaledCardWidth + 'px'
+          width:     CardCoordinate.scaledCardWidth + 'px',
         };
-      }
-    }
+      },
+    },
   };
 </script>
 

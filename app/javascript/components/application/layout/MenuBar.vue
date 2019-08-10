@@ -25,8 +25,8 @@
     methods: {
       t(name) {
         return I18n.t(name);
-      }
-    }
+      },
+    },
   };
 </script>
 

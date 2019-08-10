@@ -48,7 +48,7 @@ Vue.component('livespeed-text', Text);
 document.addEventListener('turbolinks:load', function () {
   window.gameApp = new Vue({
     el:         '[data-behaviour="vue"]',
-    components: { TheGameTable },
-    data:       {}
+    components: { TheGameTable, },
+    data:       {},
   });
 });

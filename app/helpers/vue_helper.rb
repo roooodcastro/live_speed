@@ -3,7 +3,7 @@
 module VueHelper
   def vue_component(name, props: {}, &block)
     block ||= -> {}
-    props.transform_keys! { |key| key.to_s.underscore.tr('_', '-') }
+    props.transform_keys! { |key| key.to_s.underscore.dasherize }
     content_tag(name, props, &block)
   end
 

@@ -53,14 +53,14 @@
       return {
         usernameValid: false,
         emailValid:    false,
-        passwordValid: false
+        passwordValid: false,
       };
     },
 
     computed: {
       canSubmit() {
         return this.usernameValid && this.emailValid && this.passwordValid;
-      }
+      },
     },
 
     methods: {
@@ -80,7 +80,7 @@
         this.passwordValid = password.length >= 6;
         const error = this.passwordValid ? null : I18n.t('users.new.password_error');
         this.$refs.password.setError(error);
-      }
-    }
+      },
+    },
   };
 </script>

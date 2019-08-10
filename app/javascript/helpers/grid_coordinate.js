@@ -1,5 +1,5 @@
 import screen        from 'helpers/screen';
-import { GRID_SIZE } from 'helpers/constants';
+import { GRID_SIZE, } from 'helpers/constants';
 
 export default class GridCoordinate {
   constructor(posX, posY) {

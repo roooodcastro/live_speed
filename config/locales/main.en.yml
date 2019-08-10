@@ -1,7 +1,7 @@
 en:
-  title:    'LiveSpeed'
-  logo_alt: 'LiveSpeed Logo'
-  back:     'Back'
+  title:          'LiveSpeed'
+  logo_alt:       'LiveSpeed Logo'
+  back:           'Back'
   generic_error:  'An error has occurred. Please contact an administrator or try again.'
 
   forms:
@@ -15,7 +15,13 @@ en:
 
   lobby:
     show:
-      title: 'Matches waiting for more players'
+      title:             'Lobby'
+      matches_waiting:   'Matches waiting for additional players:'
+      new_lobby_btn:     'Start a new match'
+      match_me_btn:      'I just wanna play!'
+      join_btn:          'Join'
+      match_not_started: 'Waiting for players'
+      match_started:     "On round %{round}/%{total_rounds}"
 
   matches:
     index:

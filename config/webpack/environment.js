@@ -1,4 +1,4 @@
-const { environment } = require('@rails/webpacker');
+const { environment, } = require('@rails/webpacker');
 
 const erb =  require('./loaders/erb');
 const vue =  require('./loaders/vue');

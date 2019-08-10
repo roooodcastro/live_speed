@@ -14,6 +14,6 @@ export default {
 
   // Returns an array with the x and y values of the center of the screen, in pixels.
   centerPosition() {
-    return [this.clientWidth() / 2, this.clientHeight() / 2];
-  }
+    return [this.clientWidth() / 2, this.clientHeight() / 2, ];
+  },
 };

@@ -114,12 +114,12 @@
       GameTableHand,
       GameTableCenterPile,
       GameTableCardSlots,
-      PlayingCardDeck
+      PlayingCardDeck,
     },
 
     props: {
-      roundId:  { type: String, required: true },
-      playerId: { type: String, required: true }
+      roundId:  { type: String, required: true, },
+      playerId: { type: String, required: true, },
     },
 
     data() {
@@ -132,7 +132,7 @@
         playerSubMessage:      '',
         playerSubMessageTimer: 2000,
 
-        roundData: {}
+        roundData: {},
       };
     },
 
@@ -168,7 +168,7 @@
 
       showReadyButton() {
         return this.state === 'setup' && this.playedDealAnimation && !this.controller.playerReadyToPlay;
-      }
+      },
     },
 
     mounted() {
@@ -221,7 +221,7 @@
       },
 
       onReplacementClick() {
-        if (['game', 'staled_game'].includes(this.state)) {
+        if (['game', 'staled_game', ].includes(this.state)) {
           if (this.canUseReplacement) {
             this.api.playReplacementPile(this.playerId);
           } else {
@@ -322,8 +322,8 @@
 
       t(name) {
         return I18n.t(name);
-      }
-    }
+      },
+    },
   };
 </script>
 

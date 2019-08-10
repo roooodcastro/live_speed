@@ -4,6 +4,6 @@ class LobbyController < ApplicationController
   require_player_login
 
   def show
-    @matches = Match.unmatched
+    @matches = MatchSerializer.from_collection_as_json(Match.all)
   end
 end

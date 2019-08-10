@@ -14,9 +14,9 @@
 
   export default {
     props: {
-      font: { type: String, default: 'CardChars' },
-      pos:  { type: Array, required: true },
-      size: { type: Number, default: 4 }
+      font: { type: String, default: 'CardChars', },
+      pos:  { type: Array, required: true, },
+      size: { type: Number, default: 4, },
     },
 
     computed: {
@@ -33,9 +33,9 @@
         return {
           transform:  this.transform,
           fontFamily: this.font + ', Helvetica, Arial, sans-serif',
-          fontSize:   this.fontSize
+          fontSize:   this.fontSize,
         };
-      }
+      },
     },
 
     methods: {
@@ -49,8 +49,8 @@
         } else {
           this.$el.removeAttribute('disabled');
         }
-      }
-    }
+      },
+    },
   };
 </script>
 

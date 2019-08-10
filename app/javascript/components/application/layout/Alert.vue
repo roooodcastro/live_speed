@@ -11,16 +11,16 @@
 <script>
   export default {
     props: {
-      content: { type: String, default: null },
-      title:   { type: String, default: null },
-      type:    { type: String, default: 'notice' }
+      content: { type: String, default: null, },
+      title:   { type: String, default: null, },
+      type:    { type: String, default: 'notice', },
     },
 
     computed: {
       cssClass() {
         return 'alert-' + this.type;
-      }
-    }
+      },
+    },
   };
 </script>
 

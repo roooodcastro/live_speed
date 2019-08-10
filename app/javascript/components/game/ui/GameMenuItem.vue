@@ -13,15 +13,15 @@
 <script>
   export default {
     props: {
-      label: { type: String, required: true },
-      icon:  { type: String, default: '×' }
+      label: { type: String, required: true, },
+      icon:  { type: String, default: '×', },
     },
 
     methods: {
       onClick(ev) {
         this.$emit('click', ev);
-      }
-    }
+      },
+    },
   };
 </script>
 

@@ -26,24 +26,28 @@ Vue.use(TurbolinksAdapter);
 
 import NewPlayerForm   from 'components/application/players/NewPlayerForm';
 import NewUserForm     from 'components/application/users/NewUserForm';
+import Button          from 'components/application/layout/Button';
 import MenuBar         from 'components/application/layout/MenuBar';
 import MenuBarLink     from 'components/application/layout/MenuBarLink';
 import AlertsContainer from 'components/application/layout/AlertsContainer';
 import FormInput       from 'components/application/forms/FormInput';
 import RailsFormInput  from 'components/application/forms/RailsFormInput';
+import MatchList       from 'components/application/lobby/MatchList';
 
 Vue.component('new-player-form', NewPlayerForm);
 Vue.component('new-user-form', NewUserForm);
+Vue.component('vue-button', Button);
 Vue.component('menu-bar', MenuBar);
 Vue.component('menu-bar-link', MenuBarLink);
 Vue.component('alerts-container', AlertsContainer);
 Vue.component('form-input', FormInput);
 Vue.component('rails-form-input', RailsFormInput);
+Vue.component('match-list', MatchList);
 
 document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({
     el:         '[data-behaviour="vue"]',
     components: {},
-    data:       {}
+    data:       {},
   });
 });

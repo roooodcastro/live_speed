@@ -33,21 +33,21 @@
   export default {
     components: {
       GameMenuButton,
-      GameMenuItem
+      GameMenuItem,
     },
 
     data() {
       return {
-        visible: false
+        visible: false,
       };
     },
 
     computed: {
       menuStyle() {
         return {
-          height: this.visible ? '5rem' : 0
+          height: this.visible ? '5rem' : 0,
         };
-      }
+      },
     },
 
     methods: {
@@ -61,8 +61,8 @@
 
       quitClick() {
         window.location = '/matches';
-      }
-    }
+      },
+    },
   };
 </script>
 

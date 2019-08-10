@@ -15,7 +15,7 @@ module.exports = {
   rules: {
     'block-scoped-var': 'error',
     'brace-style': 'error',
-    'comma-dangle': 'error',
+    'comma-dangle': ['error', 'always'],
     'comma-spacing': 'error',
     'complexity': 'error',
     'eol-last': 'error',

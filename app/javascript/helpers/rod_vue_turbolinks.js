@@ -32,7 +32,7 @@ function plugin(Vue) {
       if (this === this.$root && this.$el) {
         this.$el.outerHTML = this.$originalEl;
       }
-    }
+    },
   })
 }
 

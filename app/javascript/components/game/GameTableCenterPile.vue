@@ -50,15 +50,15 @@
 
 <script>
   import CardCoordinate      from 'helpers/card_coordinate';
-  import { CARD_MOVE_DELAY } from 'helpers/constants';
+  import { CARD_MOVE_DELAY, } from 'helpers/constants';
   import cardPlacement       from 'helpers/card_placement';
 
   export default {
     props: {
-      centerPiles:       { type: Array, required: true },
-      replacementPiles:  { type: Array, required: true },
-      canUseReplacement: { type: Boolean, required: true },
-      gameState:         { type: String, required: true }
+      centerPiles:       { type: Array, required: true, },
+      replacementPiles:  { type: Array, required: true, },
+      canUseReplacement: { type: Boolean, required: true, },
+      gameState:         { type: String, required: true, },
     },
 
     computed: {
@@ -73,8 +73,8 @@
       },
 
       hideCards() {
-        return ['loading', 'setup'].includes(this.gameState);
-      }
+        return ['loading', 'setup', ].includes(this.gameState);
+      },
     },
 
     methods: {
@@ -104,7 +104,7 @@
       },
 
       place(cardData, pileIndex) {
-        const newPile = this.centerPiles[pileIndex].concat([cardData]);
+        const newPile = this.centerPiles[pileIndex].concat([cardData, ]);
         this.centerPiles.splice(pileIndex, 1, newPile);
       },
 
@@ -113,19 +113,19 @@
       },
 
       leftCenterPilePosition(cardIndex) {
-        return [-20, -this.cardYOffset(cardIndex)];
+        return [-20, -this.cardYOffset(cardIndex), ];
       },
 
       rightCenterPilePosition(cardIndex) {
-        return [20, -this.cardYOffset(cardIndex)];
+        return [20, -this.cardYOffset(cardIndex), ];
       },
 
       leftRepPilePosition(cardIndex) {
-        return [-80, -this.cardYOffset(cardIndex)];
+        return [-80, -this.cardYOffset(cardIndex), ];
       },
 
       rightRepPilePosition(cardIndex) {
-        return [80, -this.cardYOffset(cardIndex)];
+        return [80, -this.cardYOffset(cardIndex), ];
       },
 
       pullFromReplacements() {
@@ -159,7 +159,7 @@
               card:     card,
               pos:      posFunction(Math.floor(index / 2)),
               delay:    CARD_MOVE_DELAY / 5,
-              flipDown: true
+              flipDown: true,
             };
           });
 
@@ -170,7 +170,7 @@
           // Start the dealer
           cardInfo.reduce(cardPlacement.dealer, Promise.resolve()).then(() => resolve());
         });
-      }
-    }
+      },
+    },
   };
 </script>
