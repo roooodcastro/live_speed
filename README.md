@@ -112,11 +112,11 @@ Here's a quick overview of the project's progress:
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects
 - [ ] Implement a better HUD for displaying more information about the game
-- [ ] Add help timer to warn players os possible plays when they stay a long time without any moves
+- [ ] Add help timer to warn players of possible plays when they stay a long time without any moves
 - [ ] Implement AI to serve as a tutorial
 - [ ] Pause game when player disconnects, give him a time limit to rejoin
 - [ ] End abandoned match by W.O., giving victory to remaining player
-- [ ] Only reveal cards once both players are ready
+- [x] Only reveal cards once both players are ready
 - [ ] Implement demo version of game to display on landing page
 - [ ] Windows Solitaire card dropping animation
 
