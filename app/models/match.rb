@@ -21,7 +21,8 @@ class Match < ApplicationRecord
   }
 
   def add_player!(player)
-    players << player
+    match_players.build(player: player)
+    save
   end
 
   def current_round

@@ -20,6 +20,7 @@ en:
       new_lobby_btn:     'Start a new match'
       match_me_btn:      'I just wanna play!'
       join_btn:          'Join'
+      join_btn_wait:     'Joining...'
       match_not_started: 'Waiting for players'
       match_started:     "On round %{round}/%{total_rounds}"
 
@@ -30,12 +31,13 @@ en:
     new:
       title:  'Create new Match'
       submit: 'Create Match'
-
     show:
       title:        "Match: %{description}"
       play_btn:     'Play Match!'
       winner:       'Winner:'
       not_finished: 'Not finished'
+    join:
+      error: "Cannot join match because %{errors}!"
 
   my_account:
     show:

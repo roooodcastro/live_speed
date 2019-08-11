@@ -14,4 +14,8 @@ class ApplicationRecord < ActiveRecord::Base
   rescue ActiveRecord::RecordInvalid
     nil
   end
+
+  def error_messages
+    errors.messages.values.flatten.join(', ')
+  end
 end

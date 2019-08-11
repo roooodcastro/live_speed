@@ -21,3 +21,9 @@ en:
         email:    'Email'
         name:     'Username'
         password: 'Password'
+    errors:
+      models:
+        match:
+          attributes:
+            match_players:
+              invalid: 'the match is full'

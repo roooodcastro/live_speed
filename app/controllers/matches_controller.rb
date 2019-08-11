@@ -45,11 +45,11 @@ class MatchesController < ApplicationController
   end
 
   def join
-    match = params[:match_id].present? ? Match.find(params[:match_id]) : Match.unmatched.sample
+    match = match_from_id_or_random
     if match.add_player!(current_player)
       redirect_to match
     else
-      flash[:error] = 'Cannot join match!'
+      flash[:error] = t('.error', errors: match.error_messages)
       redirect_to lobby_path
     end
   end
@@ -67,5 +67,9 @@ class MatchesController < ApplicationController
 
   def match_params
     params[:match].permit(:num_rounds, :num_players)
+  end
+
+  def match_from_id_or_random
+    params[:match_id].present? ? Match.find(params[:match_id]) : Match.unmatched.sample
   end
 end

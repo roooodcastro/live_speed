@@ -19,6 +19,9 @@
         <span class="MatchList__join">
           <vue-button
             :label="t('lobby.show.join_btn')"
+            :disable-with="t('lobby.show.join_btn_wait')"
+            :action="match.join_url"
+            method="POST"
           />
         </span>
       </li>
@@ -83,15 +86,19 @@
 
   .MatchList__list-item {
     align-items:      center;
-    background-color: $brand-gray-9;
+    background-color: $brand-gray-8;
     cursor:           default;
     display:          flex;
     font-weight:      bold;
     margin:           0;
     padding:          0.5rem 1rem;
 
+    &:nth-child(even) {
+      background-color: $brand-gray-9;
+    }
+
     &:hover {
-      background-color: $brand-gray-8;
+      background-color: $brand-gray-7;
     }
 
     span {
