@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
@@ -14,15 +13,11 @@ require('helpers/string');
 
 import '../stylesheets/game';
 
-// Implemented own version of VueTurbolinks because of flickering issues
-// https://github.com/jeffreyguenther/vue-turbolinks/issues/25
-import Turbolinks        from 'turbolinks';
-import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
-import Vue               from 'vue/dist/vue.esm';
+import 'initializers/vue_config';
+import 'initializers/mixins';
+import 'initializers/filters';
 
-
-Turbolinks.start();
-Vue.use(TurbolinksAdapter);
+import Vue from 'vue/dist/vue.esm';
 
 import PlayingCard  from 'components/game/PlayingCard';
 import TheGameTable from 'components/game/TheGameTable';

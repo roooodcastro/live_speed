@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>{{ t('lobby.show.matches_waiting') }}</h2>
+    <h2>{{ 'lobby.show.matches_waiting' | i18n }}</h2>
     <ul class="MatchList__list">
       <li
         v-for="match in matches"

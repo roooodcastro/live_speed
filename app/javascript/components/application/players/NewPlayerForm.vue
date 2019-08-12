@@ -17,7 +17,7 @@
       class="btn btn-lg signup-btn"
       :disabled="btnDisabled"
     >
-      {{ t('players.new.submit') }}
+      {{ 'players.new.submit' | i18n }}
     </button>
   </div>
 </template>

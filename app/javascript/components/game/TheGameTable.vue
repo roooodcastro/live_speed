@@ -68,14 +68,14 @@
           :pos="[47.5, 35]"
           @click="onNextRoundClick"
         >
-          {{ t('game.menu.next_round') }}
+          {{ 'game.menu.next_round' | i18n }}
         </livespeed-button>
 
         <livespeed-button
           :pos="[-47.5, 35]"
           @click="onQuitGameClick"
         >
-          {{ t('game.menu.quit') }}
+          {{ 'game.menu.quit' | i18n }}
         </livespeed-button>
       </div>
 
@@ -84,7 +84,7 @@
         :pos="[0, 35]"
         @click="onReadyClick"
       >
-        {{ t('game.ready') }}
+        {{ 'game.ready' | i18n }}
       </livespeed-button>
 
       <GameTableCardSlots
@@ -106,7 +106,6 @@
   import PlayingCardDeck     from 'components/game/PlayingCardDeck';
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
   import GameMenu            from 'components/game/ui/GameMenu';
-  import I18n                from 'vendor/i18n-js-game.js.erb';
 
   export default {
     components: {
@@ -318,10 +317,6 @@
         if (timer) this.playerSubMessageTimer = timer;
         this.playerSubMessage = message;
         this.$refs.submessage.resetFade();
-      },
-
-      t(name) {
-        return I18n.t(name);
       },
     },
   };

@@ -1,4 +1,3 @@
-/* eslint no-console:0 */
 // This file is automatically compiled by Webpack, along with any other files
 // present in this directory. You're encouraged to place your actual application logic in
 // a relevant structure within app/javascript and only use these pack files to reference
@@ -15,23 +14,11 @@ require('helpers/string');
 
 import '../stylesheets/application';
 
-// Implemented own version of VueTurbolinks because of flickering issues
-// https://github.com/jeffreyguenther/vue-turbolinks/issues/25
-import Turbolinks        from 'turbolinks';
-import TurbolinksAdapter from 'helpers/rod_vue_turbolinks';
-import Vue               from 'vue/dist/vue.esm';
-import I18n              from 'vendor/i18n-js-app.js.erb';
+import 'initializers/vue_config';
+import 'initializers/mixins';
+import 'initializers/filters';
 
-Turbolinks.start();
-Vue.use(TurbolinksAdapter);
-
-Vue.mixin({
-  methods: {
-    t(name, interpolations) {
-      return I18n.t(name, interpolations);
-    },
-  },
-});
+import Vue from 'vue/dist/vue.esm';
 
 // Layout
 import MenuBar         from 'components/application/layout/MenuBar';

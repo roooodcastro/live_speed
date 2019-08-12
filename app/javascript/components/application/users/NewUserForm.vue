@@ -38,7 +38,7 @@
       class="btn btn-lg signup-btn"
       :disabled="!canSubmit"
     >
-      {{ t('users.new.submit') }}
+      {{ 'users.new.submit' | i18n }}
     </button>
   </div>
 </template>

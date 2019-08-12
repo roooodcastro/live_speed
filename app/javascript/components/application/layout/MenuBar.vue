@@ -8,7 +8,7 @@
         :alt="t('logo_alt')"
         :src="require('images/logo_cards.svg')"
       >
-      {{ t('title') }}
+      {{ 'title' | i18n }}
     </a>
     <slot name="left-menu" />
 
