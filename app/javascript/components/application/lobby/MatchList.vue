@@ -17,7 +17,7 @@
           {{ playersLabel(match) }}
         </span>
         <span class="MatchList__join">
-          <vue-button
+          <LinkButton
             :label="t('lobby.show.join_btn')"
             :disable-with="t('lobby.show.join_btn_wait')"
             :action="match.join_url"
@@ -28,10 +28,10 @@
     </ul>
 
     <div class="MatchList__quick-actions">
-      <vue-button
+      <LinkButton
         :label="t('lobby.show.match_me_btn')"
       />
-      <vue-button
+      <LinkButton
         :label="t('lobby.show.new_lobby_btn')"
       />
     </div>
@@ -39,9 +39,13 @@
 </template>
 
 <script>
-  import I18n from 'vendor/i18n-js-app.js.erb';
+  import LinkButton from 'components/application/layout/LinkButton';
 
   export default {
+    components: {
+      LinkButton,
+    },
+
     props: {
       matches: {
         type:     Array,
@@ -50,10 +54,6 @@
     },
 
     methods: {
-      t(name, interpolations) {
-        return I18n.t(name, interpolations);
-      },
-
       statusLabel(match) {
         const started = match.current_round > 0;
         if (started) {

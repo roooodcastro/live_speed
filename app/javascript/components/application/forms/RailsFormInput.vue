@@ -15,7 +15,6 @@
 
 <script>
   import pluralize     from 'pluralize';
-  import I18n          from 'vendor/i18n-js-app.js.erb';
   import axios         from 'axios';
   import { debounced, } from 'helpers/forms';
 
@@ -62,7 +61,7 @@
       },
 
       humanizedColumnName() {
-        if (this.column && this.model) return I18n.t('activerecord.attributes.' + this.model + '.' + this.column);
+        if (this.column && this.model) return this.t('activerecord.attributes.' + this.model + '.' + this.column);
 
         return null;
       },
@@ -84,7 +83,7 @@
         if (this.validationUrl && this.validate) {
           this.value = value;
           this.state = 'validating';
-          this.$refs.input.setLoadingText(I18n.t('forms.validating', { attr: this.humanizedColumnName, }));
+          this.$refs.input.setLoadingText(this.t('forms.validating', { attr: this.humanizedColumnName, }));
           this.debouncedValidation();
         }
         this.$emit('input', value, this.state);
@@ -94,7 +93,7 @@
         const params = { column: this.column, value: this.value, };
         api
           .get(this.validationUrl, { params: params, })
-          .catch(() => Promise.reject([I18n.t('generic_error'), ]))
+          .catch(() => Promise.reject([this.t('generic_error'), ]))
           .then(({ data, }) => {
             if (this.value.length > 0) {
               this.state = data.valid ? 'valid' : 'error';

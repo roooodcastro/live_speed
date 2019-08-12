@@ -14,6 +14,6 @@ module VueHelper
       { type: type, title: title, content: content }
     end
 
-    vue_component('alerts-container', props: { ':alerts': flashes.to_json, ':float': float })
+    vue_component('AlertsContainer', props: { ':alerts': flashes.to_json, ':float': float })
   end
 end

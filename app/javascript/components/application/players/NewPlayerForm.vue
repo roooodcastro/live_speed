@@ -23,8 +23,6 @@
 </template>
 
 <script>
-  import I18n from 'vendor/i18n-js-app.js.erb';
-
   export default {
     props: {
       initialName: { type: String, default: '', },
@@ -43,10 +41,6 @@
     },
 
     methods: {
-      t(name) {
-        return I18n.t(name);
-      },
-
       onNameChange(validName) {
         this.validName = validName;
       },

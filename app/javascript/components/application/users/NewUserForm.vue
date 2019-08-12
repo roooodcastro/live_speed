@@ -44,8 +44,6 @@
 </template>
 
 <script>
-  import I18n from 'vendor/i18n-js-app.js.erb';
-
   export default {
     props: {},
 
@@ -64,10 +62,6 @@
     },
 
     methods: {
-      t(name) {
-        return I18n.t(name);
-      },
-
       onNameChange(name, state) {
         this.usernameValid = state === 'valid';
       },
@@ -78,7 +72,7 @@
 
       onPasswordChange(password) {
         this.passwordValid = password.length >= 6;
-        const error = this.passwordValid ? null : I18n.t('users.new.password_error');
+        const error = this.passwordValid ? null : this.t('users.new.password_error');
         this.$refs.password.setError(error);
       },
     },

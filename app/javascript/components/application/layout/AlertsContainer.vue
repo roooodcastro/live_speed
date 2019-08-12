@@ -1,7 +1,7 @@
 <template>
   <div
-    class="alerts-container"
-    :class="{ 'alerts-float': float }"
+    class="AlertsContainer"
+    :class="{ 'AlertsContainer--float': float }"
   >
     <Alert
       v-for="(alert, index) in alerts"
@@ -17,7 +17,9 @@
   import Alert from 'components/application/layout/Alert';
 
   export default {
-    components: { Alert, },
+    components: {
+      Alert,
+    },
 
     props: {
       alerts: { type: Array, required: true, },
@@ -27,14 +29,14 @@
 </script>
 
 <style lang="scss">
-  .alerts-container {
+  .AlertsContainer {
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
 
-  .alerts-float {
+  .AlertsContainer--float {
     position: absolute;
     left: 50%;
     margin-top: 4rem;
