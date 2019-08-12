@@ -6,7 +6,7 @@
     <h2><%= t('.subtitle') %></h2>
 
     <%= form_with(model: @player, local: true, html: { autocomplete: 'off' }) do |f| %>
-      <%= vue_component('new-player-form', props: { initialName: @player.name }) %>
+      <%= vue_component('NewPlayerForm', props: { initialName: @player.name }) %>
     <% end %>
   </div>
 

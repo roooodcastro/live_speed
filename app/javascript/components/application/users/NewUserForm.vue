@@ -1,6 +1,6 @@
 <template>
   <div>
-    <rails-form-input
+    <RailsFormInput
       ref="username"
       model="user"
       column="name"
@@ -10,7 +10,7 @@
       @input="onNameChange"
     />
 
-    <rails-form-input
+    <RailsFormInput
       ref="email"
       model="user"
       column="email"
@@ -21,7 +21,7 @@
       @input="onEmailChange"
     />
 
-    <rails-form-input
+    <RailsFormInput
       ref="password"
       model="user"
       column="password"
@@ -44,7 +44,13 @@
 </template>
 
 <script>
+  import RailsFormInput from 'components/application/forms/RailsFormInput';
+
   export default {
+    components: {
+      RailsFormInput,
+    },
+
     props: {},
 
     data() {

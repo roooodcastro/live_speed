@@ -1,7 +1,7 @@
 <template>
   <a
     :href="href"
-    class="menu-bar-link"
+    class="MenuBarLink"
     :data-method="method"
   >
     {{ label }}
@@ -28,7 +28,7 @@
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
-  .menu-bar-link {
+  .MenuBarLink {
     color:           $brand-white;
     display:         inline-block;
     font-size:       $menu-bar-height / 3;

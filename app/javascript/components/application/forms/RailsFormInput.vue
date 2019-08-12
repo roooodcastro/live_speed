@@ -1,5 +1,5 @@
 <template>
-  <form-input
+  <FormInput
     :id="inputId"
     ref="input"
     :name="inputName"
@@ -17,12 +17,17 @@
   import pluralize     from 'pluralize';
   import axios         from 'axios';
   import { debounced, } from 'helpers/forms';
+  import FormInput from 'components/application/forms/FormInput';
 
   const api = axios.create({
     baseURL: '/',
   });
 
   export default {
+    components: {
+      FormInput,
+    },
+
     props: {
       type:         { type: String, default: 'text', },
       model:        { type: String, default: null, },

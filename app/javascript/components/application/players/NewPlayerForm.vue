@@ -1,6 +1,6 @@
 <template>
   <div>
-    <rails-form-input
+    <RailsFormInput
       ref="username"
       model="player"
       column="own_name"
@@ -23,7 +23,13 @@
 </template>
 
 <script>
+  import RailsFormInput from 'components/application/forms/RailsFormInput';
+
   export default {
+    components: {
+      RailsFormInput,
+    },
+
     props: {
       initialName: { type: String, default: '', },
     },

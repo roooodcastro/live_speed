@@ -1,5 +1,5 @@
 <template>
-  <div class="form-input">
+  <div class="FormInput">
     <label
       v-if="createLabel"
       :for="id"
@@ -19,7 +19,7 @@
     >
 
     <span
-      class="form-input-error"
+      class="FormInput--error"
       :class="errorCssClass"
     >
       {{ errorMessage || loadText }}
@@ -120,7 +120,7 @@
   @import 'stylesheets/_variables.scss';
   @import 'stylesheets/forms.scss';
 
-  .form-input {
+  .FormInput {
     font-family: 'Open Sans', Arial, sans-serif;
 
     label {
@@ -166,7 +166,7 @@
     }
   }
 
-  .form-input-error {
+  .FormInput--error {
     color:      $red;
     display:    block;
     font-size:  0.8rem;
