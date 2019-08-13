@@ -67,6 +67,10 @@ class Match < ApplicationRecord
     match_players.size == num_players && !winner_id
   end
 
+  def include_cpu_player?
+    players.where(type: Player::CPU.name).exists?
+  end
+
   def description
     key_name = finished? ? 'description_finished' : 'description_unfinished'
 

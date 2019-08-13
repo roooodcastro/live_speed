@@ -16,4 +16,4 @@ import Vue from 'vue/dist/vue.esm';
 
 import TheGameTable from 'components/game/TheGameTable';
 
-Vue.component('TheGameTable', TheGameTable);
+Vue.component('thegametable', TheGameTable);

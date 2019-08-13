@@ -10,6 +10,7 @@ gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.2'
 
 gem 'bcrypt', '~> 3.1'
+gem 'faker'
 gem 'foreman'
 gem 'hiredis'
 gem 'i18n-js'
@@ -25,7 +26,6 @@ gem 'bootsnap', '>= 1.1', require: false
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'faker'
   gem 'pry'
   gem 'rails_real_favicon'
 end
