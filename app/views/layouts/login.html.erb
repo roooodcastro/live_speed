@@ -8,7 +8,7 @@
 
 <body>
 <div class="container" data-behaviour="vue">
-  <%= render partial: 'layouts/menu_bar' %>
+  <%= vue_component('TheMenuBar', props: { ':menu': build_menu_bar.to_json }) %>
 
   <%= vue_flash(float: true) %>
 

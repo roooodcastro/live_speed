@@ -25,10 +25,10 @@ import NewPlayerForm from 'components/application/players/NewPlayerForm';
 import NewUserForm   from 'components/application/users/NewUserForm';
 import MatchList     from 'components/application/lobby/MatchList';
 
-Vue.component('TheMenuBar', TheMenuBar);
-Vue.component('MenuBarLink', MenuBarLink);
-Vue.component('AlertsContainer', AlertsContainer);
+Vue.component('themenubar', TheMenuBar);
+Vue.component('menubarlink', MenuBarLink);
+Vue.component('alertscontainer', AlertsContainer);
 
-Vue.component('NewPlayerForm', NewPlayerForm);
-Vue.component('NewUserForm', NewUserForm);
-Vue.component('MatchList', MatchList);
+Vue.component('newplayerform', NewPlayerForm);
+Vue.component('newuserform', NewUserForm);
+Vue.component('matchlist', MatchList);

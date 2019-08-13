@@ -15,7 +15,7 @@
 <% end %>
 
 <div class="container" data-behaviour="vue">
-  <%= render partial: 'layouts/menu_bar' %>
+  <%= vue_component('TheMenuBar', props: { ':menu': build_menu_bar.to_json }) %>
 
   <div class="content <%= yield(:body_class) if content_for?(:body_class) %>">
     <%= vue_flash %>

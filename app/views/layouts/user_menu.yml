@@ -1,0 +1,11 @@
+left:
+  - href: <%= lobby_path %>
+    label: 'Find a Match'
+  - href: <%= matches_path %>
+    label: 'My Matches'
+  - href: <%= how_to_play_path %>
+    label: 'How to Play'
+right:
+  - href: <%= sessions_path %>
+    label:  'Sign out'
+    method: 'delete'

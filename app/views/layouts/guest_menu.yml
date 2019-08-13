@@ -1,0 +1,6 @@
+left:
+  - href: <%= how_to_play_path %>
+    label: 'How to Play'
+right:
+  - href: <%= new_sessions_path %>
+    label:  'Sign in'

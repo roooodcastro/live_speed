@@ -10,16 +10,37 @@
       >
       {{ 'title' | i18n }}
     </a>
-    <slot name="left-menu" />
+
+    <MenuBarLink
+      v-for="menuLink in menu.left"
+      :key="menuLink.href"
+      v-bind="menuLink"
+    />
 
     <div class="TheMenuBar__right">
-      <slot name="right-menu" />
+      <MenuBarLink
+        v-for="menuLink in menu.right"
+        :key="menuLink.href"
+        v-bind="menuLink"
+      />
     </div>
   </div>
 </template>
 
 <script>
+  import MenuBarLink from 'components/application/layout/MenuBarLink';
+
   export default {
+    components: {
+      MenuBarLink,
+    },
+
+    props: {
+      menu: {
+        type:     Object,
+        required: true,
+      },
+    },
   };
 </script>
 
