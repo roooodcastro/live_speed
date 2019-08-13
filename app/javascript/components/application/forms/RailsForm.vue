@@ -1,9 +1,9 @@
 <template>
   <form
+    ref="form"
     :action="action"
     :method="method"
     accept-charset="utf-8"
-    ref="form"
   >
     <input
       name="utf8"

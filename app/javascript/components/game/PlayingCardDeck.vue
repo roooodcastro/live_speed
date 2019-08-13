@@ -1,6 +1,6 @@
 <template>
   <div>
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in cards"
       :key="'deckCard_' + index"
       :suit="card.s"
@@ -12,11 +12,17 @@
 </template>
 
 <script>
+  import PlayingCard from 'components/game/PlayingCard';
+
   import { CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
-  import placement                    from 'helpers/card_placement';
-  import CardCoordinate               from 'helpers/card_coordinate';
+  import placement                     from 'helpers/card_placement';
+  import CardCoordinate                from 'helpers/card_coordinate';
 
   export default {
+    components: {
+      PlayingCard,
+    },
+
     props: {
       roundData: { type: Object, required: true, },
     },

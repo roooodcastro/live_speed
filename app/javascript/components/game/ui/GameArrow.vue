@@ -1,6 +1,6 @@
 <template>
-  <livespeed-text
-    class="livespeed-arrow"
+  <GameText
+    class="GameArrow"
     font="Arial"
     :pos="pos"
     :size="4"
@@ -8,13 +8,18 @@
     <span :style="style">
       {{ arrowChar }}
     </span>
-  </livespeed-text>
+  </GameText>
 </template>
 
 <script>
-  export default {
+  import GameText from 'components/game/ui/GameText';
 
-    props: {
+  export default {
+    components: {
+      GameText,
+    },
+
+    props:    {
       pos:       { type: Array, required: true, },
       direction: { type: String, default: 'up', },
     },
@@ -45,10 +50,10 @@
         switch (this.direction) {
           case 'up':
           case 'down':
-            return 'livespeed-arrow-frames-vertical';
+            return 'GameArrow--frames-vertical';
           case 'left':
           case 'right':
-            return 'livespeed-arrow-frames-horizontal';
+            return 'GameArrow--frames-horizontal';
         }
 
         return '';
@@ -58,19 +63,19 @@
 </script>
 
 <style lang="scss">
-    .livespeed-arrow span {
-        animation: livespeed-arrow-frames-vertical 0.6s infinite ease-in-out both;
-        display:   inline-block;
-        position:  relative;
-    }
+  .GameArrow span {
+    animation: livespeed-arrow-frames-vertical 0.6s infinite ease-in-out both;
+    display:   inline-block;
+    position:  relative;
+  }
 
-    @keyframes livespeed-arrow-frames-vertical {
-        0%, 100% { top: -0.25em; }
-        50% { top: 0.25em; }
-    }
+  @keyframes GameArrow--frames-vertical {
+    0%, 100% { top: -0.25em; }
+    50% { top: 0.25em; }
+  }
 
-    @keyframes livespeed-arrow-frames-horizontal {
-        0%, 100% { left: -0.25em; }
-        50% { left: 0.25em; }
-    }
+  @keyframes GameArrow--frames-horizontal {
+    0%, 100% { left: -0.25em; }
+    50% { left: 0.25em; }
+  }
 </style>

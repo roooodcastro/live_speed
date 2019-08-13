@@ -1,5 +1,5 @@
 <template>
-  <span class="livespeed-loading-ellipsis">
+  <span class="LoadingEllipsis">
     {{ text }}
   </span>
 </template>
@@ -29,9 +29,9 @@
 </script>
 
 <style>
-  .livespeed-loading-ellipsis {
-    display: inline-block;
+  .LoadingEllipsis {
+    display:    inline-block;
     text-align: left;
-    width:   2em;
+    width:      2em;
   }
 </style>

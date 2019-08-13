@@ -1,18 +1,18 @@
 <template>
   <div>
-    <livespeed-overlay
+    <GameOverlay
       v-show="visible"
       @click="toggleMenu"
     />
 
-    <div class="game-menu-container">
+    <div class="GameMenu__container">
       <GameMenuButton
         :menu-opened="visible"
         @click="toggleMenu"
       />
 
       <div
-        class="game-menu"
+        class="GameMenu"
         :class="{ active: visible }"
       >
         <GameMenuItem :label="t('game.menu.volume')" />
@@ -28,11 +28,13 @@
 <script>
   import GameMenuButton from 'components/game/ui/GameMenuButton';
   import GameMenuItem   from 'components/game/ui/GameMenuItem';
+  import GameOverlay    from 'components/game/ui/GameOverlay';
 
   export default {
     components: {
       GameMenuButton,
       GameMenuItem,
+      GameOverlay,
     },
 
     data() {
@@ -64,7 +66,7 @@
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
-  .game-menu-container {
+  .GameMenu__container {
     bottom:    0;
     left:      50%;
     position:  fixed;
@@ -72,7 +74,7 @@
     z-index:   1002;
   }
 
-  .game-menu {
+  .GameMenu {
     align-items:   center;
     background:    $brand-gray-8;
     border-radius: 1rem 1rem 0 0;

@@ -1,7 +1,7 @@
 <template>
   <p
-    :class="{ 'livespeed-text-invisible': !visible, 'livespeed-text-animated': animated }"
-    class="livespeed-text"
+    :class="{ 'GameText--invisible': !visible, 'GameText--animated': animated }"
+    class="GameText"
     :style="style"
   >
     <slot />
@@ -69,7 +69,7 @@
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
-  .livespeed-text {
+  .GameText {
     color:       $brand-white;
     margin:      0;
     opacity:     1;
@@ -81,22 +81,22 @@
     user-select: none;
   }
 
-  .livespeed-text-invisible {
+  .GameText--invisible {
     opacity: 0;
   }
 
-  .livespeed-text-animated {
-    animation: livespeed-text-animation 0.5s infinite ease-in-out,
-               livespeed-text-rainbow 5s infinite linear both;
+  .GameText--animated {
+    animation: GameText--animation 0.5s infinite ease-in-out,
+               GameText--rainbow 5s infinite linear both;
     text-shadow: 0 0 10px $brand-black;
   }
 
-  @keyframes livespeed-text-animation {
+  @keyframes GameText--animation {
     0%, 100% { font-size: 5.75vmin; }
     50% { font-size: 6vmin; }
   }
 
-  @keyframes livespeed-text-rainbow {
+  @keyframes GameText--rainbow {
     0% { color: violet; }
     7% { color: indigo; }
     14% { color: blue; }

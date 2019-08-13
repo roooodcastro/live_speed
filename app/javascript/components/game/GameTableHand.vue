@@ -1,6 +1,6 @@
 <template>
   <div class="game-table-hand">
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in draw"
       :ref="'draw_' + playerIndex + '_' + index"
       :key="'draw_' + playerIndex + '_' + index"
@@ -9,7 +9,7 @@
       :initial-position="drawCardPos(index)"
       :initial-rotation="cardRotation"
     />
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in hand"
       v-show="!!card.s"
       :ref="'card_' + playerIndex + '_' + index"
@@ -21,21 +21,28 @@
       :initial-rotation="cardRotation"
       :initial-flipped="hideCards"
     />
-    <livespeed-text
+    <GameText
       :pos="playerNamePos"
       :size="4"
       font="Barbaro"
     >
       {{ player.name }}
-    </livespeed-text>
+    </GameText>
   </div>
 </template>
 
 <script>
-  import Vue                                           from 'vue';
+  import PlayingCard from 'components/game/PlayingCard';
+  import GameText        from 'components/game/ui/GameText';
+
+  import Vue                                            from 'vue';
   import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
 
   export default {
+    components: {
+      PlayingCard,
+      GameText,
+    },
 
     props: {
       playerIndex: { type: Number, required: true, },

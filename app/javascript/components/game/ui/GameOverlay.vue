@@ -1,10 +1,10 @@
 <template>
   <div
-    class="livespeed-overlay"
+    class="GameOverlay"
     @click="onClick"
   >
-    <div class="livespeed-overlay-back" />
-    <div class="livespeed-overlay-front">
+    <div class="GameOverlay__back" />
+    <div class="GameOverlay__front">
       <slot />
     </div>
   </div>
@@ -21,7 +21,7 @@
 </script>
 
 <style>
-  .livespeed-overlay {
+  .GameOverlay {
     bottom:   0;
     left:     0;
     position: fixed;
@@ -30,7 +30,7 @@
     z-index:  1001;
   }
 
-  .livespeed-overlay-back {
+  .GameOverlay__back {
     background-color: rgba(0, 0, 0, 0.3);
     bottom:           0;
     left:             0;
@@ -39,7 +39,7 @@
     top:              0;
   }
 
-  .livespeed-overlay-front {
+  .GameOverlay__front {
     bottom:   0;
     left:     0;
     position: relative;

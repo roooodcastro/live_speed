@@ -1,22 +1,22 @@
 <template>
-  <div class="livespeed-loading-container">
-    <livespeed-text
+  <div class="LoadingSuits">
+    <GameText
       :pos="[0, 10]"
       :size="5"
     >
       {{ loadingText }}
-    </livespeed-text>
-    <div class="livespeed-loading-suits">
-      <span class="livespeed-loading-suit-1">
+    </GameText>
+    <div class="LoadingSuits__suits">
+      <span class="LoadingSuits__suit-1">
         &diams;
       </span>
-      <span class="livespeed-loading-suit-2">
+      <span class="LoadingSuits__suit-2">
         &clubs;
       </span>
-      <span class="livespeed-loading-suit-3">
+      <span class="LoadingSuits__suit-3">
         &hearts;
       </span>
-      <span class="livespeed-loading-suit-4">
+      <span class="LoadingSuits__suit-4">
         &spades;
       </span>
     </div>
@@ -24,9 +24,15 @@
 </template>
 
 <script>
+  import GameText from 'components/game/ui/GameText';
+
   import I18n from 'vendor/i18n-js-game.js.erb';
 
   export default {
+    components: {
+      GameText,
+    },
+
     props: {
       loadingText: { type: String, default: I18n.t('game.loading'), },
     },
@@ -34,10 +40,10 @@
 </script>
 
 <style>
-  .livespeed-loading-container {
+  .LoadingSuits {
   }
 
-  .livespeed-loading-suits {
+  .LoadingSuits__suits {
     display:         flex;
     justify-content: center;
     font-size:       2vmin;
@@ -47,8 +53,8 @@
     transform:       translate(-50%, calc(-50% - 5vmin));
   }
 
-  .livespeed-loading-suits span {
-    animation:   loadingsuit 1s infinite ease-in-out both;
+  .LoadingSuits__suits span {
+    animation:   LoadingSuit--animation 1s infinite ease-in-out both;
     font-size:   5em;
     height:      1em;
     line-height: 1em;
@@ -57,15 +63,15 @@
     width:       0.75em;
   }
 
-  span.livespeed-loading-suit-1 { color: #B00100; animation-delay: -0.48s; }
+  span.LoadingSuits__suit-1 { color: #B00100; animation-delay: -0.48s; }
 
-  span.livespeed-loading-suit-2 { color: black; animation-delay: -0.32s; }
+  span.LoadingSuits__suit-2 { color: black; animation-delay: -0.32s; }
 
-  span.livespeed-loading-suit-3 { color: #B00100; animation-delay: -0.16s; }
+  span.LoadingSuits__suit-3 { color: #B00100; animation-delay: -0.16s; }
 
-  span.livespeed-loading-suit-4 { color: black; animation-delay: 0s; }
+  span.LoadingSuits__suit-4 { color: black; animation-delay: 0s; }
 
-  @keyframes loadingsuit {
+  @keyframes LoadingSuit--animation {
     0%, 80%, 100% { font-size: 1em; }
     40% { font-size: 5em; }
   }

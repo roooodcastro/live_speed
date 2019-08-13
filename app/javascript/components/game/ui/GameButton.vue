@@ -1,6 +1,6 @@
 <template>
   <button
-    class="livespeed-button"
+    class="GameButton"
     :style="style"
     @click="clickCallback"
   >
@@ -57,7 +57,7 @@
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
-  .livespeed-button {
+  .GameButton {
     background:    transparent;
     border:        0.2vmin solid transparent;
     border-radius: 1vmin;
@@ -70,12 +70,12 @@
     z-index:       500;
   }
 
-  .livespeed-button:hover {
+  .GameButton:hover {
     color: $brand-white;
     cursor: pointer;
   }
 
-  .livespeed-button::before {
+  .GameButton::before {
     border:        0.2vmin solid rgba($brand-white, 0.8);
     border-radius: 1vmin;
     content:       '';
@@ -87,22 +87,22 @@
     width:         100%;
   }
 
-  .livespeed-button:hover::before {
+  .GameButton:hover::before {
     border-color: $brand-white;
     transform:    scale(1.05);
   }
 
-  .livespeed-button:active, .livespeed-button:focus {
-    animation:  livespeed-button-pulse 0.3s;
+  .GameButton:active, .GameButton:focus {
+    animation:  GameButton--pulse 0.3s;
     box-shadow: 0 0 0 1em rgba(255, 255, 255, 0);
     outline:    none;
   }
 
-  .livespeed-button:active::before, .livespeed-button:focus::before {
+  .GameButton:active::before, .GameButton:focus::before {
     background-color: rgba($brand-white, 0.15);
   }
 
-  @keyframes livespeed-button-pulse {
+  @keyframes GameButton--pulse {
     0% { box-shadow: 0 0 0 0 rgba($brand-white, 0.5); }
   }
 </style>

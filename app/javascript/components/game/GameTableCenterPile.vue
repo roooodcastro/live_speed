@@ -1,6 +1,6 @@
 <template>
   <div class="game-table-hand">
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in centerPiles[0]"
       :ref="'center_left_' + index"
       :key="'center_left_' + index"
@@ -10,7 +10,7 @@
       :initial-rotation="centerPileRot(index)"
       :initial-flipped="hideCards"
     />
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in centerPiles[1]"
       :ref="'center_right_' + index"
       :key="'center_right_' + index"
@@ -20,7 +20,7 @@
       :initial-rotation="centerPileRot(index)"
       :initial-flipped="hideCards"
     />
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in replacementPiles[0]"
       :ref="'replacement_left_' + index"
       :key="'replacement_left_' + index"
@@ -28,7 +28,7 @@
       :suit="card.s"
       :initial-position="[-80, -cardYOffset(index)]"
     />
-    <livespeed-playing-card
+    <PlayingCard
       v-for="(card, index) in replacementPiles[1]"
       :ref="'replacement_right_' + index"
       :key="'replacement_right_' + index"
@@ -40,7 +40,7 @@
       @click="onReplacementClick"
     />
 
-    <livespeed-arrow
+    <GameArrow
       v-show="canUseReplacement"
       :pos="[80, 20]"
       direction="up"
@@ -49,11 +49,19 @@
 </template>
 
 <script>
-  import CardCoordinate      from 'helpers/card_coordinate';
+  import PlayingCard from 'components/game/PlayingCard';
+  import GameArrow       from 'components/game/ui/GameArrow';
+
+  import CardCoordinate       from 'helpers/card_coordinate';
   import { CARD_MOVE_DELAY, } from 'helpers/constants';
-  import cardPlacement       from 'helpers/card_placement';
+  import cardPlacement        from 'helpers/card_placement';
 
   export default {
+    components: {
+      PlayingCard,
+      GameArrow,
+    },
+
     props: {
       centerPiles:       { type: Array, required: true, },
       replacementPiles:  { type: Array, required: true, },

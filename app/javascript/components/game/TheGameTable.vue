@@ -5,7 +5,7 @@
       class="game-table"
     >
       <div v-show="state === 'loading'">
-        <livespeed-loading-suits />
+        <LoadingSuits />
       </div>
 
       <div v-show="!playedDealAnimation">
@@ -42,7 +42,7 @@
           @replacementClick="onReplacementClick"
         />
 
-        <livespeed-text
+        <GameText
           ref="playerMessage"
           :pos="[0, -35]"
           :size="6"
@@ -50,9 +50,9 @@
           font="Barbaro"
         >
           {{ playerMessage }}
-        </livespeed-text>
+        </GameText>
 
-        <livespeed-text
+        <GameText
           ref="submessage"
           :pos="[0, 35]"
           :size="6"
@@ -60,32 +60,32 @@
           font="Barbaro"
         >
           {{ playerSubMessage }}
-        </livespeed-text>
+        </GameText>
       </div>
 
       <div v-show="(state === 'win' || state === 'lose') && playedDealAnimation">
-        <livespeed-button
+        <GameButton
           :pos="[47.5, 35]"
           @click="onNextRoundClick"
         >
           {{ 'game.menu.next_round' | i18n }}
-        </livespeed-button>
+        </GameButton>
 
-        <livespeed-button
+        <GameButton
           :pos="[-47.5, 35]"
           @click="onQuitGameClick"
         >
           {{ 'game.menu.quit' | i18n }}
-        </livespeed-button>
+        </GameButton>
       </div>
 
-      <livespeed-button
+      <GameButton
         v-show="showReadyButton"
         :pos="[0, 35]"
         @click="onReadyClick"
       >
         {{ 'game.ready' | i18n }}
-      </livespeed-button>
+      </GameButton>
 
       <GameTableCardSlots
         v-show="state !== 'loading'"
@@ -98,18 +98,25 @@
 </template>
 
 <script>
-  import apiClient           from 'api/match_channel';
-  import Round               from 'games/speed/round';
-  import Message             from 'games/speed/message';
+  import GameButton          from 'components/game/ui/GameButton';
+  import GameMenu            from 'components/game/ui/GameMenu';
+  import GameText            from 'components/game/ui/GameText';
+  import LoadingSuits        from 'components/game/ui/LoadingSuits';
   import GameTableHand       from 'components/game/GameTableHand';
   import GameTableCenterPile from 'components/game/GameTableCenterPile';
-  import PlayingCardDeck     from 'components/game/PlayingCardDeck';
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
-  import GameMenu            from 'components/game/ui/GameMenu';
+  import PlayingCardDeck     from 'components/game/PlayingCardDeck';
+
+  import apiClient from 'api/match_channel';
+  import Round     from 'games/speed/round';
+  import Message   from 'games/speed/message';
 
   export default {
     components: {
+      GameButton,
       GameMenu,
+      GameText,
+      LoadingSuits,
       GameTableHand,
       GameTableCenterPile,
       GameTableCardSlots,
