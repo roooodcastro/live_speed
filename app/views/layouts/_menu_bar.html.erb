@@ -1,4 +1,4 @@
-<MenuBar>
+<TheMenuBar>
   <div slot="left-menu">
     <% if player_logged_in? %>
       <%= vue_component('MenuBarLink', props: { href: lobby_path, label: 'Find a Match' }) %>
@@ -14,4 +14,4 @@
       <%= vue_component('MenuBarLink', props: { href: new_sessions_path, label: 'Sign in' }) %>
     <% end %>
   </div>
-</MenuBar>
+</TheMenuBar>

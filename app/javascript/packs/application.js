@@ -16,7 +16,7 @@ import Vue from 'vue/dist/vue.esm';
 // ===== Components =====
 
 // Layout
-import MenuBar         from 'components/application/layout/MenuBar';
+import TheMenuBar      from 'components/application/layout/TheMenuBar';
 import MenuBarLink     from 'components/application/layout/MenuBarLink';
 import AlertsContainer from 'components/application/layout/AlertsContainer';
 
@@ -25,7 +25,7 @@ import NewPlayerForm from 'components/application/players/NewPlayerForm';
 import NewUserForm   from 'components/application/users/NewUserForm';
 import MatchList     from 'components/application/lobby/MatchList';
 
-Vue.component('MenuBar', MenuBar);
+Vue.component('TheMenuBar', TheMenuBar);
 Vue.component('MenuBarLink', MenuBarLink);
 Vue.component('AlertsContainer', AlertsContainer);
 

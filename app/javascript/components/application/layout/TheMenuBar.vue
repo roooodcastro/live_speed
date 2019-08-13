@@ -1,8 +1,8 @@
 <template>
-  <div class="MenuBar">
+  <div class="TheMenuBar">
     <a
       href="/"
-      class="MenuBar__logo"
+      class="TheMenuBar__logo"
     >
       <img
         :alt="t('logo_alt')"
@@ -12,7 +12,7 @@
     </a>
     <slot name="left-menu" />
 
-    <div class="MenuBar__right">
+    <div class="TheMenuBar__right">
       <slot name="right-menu" />
     </div>
   </div>
@@ -26,7 +26,7 @@
 <style lang="scss">
   @import 'stylesheets/_variables.scss';
 
-  .MenuBar {
+  .TheMenuBar {
     background:  rgba($brand-3, 0.9);
     display:     flex;
     align-items: center;
@@ -38,7 +38,7 @@
     overflow:    hidden;
   }
 
-  .MenuBar__logo {
+  .TheMenuBar__logo {
     color:           $brand-white;
     display:         flex;
     font-family:     'CardChars', serif;
@@ -55,7 +55,7 @@
     &:hover { background-color: rgba($brand-white, 0.1); }
   }
 
-  .MenuBar__right {
+  .TheMenuBar__right {
     margin-left: auto;
   }
 </style>

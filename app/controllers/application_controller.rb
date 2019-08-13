@@ -5,4 +5,5 @@ class ApplicationController < ActionController::Base
 
   include PlayerLogin
   include UserLogin
+  include MainMenu
 end
