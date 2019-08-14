@@ -7,5 +7,9 @@ class Player
     def name
       own_name
     end
+
+    def play!(round)
+      # puts "Playing round #{round.id}!"
+    end
   end
 end

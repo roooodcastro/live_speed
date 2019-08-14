@@ -3,6 +3,7 @@
 class Round < ApplicationRecord
   belongs_to :winner, class_name: 'Player', optional: true
   belongs_to :match
+  has_many :players, through: :match, inverse_of: :rounds
 
   GAMES = {
     speed: { setup: 'Games::Speed::Setup', controller: 'Games::Speed::RoundController' }
@@ -22,8 +23,12 @@ class Round < ApplicationRecord
   delegate :players, :rules, to: :match
   delegate :finished?, :unfinished?, :can_use_replacement_piles?, to: :round_controller
 
+  scope :with_status, ->(status) { where("data->> 'status' IN (?)", Array(status).map(&:to_s)) }
+  scope :created_or_playing, -> { with_status([STATUS_CREATED, STATUS_PLAYING]) }
+  scope :with_cpu_players, -> { joins(match: :players).where(players: { type: Player::CPU.name }) }
+
   def setup_round!
-    update!(data: setup_class.new(players, rules).to_h)
+    update!(data: setup_class.new(players, rules).to_h.merge(status: status))
   end
 
   def play_card!(args)
@@ -63,7 +68,7 @@ class Round < ApplicationRecord
   end
 
   def status
-    data['status']
+    data['status'] || STATUS_CREATED
   end
 
   def status=(new_status)
