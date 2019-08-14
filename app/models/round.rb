@@ -31,11 +31,11 @@ class Round < ApplicationRecord
   scope :with_cpu_players, -> { joins(match: :players).where(players: { type: Player::CPU.name }) }
 
   def setup_round!
-    synchronized { update!(data: setup_class.new(players, rules).to_h.merge(status: status)) }
+    thread_safe { update!(data: setup_class.new(players, rules).to_h.merge(status: status)) }
   end
 
   def play_card!(args)
-    synchronized do
+    thread_safe do
       played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
       update_round! if played_card.present?
       played_card
@@ -43,7 +43,7 @@ class Round < ApplicationRecord
   end
 
   def use_replacement_pile!(player_id)
-    synchronized do
+    thread_safe do
       round_controller.mark_player_replacement_ready(player_id)
       players_ready = round_controller.players_ready_for_replacement?
       update_round!
@@ -56,7 +56,7 @@ class Round < ApplicationRecord
   end
 
   def mark_player_as_ready(player_id)
-    synchronized do
+    thread_safe do
       round_controller.mark_player_as_ready(player_id)
       self.status = STATUS_PLAYING if round_controller.players_ready?
       update_round!
@@ -64,7 +64,7 @@ class Round < ApplicationRecord
   end
 
   def mark_player_connected(player_id, connected)
-    synchronized do
+    thread_safe do
       round_controller.mark_player_connected(player_id, connected)
       update_round!
     end
@@ -126,7 +126,12 @@ class Round < ApplicationRecord
     true
   end
 
-  def synchronized
-    cpu_mutex.synchronize { yield }
+  def thread_safe
+    result = nil
+    cpu_mutex.synchronize do
+      reload
+      result = yield
+    end
+    result
   end
 end
