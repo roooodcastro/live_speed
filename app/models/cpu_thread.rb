@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CPUThread
+  include RoundActions
+
   attr_reader :random, :cpu_players, :next_player_check
 
   PLAYER_CHECK_INTERVAL = 5.seconds
@@ -14,6 +16,8 @@ class CPUThread
   end
 
   def run
+    Rails.logger.info 'Starting CPU Thread...'
+
     loop do
       tick = Time.current.to_f
 
@@ -22,6 +26,9 @@ class CPUThread
 
       sleep 0.01
     end
+  ensure
+    Rails.logger.info 'Exiting CPU Thread, disconnecting all CPU players...'
+    disconnect_all_cpu_players!
   end
 
   private
@@ -50,9 +57,18 @@ class CPUThread
   end
 
   def activate_player(player)
+    # A CPU player will only ever play a single game and be discarded afterwards (sorry, CPU)
     round = player.matches.first.current_round
+    response_params = perform_subscribed(player.id, round.id)
+    broadcast_to_action_cable(round.id, response_params)
 
     cpu_players[player.id] = { player: player, round: round, next_move_time: next_move_time }
+  end
+
+  def disconnect_all_cpu_players!
+    cpu_players.values.each do |cpu_player|
+      cpu_player[:round].mark_player_connected(cpu_player[:player].id, false)
+    end
   end
 
   def process_moves(tick)
@@ -66,5 +82,9 @@ class CPUThread
         player_hash[:next_move_time] = next_move_time
       end
     end
+  end
+
+  def broadcast_to_action_cable(round_id, response_params)
+    ActionCable.server.broadcast "round_#{round_id}", response_params
   end
 end

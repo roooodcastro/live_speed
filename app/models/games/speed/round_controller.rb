@@ -73,6 +73,10 @@ module Games
         hands.find { |hand| hand.cards.compact.empty? }&.player&.dig(:id)
       end
 
+      def player_ready?(player_id)
+        player_hand(player_id).player[:ready_to_play]
+      end
+
       def players_ready?
         hands.map { |hand| hand.player[:ready_to_play] }.all?
       end

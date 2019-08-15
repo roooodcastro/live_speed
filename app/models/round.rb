@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-class Round < ApplicationRecord
-  @@cpu_mutex = Mutex.new # rubocop:disable Style/ClassVars
+class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
+  @@cpu_mutex = Monitor.new # rubocop:disable Style/ClassVars
   cattr_reader :cpu_mutex
 
   belongs_to :winner, class_name: 'Player', optional: true
@@ -31,7 +31,7 @@ class Round < ApplicationRecord
   scope :with_cpu_players, -> { joins(match: :players).where(players: { type: Player::CPU.name }) }
 
   def setup_round!
-    thread_safe { update!(data: setup_class.new(players, rules).to_h.merge(status: status)) }
+    update!(data: setup_class.new(players, rules).to_h.merge(status: status))
   end
 
   def play_card!(args)
@@ -86,15 +86,22 @@ class Round < ApplicationRecord
     status == STATUS_PLAYING
   end
 
+  def reload
+    instance_variable_set(:@round_controller, nil)
+    super
+  end
+
   private
 
   def update_round!
-    self.data = round_controller.to_h.merge(status: status)
-    check_for_winner
-    return update_to_cache! if USE_CACHE
+    thread_safe do
+      self.data = round_controller.to_h.merge(status: status)
+      check_for_winner
+      return update_to_cache! if USE_CACHE
 
-    save!
-    true
+      save!
+      true
+    end
   end
 
   def check_for_winner
@@ -129,7 +136,6 @@ class Round < ApplicationRecord
   def thread_safe
     result = nil
     cpu_mutex.synchronize do
-      reload
       result = yield
     end
     result
