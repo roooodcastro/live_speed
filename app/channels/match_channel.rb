@@ -58,7 +58,7 @@ class MatchChannel < ApplicationCable::Channel
   private
 
   def load_round
-    CpuThreadOrchestrator.instance.ensure_is_running
+    # CpuThreadOrchestrator.instance.ensure_is_running
 
     Round.find(@round_id).reload
   end

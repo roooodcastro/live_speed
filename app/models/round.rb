@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 class Round < ApplicationRecord
+  @@cpu_mutex = Mutex.new # rubocop:disable Style/ClassVars
+  cattr_reader :cpu_mutex
+
   belongs_to :winner, class_name: 'Player', optional: true
   belongs_to :match
   has_many :players, through: :match, inverse_of: :rounds
@@ -28,43 +31,47 @@ class Round < ApplicationRecord
   scope :with_cpu_players, -> { joins(match: :players).where(players: { type: Player::CPU.name }) }
 
   def setup_round!
-    update!(data: setup_class.new(players, rules).to_h.merge(status: status))
+    synchronized { update!(data: setup_class.new(players, rules).to_h.merge(status: status)) }
   end
 
   def play_card!(args)
-    played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
-    update_round! if played_card.present?
-    played_card
+    synchronized do
+      played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
+      update_round! if played_card.present?
+      played_card
+    end
   end
 
   def use_replacement_pile!(player_id)
-    round_controller.mark_player_replacement_ready(player_id)
-    players_ready = round_controller.players_ready_for_replacement?
-    update_round!
+    synchronized do
+      round_controller.mark_player_replacement_ready(player_id)
+      players_ready = round_controller.players_ready_for_replacement?
+      update_round!
 
-    return false unless players_ready
-    return false unless round_controller.use_replacement_pile
+      return false unless players_ready
+      return false unless round_controller.use_replacement_pile
 
-    update_round!
+      update_round!
+    end
   end
 
   def mark_player_as_ready(player_id)
-    round_controller.mark_player_as_ready(player_id)
-    self.status = STATUS_PLAYING if round_controller.players_ready?
-    update_round!
+    synchronized do
+      round_controller.mark_player_as_ready(player_id)
+      self.status = STATUS_PLAYING if round_controller.players_ready?
+      update_round!
+    end
   end
 
   def mark_player_connected(player_id, connected)
-    round_controller.mark_player_connected(player_id, connected)
-    update_round!
+    synchronized do
+      round_controller.mark_player_connected(player_id, connected)
+      update_round!
+    end
   end
 
   def round_controller
     @round_controller ||= controller_class.send(:from_h, cached_data)
-  end
-
-  def commit_changes!
-    update_round!
   end
 
   def status
@@ -117,5 +124,9 @@ class Round < ApplicationRecord
   def update_to_cache!
     Rails.cache.write("round_data_#{id}", round_controller.to_h.merge(status: status))
     true
+  end
+
+  def synchronized
+    cpu_mutex.synchronize { yield }
   end
 end
