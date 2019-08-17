@@ -24,7 +24,7 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
   validates :number, presence: true, numericality: true
 
   delegate :players, :rules, to: :match
-  delegate :finished?, :unfinished?, :can_use_replacement_piles?, to: :round_controller
+  delegate :finished?, :unfinished?, :can_use_replacement_piles?, :player_hand, to: :round_controller
 
   scope :with_status, ->(status) { where("data->> 'status' IN (?)", Array(status).map(&:to_s)) }
   scope :created_or_playing, -> { with_status([STATUS_CREATED, STATUS_PLAYING]) }

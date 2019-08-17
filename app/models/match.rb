@@ -25,13 +25,16 @@ class Match < ApplicationRecord
     save
   end
 
-  def current_round
+  def current_round(create_new_round = true)
     return latest_round if latest_round&.unfinished?
 
-    create_next_round!
+    create_next_round! if create_new_round
   end
 
   def create_next_round!
+    check_for_winner!
+    return if finished?
+
     round_number = rounds.count + 1
     return latest_round if round_number > num_rounds
 
@@ -44,7 +47,7 @@ class Match < ApplicationRecord
     rounds.last
   end
 
-  def winner_id
+  def derive_winner_id
     round_winners   = rounds.pluck(:winner_id)
                             .group_by(&:itself)
                             .transform_values(&:size)
@@ -53,6 +56,13 @@ class Match < ApplicationRecord
     return unless most_round_wins # If no one has won a round yet
 
     most_round_wins.first if most_round_wins.last > num_rounds / 2
+  end
+
+  def check_for_winner!
+    possible_winner_id = derive_winner_id
+    return unless possible_winner_id
+
+    update(winner_id: possible_winner_id)
   end
 
   def winner

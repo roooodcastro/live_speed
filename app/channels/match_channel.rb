@@ -41,7 +41,7 @@ class MatchChannel < ApplicationCable::Channel
   end
 
   def player_ready(args)
-    response_params = perform_player_read(@round_id, args)
+    response_params = perform_player_ready(@round_id, args)
     respond(response_params)
   rescue StandardError => e
     handle_error(e)

@@ -62,7 +62,7 @@ module Games
       end
 
       def finished?
-        winner_id.present?
+        hands.any? { |hand| hand.cards.compact.empty? && hand.draw_pile.compact.empty? }
       end
 
       def unfinished?
@@ -81,6 +81,10 @@ module Games
         hands.map { |hand| hand.player[:ready_to_play] }.all?
       end
 
+      def player_connected?(player_id)
+        player_hand(player_id).player[:connected]
+      end
+
       # Return true if all players are connected at the same time (if they're all playing this game)
       def players_connected?
         hands.map { |hand| hand.player[:connected] }.all?
@@ -88,6 +92,10 @@ module Games
 
       def players_ready_for_replacement?
         hands.map { |hand| hand.player[:ready_replacement] }.all?
+      end
+
+      def player_hand(player_id)
+        hands.find { |hand| hand.player[:id] == player_id }
       end
 
       def to_h
@@ -102,10 +110,6 @@ module Games
       end
 
       private
-
-      def player_hand(player_id)
-        hands.find { |hand| hand.player[:id] == player_id }
-      end
 
       # Pops and returns 2 replacement cards, one from each pile. If the piles are empty, get all cards from the
       # central piles - except the top cards - and place them in the replacement piles, shuffled.

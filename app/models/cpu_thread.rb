@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class CPUThread
-  include RoundActions
-
   attr_reader :random, :cpu_players, :next_player_check
 
   PLAYER_CHECK_INTERVAL = 5.seconds
@@ -58,11 +56,12 @@ class CPUThread
 
   def activate_player(player)
     # A CPU player will only ever play a single game and be discarded afterwards (sorry, CPU)
-    round = player.matches.first.current_round
-    response_params = perform_subscribed(player.id, round.id)
-    broadcast_to_action_cable(round.id, response_params)
-
+    round = player.matches.first.current_round(false)
     cpu_players[player.id] = { player: player, round: round, next_move_time: next_move_time }
+    log("Add #{player.name} to pool, on round #{round&.id || '<no round>'}")
+    return unless round
+
+    player.play!(round)
   end
 
   def disconnect_all_cpu_players!
@@ -75,16 +74,21 @@ class CPUThread
     cpu_players.values.each do |player_hash|
       next if player_hash[:next_move_time] > tick
 
-      if player_hash[:round].finished?
-        cpu_players.delete(player_hash[:player].id)
-      else
-        player_hash[:player].play!(player_hash[:round])
-        player_hash[:next_move_time] = next_move_time
-      end
+      player = player_hash[:player]
+      round = player_hash[:round]
+      next remove_cpu(player) unless round&.unfinished?
+
+      player.play!(round)
+      player_hash[:next_move_time] = next_move_time
     end
   end
 
-  def broadcast_to_action_cable(round_id, response_params)
-    ActionCable.server.broadcast "round_#{round_id}", response_params
+  def remove_cpu(player)
+    log("Removing #{player.name} from pool, no rounds active")
+    cpu_players.delete(player.id)
+  end
+
+  def log(message)
+    Rails.logger.info(Rainbow("[CPU] #{message}").green.bright)
   end
 end
