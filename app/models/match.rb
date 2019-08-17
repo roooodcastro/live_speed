@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Match < ApplicationRecord
+  attr_accessor :cpu_match
+
   belongs_to :winner, class_name: 'Player', optional: true
   has_many :rounds, -> { order(created_at: :asc) }, dependent: :destroy, inverse_of: :match
   has_many :match_players, dependent: :destroy
@@ -9,6 +11,8 @@ class Match < ApplicationRecord
   validates :num_rounds, presence: true, numericality: true
   validates :num_players, numericality: { between: 2..4 }
   validates :match_players, length: { in: 1..4 }
+
+  after_create :create_cpu_players
 
   scope :from_player, ->(player_id) { joins(:match_players).where match_players: { player_id: player_id } }
   scope :with_players, -> { includes players: :user }
@@ -90,5 +94,13 @@ class Match < ApplicationRecord
 
   def rules
     []
+  end
+
+  private
+
+  def create_cpu_players
+    return unless cpu_match
+
+    Array.new(num_players - players.count).each { players << Player::CPU.create }
   end
 end

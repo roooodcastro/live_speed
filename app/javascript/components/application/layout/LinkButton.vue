@@ -7,7 +7,8 @@
   >
     <button
       :id="id"
-      :class="cssClass"
+      class="btn"
+      :class="variant"
       :disabled="disabled"
       type="submit"
       @click="click"
@@ -18,7 +19,8 @@
   <button
     v-else
     :id="id"
-    :class="cssClass"
+    class="btn"
+    :class="variant"
     :disabled="disabled"
     @click="click"
   >
@@ -55,6 +57,10 @@
         type: String,
         default: 'GET',
       },
+      variant: {
+        type: String,
+        default: '',
+      },
     },
 
     data() {
@@ -64,10 +70,6 @@
     },
 
     computed: {
-      cssClass() {
-        return 'btn';
-      },
-
       actsLikeALink() {
         return !!this.href;
       },

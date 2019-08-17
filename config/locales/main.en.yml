@@ -2,10 +2,16 @@ en:
   title:          'LiveSpeed'
   logo_alt:       'LiveSpeed Logo'
   back:           'Back'
+  close:          'Close'
   generic_error:  'An error has occurred. Please contact an administrator or try again.'
 
   forms:
     validating: "Validating %{attr}..."
+
+    new_match_form:
+      title:     'Start new match'
+      cpu_title: 'Start new CPU match'
+      submit:    'Create Match'
 
   home:
     index:
@@ -18,7 +24,7 @@ en:
       title:             'Lobby'
       matches_waiting:   'Matches waiting for additional players:'
       new_lobby_btn:     'Start a new match'
-      match_me_btn:      'I just wanna play!'
+      play_cpu_btn:      'Play against a CPU'
       join_btn:          'Join'
       join_btn_wait:     'Joining...'
       match_not_started: 'Waiting for players'

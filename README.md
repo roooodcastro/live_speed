@@ -107,11 +107,12 @@ Here's a quick overview of the project's progress:
 - [x] End-game feedback
 - [x] Redo card positioning to make it work for mobile
 - [x] Fix visual bugs
+- [ ] Fix game ready bug where the cards don't flip when players are ready
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects
-- [ ] Implement a better HUD for displaying more information about the game
+- [ ] Implement a HUD to show current round, current score, etc
 - [ ] Add help timer to warn players of possible plays when they stay a long time without any moves
-- [ ] Implement AI to serve as a tutorial
+- [x] Implement AI to serve as a tutorial
 - [ ] Pause game when player disconnects, give him a time limit to rejoin
 - [ ] End abandoned match by W.O., giving victory to remaining player
 - [x] Only reveal cards once both players are ready
@@ -125,7 +126,6 @@ Here's a quick overview of the project's progress:
 - [x] Create basic Vue components (buttons, links, form inputs, etc)
 - [x] Style player creation page
 - [x] Create landing page
-- [ ] Style rest of the site
 - [ ] Add Google Analytics or similar user tracking service
 - [ ] Implement GDPR
 

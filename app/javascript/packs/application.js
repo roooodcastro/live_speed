@@ -10,6 +10,9 @@ import 'initializers/vue_config';
 import 'initializers/mixins';
 import 'initializers/filters';
 import 'initializers/vue_wrapper';
+import Routes from 'initializers/js_routes.js.erb';
+
+window.Routes = Routes;
 
 import Vue from 'vue/dist/vue.esm';
 

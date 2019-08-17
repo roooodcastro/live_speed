@@ -1,5 +1,13 @@
 <template>
   <div>
+    <NewCPUMatchForm
+      ref="newCPUMatchForm"
+    />
+
+    <NewMatchForm
+      ref="newMatchForm"
+    />
+
     <h2>{{ 'lobby.show.matches_waiting' | i18n }}</h2>
     <ul class="MatchList__list">
       <li
@@ -29,21 +37,29 @@
 
     <div class="MatchList__quick-actions">
       <LinkButton
-        :label="t('lobby.show.match_me_btn')"
+        variant="btn-lg"
+        :label="t('lobby.show.play_cpu_btn')"
+        @click="openNewCPUMatchForm"
       />
       <LinkButton
+        variant="btn-alt btn-lg"
         :label="t('lobby.show.new_lobby_btn')"
+        @click="openNewMatchForm"
       />
     </div>
   </div>
 </template>
 
 <script>
-  import LinkButton from 'components/application/layout/LinkButton';
+  import LinkButton      from 'components/application/layout/LinkButton';
+  import NewMatchForm    from 'components/application/forms/NewMatchForm';
+  import NewCPUMatchForm from 'components/application/forms/NewCPUMatchForm';
 
   export default {
     components: {
       LinkButton,
+      NewMatchForm,
+      NewCPUMatchForm,
     },
 
     props: {
@@ -70,6 +86,14 @@
       playersLabel(match) {
         return this.t('activerecord.attributes.match.players',
           { players: match.num_current_players, total_players: match.num_total_players, });
+      },
+
+      openNewCPUMatchForm() {
+        this.$refs.newCPUMatchForm.open();
+      },
+
+      openNewMatchForm() {
+        this.$refs.newMatchForm.open();
       },
     },
   };
@@ -103,7 +127,8 @@
 
     span {
       text-align: right;
-      width: 25%;
+      width:      25%;
+
       &:first-child { text-align: left; }
     }
   }
@@ -121,7 +146,7 @@
   }
 
   .MatchList__quick-actions {
-    display: flex;
+    display:         flex;
     justify-content: center;
   }
 </style>

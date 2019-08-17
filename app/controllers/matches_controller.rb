@@ -20,7 +20,7 @@ class MatchesController < ApplicationController
   end
 
   def play
-    return redirect_to @match unless @match.can_play?
+    return redirect_to @match if !@match.can_play? || @match.current_round.blank?
 
     respond_with(@match)
   end
@@ -66,7 +66,7 @@ class MatchesController < ApplicationController
   end
 
   def match_params
-    params[:match].permit(:num_rounds, :num_players)
+    params[:match].permit(:num_rounds, :num_players, :cpu_match)
   end
 
   def match_from_id_or_random
