@@ -3,11 +3,12 @@
   "private": true,
   "dependencies": {
     "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4",
+    "@rails/webpacker": "^4.0.0",
     "actioncable": "^5.2.2",
     "axios": "^0.18.0",
     "eslint": "^5.13.0",
     "eslint-plugin-vue": "^5.1.0",
+    "handlebars": "^4.0.0",
     "i18n-js": "^3.2.1",
     "normalize.css": "^8.0.1",
     "pluralize": "^7.0.0",
@@ -15,7 +16,7 @@
     "sass-loader": "^7.1.0",
     "turbolinks": "^5.2.0",
     "vue": "^2.5.22",
-    "vue-loader": "15",
+    "vue-loader": "^15.0.0",
     "vue-template-compiler": "^2.5.22",
     "vue-turbolinks": "^2.0.4",
     "webpack-bundle-analyzer": "^3.4.1"
@@ -23,6 +24,6 @@
   "devDependencies": {
     "cssnext": "^1.8.4",
     "postcss-cssnext": "^3.1.0",
-    "webpack-dev-server": "3"
+    "webpack-dev-server": "^3.0.0"
   }
 }
