@@ -15,24 +15,17 @@
         value="2"
       >
 
-      <select name="match[num_rounds]">
-        <option
-          value="3"
-          selected="true"
-        >
-          3
-        </option>
-        <option value="5">
-          5
-        </option>
-        <option value="7">
-          7
-        </option>
-      </select>
+      <FormSelect
+        id="match_num_rounds"
+        name="match[num_rounds]"
+        selected="5"
+        label="activerecord.attributes.match.num_rounds"
+        :options="numRoundsOptions"
+      />
 
       <button
         type="submit"
-        class="btn"
+        class="btn btn-lg NewCPUMatchForm__submit-button"
       >
         {{ 'forms.new_match_form.submit' | i18n }}
       </button>
@@ -43,11 +36,24 @@
 <script>
   import ModalOverlay from 'components/application/layout/ModalOverlay';
   import RailsForm    from 'components/application/forms/RailsForm';
+  import FormSelect   from 'components/application/forms/FormSelect';
 
   export default {
     components: {
       ModalOverlay,
       RailsForm,
+      FormSelect,
+    },
+
+    computed: {
+      numRoundsOptions() {
+        const descI18nKey = 'activerecord.attributes.match.num_rounds_description';
+        return [
+          ['3', this.t(descI18nKey, { rounds: 3, }), ],
+          ['5', this.t(descI18nKey, { rounds: 5, }), ],
+          ['7', this.t(descI18nKey, { rounds: 7, }), ],
+        ];
+      },
     },
 
     methods: {
@@ -59,5 +65,8 @@
 </script>
 
 <style lang="scss">
-
+  .NewCPUMatchForm__submit-button {
+    margin-top: 1rem;
+    width: 100%;
+  }
 </style>

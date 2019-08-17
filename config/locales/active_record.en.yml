@@ -9,7 +9,8 @@ en:
         other: 'Rounds'
     attributes:
       match:
-        description_finished:   "Best of %{rounds} rounds, %{players} - %{winner} won"
+        num_rounds_description: "Best of %{rounds}"
+        description_finished:   "Best of %{rounds} rounds, %{players} players - %{winner} won"
         description_unfinished: "Best of %{rounds} rounds, %{players} players"
         num_players:            'Number of Players'
         num_rounds:             'Number of Rounds'

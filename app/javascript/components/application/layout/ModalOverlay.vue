@@ -97,9 +97,14 @@
 
     h3 {
       border-bottom: 1px solid $border-color;
+      flex-grow:     1;
       margin:        auto 0 auto 0;
       padding:       0 0.5rem 0.5rem 0.5rem;
     }
+  }
+
+  .ModalOverlay__modal-body {
+    padding: 1rem;
   }
 
   .ModalOverlay__close-btn {

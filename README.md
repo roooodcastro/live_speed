@@ -159,6 +159,7 @@ Here's a quick overview of the project's progress:
 - [x] Add i18n to JS/webpacker
 - [x] Completely remove Sprockets in favour of Webpacker
 - [ ] Add some SEO stuff
+- [ ] Upgrade Webpack
 
 ## Credits
 

@@ -77,8 +77,12 @@ class Match < ApplicationRecord
     winner_id.present?
   end
 
+  def full?
+    match_players.size == num_players
+  end
+
   def can_play?
-    match_players.size == num_players && !winner_id
+    full? && !winner_id
   end
 
   def include_cpu_player?
