@@ -118,6 +118,7 @@ Here's a quick overview of the project's progress:
 - [x] Only reveal cards once both players are ready
 - [ ] Implement demo version of game to display on landing page
 - [ ] Windows Solitaire card dropping animation
+- [ ] Optimize for mobile gameplay
 
 ### Interface
 
@@ -128,6 +129,7 @@ Here's a quick overview of the project's progress:
 - [x] Create landing page
 - [ ] Add Google Analytics or similar user tracking service
 - [ ] Implement GDPR
+- [ ] Optimize for mobile
 
 ### Main site
 
