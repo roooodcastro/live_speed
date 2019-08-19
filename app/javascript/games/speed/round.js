@@ -101,6 +101,7 @@ export default class {
     this.readyToPlay       = new Readiness(this.players, 'ready_to_play');
     this.readyToReplace    = new Readiness(this.players, 'ready_replacement');
     this.matchId           = roundData.match_id;
+    this.lastTimestamp     = roundData.timestamp;
   }
 
   playerHand(playerId) {

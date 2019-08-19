@@ -2,6 +2,7 @@
   <div
     :class="cssClass"
     :style="style"
+    :data-transform="transform"
     @click="onClick"
   />
 </template>
@@ -127,6 +128,7 @@
       dragMove(ev) {
         if (this.isDragging) {
           this.dragPosition = CardCoordinate.fromPixelPosition(ev.clientX, ev.clientY);
+          this.$forceUpdate();
         }
       },
 

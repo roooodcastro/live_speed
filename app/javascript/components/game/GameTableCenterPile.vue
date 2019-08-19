@@ -3,7 +3,7 @@
     <PlayingCard
       v-for="(card, index) in centerPiles[0]"
       :ref="'center_left_' + index"
-      :key="'center_left_' + index"
+      :key="'center_left_' + index + timestamp"
       :suit="card.s"
       :rank="card.r"
       :initial-position="leftCenterPilePosition(index)"
@@ -13,7 +13,7 @@
     <PlayingCard
       v-for="(card, index) in centerPiles[1]"
       :ref="'center_right_' + index"
-      :key="'center_right_' + index"
+      :key="'center_right_' + index + timestamp"
       :suit="card.s"
       :rank="card.r"
       :initial-position="rightCenterPilePosition(index)"
@@ -23,7 +23,7 @@
     <PlayingCard
       v-for="(card, index) in replacementPiles[0]"
       :ref="'replacement_left_' + index"
-      :key="'replacement_left_' + index"
+      :key="'replacement_left_' + index + timestamp"
       :rank="card.r"
       :suit="card.s"
       :initial-position="[-80, -cardYOffset(index)]"
@@ -31,7 +31,7 @@
     <PlayingCard
       v-for="(card, index) in replacementPiles[1]"
       :ref="'replacement_right_' + index"
-      :key="'replacement_right_' + index"
+      :key="'replacement_right_' + index + timestamp"
       :is-featured="index === 0 && canUseReplacement"
       :is-active="isReplacementCardActive(index)"
       :rank="card.r"
@@ -50,7 +50,7 @@
 
 <script>
   import PlayingCard from 'components/game/PlayingCard';
-  import GameArrow       from 'components/game/ui/GameArrow';
+  import GameArrow   from 'components/game/ui/GameArrow';
 
   import CardCoordinate       from 'helpers/card_coordinate';
   import { CARD_MOVE_DELAY, } from 'helpers/constants';
@@ -67,6 +67,7 @@
       replacementPiles:  { type: Array, required: true, },
       canUseReplacement: { type: Boolean, required: true, },
       gameState:         { type: String, required: true, },
+      timestamp:         { type: Number, default: 0, },
     },
 
     computed: {

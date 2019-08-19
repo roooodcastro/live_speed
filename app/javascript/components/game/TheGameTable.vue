@@ -25,7 +25,7 @@
         <GameTableHand
           v-for="(hand, index) in hands"
           :ref="'hand_' + hand.player.id"
-          :key="'hand_' + hand.player.id"
+          :key="'hand_' + hand.player.id + roundData.timestamp"
           :player-index="index"
           :player="hand.player"
           :initial-hand="hand.cards"
@@ -39,6 +39,7 @@
           :replacement-piles="replacementPiles"
           :can-use-replacement="canUseReplacement"
           :game-state="state"
+          :timestamp="roundData.timestamp"
           @replacementClick="onReplacementClick"
         />
 
@@ -133,6 +134,7 @@
         api:                   null,
         dragHold:              false,
         isDragging:            null,
+        dragCardIndex:         -1,
         controller:            new Round(this.playerId, this.onControllerStateChange),
         playedDealAnimation:   false,
         playerSubMessage:      '',
@@ -191,6 +193,7 @@
         if (data.player_id !== this.playerId) return;
 
         this.updateData(data);
+        this.persistDrag();
 
         this.$nextTick(() => {
           this.$refs['cardDeck'].dealCards(this.controller.data)
@@ -206,10 +209,12 @@
 
       onPlayerReady(data) {
         this.updateData(data);
+        this.persistDrag();
       },
 
       onPlayerConnected(data) {
         this.updateData(data);
+        this.persistDrag();
 
         if (this.playerId !== data.player_id) {
           const playerName = this.controller.playerHand(data.player_id).player.name;
@@ -219,6 +224,7 @@
 
       onPlayerDisconnected(data) {
         this.updateData(data);
+        this.persistDrag();
 
         if (this.playerId !== data.player_id) {
           const playerName = this.controller.playerHand(data.player_id).player.name;
@@ -239,34 +245,42 @@
       onReplacementResponse(data) {
         if (!data.round.can_use_replacement) {
           this.centerPileComponent.pullFromReplacements()
-            .then(() => this.updateData(data));
+            .then(() => this.updateData(data))
+            .then(() => this.persistDrag());
         } else {
           this.updateData(data);
+          this.persistDrag();
         }
       },
 
       onPlayResponse(response) {
         if (response.success) {
+          const ownPlay             = response.player_id === this.playerId;
           const cardIndex           = response.card_index;
           const playerHandComponent = this.playerHandComponent(response.player_id);
           const card                = playerHandComponent.handCards[cardIndex];
           playerHandComponent.removeCard(card)
             .then(() => this.centerPileComponent.place(response.card_data, response.pile_index))
             .then(() => playerHandComponent.pullFromDraw(cardIndex))
-            .then(() => this.updateData(response));
+            .then(() => this.updateData(response))
+            .then(() => {
+              if (ownPlay) {
+                this.endDrag();
+              } else {
+                this.persistDrag();
+              }
+            });
         } else {
           this.setPlayerSubmessage(Message.invalidPlay(), 2000);
         }
-        if (this.isDragging) {
-          this.isDragging.endDrag();
-          this.isDragging = null;
-          this.dragHold   = false;
-        }
+        this.persistDrag();
       },
 
       onDragStart(ev) {
         const card         = ev.target.__vue__;
-        const isPlayerCard = this.playerHandComponent(this.playerId).handCards.includes(card);
+        const playerHand   = this.playerHandComponent(this.playerId);
+        const isPlayerCard = playerHand.handCards.includes(card);
+        this.dragCardIndex = playerHand.indexOfCard(card);
         if (isPlayerCard && this.state === 'game' && !this.dragHold) {
           if (this.isDragging) this.isDragging.endDrag();
           this.isDragging = card;
@@ -288,8 +302,7 @@
 
           if (pileIndex >= 0) return this.playCard(card, pileIndex);
 
-          this.isDragging.endDrag();
-          this.isDragging = null;
+          this.endDrag();
         }
         this.dragHold = false;
       },
@@ -318,6 +331,27 @@
       updateData(data) {
         this.roundData = Round.parseRoundData(data.round, this.playerId);
         this.controller.updateData(data.round);
+      },
+
+      persistDrag() {
+        this.$nextTick(() => {
+          this.dragHold = false;
+          if (this.isDragging && this.state === 'game') {
+            const playerHand = this.playerHandComponent(this.playerId);
+            const card       = playerHand.handCards[this.dragCardIndex];
+            if (this.isDragging) this.isDragging.endDrag();
+            this.isDragging = card;
+            card.startDrag();
+          } else {
+            this.endDrag();
+          }
+        });
+      },
+
+      endDrag() {
+        if (this.isDragging) this.isDragging.endDrag();
+        this.dragCardIndex = -1;
+        this.isDragging    = null;
       },
 
       setPlayerSubmessage(message, timer) {

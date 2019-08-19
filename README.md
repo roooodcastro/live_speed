@@ -107,7 +107,7 @@ Here's a quick overview of the project's progress:
 - [x] End-game feedback
 - [x] Redo card positioning to make it work for mobile
 - [x] Fix visual bugs
-- [ ] Fix game ready bug where the cards don't flip when players are ready
+- [x] Fix game ready bug where the cards don't flip when players are ready
 - [ ] Finish sound effects
 - [ ] Implement controls for disabling sound effects
 - [ ] Implement a HUD to show current round, current score, etc
@@ -119,6 +119,10 @@ Here's a quick overview of the project's progress:
 - [ ] Implement demo version of game to display on landing page
 - [ ] Windows Solitaire card dropping animation
 - [ ] Optimize for mobile gameplay
+- [ ] Replacement cards sometimes are placed behind the top center pile cards after reshuffle
+- [ ] Eliminate lag after playing a card (assume it's valid until API says it isn't)
+- [x] Persist card being dragged after Vue update
+- [ ] Animate opponent card play
 
 ### Interface
 
