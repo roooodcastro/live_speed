@@ -114,7 +114,7 @@ module Games
       # Pops and returns 2 replacement cards, one from each pile. If the piles are empty, get all cards from the
       # central piles - except the top cards - and place them in the replacement piles, shuffled.
       def pop_replacement_cards
-        refill_replacement_piles if replacement_piles[0].blank?
+        refill_replacement_piles if replacement_piles[0].empty? || replacement_piles[1].empty?
         [replacement_piles[0].pop, replacement_piles[1].pop]
       end
 
