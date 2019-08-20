@@ -7,7 +7,7 @@
   display:          inline-block;
   font-family:      'CardChars', serif;
   font-size:        0.8rem;
-  line-height:      2rem;
+  line-height:      1.5rem;
   outline:          none;
   padding:          0 1rem;
   text-align:       center;
@@ -41,20 +41,20 @@
 
   &.btn-alt {
     background-color: $brand-alt;
-    border-color: $brand-alt-4;
+    border-color:     $brand-alt-4;
+
     &:hover:enabled { border-color: $brand-alt-1; }
   }
 
   &.btn-lg {
-    font-size:   1rem;
-    line-height: 2.5rem;
-    padding:     0 2rem;
+    font-size:  1rem;
+    padding:    0.5rem 2rem;
   }
 
   &.btn-hero {
-    font-size:   1.5rem;
-    line-height: 4rem;
-    padding:     0 5rem;
+    font-size:  1.5rem;
+    padding:    1.5rem 5rem;
+
     &:hover:enabled { transform: scale(1.1); }
   }
 }

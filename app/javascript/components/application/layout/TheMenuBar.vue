@@ -8,7 +8,7 @@
         :alt="t('logo_alt')"
         :src="require('images/logo_cards.svg')"
       >
-      {{ 'title' | i18n }}
+      <span>{{ 'title' | i18n }}</span>
     </a>
 
     <MenuBarLink
@@ -78,5 +78,14 @@
 
   .TheMenuBar__right {
     margin-left: auto;
+    height: 100%;
+  }
+
+  @media (max-width: 575px) {
+    .TheMenuBar__logo {
+      span {
+        display: none;
+      }
+    }
   }
 </style>

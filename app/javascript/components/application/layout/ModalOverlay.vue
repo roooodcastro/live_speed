@@ -103,4 +103,16 @@
   .ModalOverlay__modal-body {
     padding: 1rem;
   }
+
+  @media (max-width: 575px) {
+    .ModalOverlay__modal-container {
+      width: 100%;
+    }
+
+    .ModalOverlay__modal {
+      display:        flex;
+      margin:         0 0.75rem;
+      flex-direction: column;
+    }
+  }
 </style>

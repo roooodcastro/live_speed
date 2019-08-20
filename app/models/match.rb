@@ -15,6 +15,7 @@ class Match < ApplicationRecord
   after_create :create_cpu_players
 
   scope :from_player, ->(player_id) { joins(:match_players).where match_players: { player_id: player_id } }
+  scope :without_player, ->(player_id) { joins(:match_players).where.not match_players: { player_id: player_id } }
   scope :with_players, -> { includes players: :user }
   scope :with_rounds, -> { includes :rounds }
 

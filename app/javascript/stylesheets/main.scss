@@ -25,11 +25,13 @@ h1 {
 }
 
 .before-container {
-  margin-top: $menu-bar-height;
+  margin-top:    $menu-bar-height;
   margin-bottom: -$menu-bar-height;
 }
 
-.content { margin-top: $menu-bar-height; }
+.content {
+  padding-top: $menu-bar-height;
+}
 
 main {
   @extend %grid;
@@ -78,4 +80,26 @@ li + li {
 
 .centered {
   text-align: center;
+}
+
+.full-size-image {
+  max-width: 100%;
+}
+
+@media (min-width: 768px) and (max-width: 1367px) {
+  html { font-size: 16px; }
+}
+
+@media (max-width: 575px) {
+  html { font-size: 14px; }
+
+  .content {
+    padding: $menu-bar-height 0 0 0;
+  }
+
+  main {
+    display: block;
+    padding: 0.75rem;
+    margin:  0;
+  }
 }

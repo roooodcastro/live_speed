@@ -21,14 +21,15 @@ en:
 
   lobby:
     show:
-      title:             'Lobby'
-      matches_waiting:   'Matches waiting for additional players:'
-      new_lobby_btn:     'Start a new match'
-      play_cpu_btn:      'Play against a CPU'
-      join_btn:          'Join'
-      join_btn_wait:     'Joining...'
-      match_not_started: 'Waiting for players'
-      match_started:     "On round %{round}/%{total_rounds}"
+      title:                  'Lobby'
+      matches_waiting:        'Matches waiting for additional players:'
+      no_matches_waiting:     'There are no open matches waiting for additional players!'
+      new_lobby_btn:          'Start a new match'
+      play_cpu_btn:           'Play against a CPU'
+      join_btn:               'Join'
+      join_btn_wait:          'Joining...'
+      match_not_started:      'Waiting for players'
+      match_started:          "On round %{round}/%{total_rounds}"
 
   matches:
     index:

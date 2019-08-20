@@ -30,10 +30,12 @@
 
   .MenuBarLink {
     color:           $brand-white;
-    display:         inline-block;
+    display:         flex;
+    flex-direction:  column;
     font-size:       $menu-bar-height / 3;
     font-weight:     normal;
-    line-height:     $menu-bar-height;
+    height:          100%;
+    justify-content: center;
     padding:         0 2rem;
     position:        relative;
     text-decoration: none;
@@ -55,6 +57,12 @@
       background-color: rgba($brand-white, 0.1);
 
       &:before { height: $menu-bar-height / 10; }
+    }
+  }
+
+  @media (max-width: 575px) {
+    .MenuBarLink {
+      padding: 0 0.5rem;
     }
   }
 </style>

@@ -8,32 +8,38 @@
       ref="newMatchForm"
     />
 
-    <h2>{{ 'lobby.show.matches_waiting' | i18n }}</h2>
-    <ul class="MatchList__list">
-      <li
-        v-for="match in matches"
-        :key="`match_${match.id}`"
-        class="MatchList__list-item"
-      >
-        <span class="MatchList__status">
-          {{ statusLabel(match) }}
-        </span>
-        <span class="MatchList__num-rounds">
-          {{ roundsLabel(match) }}
-        </span>
-        <span class="MatchList__num-players">
-          {{ playersLabel(match) }}
-        </span>
-        <span class="MatchList__join">
-          <LinkButton
-            :label="t('lobby.show.join_btn')"
-            :disable-with="t('lobby.show.join_btn_wait')"
-            :action="match.join_url"
-            method="POST"
-          />
-        </span>
-      </li>
-    </ul>
+    <div v-if="matches.length > 0">
+      <h2>{{ 'lobby.show.matches_waiting' | i18n }}</h2>
+      <ul class="MatchList__list">
+        <li
+          v-for="match in matches"
+          :key="`match_${match.id}`"
+          class="MatchList__list-item"
+        >
+          <span class="MatchList__status">
+            {{ statusLabel(match) }}
+          </span>
+          <span class="MatchList__num-rounds">
+            {{ roundsLabel(match) }}
+          </span>
+          <span class="MatchList__num-players">
+            {{ playersLabel(match) }}
+          </span>
+          <span class="MatchList__join">
+            <LinkButton
+              :label="t('lobby.show.join_btn')"
+              :disable-with="t('lobby.show.join_btn_wait')"
+              :action="match.join_url"
+              method="POST"
+            />
+          </span>
+        </li>
+      </ul>
+    </div>
+
+    <div v-else>
+      <h3>{{ 'lobby.show.no_matches_waiting' | i18n }}</h3>
+    </div>
 
     <div class="MatchList__quick-actions">
       <LinkButton
@@ -148,5 +154,19 @@
   .MatchList__quick-actions {
     display:         flex;
     justify-content: center;
+  }
+
+  @media (max-width: 575px) {
+    .MatchList__quick-actions {
+      flex-direction: column;
+      justify-content: stretch;
+
+      .btn {
+        margin: 0;
+        width: 100%;
+      }
+
+      .btn + .btn { margin-top: 0.5rem; }
+    }
   }
 </style>
