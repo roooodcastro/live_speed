@@ -193,7 +193,6 @@
         if (data.player_id !== this.playerId) return;
 
         this.updateData(data);
-        this.persistDrag();
 
         this.$nextTick(() => {
           this.$refs['cardDeck'].dealCards(this.controller.data)
@@ -209,12 +208,10 @@
 
       onPlayerReady(data) {
         this.updateData(data);
-        this.persistDrag();
       },
 
       onPlayerConnected(data) {
         this.updateData(data);
-        this.persistDrag();
 
         if (this.playerId !== data.player_id) {
           const playerName = this.controller.playerHand(data.player_id).player.name;
@@ -224,7 +221,6 @@
 
       onPlayerDisconnected(data) {
         this.updateData(data);
-        this.persistDrag();
 
         if (this.playerId !== data.player_id) {
           const playerName = this.controller.playerHand(data.player_id).player.name;
@@ -245,11 +241,9 @@
       onReplacementResponse(data) {
         if (!data.round.can_use_replacement) {
           this.centerPileComponent.pullFromReplacements()
-            .then(() => this.updateData(data))
-            .then(() => this.persistDrag());
+            .then(() => this.updateData(data));
         } else {
           this.updateData(data);
-          this.persistDrag();
         }
       },
 
@@ -262,18 +256,10 @@
           playerHandComponent.removeCard(card)
             .then(() => this.centerPileComponent.place(response.card_data, response.pile_index))
             .then(() => playerHandComponent.pullFromDraw(cardIndex))
-            .then(() => this.updateData(response))
-            .then(() => {
-              if (ownPlay) {
-                this.endDrag();
-              } else {
-                this.persistDrag();
-              }
-            });
+            .then(() => this.updateData(response, !ownPlay));
         } else {
           this.setPlayerSubmessage(Message.invalidPlay(), 2000);
         }
-        this.persistDrag();
       },
 
       onDragStart(ev) {
@@ -328,24 +314,30 @@
         return this.$refs['hand_' + playerId][0];
       },
 
-      updateData(data) {
+      updateData(data, persistDrag) {
         this.roundData = Round.parseRoundData(data.round, this.playerId);
         this.controller.updateData(data.round);
+        if (persistDrag) {
+          // Call it twice, first to make sure the card is dragging instantly after the update, and afterwards
+          // to make sure the updated component instance is being dragged after Vue updates the DOM.
+          this.persistDrag();
+          this.$nextTick(() => this.persistDrag());
+        } else {
+          this.endDrag();
+        }
       },
 
       persistDrag() {
-        this.$nextTick(() => {
-          this.dragHold = false;
-          if (this.isDragging && this.state === 'game') {
-            const playerHand = this.playerHandComponent(this.playerId);
-            const card       = playerHand.handCards[this.dragCardIndex];
-            if (this.isDragging) this.isDragging.endDrag();
-            this.isDragging = card;
-            card.startDrag();
-          } else {
-            this.endDrag();
-          }
-        });
+        this.dragHold = false;
+        if (this.isDragging && this.state === 'game') {
+          const playerHand = this.playerHandComponent(this.playerId);
+          const card       = playerHand.handCards[this.dragCardIndex];
+          if (this.isDragging) this.isDragging.endDrag();
+          this.isDragging = card;
+          card.startDrag();
+        } else {
+          this.endDrag();
+        }
       },
 
       endDrag() {
