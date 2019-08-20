@@ -3,37 +3,55 @@
     class="AlertsContainer"
     :class="{ 'AlertsContainer--float': float }"
   >
-    <Alert
-      v-for="(alert, index) in alerts"
+    <RailsAlert
+      v-for="(alert, index) in displayedAlerts"
       :key="'alert-' + index"
       :title="alert.title"
       :content="alert.content"
       :type="alert.type"
+      @close="removeAlert(index)"
     />
   </div>
 </template>
 
 <script>
-  import Alert from 'components/application/layout/Alert';
+  import RailsAlert from 'components/application/layout/RailsAlert';
 
   export default {
     components: {
-      Alert,
+      RailsAlert,
     },
 
     props: {
       alerts: { type: Array, required: true, },
       float: { type: Boolean, default: false, },
     },
+
+    data() {
+      return {
+        displayedAlerts: this.alerts,
+      };
+    },
+
+    methods: {
+      removeAlert(index) {
+        this.displayedAlerts.splice(index, 1);
+      },
+    },
   };
 </script>
 
 <style lang="scss">
+  @import 'stylesheets/_grid.scss';
+
   .AlertsContainer {
+    @extend %grid;
+
     align-items: center;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 0;
   }
 
   .AlertsContainer--float {

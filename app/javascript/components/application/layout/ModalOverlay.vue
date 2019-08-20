@@ -9,13 +9,7 @@
       <div class="ModalOverlay__modal">
         <div class="ModalOverlay__modal-header">
           <h3>{{ title | i18n }}</h3>
-          <span
-            class="ModalOverlay__close-btn"
-            @click="close"
-          >
-            <span>&times;</span>
-            {{ 'close' | i18n }}
-          </span>
+          <CloseButton @close="close" />
         </div>
         <div class="ModalOverlay__modal-body">
           <slot />
@@ -26,7 +20,13 @@
 </template>
 
 <script>
+  import CloseButton from 'components/application/layout/CloseButton';
+
   export default {
+    components: {
+      CloseButton,
+    },
+
     props: {
       closable:    {
         type:    Boolean,
@@ -81,9 +81,6 @@
     top:              0;
   }
 
-  .ModalOverlay__modal-container {
-  }
-
   .ModalOverlay__modal {
     background-color: $brand-gray-9;
     border:           1px solid $border-color;
@@ -105,25 +102,5 @@
 
   .ModalOverlay__modal-body {
     padding: 1rem;
-  }
-
-  .ModalOverlay__close-btn {
-    color:       $brand-gray-4;
-    cursor:      pointer;
-    font-size:   0.8rem;
-    margin-left: 1rem;
-    padding:     0.25rem;
-    text-align:  center;
-
-    &:hover {
-      background-color: $brand-gray-8;
-      color:            $brand-gray-3;
-    }
-
-    span {
-      display:     block;
-      font-size:   2em;
-      line-height: 0.8em;
-    }
   }
 </style>
