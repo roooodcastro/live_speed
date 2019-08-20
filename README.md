@@ -159,13 +159,13 @@ Here's a quick overview of the project's progress:
 - [x] Setup Heroku deploy
 - [ ] Add monitoring service
 - [x] Use Webpacker version of ActionCable and Turbolinks
-- [ ] Add JSRoutes with webpacker
+- [x] Add JSRoutes with webpacker
 - [ ] Generate favicons in webpacker instead of sprockets
 - [x] Add i18n to Rails
 - [x] Add i18n to JS/webpacker
 - [x] Completely remove Sprockets in favour of Webpacker
 - [ ] Add some SEO stuff
-- [ ] Upgrade Webpack
+- [x] Upgrade Webpack
 
 ## Credits
 

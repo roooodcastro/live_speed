@@ -17,10 +17,10 @@
 
       <div
         v-show="playedDealAnimation"
+        v-touch:start="onDragStart"
+        v-touch:end="onDragEnd"
+        v-touch:moving="onDragMove"
         class="game-table-gamearea"
-        @mousedown="onDragStart"
-        @mouseup="onDragEnd"
-        @mousemove="onDragMove"
       >
         <GameTableHand
           v-for="(hand, index) in hands"
@@ -259,6 +259,8 @@
             .then(() => this.updateData(response, !ownPlay));
         } else {
           this.setPlayerSubmessage(Message.invalidPlay(), 2000);
+          this.dragHold = false;
+          this.endDrag();
         }
       },
 

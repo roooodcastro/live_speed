@@ -127,7 +127,8 @@
 
       dragMove(ev) {
         if (this.isDragging) {
-          this.dragPosition = CardCoordinate.fromPixelPosition(ev.clientX, ev.clientY);
+          const touch = ev.touches[0];
+          this.dragPosition = CardCoordinate.fromPixelPosition(touch.clientX, touch.clientY);
           this.$forceUpdate();
         }
       },
