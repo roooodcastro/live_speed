@@ -65,7 +65,7 @@
       },
 
       transform() {
-        const posTransform = 'translate(' + this.currentPosition.toString + ')';
+        const posTransform = 'translate3d(' + this.currentPosition.toString + ', 0)';
         const rotTransform = 'rotate(' + this.rotation + 'deg)';
         return [posTransform, rotTransform, ].join(' ');
       },
@@ -85,6 +85,14 @@
       currentPosition() {
         return this.isDragging ? this.dragPosition : this.position;
       },
+    },
+
+    created() {
+      if (typeof window.numPlayingCards === 'undefined') {
+        window.numPlayingCards = 0;
+      }
+
+      window.numPlayingCards++;
     },
 
     methods: {

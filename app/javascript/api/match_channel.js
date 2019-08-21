@@ -24,6 +24,10 @@ export default {
         } else {
           const callbackName = ('on_' + data.action).toCamelCase();
           gameTable[callbackName](data);
+
+          if (typeof window.numPlayingCards !== 'undefined') {
+            console.log('Created PlayingCards: ' + window.numPlayingCards);
+          }
         }
       },
 
