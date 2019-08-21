@@ -6,10 +6,10 @@
 
 ## What is this?
 
-Live Speed is an implementation of the card game "Speed". Speed is a card
-game, played with a standard 52-card deck. The main goal is to get rid of all
-of your own cards before your opponents. It's mainly a speed-based game, as
-opposed to a more strategy-focused card game.
+Live Speed is an implementation of the card game "Speed". Speed is a
+fast-paced card game, played with a standard 52-card deck. Its main goal is
+to play and get rid of all of your cards before your opponent does. It's a
+game more heavily focused on speed and reflexes, and less on strategy.
 
 Live Speed is meant to be played online with friends or strangers. You can
 also play against a CPU player. It was developed using the following stack:
@@ -24,7 +24,8 @@ also play against a CPU player. It was developed using the following stack:
 
 ### You can access and PLAY the game now on: http://livespeed.rooood.com
 
-(Please note that the gameplay is still buggy and slow).
+Please note that the gameplay is still buggy and slow, and the game is
+currently hosted on a free Heroku dyno, so it might take a while to boot.
 
 ## How to Play
 
