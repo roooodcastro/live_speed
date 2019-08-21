@@ -51,8 +51,6 @@ class CPUThread
               .where.not(id: cpu_players.keys)
     players.each(&method(:activate_player))
 
-    log("Found #{players.count} dangling CPU players")
-
     set_next_player_check
   end
 

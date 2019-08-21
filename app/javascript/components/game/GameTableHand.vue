@@ -33,7 +33,7 @@
 
 <script>
   import PlayingCard from 'components/game/PlayingCard';
-  import GameText        from 'components/game/ui/GameText';
+  import GameText    from 'components/game/ui/GameText';
 
   import Vue                                            from 'vue';
   import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
@@ -143,6 +143,10 @@
         const posX = 80 * mult;
         const posY = (75 * mult) - (cardIndex * CARD_VERTICAL_SEPARATION);
         return [posX, posY, ];
+      },
+
+      flipCards() {
+        this.handCards.forEach((card) => card.flipUp());
       },
     },
   };

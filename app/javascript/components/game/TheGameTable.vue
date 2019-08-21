@@ -25,7 +25,7 @@
         <GameTableHand
           v-for="(hand, index) in hands"
           :ref="'hand_' + hand.player.id"
-          :key="'hand_' + hand.player.id + roundData.timestamp"
+          :key="'hand_' + hand.player.id"
           :player-index="index"
           :player="hand.player"
           :initial-hand="hand.cards"
@@ -39,7 +39,6 @@
           :replacement-piles="replacementPiles"
           :can-use-replacement="canUseReplacement"
           :game-state="state"
-          :timestamp="roundData.timestamp"
           @replacementClick="onReplacementClick"
         />
 
@@ -208,6 +207,11 @@
 
       onPlayerReady(data) {
         this.updateData(data);
+        const hands = this.controller.allPlayerIds.map((playerId) => this.playerHandComponent(playerId));
+        if (this.controller.readyToPlay.allPlayersReady) {
+          hands.forEach((hand) => hand.flipCards());
+          this.centerPileComponent.flipCards();
+        }
       },
 
       onPlayerConnected(data) {
@@ -259,9 +263,9 @@
             .then(() => this.updateData(response, !ownPlay));
         } else {
           this.setPlayerSubmessage(Message.invalidPlay(), 2000);
-          this.dragHold = false;
           this.endDrag();
         }
+        this.dragHold = false;
       },
 
       onDragStart(ev) {

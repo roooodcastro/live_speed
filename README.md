@@ -6,36 +6,32 @@
 
 ## What is this?
 
-Speed is a card game, played with a standard 52-card deck. The main goal is to
-get rid of all of your own cards before your opponents. It's mainly a
-speed-based game, as opposed to a more strategy-focused card game.
+Live Speed is an implementation of the card game "Speed". Speed is a card
+game, played with a standard 52-card deck. The main goal is to get rid of all
+of your own cards before your opponents. It's mainly a speed-based game, as
+opposed to a more strategy-focused card game.
 
-Live Speed is my implementation of the game, meant to be played online with
-one or more friends or strangers. It was developed using the following stack:
+Live Speed is meant to be played online with friends or strangers. You can
+also play against a CPU player. It was developed using the following stack:
 
 * Ruby 2.6
-* Rails 5.2 w/ Webpacker
+* Rails 6.0 w/ Webpacker
 * VueJS 2.5
+* A few other JS libraries and their bazillion NPM dependencies
 * Websockets w/ ActionCable
 * PostgreSQL
 * Hosted on Heroku
 
-I've developed this as a learning project to learn more about ActionCable,
-Webpacker and more importantly, VueJS. The plan is to finish the game and grow
-it into a finished product that can actually be useful.
+### You can access and PLAY the game now on: http://livespeed.rooood.com
 
-There is **zero** automated testing being done on this project, and that is on
-purpose. I've noticed that writing tests would always slow me down on a
-personal project and eventually make me completely lose interest in it.
-
-You can access the game on: http://livespeed.rooood.com
+(Please note that the gameplay is still buggy and slow).
 
 ## How to Play
 
 You can currently play Live Speed matches with 2 players. Future expansion
-will allow up to 4 players to play a single game. A match consists of at least
-one round, and can be extended in increments of 2 rounds (so that the total
-number of rounds is always an odd number to avoid draws).
+may allow up to 4 players to play at the same time. A match consists of at
+least one round, and can be extended in increments of 2 rounds (so that the
+total number of rounds is always an odd number to avoid draws).
 
 Each round is played as follows:
 
@@ -150,10 +146,6 @@ Here's a quick overview of the project's progress:
 - [ ] Let players check their matches history
 - [ ] Implement public/private player profiles, show statistics on profile page
 
-### Admin site
-
-- [ ] Create Admin dashboard to better control and have some metrics on the project
-
 ### Deployment/misc
 
 - [x] Setup Heroku deploy
@@ -169,7 +161,7 @@ Here's a quick overview of the project's progress:
 
 ## Credits
 
-Author, Design & Implementation: Rodrigo Castro
+Author, Design & Implementation: Rodrigo Castro Azevedo
 
 Playing Cards SVGs: Adrian Kennard from www.me.uk/cards
 

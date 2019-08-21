@@ -82,6 +82,10 @@ export default class {
     return !!this.data;
   }
 
+  get allPlayerIds() {
+    return this.hands.map((hand) => hand.player.id);
+  }
+
   set state(newState) {
     return new Promise(resolve => {
       const oldState = this._state;
@@ -101,7 +105,6 @@ export default class {
     this.readyToPlay       = new Readiness(this.players, 'ready_to_play');
     this.readyToReplace    = new Readiness(this.players, 'ready_replacement');
     this.matchId           = roundData.match_id;
-    this.lastTimestamp     = roundData.timestamp;
   }
 
   playerHand(playerId) {

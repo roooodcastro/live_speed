@@ -3,7 +3,7 @@
     <PlayingCard
       v-for="(card, index) in centerPiles[0]"
       :ref="'center_left_' + index"
-      :key="'center_left_' + index + timestamp"
+      :key="'center_left_' + index"
       :suit="card.s"
       :rank="card.r"
       :initial-position="leftCenterPilePosition(index)"
@@ -13,7 +13,7 @@
     <PlayingCard
       v-for="(card, index) in centerPiles[1]"
       :ref="'center_right_' + index"
-      :key="'center_right_' + index + timestamp"
+      :key="'center_right_' + index"
       :suit="card.s"
       :rank="card.r"
       :initial-position="rightCenterPilePosition(index)"
@@ -23,7 +23,7 @@
     <PlayingCard
       v-for="(card, index) in replacementPiles[0]"
       :ref="'replacement_left_' + index"
-      :key="'replacement_left_' + index + timestamp"
+      :key="'replacement_left_' + index"
       :rank="card.r"
       :suit="card.s"
       :initial-position="[-80, -cardYOffset(index)]"
@@ -31,7 +31,7 @@
     <PlayingCard
       v-for="(card, index) in replacementPiles[1]"
       :ref="'replacement_right_' + index"
-      :key="'replacement_right_' + index + timestamp"
+      :key="'replacement_right_' + index"
       :is-featured="index === 0 && canUseReplacement"
       :is-active="isReplacementCardActive(index)"
       :rank="card.r"
@@ -67,7 +67,6 @@
       replacementPiles:  { type: Array, required: true, },
       canUseReplacement: { type: Boolean, required: true, },
       gameState:         { type: String, required: true, },
-      timestamp:         { type: Number, default: 0, },
     },
 
     computed: {
@@ -179,6 +178,10 @@
           // Start the dealer
           cardInfo.reduce(cardPlacement.dealer, Promise.resolve()).then(() => resolve());
         });
+      },
+
+      flipCards() {
+        this.allCenterCards.forEach((card) => card.flipUp());
       },
     },
   };

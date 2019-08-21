@@ -46,6 +46,7 @@
       numRoundsOptions() {
         const descI18nKey = 'activerecord.attributes.match.num_rounds_description';
         return [
+          ['1', this.t(descI18nKey, { rounds: 1, }), ],
           ['3', this.t(descI18nKey, { rounds: 3, }), ],
           ['5', this.t(descI18nKey, { rounds: 5, }), ],
           ['7', this.t(descI18nKey, { rounds: 7, }), ],
