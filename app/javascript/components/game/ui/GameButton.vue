@@ -16,7 +16,7 @@
     props: {
       font: { type: String, default: 'CardChars', },
       pos:  { type: Array, required: true, },
-      size: { type: Number, default: 4, },
+      size: { type: Number, default: 3, },
     },
 
     computed: {

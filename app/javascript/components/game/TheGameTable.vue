@@ -44,8 +44,8 @@
 
         <GameText
           ref="playerMessage"
-          :pos="[0, -35]"
-          :size="6"
+          :pos="[0, -32]"
+          :size="5"
           :animated="state === 'win'"
           font="Barbaro"
         >
@@ -54,8 +54,8 @@
 
         <GameText
           ref="submessage"
-          :pos="[0, 35]"
-          :size="6"
+          :pos="[0, 32]"
+          :size="5"
           :fade-in="playerSubMessageTimer"
           font="Barbaro"
         >
@@ -170,7 +170,7 @@
       },
 
       canUseReplacement() {
-        return !!this.roundData.can_use_replacement && !this.controller.playerReadyToReplace;
+        return !!this.roundData.can_use_replacement && !this.controller.playerReadyToReplace && this.state === 'game';
       },
 
       showReadyButton() {

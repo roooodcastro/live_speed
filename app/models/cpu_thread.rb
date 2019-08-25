@@ -47,7 +47,10 @@ class CPUThread
   def find_dangling_cpu_players
     players = Player::CPU
               .joins(:matches)
-              .where(matches: { id: Round.created_or_playing.with_cpu_players.pluck(:match_id) })
+              .where(matches: {
+                       id:        Round.created_or_playing.with_cpu_players.pluck(:match_id),
+                       winner_id: nil
+                     })
               .where.not(id: cpu_players.keys)
     players.each(&method(:activate_player))
 
@@ -57,16 +60,17 @@ class CPUThread
   def activate_player(player)
     # A CPU player will only ever play a single game and be discarded afterwards (sorry, CPU)
     round = player.matches.first.current_round(false)
+    return if round.blank? || round.finished?
+
     cpu_players[player.id] = { player: player, round: round, next_move_time: next_move_time }
-    log("Add #{player.name} to pool, on round #{round&.id || '<no round>'}")
-    return unless round
+    log("Add #{player.name} to pool, on round #{round.id}")
 
     player.play!(round)
   end
 
   def disconnect_all_cpu_players!
     cpu_players.values.each do |cpu_player|
-      cpu_player[:round].mark_player_connected(cpu_player[:player].id, false)
+      cpu_player[:round]&.mark_player_connected(cpu_player[:player].id, false)
     end
   end
 

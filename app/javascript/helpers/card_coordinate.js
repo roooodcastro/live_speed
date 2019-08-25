@@ -12,11 +12,11 @@ export default class CardCoordinate extends GridCoordinate {
     const clientH = screen.clientHeight();
     if (clientW > clientH) {
       const smallerSize  = CARD_WIDTH;
-      const targetHeight = (100 * CardCoordinate.coordSize()) / 5;
+      const targetHeight = (100 * CardCoordinate.coordSize()) / 4;
       return targetHeight / smallerSize;
     } else {
       const smallerSize = CARD_HEIGHT;
-      const targetWidth = (100 * CardCoordinate.coordSize()) / 4;
+      const targetWidth = (100 * CardCoordinate.coordSize()) / 2.5;
       return targetWidth / smallerSize;
     }
   }

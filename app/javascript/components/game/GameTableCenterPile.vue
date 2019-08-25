@@ -6,6 +6,7 @@
       :key="'center_left_' + index"
       :suit="card.s"
       :rank="card.r"
+      :order="card.order"
       :initial-position="leftCenterPilePosition(index)"
       :initial-rotation="centerPileRot(index)"
       :initial-flipped="hideCards"
@@ -16,6 +17,7 @@
       :key="'center_right_' + index"
       :suit="card.s"
       :rank="card.r"
+      :order="card.order"
       :initial-position="rightCenterPilePosition(index)"
       :initial-rotation="centerPileRot(index)"
       :initial-flipped="hideCards"
@@ -26,6 +28,7 @@
       :key="'replacement_left_' + index"
       :rank="card.r"
       :suit="card.s"
+      :order="card.order"
       :initial-position="[-80, -cardYOffset(index)]"
     />
     <PlayingCard
@@ -36,13 +39,14 @@
       :is-active="isReplacementCardActive(index)"
       :rank="card.r"
       :suit="card.s"
+      :order="card.order"
       :initial-position="[80, -cardYOffset(index)]"
       @click="onReplacementClick"
     />
 
     <GameArrow
       v-show="canUseReplacement"
-      :pos="[80, 20]"
+      :pos="[80, 25]"
       direction="up"
     />
   </div>
@@ -112,8 +116,19 @@
       },
 
       place(cardData, pileIndex) {
+        const topCardOrder = this.topCenterCardOrder(pileIndex);
+        cardData.order = topCardOrder + 1;
         const newPile = this.centerPiles[pileIndex].concat([cardData, ]);
         this.centerPiles.splice(pileIndex, 1, newPile);
+      },
+
+      topCenterCardOrder(pileIndex) {
+        const pileName = pileIndex === 0 ? 'left' : 'right';
+        const topCard = Object.keys(this.$refs)
+          .filter(key => key.includes('center_' + pileName))
+          .map((key) => this.$refs[key][0])
+          .slice(-1);
+        return topCard.order || 1;
       },
 
       onReplacementClick() {
@@ -138,27 +153,41 @@
 
       pullFromReplacements() {
         return new Promise((resolve) => {
-          const repIndex  = this.replacementPiles[0].length - 1;
-          const leftCard  = this.$refs['replacement_left_' + repIndex][0];
-          const rightCard = this.$refs['replacement_right_' + repIndex][0];
-          leftCard.setOrder(100);
-          leftCard.move(this.leftCenterPilePosition(this.centerPiles[0].length));
-          leftCard.flipUp();
-          rightCard.setOrder(100);
-          rightCard.move(this.rightCenterPilePosition(this.centerPiles[1].length));
-          rightCard.flipUp();
+          const leftRepIndex  = this.replacementPiles[0].length - 1;
+          const rightRepIndex  = this.replacementPiles[1].length - 1;
+          const leftCard  = this.$refs['replacement_left_' + leftRepIndex][0];
+          const rightCard = this.$refs['replacement_right_' + rightRepIndex][0];
+          const leftOrder = this.topCenterCardOrder(0) + 1;
+          const rightOrder = this.topCenterCardOrder(1) + 1;
+          if (this.replacementPiles[0].length > 1 && this.replacementPiles[1].length > 1) {
+            leftCard.move(this.leftCenterPilePosition(this.centerPiles[0].length));
+            leftCard.setOrder(leftOrder);
+            leftCard.flipUp();
+            rightCard.move(this.rightCenterPilePosition(this.centerPiles[1].length));
+            rightCard.setOrder(rightOrder);
+            rightCard.flipUp();
+          }
           setTimeout(() => {
-            if (this.replacementPiles[0].length > 1) {
+            if (this.replacementPiles[0].length > 1 && this.replacementPiles[1].length > 1) {
               resolve();
             } else {
-              this.reshuffleCenterPilesIntoReplacement(leftCard, rightCard)
-                .then(() => resolve());
+              this.reshuffleCenterPilesIntoReplacement()
+                .then(() => {
+                  // Return the top cards to the correct position (remove the vertical offset)
+                  leftCard.move(this.leftCenterPilePosition(0));
+                  leftCard.setOrder(0);
+                  leftCard.flipUp();
+                  rightCard.move(this.rightCenterPilePosition(0));
+                  rightCard.setOrder(0);
+                  rightCard.flipUp();
+                  resolve();
+                });
             }
           }, CARD_MOVE_DELAY);
         });
       },
 
-      reshuffleCenterPilesIntoReplacement(leftCard, rightCard) {
+      reshuffleCenterPilesIntoReplacement() {
         return new Promise(resolve => {
           // Define properties for the card dealer
           const cardInfo = this.allCenterCards.map((card, index) => {
@@ -170,10 +199,6 @@
               flipDown: true,
             };
           });
-
-          // Return the top cards to the correct position (remove the vertical offset)
-          leftCard.move(this.leftCenterPilePosition(0));
-          rightCard.move(this.rightCenterPilePosition(0));
 
           // Start the dealer
           cardInfo.reduce(cardPlacement.dealer, Promise.resolve()).then(() => resolve());

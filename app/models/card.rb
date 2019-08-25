@@ -43,8 +43,8 @@ class Card
     code.chr
   end
 
-  def to_h
-    { s: suit, r: rank }
+  def to_h(order = 1)
+    { s: suit, r: rank, order: order }
   end
 
   def to_i

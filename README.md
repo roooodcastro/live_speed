@@ -116,7 +116,7 @@ Here's a quick overview of the project's progress:
 - [ ] Implement demo version of game to display on landing page
 - [ ] Windows Solitaire card dropping animation
 - [ ] Optimize for mobile gameplay
-- [ ] Replacement cards sometimes are placed behind the top center pile cards after reshuffle
+- [x] Replacement cards sometimes are placed behind the top center pile cards after reshuffle
 - [ ] Eliminate lag after playing a card (assume it's valid until API says it isn't)
 - [x] Persist card being dragged after Vue update
 - [ ] Animate opponent card play

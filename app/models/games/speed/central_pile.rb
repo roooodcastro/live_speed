@@ -46,8 +46,8 @@ module Games
       def to_h
         {
           piles: [
-            piles[0].map(&:to_h),
-            piles[1].map(&:to_h)
+            piles[0].map.with_index { |card, index| card.to_h(index + 1) },
+            piles[1].map.with_index { |card, index| card.to_h(index + 1) }
           ]
         }
       end

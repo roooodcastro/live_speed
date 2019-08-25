@@ -23,7 +23,9 @@
     />
     <GameText
       :pos="playerNamePos"
-      :size="4"
+      :size="3.5"
+      :full-size="true"
+      :text-align="playerNameAlign"
       font="Barbaro"
     >
       {{ player.name }}
@@ -85,7 +87,11 @@
 
       playerNamePos() {
         const mult = (this.playerIndex === 0) ? 1 : -1;
-        return [80 * mult, 53 * mult, ];
+        return [0, 49.5 * mult, ];
+      },
+
+      playerNameAlign() {
+        return this.playerIndex === 0 ? 'right' : 'left';
       },
 
       hideCards() {

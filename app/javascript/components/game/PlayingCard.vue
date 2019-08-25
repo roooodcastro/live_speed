@@ -31,7 +31,7 @@
         dragPosition: new CardCoordinate(0, 0),
         flipped:      this.initialFlipped,
         isDragging:   false,
-        order:        this.initialOrder,
+        order:        this.initialOrder || 1,
         position:     new CardCoordinate(this.initialPosition),
         rotation:     this.initialRotation,
       };

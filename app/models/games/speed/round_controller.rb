@@ -122,7 +122,12 @@ module Games
       end
 
       def refill_replacement_piles
-        new_replacement_cards = central_pile.remove_all_but_top_cards.map(&:shuffle)
+        new_replacement_cards = central_pile
+                                .remove_all_but_top_cards
+                                .flatten
+                                .shuffle
+                                .in_groups(2)
+                                .map(&:compact)
         new_replacement_cards.each_with_index { |new_cards, index| replacement_piles[index] += new_cards }
       end
     end

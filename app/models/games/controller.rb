@@ -24,13 +24,13 @@ module Games
     private
 
     def array_to_h(array)
-      array.map do |element|
+      array.map.with_index do |element, index|
         next array_to_h(element) if element.is_a?(Array)
 
         unsupported = !element.respond_to?(:to_h)
         raise ArgumentError, "#{element.class.name} cannot be serialized as it does not implement #to_h" if unsupported
 
-        element.to_h
+        element.is_a?(::Card) ? element.to_h(index) : element.to_h
       end
     end
   end

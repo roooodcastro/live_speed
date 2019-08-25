@@ -14,11 +14,13 @@
 
   export default {
     props: {
-      animated: { type: Boolean, default: false, },
-      font:     { type: String, default: 'CardChars', },
-      pos:      { type: Array, required: true, },
-      size:     { type: Number, default: 2, },
-      fadeIn:   { type: Number, default: 0, },
+      animated:  { type: Boolean, default: false, },
+      font:      { type: String, default: 'CardChars', },
+      pos:       { type: Array, required: true, },
+      size:      { type: Number, default: 2, },
+      fadeIn:    { type: Number, default: 0, },
+      fullSize:  { type: Boolean, default: false, },
+      textAlign: { type: String, default: 'center', },
     },
 
     data() {
@@ -43,6 +45,8 @@
           transform:  this.transform,
           fontFamily: this.font + ', Helvetica, Arial, sans-serif',
           fontSize:   this.fontSize,
+          textAlign:  this.textAlign,
+          width:      this.fullSize ? '100%' : 'inherit',
         };
       },
     },
@@ -86,8 +90,8 @@
   }
 
   .GameText--animated {
-    animation: GameText--animation 0.5s infinite ease-in-out,
-               GameText--rainbow 5s infinite linear both;
+    animation:   GameText--animation 0.5s infinite ease-in-out,
+                 GameText--rainbow 5s infinite linear both;
     text-shadow: 0 0 10px $brand-black;
   }
 
