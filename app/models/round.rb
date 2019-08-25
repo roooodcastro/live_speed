@@ -31,11 +31,13 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
   scope :with_cpu_players, -> { joins(match: :players).where(players: { type: Player::CPU.name }) }
 
   def setup_round!
-    update!(data: setup_class.new(players, rules).to_h.merge(status: status))
+    update!(data: setup_class.new(players, rules).to_h.merge(status: status, match: match.rounds_info))
   end
 
   def play_card!(args)
     thread_safe do
+      return if paused?
+
       played_card = round_controller.play_card(args[:player_id], args[:card_index].to_i, args[:pile_index].to_i)
       update_round! if played_card.present?
       played_card
@@ -44,6 +46,8 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def use_replacement_pile!(player_id)
     thread_safe do
+      return false if paused?
+
       round_controller.mark_player_replacement_ready(player_id)
       players_ready = round_controller.players_ready_for_replacement?
       update_round!
@@ -66,7 +70,16 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
   def mark_player_connected(player_id, connected)
     thread_safe do
       round_controller.mark_player_connected(player_id, connected)
+      check_for_pause
       update_round!
+    end
+  end
+
+  def check_for_pause
+    if playing?
+      self.status = STATUS_PAUSED unless round_controller.players_connected?
+    elsif paused?
+      self.status = STATUS_PLAYING if round_controller.players_connected?
     end
   end
 
@@ -86,6 +99,10 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
     status == STATUS_PLAYING
   end
 
+  def paused?
+    status == STATUS_PAUSED
+  end
+
   def reload
     instance_variable_set(:@round_controller, nil)
     super
@@ -95,7 +112,7 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
 
   def update_round!
     thread_safe do
-      self.data = round_controller.to_h.merge(status: status)
+      self.data = round_controller.to_h.merge(status: status, match: match.rounds_info)
       check_for_winner
       return update_to_cache! if USE_CACHE
 
@@ -129,7 +146,7 @@ class Round < ApplicationRecord # rubocop:disable Metrics/ClassLength
   end
 
   def update_to_cache!
-    Rails.cache.write("round_data_#{id}", round_controller.to_h.merge(status: status))
+    Rails.cache.write("round_data_#{id}", round_controller.to_h.merge(status: status, match: match.rounds_info))
     true
   end
 

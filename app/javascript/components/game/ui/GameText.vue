@@ -83,6 +83,8 @@
     text-shadow: 1px 1px 2px $brand-black;
     transition:  all 0.5s;
     user-select: none;
+
+    svg { margin: 0 0.25rem; }
   }
 
   .GameText--invisible {

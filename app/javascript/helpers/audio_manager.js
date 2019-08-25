@@ -2,6 +2,7 @@ import cardPlace1 from '../audios/cardPlace1.wav';
 import cardPlace2 from '../audios/cardPlace2.wav';
 import cardPlace3 from '../audios/cardPlace3.wav';
 import cardPlace4 from '../audios/cardPlace4.wav';
+import Cookies from 'js-cookie';
 
 const AUDIOS = [
   cardPlace1,
@@ -12,9 +13,12 @@ const AUDIOS = [
 
 export default {
   play(audioName, volume = 1.0) {
-    const audio  = new Audio(audioName);
-    audio.volume = volume;
-    return audio.play();
+    const gameMuted = Cookies.get('volumeMuted') === 'true';
+    if (!gameMuted) {
+      const audio  = new Audio(audioName);
+      audio.volume = volume;
+      return audio.play();
+    }
   },
 
   playDealCard() {

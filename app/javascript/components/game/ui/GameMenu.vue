@@ -5,18 +5,19 @@
       @click="toggleMenu"
     />
 
-    <div class="GameMenu__container">
-      <GameMenuButton
-        :menu-opened="visible"
-        @click="toggleMenu"
-      />
+    <GameMenuButton
+      :menu-opened="visible"
+      @click="toggleMenu"
+    />
 
+    <div class="GameMenu__container">
       <div
         class="GameMenu"
         :class="{ active: visible }"
       >
-        <GameMenuItem :label="t('game.menu.volume')" />
+        <GameMenuItemVolume />
         <GameMenuItem
+          icon-name="door-open"
           :label="t('game.menu.quit')"
           @click="quitClick"
         />
@@ -26,14 +27,16 @@
 </template>
 
 <script>
-  import GameMenuButton from 'components/game/ui/GameMenuButton';
-  import GameMenuItem   from 'components/game/ui/GameMenuItem';
-  import GameOverlay    from 'components/game/ui/GameOverlay';
+  import GameMenuButton     from 'components/game/ui/GameMenuButton';
+  import GameMenuItem       from 'components/game/ui/GameMenuItem';
+  import GameMenuItemVolume from 'components/game/ui/GameMenuItemVolume';
+  import GameOverlay        from 'components/game/ui/GameOverlay';
 
   export default {
     components: {
       GameMenuButton,
       GameMenuItem,
+      GameMenuItemVolume,
       GameOverlay,
     },
 

@@ -28,7 +28,24 @@
       :text-align="playerNameAlign"
       font="Barbaro"
     >
+      <template v-if="playerIndex === 0">
+        <FontAwesomeIcon
+          v-for="index in roundWins"
+
+          :key="index"
+          icon="trophy"
+        />
+      </template>
+
       {{ player.name }}
+
+      <template v-if="playerIndex !== 0">
+        <FontAwesomeIcon
+          v-for="index in roundWins"
+          :key="index"
+          icon="trophy"
+        />
+      </template>
     </GameText>
   </div>
 </template>
@@ -38,12 +55,14 @@
   import GameText    from 'components/game/ui/GameText';
 
   import Vue                                            from 'vue';
+  import { FontAwesomeIcon, }                           from '@fortawesome/vue-fontawesome';
   import { CARD_MOVE_DELAY, CARD_VERTICAL_SEPARATION, } from 'helpers/constants';
 
   export default {
     components: {
       PlayingCard,
       GameText,
+      FontAwesomeIcon,
     },
 
     props: {
@@ -52,6 +71,7 @@
       initialDraw: { type: Array, required: true, },
       player:      { type: Object, required: true, },
       gameState:   { type: String, required: true, },
+      matchInfo:   { type: Object, default: null, },
     },
 
     data() {
@@ -96,6 +116,14 @@
 
       hideCards() {
         return ['loading', 'setup', ].includes(this.gameState);
+      },
+
+      roundWins() {
+        if (this.matchInfo) {
+          return this.matchInfo.wins[this.player.id];
+        } else {
+          return 0;
+        }
       },
     },
 

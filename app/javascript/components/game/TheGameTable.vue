@@ -31,6 +31,7 @@
           :initial-hand="hand.cards"
           :initial-draw="hand.draw_pile"
           :game-state="state"
+          :match-info="roundData['match']"
         />
 
         <GameTableCenterPile
@@ -60,6 +61,16 @@
           font="Barbaro"
         >
           {{ playerSubMessage }}
+        </GameText>
+
+        <GameText
+          :pos="[0, 49.5]"
+          :size="3.5"
+          :full-size="true"
+          text-align="left"
+          font="Barbaro"
+        >
+          {{ 'game.info' | i18n(roundInfo) }}
         </GameText>
       </div>
 
@@ -107,9 +118,10 @@
   import GameTableCardSlots  from 'components/game/GameTableCardSlots';
   import PlayingCardDeck     from 'components/game/PlayingCardDeck';
 
-  import apiClient from 'api/match_channel';
-  import Round     from 'games/speed/round';
-  import Message   from 'games/speed/message';
+  import apiClient    from 'api/match_channel';
+  import Round        from 'games/speed/round';
+  import Message      from 'games/speed/message';
+  import AudioManager from 'helpers/audio_manager';
 
   export default {
     components: {
@@ -175,6 +187,17 @@
 
       showReadyButton() {
         return this.state === 'setup' && this.playedDealAnimation && !this.controller.playerReadyToPlay;
+      },
+
+      roundInfo() {
+        if (this.roundData.match) {
+          return {
+            rounds: this.roundData.match.rounds,
+            round:  this.roundData.match.round,
+          };
+        } else {
+          return { rounds: 0, round: 0, };
+        }
       },
     },
 
@@ -253,6 +276,7 @@
 
       onPlayResponse(response) {
         if (response.success) {
+          AudioManager.playDealCard();
           const ownPlay             = response.player_id === this.playerId;
           const cardIndex           = response.card_index;
           const playerHandComponent = this.playerHandComponent(response.player_id);

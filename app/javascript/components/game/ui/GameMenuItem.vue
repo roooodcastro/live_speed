@@ -4,17 +4,23 @@
     @click="onClick"
   >
     <span class="game-menu-icon">
-      {{ icon }}
+      <FontAwesomeIcon :icon="iconName" />
     </span>
     {{ label }}
   </button>
 </template>
 
 <script>
+  import { FontAwesomeIcon, } from '@fortawesome/vue-fontawesome';
+
   export default {
+    components: {
+      FontAwesomeIcon,
+    },
+
     props: {
-      label: { type: String, required: true, },
-      icon:  { type: String, default: '×', },
+      label:    { type: String, required: true, },
+      iconName: { type: String, default: '', },
     },
 
     methods: {

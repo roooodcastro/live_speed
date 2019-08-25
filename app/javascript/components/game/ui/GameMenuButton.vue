@@ -1,15 +1,23 @@
 <template>
   <div
-    class="game-menu-button"
+    class="GameMenuButton"
     :class="{ active: menuOpened }"
+    :style="style()"
     @click="onClick"
   >
-    . . .
+    <FontAwesomeIcon icon="cogs" />
   </div>
 </template>
 
 <script>
+  import { FontAwesomeIcon, } from '@fortawesome/vue-fontawesome';
+  import CardCoordinate      from 'helpers/card_coordinate';
+
   export default {
+    components: {
+      FontAwesomeIcon,
+    },
+
     props: {
       menuOpened: { type: Boolean, required: true, },
     },
@@ -18,30 +26,36 @@
       onClick(ev) {
         this.$emit('click', ev);
       },
+
+      style() {
+        const coordinates  = new CardCoordinate([-80, 0, ]);
+        const posTransform = 'translate(' + coordinates.toString + ')';
+        const fontSize = (7 * CardCoordinate.cardScale()) + 'rem';
+
+        return { transform: posTransform, fontSize: fontSize, };
+      },
     },
   };
 </script>
 
 <style lang="scss">
-  .game-menu-button {
-    background-color: #CCD0CD;
-    border-radius:    1rem 1rem 0 0;
-    box-shadow:       inset 0 -2px 10px #344339;
-    color:            white;
-    font-size:        2rem;
-    height:           1rem;
-    left:             calc(50% - 5rem);
-    line-height:      0;
-    position:         relative;
-    text-align:       center;
-    text-shadow:      1px 1px 2px #344339;
-    transition:       all 0.3s;
-    width:            10rem;
-    z-index:          1002;
+  @import 'stylesheets/_variables';
+
+  .GameMenuButton {
+    color:      $brand-alt;
+    font-size:  2rem;
+    padding:    0.5rem;
+    position:   absolute;
+    text-align: center;
+    transition: all 0.3s;
+    z-index:    1002;
 
     &:hover {
-      cursor: pointer;
-      height: 1.5rem;
+      background-color: $brand-alt-1;
+      border-radius:    4rem;
+      color:            $brand-alt-3;
+      cursor:           pointer;
+      padding:          0.5rem;
     }
 
     &.active {

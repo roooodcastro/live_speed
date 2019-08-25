@@ -44,6 +44,7 @@ export default {
   gameMessage(round, playerId) {
     const vars = this.gameStateVars(round, playerId);
 
+    if (round.status === 2) return I18n.t('game.message.paused.waiting');
     if (!vars.canPlayReplacement) return '';
     if (!vars.ready) return I18n.t('game.message.play.no_plays');
     if (vars.opponentsReady) return I18n.t('game.message.play.drawing');

@@ -97,6 +97,17 @@ class Match < ApplicationRecord
            players: num_players, rounds: num_rounds, winner: winner&.name)
   end
 
+  def rounds_info
+    wins_hash = players.each_with_object({}) do |player, wins|
+      wins[player.id] = rounds.count { |round| round.winner_id == player.id }
+    end
+    {
+      rounds: num_rounds,
+      round:  rounds.count,
+      wins:   wins_hash
+    }
+  end
+
   def rules
     []
   end

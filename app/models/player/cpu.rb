@@ -12,7 +12,7 @@ class Player
       own_name
     end
 
-    def play!(round) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+    def play!(round) # rubocop:disable Metrics/AbcSize
       Round.cpu_mutex.synchronize do
         @current_round = round.reload
         controller     = current_round.round_controller
@@ -21,7 +21,7 @@ class Player
         return disconnect if controller.finished?
         return player_ready unless controller.player_ready?(id)
         return play_replacement if controller.can_use_replacement_piles?
-        return unless controller.players_ready? && controller.players_connected?
+        return unless current_round.playing?
 
         play_card
       end

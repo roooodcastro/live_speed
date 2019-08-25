@@ -105,17 +105,17 @@ Here's a quick overview of the project's progress:
 - [x] Redo card positioning to make it work for mobile
 - [x] Fix visual bugs
 - [x] Fix game ready bug where the cards don't flip when players are ready
-- [ ] Finish sound effects
-- [ ] Implement controls for disabling sound effects
-- [ ] Implement a HUD to show current round, current score, etc
+- [x] Finish sound effects
+- [x] Implement controls for disabling sound effects
+- [x] Implement a HUD to show current round, current score, etc
 - [ ] Add help timer to warn players of possible plays when they stay a long time without any moves
 - [x] Implement AI to serve as a tutorial
-- [ ] Pause game when player disconnects, give him a time limit to rejoin
-- [ ] End abandoned match by W.O., giving victory to remaining player
+- [x] Pause game when player disconnects
+- [ ] End abandoned match by W.O. when player does not reconnect after a while
 - [x] Only reveal cards once both players are ready
 - [ ] Implement demo version of game to display on landing page
 - [ ] Windows Solitaire card dropping animation
-- [ ] Optimize for mobile gameplay
+- [x] Optimize for mobile gameplay
 - [x] Replacement cards sometimes are placed behind the top center pile cards after reshuffle
 - [ ] Eliminate lag after playing a card (assume it's valid until API says it isn't)
 - [x] Persist card being dragged after Vue update

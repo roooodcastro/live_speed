@@ -3,6 +3,7 @@ en:
     loading: 'Loading…'
     ready:   'READY'
     error:   "We're sorry, but an error has occurred. Please reload the game and try again. Error message: %{error}"
+    info:    "Best of %{rounds} | Round %{round}"
 
     message:
       setup:
@@ -20,7 +21,7 @@ en:
         connected:    "%{name} has just connected!"
         disconnected: "%{name} has disconnected!"
       paused:
-        waiting: 'The game is paused because your opponent has disconnected.'
+        waiting: 'PAUSED! Waiting for your opponent to reconnect!'
       finish:
         win:       'Congratulations, you have won this round!'
         lose:      'Sorry, You have lost this round...'
@@ -29,7 +30,8 @@ en:
         continue:  'Continue'
 
     menu:
-      quit:         'Exit Game'
-      confirm_quit: 'Are you sure? By exiting, this round will be forfeit and your opponent will be given a win!'
-      volume:       'Volume'
-      next_round:   'Play Next Round!'
+      quit:          'Exit Game'
+      confirm_quit:  'Are you sure? By exiting, this round will be forfeit and your opponent will be given a win!'
+      volume_mute:   'Mute Game'
+      volume_unmute: 'Unmute Game'
+      next_round:    'Play Next Round!'
