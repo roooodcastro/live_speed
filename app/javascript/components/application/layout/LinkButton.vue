@@ -16,16 +16,16 @@
       {{ btnLabel }}
     </button>
   </RailsForm>
-  <button
+  <a
     v-else
     :id="id"
     class="btn"
     :class="variant"
+    :href="href"
     :disabled="disabled"
-    @click="click"
   >
     {{ btnLabel }}
-  </button>
+  </a>
 </template>
 
 <script>

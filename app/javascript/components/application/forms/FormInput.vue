@@ -175,4 +175,8 @@
 
     &.loading { color: $text-color-faded; }
   }
+
+  @media (max-width: 575px) {
+    .FormInput label { display: none; }
+  }
 </style>

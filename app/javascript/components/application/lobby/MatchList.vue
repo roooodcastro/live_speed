@@ -80,6 +80,8 @@
         const started = match.current_round > 0;
         if (started) {
           return this.t('lobby.show.match_started', { round: match.current_round, total_rounds: match.num_rounds, });
+        } else if (match.finished) {
+          return this.t('lobby.show.match_finished');
         } else {
           return this.t('lobby.show.match_not_started');
         }

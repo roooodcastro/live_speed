@@ -21,15 +21,16 @@ en:
 
   lobby:
     show:
-      title:                  'Lobby'
-      matches_waiting:        'Matches waiting for additional players:'
-      no_matches_waiting:     'There are no open matches waiting for additional players!'
-      new_lobby_btn:          'Start a new match'
-      play_cpu_btn:           'Play against a CPU'
-      join_btn:               'Join'
-      join_btn_wait:          'Joining...'
-      match_not_started:      'Waiting for players'
-      match_started:          "On round %{round}/%{total_rounds}"
+      title:              'Lobby'
+      matches_waiting:    'Matches waiting for additional players:'
+      no_matches_waiting: 'There are no open matches waiting for additional players!'
+      new_lobby_btn:      'Start a new match'
+      play_cpu_btn:       'Play against a CPU'
+      join_btn:           'Join'
+      join_btn_wait:      'Joining...'
+      match_not_started:  'Waiting for players'
+      match_started:      "On round %{round}/%{total_rounds}"
+      match_finished:     'Finished!'
 
   matches:
     index:
@@ -89,7 +90,7 @@ en:
       first_timer:     'First timer?'
       forgot_password: 'Forgot your password?'
       new_player_btn:  'Start Playing Now'
-      submit:          'Login to my Account'
+      submit:          'Log in'
       signup_btn:      'Sign Up For an Account'
 
   users:

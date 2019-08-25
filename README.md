@@ -130,7 +130,7 @@ Here's a quick overview of the project's progress:
 - [x] Create landing page
 - [ ] Add Google Analytics or similar user tracking service
 - [ ] Implement GDPR
-- [ ] Optimize for mobile
+- [x] Optimize for mobile
 
 ### Main site
 
@@ -145,7 +145,8 @@ Here's a quick overview of the project's progress:
 - [ ] Add How to Play page with good instructions
 - [ ] Let players with no account create an account with their existing Player
 - [ ] Let players check their matches history
-- [ ] Implement public/private player profiles, show statistics on profile page
+- [ ] Let players view and manage their accounts
+- [ ] Show player statistics on profile page
 
 ### Deployment/misc
 

@@ -4,7 +4,7 @@
     :class="cssClass"
   >
     <div>
-      <strong>{{ title }}:</strong>
+      <strong v-if="title">{{ title }}:</strong>
       {{ content }}
     </div>
     <CloseButton

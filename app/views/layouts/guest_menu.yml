@@ -1,3 +1,2 @@
+left:
 right:
-  - href: <%= new_sessions_path %>
-    label:  'Sign in'

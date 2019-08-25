@@ -80,12 +80,4 @@
     margin-left: auto;
     height: 100%;
   }
-
-  @media (max-width: 575px) {
-    .TheMenuBar__logo {
-      span {
-        display: none;
-      }
-    }
-  }
 </style>

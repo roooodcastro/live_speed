@@ -98,3 +98,37 @@
 .signup-alternatives-box {
   width: 20rem;
 }
+
+.btn-signup {
+  display: block;
+  margin: 0;
+  width: 100%;
+}
+
+.btn-signup + .btn-signup {
+  margin: 0.5rem 0 0 0;
+}
+
+@media (max-width: 767px) {
+  .signup-card {
+    left: 1rem;
+    min-width: 16rem;
+  }
+
+  .signup-brand-info {
+    margin-left: 1rem;
+  }
+
+  .signup-alternatives-box {
+    width: auto;
+  }
+}
+
+@media (max-width: 575px) {
+  .signup-card {
+    left: 2rem;
+    width: calc(100% - 4rem);
+  }
+
+  .signup-brand-info { display: none; }
+}

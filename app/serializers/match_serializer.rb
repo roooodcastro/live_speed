@@ -3,7 +3,7 @@
 class MatchSerializer < ApplicationSerializer
   include Rails.application.routes.url_helpers
 
-  def as_json # rubocop:disable Metrics/AbcSize
+  def as_json # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     {
       id:                  record.id,
       description:         record.description,
@@ -11,7 +11,9 @@ class MatchSerializer < ApplicationSerializer
       num_rounds:          record.num_rounds,
       num_total_players:   record.num_players,
       num_current_players: record.players.count,
-      current_round:       record.rounds.count
+      current_round:       record.rounds.count,
+      winner_id:           record.winner_id,
+      finished:            record.winner_id.present?
     }
   end
 end

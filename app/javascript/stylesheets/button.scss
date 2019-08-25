@@ -71,3 +71,7 @@
     margin-top:  0.5rem;
   }
 }
+
+@media (min-width: 576px) {
+  .btn-mobile { display: none !important; }
+}

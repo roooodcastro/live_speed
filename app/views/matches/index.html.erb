@@ -1,9 +1,3 @@
 <%= title t('.title') %>
 
-<%= link_to t('.new_match_btn'), new_match_path, class: 'btn' %>
-
-<ul>
-  <% @matches.each do |match| %>
-    <li><%= link_to match.description, match %></li>
-  <% end %>
-</ul>
+<%= vue_component('MatchList', props: { ':matches': @matches.to_json }) %>
