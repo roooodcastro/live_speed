@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import CardCoordinate              from 'helpers/card_coordinate';
+  import CardCoordinate               from 'helpers/card_coordinate';
   import { CARD_WIDTH, CARD_HEIGHT, } from 'helpers/constants';
 
   export default {
@@ -23,6 +23,7 @@
       initialRotation: { type: Number, default: 0, },
       initialFlipped:  { type: Boolean, default: true, },
       initialOrder:    { type: Number, default: 1, },
+      name:            { type: String, default: '', },
     },
 
     data() {
@@ -135,8 +136,8 @@
 
       dragMove(ev) {
         if (this.isDragging) {
-          const posX = ev.clientX || ev.touches[0].clientX;
-          const posY = ev.clientY || ev.touches[0].clientY;
+          const posX        = ev.clientX || ev.touches[0].clientX;
+          const posY        = ev.clientY || ev.touches[0].clientY;
           this.dragPosition = CardCoordinate.fromPixelPosition(posX, posY);
         }
       },
@@ -154,6 +155,7 @@
     background-repeat:          no-repeat;
     background-size:            1000% 600%;
     position:                   absolute;
+    text-align:                 center;
     transition-timing-function: ease-in-out;
 
     &:after {

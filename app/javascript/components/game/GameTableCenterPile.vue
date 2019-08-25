@@ -4,6 +4,7 @@
       v-for="(card, index) in centerPiles[0]"
       :ref="'center_left_' + index"
       :key="'center_left_' + index"
+      :name="'center_left_' + index"
       :suit="card.s"
       :rank="card.r"
       :order="card.order"
@@ -15,6 +16,7 @@
       v-for="(card, index) in centerPiles[1]"
       :ref="'center_right_' + index"
       :key="'center_right_' + index"
+      :name="'center_right_' + index"
       :suit="card.s"
       :rank="card.r"
       :order="card.order"
@@ -26,6 +28,7 @@
       v-for="(card, index) in replacementPiles[0]"
       :ref="'replacement_left_' + index"
       :key="'replacement_left_' + index"
+      :name="'replacement_left_' + index"
       :rank="card.r"
       :suit="card.s"
       :order="card.order"
@@ -35,6 +38,7 @@
       v-for="(card, index) in replacementPiles[1]"
       :ref="'replacement_right_' + index"
       :key="'replacement_right_' + index"
+      :name="'replacement_right_' + index"
       :is-featured="index === 0 && canUseReplacement"
       :is-active="isReplacementCardActive(index)"
       :rank="card.r"
@@ -124,7 +128,7 @@
 
       topCenterCardOrder(pileIndex) {
         const pileName = pileIndex === 0 ? 'left' : 'right';
-        const topCard = Object.keys(this.$refs)
+        const topCard  = Object.keys(this.$refs)
           .filter(key => key.includes('center_' + pileName))
           .map((key) => this.$refs[key][0])
           .slice(-1);
@@ -135,12 +139,18 @@
         this.$emit('replacementClick');
       },
 
+      centerPilePosition(pileIndex, cardIndex) {
+
+        const xPos = 20 * (pileIndex === 0 ? -1 : 1);
+        return [xPos, -this.cardYOffset(cardIndex), ];
+      },
+
       leftCenterPilePosition(cardIndex) {
-        return [-20, -this.cardYOffset(cardIndex), ];
+        return this.centerPilePosition(0, cardIndex);
       },
 
       rightCenterPilePosition(cardIndex) {
-        return [20, -this.cardYOffset(cardIndex), ];
+        return this.centerPilePosition(1, cardIndex);
       },
 
       leftRepPilePosition(cardIndex) {
@@ -154,11 +164,11 @@
       pullFromReplacements() {
         return new Promise((resolve) => {
           const leftRepIndex  = this.replacementPiles[0].length - 1;
-          const rightRepIndex  = this.replacementPiles[1].length - 1;
-          const leftCard  = this.$refs['replacement_left_' + leftRepIndex][0];
-          const rightCard = this.$refs['replacement_right_' + rightRepIndex][0];
-          const leftOrder = this.topCenterCardOrder(0) + 1;
-          const rightOrder = this.topCenterCardOrder(1) + 1;
+          const rightRepIndex = this.replacementPiles[1].length - 1;
+          const leftCard      = this.$refs['replacement_left_' + leftRepIndex][0];
+          const rightCard     = this.$refs['replacement_right_' + rightRepIndex][0];
+          const leftOrder     = this.topCenterCardOrder(0) + 1;
+          const rightOrder    = this.topCenterCardOrder(1) + 1;
           if (this.replacementPiles[0].length > 1 && this.replacementPiles[1].length > 1) {
             leftCard.move(this.leftCenterPilePosition(this.centerPiles[0].length));
             leftCard.setOrder(leftOrder);

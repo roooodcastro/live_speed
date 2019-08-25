@@ -108,18 +108,18 @@ Here's a quick overview of the project's progress:
 - [x] Finish sound effects
 - [x] Implement controls for disabling sound effects
 - [x] Implement a HUD to show current round, current score, etc
-- [ ] Add help timer to warn players of possible plays when they stay a long time without any moves
 - [x] Implement AI to serve as a tutorial
 - [x] Pause game when player disconnects
-- [ ] End abandoned match by W.O. when player does not reconnect after a while
 - [x] Only reveal cards once both players are ready
-- [ ] Implement demo version of game to display on landing page
-- [ ] Windows Solitaire card dropping animation
 - [x] Optimize for mobile gameplay
 - [x] Replacement cards sometimes are placed behind the top center pile cards after reshuffle
-- [ ] Eliminate lag after playing a card (assume it's valid until API says it isn't)
 - [x] Persist card being dragged after Vue update
+- [ ] Add help timer to warn players of possible plays when they stay a long time without any moves
+- [ ] End abandoned match by W.O. when player does not reconnect after a while
+- [ ] Implement demo version of game to display on landing page
+- [ ] Windows Solitaire card dropping animation
 - [ ] Animate opponent card play
+- [ ] Cards being pulled from random places instead of the draw pile
 
 ### Interface
 
@@ -141,8 +141,8 @@ Here's a quick overview of the project's progress:
 - [x] List matches that are waiting for players
 - [x] Allow player to join a match
 - [x] Able to start playing a round/new round from a match page
-- [ ] Add How to Play page with good instructions
 - [x] Define and implement full flow of player/user signup/login
+- [ ] Add How to Play page with good instructions
 - [ ] Let players with no account create an account with their existing Player
 - [ ] Let players check their matches history
 - [ ] Implement public/private player profiles, show statistics on profile page
@@ -150,15 +150,15 @@ Here's a quick overview of the project's progress:
 ### Deployment/misc
 
 - [x] Setup Heroku deploy
-- [ ] Add monitoring service
 - [x] Use Webpacker version of ActionCable and Turbolinks
 - [x] Add JSRoutes with webpacker
-- [ ] Generate favicons in webpacker instead of sprockets
 - [x] Add i18n to Rails
 - [x] Add i18n to JS/webpacker
 - [x] Completely remove Sprockets in favour of Webpacker
-- [ ] Add some SEO stuff
 - [x] Upgrade Webpack
+- [ ] Add monitoring service
+- [ ] Generate favicons in webpacker instead of sprockets
+- [ ] Add some SEO stuff
 
 ## Credits
 
