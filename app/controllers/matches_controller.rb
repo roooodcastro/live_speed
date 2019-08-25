@@ -10,9 +10,9 @@ class MatchesController < ApplicationController
   before_action :set_match, only: %i[show play edit update]
 
   def index
-    @matches = MatchSerializer.from_collection_as_json(Match.from_player(current_player_id).with_players.with_rounds)
-
-    respond_with(@matches)
+    matches = Match.from_player(current_player_id).with_players.with_rounds
+    @finished_matches = MatchSerializer.from_collection_as_json(matches.finished)
+    @unfinished_matches = MatchSerializer.from_collection_as_json(matches.not_finished)
   end
 
   def show

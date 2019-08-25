@@ -34,8 +34,10 @@ en:
 
   matches:
     index:
-      title:         'My Matches'
-      new_match_btn: 'Create new Match'
+      title:               'My Matches'
+      new_match_btn:       'Create new Match'
+      subtitle_unfinished: 'Current matches'
+      subtitle_finished:   'Finished matches'
     new:
       title:  'Create new Match'
       submit: 'Create Match'

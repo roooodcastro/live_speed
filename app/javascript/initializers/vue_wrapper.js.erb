@@ -4,6 +4,6 @@ document.addEventListener('turbolinks:load', function () {
   window.vueApp = new Vue({
     el:         '[data-behaviour="vue"]',
     components: {},
-    data:       {},
+    data:       { currentPlayerId: <%= 'null' %> },
   });
 });

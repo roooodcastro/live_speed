@@ -18,6 +18,8 @@ class Match < ApplicationRecord
   scope :without_player, ->(player_id) { joins(:match_players).where.not match_players: { player_id: player_id } }
   scope :with_players, -> { includes players: :user }
   scope :with_rounds, -> { includes :rounds }
+  scope :finished, -> { where.not(winner_id: nil) }
+  scope :not_finished, -> { where(winner_id: nil) }
 
   scope :unmatched, lambda {
     joins(:players)

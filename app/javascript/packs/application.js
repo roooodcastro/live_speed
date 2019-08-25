@@ -9,7 +9,7 @@ import '../stylesheets/application';
 import 'initializers/vue_config';
 import 'initializers/mixins';
 import 'initializers/filters';
-import 'initializers/vue_wrapper';
+import 'initializers/vue_wrapper.js.erb';
 import Routes from 'initializers/js_routes.js.erb';
 
 window.Routes = Routes;

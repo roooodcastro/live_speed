@@ -9,7 +9,7 @@
     />
 
     <div v-if="matches.length > 0">
-      <h2>{{ 'lobby.show.matches_waiting' | i18n }}</h2>
+      <h2>{{ title | i18n }}</h2>
       <ul class="MatchList__list">
         <li
           v-for="match in matches"
@@ -37,11 +37,14 @@
       </ul>
     </div>
 
-    <div v-else>
+    <div v-else-if="emptyTitle">
       <h3>{{ 'lobby.show.no_matches_waiting' | i18n }}</h3>
     </div>
 
-    <div class="MatchList__quick-actions">
+    <div
+      v-if="newMatchControls"
+      class="MatchList__quick-actions"
+    >
       <LinkButton
         variant="btn-lg"
         :label="t('lobby.show.play_cpu_btn')"
@@ -72,6 +75,18 @@
       matches: {
         type:     Array,
         required: true,
+      },
+      title:   {
+        type:     String,
+        required: true,
+      },
+      emptyTitle: {
+        type: String,
+        default: null,
+      },
+      newMatchControls: {
+        type: Boolean,
+        default: true,
       },
     },
 
@@ -160,12 +175,12 @@
 
   @media (max-width: 575px) {
     .MatchList__quick-actions {
-      flex-direction: column;
+      flex-direction:  column;
       justify-content: stretch;
 
       .btn {
         margin: 0;
-        width: 100%;
+        width:  100%;
       }
 
       .btn + .btn { margin-top: 0.5rem; }

@@ -4,7 +4,7 @@ module PlayerLogin
   extend ActiveSupport::Concern
 
   included do
-    helper_method :player_logged_in?, :current_player
+    helper_method :player_logged_in?, :current_player, :current_player_id
 
     def self.require_player_login(opts = {})
       before_action :require_player_login, opts

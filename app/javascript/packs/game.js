@@ -8,7 +8,7 @@ import '../stylesheets/game';
 import 'initializers/vue_config';
 import 'initializers/mixins';
 import 'initializers/filters';
-import 'initializers/vue_wrapper';
+import 'initializers/vue_wrapper.js.erb';
 import 'initializers/font_awesome';
 
 import Vue from 'vue/dist/vue.esm';
