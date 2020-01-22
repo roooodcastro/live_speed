@@ -14,7 +14,9 @@ class UsersController < ApplicationController
     redirect_to new_user_path unless user_logged_in?
   end
 
-  def show; end
+  def show
+    @props = { user: UserSerializer.new(@user).as_json }
+  end
 
   def new
     @user = User.new

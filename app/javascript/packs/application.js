@@ -26,6 +26,7 @@ import AlertsContainer from 'components/application/layout/AlertsContainer';
 // Resources
 import NewPlayerForm from 'components/application/players/NewPlayerForm';
 import NewUserForm   from 'components/application/users/NewUserForm';
+import UserProfile   from 'components/application/users/UserProfile';
 import MatchList     from 'components/application/lobby/MatchList';
 
 Vue.component('themenubar', TheMenuBar);
@@ -34,4 +35,5 @@ Vue.component('alertscontainer', AlertsContainer);
 
 Vue.component('newplayerform', NewPlayerForm);
 Vue.component('newuserform', NewUserForm);
+Vue.component('userprofile', UserProfile);
 Vue.component('matchlist', MatchList);

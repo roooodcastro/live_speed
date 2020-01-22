@@ -46,6 +46,13 @@
     &:hover:enabled { border-color: $brand-alt-1; }
   }
 
+  &.btn-danger {
+    background-color: $red;
+    border-color:     darken($red, 15%);
+
+    &:hover:enabled { border-color: lighten($red, 15%); }
+  }
+
   &.btn-lg {
     font-size:  1rem;
     padding:    0.5rem 2rem;

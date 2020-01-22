@@ -114,6 +114,8 @@ en:
     create:
       error:   'We could not create your account :('
       success: 'You now have an account with us! Welcome!'
+    show:
+      title: 'Your Profile'
 
   static_pages:
     how_to_play:
