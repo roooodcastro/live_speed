@@ -1,4 +1,4 @@
-.btn {
+.btn, a.btn {
   background-color: $brand;
   border:           1px solid $brand-4;
   border-radius:    4px;
@@ -14,18 +14,18 @@
   text-decoration:  none;
   transition:       all 0.1s;
 
-  &:hover:enabled {
+  &:hover:enabled, &.enabled:hover {
     border-color: $brand-1;
     color:        $white;
     cursor:       pointer;
   }
 
-  &:active:enabled, &:focus:enabled {
+  &:active:enabled, &:focus:enabled, &.enabled:active, &.enabled:focus {
     box-shadow: 0 0 0.4rem 0.1rem $brand-4;
     color:      $white;
   }
 
-  &:disabled {
+  &:disabled, &.disabled {
     background-color: $brand-gray-5;
     border-color:     $border-color;
   }
@@ -34,7 +34,7 @@
     background-color: rgba($brand-1, 0.3);
     color:            $brand-3;
 
-    &:hover:enabled, &:active:enabled, &:focus:enabled {
+    &:hover:enabled, &:active:enabled, &:focus:enabled, &.enabled:hover, &.enabled:active, &.enabled:focus {
       color: $brand;
     }
   }
@@ -43,14 +43,14 @@
     background-color: $brand-alt;
     border-color:     $brand-alt-4;
 
-    &:hover:enabled { border-color: $brand-alt-1; }
+    &:hover:enabled, &.enabled:hover { border-color: $brand-alt-1; }
   }
 
   &.btn-danger {
     background-color: $red;
     border-color:     darken($red, 15%);
 
-    &:hover:enabled { border-color: lighten($red, 15%); }
+    &:hover:enabled, &.enabled:hover { border-color: lighten($red, 15%); }
   }
 
   &.btn-lg {
@@ -62,7 +62,7 @@
     font-size:  1.5rem;
     padding:    1.5rem 5rem;
 
-    &:hover:enabled { transform: scale(1.1); }
+    &:hover:enabled, &.enabled:hover { transform: scale(1.1); }
   }
 }
 

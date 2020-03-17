@@ -39,7 +39,7 @@
     padding:         0 2rem;
     position:        relative;
     text-decoration: none;
-    text-shadow:     1px 1px 2px $brand-alt-4;
+    text-shadow:     1px 1px 0 $brand-alt-4;
     transition:      all 0.15s;
 
     &:before {
@@ -55,6 +55,7 @@
 
     &:hover {
       background-color: rgba($brand-white, 0.1);
+      color: $brand-white;
 
       &:before { height: $menu-bar-height / 10; }
     }

@@ -144,7 +144,7 @@ Here's a quick overview of the project's progress:
 - [x] Define and implement full flow of player/user signup/login
 - [ ] Add How to Play page with good instructions
 - [ ] Let players with no account create an account with their existing Player
-- [ ] Let players check their matches history
+- [x] Let players check their matches history
 - [ ] Let players view and manage their accounts
 - [ ] Show player statistics on profile page
 

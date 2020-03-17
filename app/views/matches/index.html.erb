@@ -1,15 +1,17 @@
 <%= title t('.title') %>
 
-<%= vue_component('MatchList', props: { ':matches': '{}', title: '' }) %>
-
 <%= vue_component('MatchList', props: {
-    ':matches': @unfinished_matches.to_json,
-    ':new_match_controls': false,
-    title: 'matches.index.subtitle_unfinished'
+    'player_id':          current_player_id,
+    ':matches':            @unfinished_matches.to_json,
+    ':new_match_controls': true,
+    'empty_title':         'matches.index.empty_matches_title',
+    title:                 'matches.index.subtitle_unfinished'
 }) %>
 
 <%= vue_component('MatchList', props: {
-    ':matches': @finished_matches.to_json,
+    'player_id':          current_player_id,
+    ':matches':            @finished_matches.to_json,
     ':new_match_controls': false,
-    title: 'matches.index.subtitle_finished'
+    'empty_title':         'matches.index.empty_finished_matches_title',
+    title:                 'matches.index.subtitle_finished'
 }) %>

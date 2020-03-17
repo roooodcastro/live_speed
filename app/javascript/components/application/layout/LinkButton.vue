@@ -8,10 +8,10 @@
     <button
       :id="id"
       class="btn"
-      :class="variant"
-      :disabled="disabled"
+      :class="cssClass"
+      :disabled="isDisabled"
       type="submit"
-      @click="click"
+      @click="clickSubmit"
     >
       {{ btnLabel }}
     </button>
@@ -20,9 +20,10 @@
     v-else
     :id="id"
     class="btn"
-    :class="variant"
+    :class="cssClass"
     :href="href"
-    :disabled="disabled"
+    :disabled="isDisabled"
+    @click="clickLink"
   >
     {{ btnLabel }}
   </a>
@@ -49,33 +50,47 @@
         type:    String,
         default: null,
       },
+      disabled:    {
+        type:    Boolean,
+        default: false,
+      },
       label:       {
         type:    String,
         default: 'Button',
       },
-      method: {
-        type: String,
+      method:      {
+        type:    String,
         default: 'GET',
       },
-      variant: {
-        type: String,
+      variant:     {
+        type:    String,
         default: '',
       },
     },
 
     data() {
       return {
-        disabled: false,
+        isDisabled: this.disabled,
       };
     },
 
     computed: {
+      cssClass() {
+        return [
+          this.variant,
+          {
+            disabled: this.isDisabled,
+            enabled:  !this.isDisabled,
+          },
+        ];
+      },
+
       actsLikeALink() {
         return !!this.href;
       },
 
       btnLabel() {
-        if (this.disabled) {
+        if (this.isDisabled && !this.disabled) {
           return this.disableWith;
         } else {
           return this.label;
@@ -88,13 +103,19 @@
     },
 
     methods: {
-      click(ev) {
-        if (!this.disabled) {
+      clickSubmit(ev) {
+        if (!this.isDisabled) {
           this.$emit('click', ev);
-          this.disabled = !!this.disableWith;
+          this.isDisabled = !!this.disableWith;
 
           if (this.actsLikeALink) window.location.href = this.href;
           if (this.renderForm) this.$refs.form.submit();
+        }
+      },
+
+      clickLink(ev) {
+        if (!this.isDisabled) {
+          this.$emit('click', ev);
         }
       },
     },

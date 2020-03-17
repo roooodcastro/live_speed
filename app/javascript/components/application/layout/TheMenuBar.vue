@@ -73,7 +73,10 @@
 
     img { height: $menu-bar-height - 0.5rem; width: $menu-bar-height - 0.5rem; }
 
-    &:hover { background-color: rgba($brand-white, 0.1); }
+    &:hover {
+      background-color: rgba($brand-white, 0.1);
+      color: $brand-white;
+    }
   }
 
   .TheMenuBar__right {

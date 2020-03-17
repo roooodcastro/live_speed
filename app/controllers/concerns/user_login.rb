@@ -45,7 +45,7 @@ module UserLogin
   end
 
   def require_user_login
-    redirect_to new_sessions_path unless user_logged_in?
+    redirect_to login_path unless user_logged_in?
   end
 
   def login_user(user)

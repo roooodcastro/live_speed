@@ -48,7 +48,7 @@
     />
 
     <LinkButton
-      :href="r('new_sessions_path')"
+      :href="r('login_path')"
       :label="'users.new.login_btn' | i18n"
       variant="btn-lg btn-outline btn-signup btn-mobile"
     />

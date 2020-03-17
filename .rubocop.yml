@@ -11,7 +11,7 @@ AllCops:
   TargetRubyVersion: 2.6
   TargetRailsVersion: 5.2
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 120
 
 Metrics/BlockLength:
@@ -31,5 +31,5 @@ Style/Documentation:
 Rails:
   Enabled: true
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: table

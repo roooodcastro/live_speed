@@ -24,6 +24,18 @@ h1 {
   padding-bottom: 1rem;
 }
 
+a {
+  color:       $brand-alt-2;
+  font-weight: bold;
+
+  &:hover { color: $brand-alt; }
+}
+
+p {
+  font-size:   1rem;
+  line-height: 2rem;
+}
+
 .before-container {
   margin-top:    $menu-bar-height;
   margin-bottom: -$menu-bar-height;
@@ -41,18 +53,6 @@ main {
   margin-top:       2rem;
   padding:          2rem;
   box-shadow:       2px 2px 5px $brand-black;
-
-  a {
-    color:       $brand-alt-2;
-    font-weight: bold;
-
-    &:hover { color: $brand-alt; }
-  }
-
-  p {
-    font-size:   1rem;
-    line-height: 2rem;
-  }
 }
 
 article {

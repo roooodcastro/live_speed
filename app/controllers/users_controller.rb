@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    redirect_to new_user_path unless user_logged_in?
+    redirect_to sign_up_path unless user_logged_in?
   end
 
   def show

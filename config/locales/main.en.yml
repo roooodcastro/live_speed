@@ -27,6 +27,7 @@ en:
       new_lobby_btn:      'Start a new match'
       play_cpu_btn:       'Play against a CPU'
       join_btn:           'Join'
+      play_btn:           'Play!'
       join_btn_wait:      'Joining...'
       match_not_started:  'Waiting for players'
       match_started:      "On round %{round}/%{total_rounds}"
@@ -34,10 +35,12 @@ en:
 
   matches:
     index:
-      title:               'My Matches'
-      new_match_btn:       'Create new Match'
-      subtitle_unfinished: 'Current matches'
-      subtitle_finished:   'Finished matches'
+      title:                        'My Matches'
+      new_match_btn:                'Create new Match'
+      subtitle_unfinished:          'Current matches'
+      subtitle_finished:            'Finished matches'
+      empty_matches_title:          'You have no ongoing matches!'
+      empty_finished_matches_title: 'You have not finished a match yet!'
     new:
       title:  'Create new Match'
       submit: 'Create Match'
@@ -68,16 +71,17 @@ en:
     destroy:
       success: "You have been signed out of the anonymous player account."
     new:
-      title_html:       'Almost There!<br/>We just need one more thing:'
-      subtitle:         'Choose a name to play:'
-      login_btn:        'Sign In'
-      options:          'You can also:'
-      signup_btn:       'Sign Up For an Account'
-      checking_name:    'Checking name...'
-      valid_name:       '✓ This name is valid!'
-      name_placeholder: 'Player Name'
-      name_aria_label:  'Type your player name'
-      submit:           'Confirm'
+      title_html:        'Almost There!<br/>We just need one more thing:'
+      subtitle:          'Choose a name to play:'
+      login_btn:         'Sign In'
+      options:           'You can also:'
+      signup_btn:        'Sign Up For an Account'
+      checking_name:     'Checking name...'
+      valid_name:        '✓ This name is valid!'
+      name_placeholder:  'Player Name'
+      name_aria_label:   'Type your player name'
+      submit:            'Confirm'
+      already_logged_in: 'You are already signed in!'
 
   sessions:
     create:

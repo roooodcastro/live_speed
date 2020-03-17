@@ -4,10 +4,12 @@
     :class="cssClass"
   >
     <div>
-      <strong v-if="title">{{ title }}:</strong>
+      <strong v-if="title">{{ title }}</strong>
       {{ content }}
     </div>
+
     <CloseButton
+      v-if="closeable"
       class="RailsAlert__close-button"
       @close="$emit('close')"
     />
@@ -23,9 +25,10 @@
     },
 
     props: {
-      content: { type: String, default: null, },
-      title:   { type: String, default: null, },
-      type:    { type: String, default: 'notice', },
+      content:   { type: String, default: null, },
+      title:     { type: String, default: null, },
+      type:      { type: String, default: 'notice', },
+      closeable: { type: Boolean, default: true, },
     },
 
     computed: {
@@ -40,15 +43,16 @@
   @import 'stylesheets/_variables.scss';
 
   .RailsAlert {
-    background:      $brand-white;
-    border-radius:   0.25rem;
-    color:           $text-color;
-    display:         flex;
-    justify-content: space-between;
-    margin-top:      1rem;
-    padding:         0 0.5rem;
-    position:        relative;
-    width:           100%;
+    background:          $brand-white;
+    border:              1px solid black;
+    border-bottom-width: 0.4rem;
+    border-radius:       0.25rem;
+    color:               $text-color;
+    display:             flex;
+    justify-content:     space-between;
+    margin-top:          1rem;
+    padding:             0 0.5rem;
+    width:               100%;
 
     div {
       padding:        1rem 2rem;
@@ -56,41 +60,31 @@
       flex-direction: row;
     }
 
-    &:before {
-      background:    $brand-gray-5;
-      border-radius: 0.25rem;
-      bottom:        -0.4rem;
-      box-shadow:    0 0.2rem 0.5rem $brand-black;
-      content:       '';
-      left:          0;
-      position:      absolute;
-      right:         0;
-      top:           0;
-      z-index:       -1;
-    }
-
     strong {
-      color:   $brand-black;
+      color:        $brand-black;
       margin-right: 1rem;
     }
   }
 
   .RailsAlert--notice {
-    strong { color: $brand; }
+    background-color: lighten($green, 75%);
+    border-color:     $green;
 
-    &:before { background: $brand; }
+    strong { color: $green; }
   }
 
   .RailsAlert--warning {
-    strong { color: $yellow; }
+    background-color: lighten($yellow, 55%);
+    border-color:     $yellow;
 
-    &:before { background: $yellow; }
+    strong { color: $yellow; }
   }
 
   .RailsAlert--error {
-    strong { color: $red; }
+    background-color: lighten($red, 65%);
+    border-color:     $red;
 
-    &:before { background: $red; }
+    strong { color: $red; }
   }
 
   .RailsAlert__close-button {

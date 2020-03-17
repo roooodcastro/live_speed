@@ -8,8 +8,9 @@
       ref="newMatchForm"
     />
 
+    <h2>{{ title | i18n }}</h2>
+
     <div v-if="matches.length > 0">
-      <h2>{{ title | i18n }}</h2>
       <ul class="MatchList__list">
         <li
           v-for="match in matches"
@@ -25,21 +26,36 @@
           <span class="MatchList__num-players">
             {{ playersLabel(match) }}
           </span>
-          <span class="MatchList__join">
+          <span
+            v-if="canJoin(match)"
+            class="MatchList__join"
+          >
             <LinkButton
               :label="t('lobby.show.join_btn')"
               :disable-with="t('lobby.show.join_btn_wait')"
-              :action="match.join_url"
+              :href="match.join_url"
               method="POST"
+            />
+          </span>
+          <span
+            v-else
+            class="MatchList__join"
+          >
+            <LinkButton
+              :label="t('lobby.show.play_btn')"
+              :href="r('match_path', match.id)"
             />
           </span>
         </li>
       </ul>
     </div>
 
-    <div v-else-if="emptyTitle">
-      <h3>{{ 'lobby.show.no_matches_waiting' | i18n }}</h3>
-    </div>
+    <RailsAlert
+      v-else
+      :title="emptyTitle | i18n"
+      :closeable="false"
+      type="warning"
+    />
 
     <div
       v-if="newMatchControls"
@@ -63,30 +79,36 @@
   import LinkButton      from 'components/application/layout/LinkButton';
   import NewMatchForm    from 'components/application/forms/NewMatchForm';
   import NewCPUMatchForm from 'components/application/forms/NewCPUMatchForm';
+  import RailsAlert      from 'components/application/layout/RailsAlert';
 
   export default {
     components: {
       LinkButton,
       NewMatchForm,
       NewCPUMatchForm,
+      RailsAlert,
     },
 
     props: {
-      matches: {
+      matches:          {
         type:     Array,
         required: true,
       },
-      title:   {
+      title:            {
         type:     String,
         required: true,
       },
-      emptyTitle: {
-        type: String,
+      emptyTitle:       {
+        type:    String,
         default: null,
       },
       newMatchControls: {
-        type: Boolean,
+        type:    Boolean,
         default: true,
+      },
+      playerId: {
+        type: String,
+        required: true,
       },
     },
 
@@ -109,6 +131,12 @@
       playersLabel(match) {
         return this.t('activerecord.attributes.match.players',
           { players: match.num_current_players, total_players: match.num_total_players, });
+      },
+
+      canJoin(match) {
+        const matchFull = match.num_current_players >= match.num_total_players;
+        const playerInMatch = match.player_ids.includes(this.playerId);
+        return !matchFull && !playerInMatch;
       },
 
       openNewCPUMatchForm() {
@@ -171,6 +199,7 @@
   .MatchList__quick-actions {
     display:         flex;
     justify-content: center;
+    margin-top:      1rem;
   }
 
   @media (max-width: 575px) {

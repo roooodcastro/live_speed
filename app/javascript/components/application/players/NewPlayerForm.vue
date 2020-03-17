@@ -21,13 +21,13 @@
     </button>
 
     <LinkButton
-      :href="r('new_user_path')"
+      :href="r('sign_up_path')"
       :label="'players.new.signup_btn' | i18n"
       variant="btn-lg btn-outline btn-signup btn-mobile"
     />
 
     <LinkButton
-      :href="r('new_sessions_path')"
+      :href="r('login_path')"
       :label="'players.new.login_btn' | i18n"
       variant="btn-lg btn-outline btn-signup btn-mobile"
     />

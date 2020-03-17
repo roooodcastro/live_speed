@@ -6,9 +6,11 @@ class PlayersController < ApplicationController
   layout 'login', only: :new
 
   def new
-    # TODO: Do a single page with the new user and player forms, both as playing cards on top of another. When the user
-    # TODO: decides to change between creating a player or an account, have the bottom card swipe right/up while the
-    # TODO: top card swipe in the opposite direction, and then change their z-index so the desired one stays on top.
+    if player_logged_in?
+      flash[:notice] = t('.already_logged_in')
+      return redirect_to lobby_path
+    end
+
     @player = Player.new
   end
 

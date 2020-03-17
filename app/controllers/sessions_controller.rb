@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   layout 'login'
 
   def show
-    redirect_to new_sessions_path
+    redirect_to login_path
   end
 
   def new
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    logout_and_redirect_user(new_sessions_path)
+    logout_and_redirect_user(login_path)
   end
 
   private

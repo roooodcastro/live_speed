@@ -1,3 +1,8 @@
 <%= title t('.title') %>
 
-<%= vue_component('MatchList', props: { ':matches': @matches.to_json, title: 'lobby.show.matches_waiting' }) %>
+<%= vue_component('MatchList', props: {
+    'player_id':  current_player_id,
+    ':matches':    @matches.to_json,
+    title:         'lobby.show.matches_waiting',
+    'empty-title': 'lobby.show.no_matches_waiting',
+}) %>

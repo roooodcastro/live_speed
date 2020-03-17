@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   resources(:users) { collection { get :validate } }
 
   get :how_to_play, to: 'static_pages#how_to_play'
+
+  get :login, to: 'sessions#new'
+  get :sign_up, to: 'users#new'
 end
