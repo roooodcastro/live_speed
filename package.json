@@ -8,7 +8,7 @@
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^4.0.0",
     "actioncable": "^5.2.2",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "cookie-js": "^0.0.1",
     "cssnext": "^1.8.4",
     "eslint": "^5.13.0",
